@@ -1,0 +1,58 @@
+{
+  "es": {
+    "header":{
+      "bycicles":"Bicicletas",
+      "road":"CARRETERA",
+      "mtb":"MTB",
+      "ebike":"E-BIKE",
+      "contact":"Contactar"
+    },
+    "login": {
+      "title": "Registrate ahora",
+      "firstname": "Nombre",
+      "lastname": "Apellido",
+      "email": "Email",
+      "password": "Contraseña",
+      "signup": "Registrate",
+      "orsocial": "o inicia sesión con:",
+      "signin": "Iniciar Sesión",
+      "remember": "Recordar",
+      "forgot": "Has olvidado la contraseña?",
+      "create": "¿Crear una cuenta?"
+    },
+    "error": {
+      "ops": "Opps!",
+      "notFound": "Página no encontrada",
+      "dontExist": "La página que estás buscando no existe",
+      "home": "Volver"
+    }
+  },
+  "en": {
+    "header":{
+      "bycicles":"Bycicles",
+      "road":"ROAD",
+      "mtb":"MTB",
+      "ebike":"E-BIKE",
+      "contact":"Contact"
+    },
+    "login": {
+      "title": "Sign up now",
+      "firstname": "First name",
+      "lastname": "Last name",
+      "email": "Email",
+      "password": "Password",
+      "signup": "Sign Up",
+      "orsocial": "or sign up with:",
+      "signin": "Sign In",
+      "remember": "Remember Me",
+      "forgot": "Forgot Password?",
+      "create": "¿Create an account?"
+    },
+    "error": {
+      "ops": "Opps!",
+      "notFound": "Page not found.",
+      "dontExist": "The page you're looking for doesn't exist",
+      "home": "Go Back"
+    }
+  }
+}
