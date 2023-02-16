@@ -1,25 +1,27 @@
+@use '../abstracts/variables' as var;
+
 .container-link {
-  background: white;
-  margin: 0;
+  margin: 0 20px;
   border-radius: 5px;
   padding: 0;
-  display: inline-block;
-  width: 5%;
+  display: flex;
+  width: 10%;
+  height: 100%;
 
   .item-link {
-    background-color: inherit;
     border: none;
     height: 100%;
-    color: gray;
-    font-weight: 400;
-    letter-spacing: 1px;
+    color: var.$font-color-header;
+    font-weight: var.$weight-header;
     display: flex;
-    font-size: 1.1em;
-    padding: 1rem 0.6rem;
+    letter-spacing: 1.3px;
+    font-size: var.$font-size-header;
     cursor: pointer;
     width: 100%;
     text-decoration: none;
     justify-content: center;
+    align-items: center;
+    min-width: 150px;
   }
 
   &:hover {
@@ -28,5 +30,19 @@
         transparent 20%,
         #1a1b1b,
         transparent 80%) 30 !important;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: auto;
+
+    &:hover {
+      border: none;
+      border-image: none;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    font-size: 0.8em;
   }
 }

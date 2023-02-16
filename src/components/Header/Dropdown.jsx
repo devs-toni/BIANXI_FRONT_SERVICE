@@ -42,7 +42,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
 
   return (
     <div className='dropdown_wrapper' onKeyUp={keyHandler}>
-      <button
+      <p
         className='dropdown_activator'
         aria-haspopup="true"
         aria-controls={dropdownTitle}
@@ -73,7 +73,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
             <path d="m7.41 8.59 4.59 4.58 4.59-4.58 1.41 1.41-6 6-6-6z" />
           </svg>
         )}
-      </button>
+      </p>
       <ul
         ref={dropdownListRef}
         className={`dropdown_item_list ${isOpen ? 'active' : ''} `}

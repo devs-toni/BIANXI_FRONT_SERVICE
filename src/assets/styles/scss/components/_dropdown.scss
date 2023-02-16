@@ -1,6 +1,12 @@
+@use '../abstracts/variables' as var;
+
 .dropdown_wrapper {
   position: relative;
   display: inline-block;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7em;
+  }
 }
 
 .dropdown_activator {
@@ -8,25 +14,27 @@
   background-color: inherit;
   border: none;
   height: 100%;
-  color: gray;
-  font-weight: 500;
-  letter-spacing: 1.1px;
+  color: var.$font-color-header;
+  font-weight: var.$weight-header;
+  letter-spacing: 1.3px;
   display: flex;
   align-items: center;
-  font-size: inherit;
+  font-size: var.$font-size-header;
   padding: 1rem 0.6rem;
   cursor: pointer;
   width: 100%;
+
+  @media screen and (max-width: 768px) {
+    padding: 0;
+  }
 }
 
 .dropdown_activator:hover {
   border-bottom: 1px solid silver;
-  border-image: linear-gradient(
-      to right,
+  border-image: linear-gradient(to right,
       transparent 20%,
       #1a1b1b,
-      transparent 80%
-    ) 30;
+      transparent 80%) 30;
 }
 
 .dropdown_item_list {
@@ -38,6 +46,11 @@
   box-shadow: 0 0 2px 0 gray;
   border-radius: 5px;
   padding: 0;
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    font-size: 0.7em
+  }
 }
 
 .dropdown_item_list.active {
@@ -61,9 +74,22 @@
   text-decoration: none;
   padding: 0.8rem;
   transition: all 0.1s linear;
+
+  @media screen and (max-width: 768px) {
+    width: auto;
+    padding: 0;
+    padding-left: 0.4rem;
+    height: 40px;
+  }
 }
 
 .item_list a:hover {
   background-color: gray;
   color: white;
+
+  @media screen and (max-width: 768px) {
+    max-width: 48%;
+    color: inherit;
+    background-color: inherit;
+  }
 }

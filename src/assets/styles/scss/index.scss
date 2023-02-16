@@ -1,7 +1,9 @@
 @use './components/register';
 @use './components/dropdown';
 @use './components/link';
+@use './components/navbar';
 
 
 @use './abstracts/variables';
 @use './abstracts/animations';
+@use './abstracts/reset';
