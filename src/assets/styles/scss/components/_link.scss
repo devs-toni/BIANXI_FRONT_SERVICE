@@ -1,0 +1,32 @@
+.container-link {
+  background: white;
+  margin: 0;
+  border-radius: 5px;
+  padding: 0;
+  display: inline-block;
+  width: 5%;
+
+  .item-link {
+    background-color: inherit;
+    border: none;
+    height: 100%;
+    color: gray;
+    font-weight: 400;
+    letter-spacing: 1px;
+    display: flex;
+    font-size: 1.1em;
+    padding: 1rem 0.6rem;
+    cursor: pointer;
+    width: 100%;
+    text-decoration: none;
+    justify-content: center;
+  }
+
+  &:hover {
+    border-bottom: 1px solid silver !important;
+    border-image: linear-gradient(to right,
+        transparent 20%,
+        #1a1b1b,
+        transparent 80%) 30 !important;
+  }
+}

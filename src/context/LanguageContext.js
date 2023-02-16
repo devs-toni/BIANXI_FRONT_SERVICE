@@ -1,7 +1,7 @@
 import { createContext,useState } from "react";
 
 const LanguageContext = createContext();
-const initialLanguage = 'en';
+const initialLanguage = 'es';
 const translations = require('../Translation.json');
 
 const LanguageProvider = ({children}) => {

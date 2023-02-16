@@ -1,7 +1,7 @@
 {
   "es": {
     "header":{
-      "bycicles":"Bicicletas",
+      "bycicles":"BICICLETAS",
       "road":"CARRETERA",
       "mtb":"MTB",
       "ebike":"E-BIKE",
@@ -27,6 +27,12 @@
       "home": "Volver"
     }
   },
+
+
+
+
+
+  
   "en": {
     "header":{
       "bycicles":"Bycicles",
