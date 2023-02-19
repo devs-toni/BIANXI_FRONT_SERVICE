@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import '../../assets/styles/css/index.min.css';
 
 
 const Dropdown = ({ items = [], dropdownTitle }) => {

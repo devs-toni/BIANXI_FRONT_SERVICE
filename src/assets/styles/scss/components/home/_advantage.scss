@@ -1,0 +1,30 @@
+@use '../../abstracts/variables' as var;
+
+.advantages {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 50px;
+
+  &__advantage {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: start;
+    align-items: center;
+    color: var.$bianchi-color;
+
+    &--image {
+      font-size: 4.4em;
+      margin-bottom: 30px;
+    }
+
+    &--name {
+      font-size: 1.5em;
+    }
+
+    &--description {
+      margin-top: 20px;
+      color: black;
+    }
+  }
+}

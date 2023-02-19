@@ -1,12 +1,75 @@
 {
   "es": {
-    "header":{
-      "bycicles":"BICICLETAS",
-      "road":"CARRETERA",
-      "mtb":"MTB",
-      "ebike":"E-BIKE",
-      "contact":"CONTACTAR"
+    "header": {
+      "bycicles": "BICICLETAS",
+      "road": "CARRETERA",
+      "mtb": "MTB",
+      "ebike": "E-BIKE",
+      "city": "CITY",
+      "contact": "CONTACTAR"
     },
+    "home": {
+      "cover": {
+        "title1": "Tu Nueva",
+        "title2": "Bianchi",
+        "title3": "te espera"
+      },
+      "creation": {
+        "description1": "BIANCHI ES LA MAS HISTORICA Y PRESTIGIOSA MARCA DE BICICLETAS. NUESTRA HERENCIA, POR MAS DE 130 AÑOS EMPEZADA POR EDOARDO BIANCHI EL 1885, NO PUEDE SER IGUALADA EN EL MUNDO CICLISTA.",
+        "description2": "NUESTRA POSICION ES OFRECER LO MEJOR QUE ITALIA PUEDE OFRECER AL MUNDO: EL COMPROMISO DE HACER PRODUCTOS COMO ARTESANOS “A REGOLA D’ARTE”, ASI COMO UN DISEÑO DISTINGUIDO, ESTILO Y GUSTO."
+      },
+      "advantages": {
+        "advantage1": {
+          "name": "Envío Gratis",
+          "description": "* Pedidos superiores a 50€ *"
+        },
+        "advantage2": "Pago Seguro",
+        "advantage3": "Garantía Mínima de 2 años",
+        "advantage4": "Las mejores bicicletas"
+      }
+    },
+
+
+
+    "footer": {
+      "contact": {
+        "title": "Puedes contactar a través de:",
+        "phone": "+34 000 00 00 00",
+        "whatsapp": "+34 000 00 00 00",
+        "mail": "info@xyzemail.com"
+      },
+      "pay": {
+        "title": "Métodos de pago aceptados"
+      },
+      "opinions": {
+        "title": "Opiniones"
+      },
+      "utils": {
+        "title": "Enlaces útiles",
+        "contact": "Contacto",
+        "about": "Sobre Nosotros",
+        "faq": "FAQ",
+        "pay": "Métodos de Pago",
+        "warranty": "Garantía"
+      },
+      "know": {
+        "title": "Conoces más",
+        "history": "Historia",
+        "color": "Celeste",
+        "models": "Modelos Históricos",
+        "counter": "Countervail" 
+      },
+      "shipments": {
+        "title": "Envíos",
+        "shipment": "Envío y Devoluciones",
+        "time": "Tiempo de entrega",
+        "free": "Envío Gratis",
+        "change": "Devoluciones"
+      }
+    },
+
+
+
     "login": {
       "title": "Registrate ahora",
       "firstname": "Nombre",
@@ -27,19 +90,13 @@
       "home": "Volver"
     }
   },
-
-
-
-
-
-  
   "en": {
-    "header":{
-      "bycicles":"Bycicles",
-      "road":"ROAD",
-      "mtb":"MTB",
-      "ebike":"E-BIKE",
-      "contact":"Contact"
+    "header": {
+      "bycicles": "Bycicles",
+      "road": "ROAD",
+      "mtb": "MTB",
+      "ebike": "E-BIKE",
+      "contact": "Contact"
     },
     "login": {
       "title": "Sign up now",

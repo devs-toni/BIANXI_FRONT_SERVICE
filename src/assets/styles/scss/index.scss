@@ -1,9 +1,8 @@
 @use './components/register';
-@use './components/dropdown';
-@use './components/link';
-@use './components/navbar';
 
+@use './components/header/navbar';
+@use './components/home/home';
+@use './components/footer/footer';
 
 @use './abstracts/variables';
 @use './abstracts/animations';
-@use './abstracts/reset';

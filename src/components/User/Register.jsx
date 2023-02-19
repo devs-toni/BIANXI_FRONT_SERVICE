@@ -1,7 +1,6 @@
 import React from 'react';
 import LanguageContext from '../../context/LanguageContext';
 import { useContext } from 'react';
-import '../../assets/styles/css/index.min.css';
 
 const Register = () => {
 

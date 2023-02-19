@@ -2,7 +2,6 @@ import React from 'react'
 import { useContext, useState } from 'react'
 import Dropdown from './Dropdown';
 import LanguageContext from '../../context/LanguageContext';
-import '../../assets/styles/css/index.min.css';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo.png';
 import { FiMenu } from 'react-icons/fi';
