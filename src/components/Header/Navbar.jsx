@@ -23,44 +23,46 @@ const Navbar = () => {
 
   const items = [
     {
-      ref: "/product-category/bycicles/road",
+      ref: "product-category/bycicles/road",
       text: text.header.road
     },
     {
-      ref: "/product-category/bycicles/mtb",
+      ref: "product-category/bycicles/mtb",
       text: text.header.mtb
     },
     {
-      ref: "/product-category/bycicles/ebike",
+      ref: "product-category/bycicles/ebike",
       text: text.header.ebike
     },
     {
-      ref: "/product-category/bycicles/city",
+      ref: "product-category/bycicles/city",
       text: text.header.city
-    },
-
+    }
   ];
 
   return (
     <div className='navbar'>
-      <div className='container-logo'>
+      <div className='navbar__container-logo'>
         <Link to='/'><img src={Logo} alt="" onClick={closeMenu} /></Link>
       </div>
-      <nav className={`nav ${isNavShow ? 'active' : ''}`}>
+      <nav className={`navbar__nav ${isNavShow ? 'active' : ''}`}>
         <Dropdown items={items} dropdownTitle={text.header.bycicles} />
         <div className="container-link">
-          <Link className='item-link' to='/'>{text.header.contact}</Link>
+          <Link className='item-link'>{text.header.contact}</Link>
         </div>
-        <button className='nav__user'>
+        <button className='navbar__nav--user'>
           <FaUserAlt />
         </button>
-        <button className='nav__cart'>
-          <IoIosCart />
-        </button>
       </nav>
-      <button className='menu-responsive' onClick={handleMenu}>
-        {isNavShow ? <GrClose /> : <FiMenu />}
-      </button>
+      <div className="navbar__extra-icons">
+        <button className='nabvar__extra-icons--cart'>
+          <IoIosCart />
+          <span>New</span>
+        </button>
+        <button className='nabvar__extra-icons--hamburguer' onClick={handleMenu}>
+          {isNavShow ? <GrClose /> : <FiMenu />}
+        </button>
+      </div>
 
     </div>
   )

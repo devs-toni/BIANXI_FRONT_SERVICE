@@ -1,0 +1,206 @@
+{
+  "products": {
+    "mtb": [
+      {
+        "name": "Methanol CV FS 9.3 XT",
+        "since": 4707,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Methanol CV FS 9.2 XTR",
+        "since": 6195,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Methanol CV FS 9.1 XX1",
+        "since": 9932,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Methanol CV RS 9.3 XT",
+        "since": 4511,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "Methanol CV RS 9.1 XX1",
+        "since": 8475,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Nitron 9.2 XT",
+        "since": 2784,
+        "stock": 10,
+        "offer": 20
+      },
+      {
+        "name": "Nitron 9.3 XT",
+        "since": 2317,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Nitron 9.4 XT",
+        "since": 2015,
+        "stock": 10,
+        "offer": 10
+      },
+      {
+        "name": "Magma 9.2 Alivio",
+        "since": 703,
+        "stock": 0,
+        "offer": 0
+      }
+    ],
+    "road": [
+      {
+        "name": "Aria-105",
+        "since": 3240,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Oltre PRO Ultegra Di2",
+        "since": 7949,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "Oltre XR4 Red AXS 12v",
+        "since": 11049,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Oltre Ultegra Di2",
+        "since": 5749,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Oltre XR4 Ultegra Di2",
+        "since": 7403,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Sprint 105",
+        "since": 2277,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "Sprint 105 Di2 Disc",
+        "since": 2733,
+        "until": 3799,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "Spring Ultegra",
+        "since": 3121,
+        "stock": 10,
+        "offer": 20
+      },
+      {
+        "name": "Oltre XR4 Ultegra Di2 Fulcrum AirBeat",
+        "since": 8343,
+        "stock": 10,
+        "offer": 0
+      }
+    ],
+    "ebike": [
+      {
+        "name": "T-Tronik Performer 9.1 XTR",
+        "since": 8113,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Performer 9.2 XT",
+        "since": 7059,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Performer 9.3 XT",
+        "since": 6388,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Rebel 9.1 XT",
+        "since": 5423,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Rebel 9.2 NX",
+        "since": 4649,
+        "until": 5093,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Sport 9.1 Deore 12v",
+        "since": 3009,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Sport 9.1 Deore 12vTRK",
+        "since": 3060,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "T-Tronik Sport 9.1 SX",
+        "since": 3009,
+        "stock": 10,
+        "offer": 20
+      },
+      {
+        "name": "T-Tronik Sport 9.2 Altus",
+        "since": 2841,
+        "stock": 10,
+        "offer": 0
+      }
+    ],
+    "city": [
+      {
+        "name": "C-Sport 2 Acera Step-Through",
+        "since": 789,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "C-Sport 3 Acera",
+        "since": 807,
+        "stock": 0,
+        "offer": 0
+      },
+      {
+        "name": "C-Sport 3 Alivio",
+        "since": 859,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "C-Sport Cross Acera",
+        "since": 751,
+        "stock": 10,
+        "offer": 0
+      },
+      {
+        "name": "C-Sport Cross Acera Step-Through",
+        "since": 751,
+        "stock": 10,
+        "offer": 0
+      }
+    ]
+  }
+}

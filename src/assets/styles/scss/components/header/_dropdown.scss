@@ -56,11 +56,13 @@
 
 .dropdown_item_list.active {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
 }
 
 .item_list {
   list-style: none;
+  border: none;
+  outline: none;
 }
 
 .item_list:last-child a {
@@ -68,7 +70,8 @@
 }
 
 .item_list a,
-.item_list a:link {
+.item_list a:link,
+.item_list a:active {
   display: flex;
   color: #666666;
   font-weight: 600;

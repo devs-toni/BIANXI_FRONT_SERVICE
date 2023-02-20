@@ -1,0 +1,47 @@
+@use '../../abstracts/variables' as var;
+@use './product';
+
+.category {
+  padding: var.$section-padding;
+  width: var.$section-category;
+  margin: 0 auto;
+
+  &__title {
+    text-transform: capitalize;
+    font-size: 3em;
+    text-align: left;
+
+    @media screen and (max-width: 770px) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 1750px) {
+    width: 62%;
+  }
+
+  @media screen and (max-width: 1550px) {
+    width: 67%;
+  }
+
+  @media screen and (max-width: 1350px) {
+    width: 75%;
+  }
+
+  @media screen and (max-width: 1150px) {
+    width: 82%;
+  }
+
+  @media screen and (max-width: 950px) {
+    width: 82%;
+  }
+
+  @media screen and (max-width: 850px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 500px) {
+    padding: 0;
+  }
+}

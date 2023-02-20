@@ -7,7 +7,7 @@
   padding: 10px 0;
   margin-bottom: 0;
 
-  .container-logo {
+  &__container-logo {
     width: 20%;
     cursor: pointer;
     margin: 0 50px;
@@ -17,7 +17,7 @@
     }
   }
 
-  .nav {
+  &__nav {
     flex-grow: 1;
     margin-right: 100px;
     display: flex;
@@ -80,21 +80,6 @@
         font-size: .8em;
       }
     }
-
-    &__cart {
-      font-size: 1.6em;
-      width: 3%;
-      min-width: 50px;
-
-      svg {
-        cursor: pointer;
-      }
-
-      @media screen and (max-width: 768px) {
-        width: 100%;
-        font-size: 1.1em;
-      }
-    }
   }
 
   .menu-close {
@@ -113,22 +98,40 @@
     }
   }
 
-  .menu-responsive {
-    width: 50px;
-    height: 50px;
-    display: none;
-    font-size: 2em;
-    margin: 15px 30px;
-    cursor: pointer;
-    position: relative;
-    z-index: 200;
+  &__extra-icons {
 
-    @media screen and (max-width: 768px) {
-      display: block;
+    &--cart {
+      font-size: 1.6em;
+      width: 3%;
+      min-width: 50px;
+
+      svg {
+        cursor: pointer;
+      }
+
+      @media screen and (max-width: 768px) {
+        width: 100%;
+        font-size: 1.1em;
+      }
     }
 
-    @media screen and (max-width: 768px) {
-      display: block;
+    &--hamburguer {
+      width: 50px;
+      height: 50px;
+      display: none;
+      font-size: 2em;
+      margin: 15px 30px;
+      cursor: pointer;
+      position: relative;
+      z-index: 200;
+
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
+
+      @media screen and (max-width: 768px) {
+        display: block;
+      }
     }
   }
 }

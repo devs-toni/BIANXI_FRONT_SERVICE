@@ -28,6 +28,11 @@
         "advantage4": "Las mejores bicicletas"
       }
     },
+    "product": {
+      "addCart": "Añadir al Carrito",
+      "empty": "Agotado",
+      "offer": "En Oferta"
+    },
 
 
 

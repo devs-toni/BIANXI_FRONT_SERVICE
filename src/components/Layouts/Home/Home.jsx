@@ -13,19 +13,23 @@ const Home = () => {
 
   const initSections = [{
     name: text.header.road,
-    icon: faRoad
+    icon: faRoad,
+    path: "road"
   },
   {
     name: text.header.mtb,
     icon: faMountain,
+    path: "mtb"
   },
   {
     name: text.header.ebike,
     icon: faBolt,
+    path: "ebike"
   },
   {
     name: text.header.city,
-    icon: faCity
+    icon: faCity,
+    path: "city"
   }];
 
   const initAdvantages = [{
@@ -54,8 +58,8 @@ const Home = () => {
     <div className='home'>
       <Image />
       <div className='sections'>
-        {sections.map(({ name, icon }, index) => {
-          return <Section key={index} name={name} icon={icon} />
+        {sections.map(({ name, icon, path }, index) => {
+          return <Section key={index} name={name} icon={icon} path={path} />
         })}
       </div>
       <div className="home__creation">

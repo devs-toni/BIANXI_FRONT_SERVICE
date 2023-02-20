@@ -22,6 +22,10 @@
     cursor: pointer;
     transition: all .4s ease-in-out;
 
+    &--link {
+      text-align: center;
+    }
+
     &--image {
       font-size: 6em;
       margin-bottom: 50px;
@@ -86,6 +90,7 @@
   @media screen and (max-width: 1120px) {
     grid-template-columns: repeat(2, 1fr);
   }
+
   @media screen and (max-width: 640px) {
     grid-template-columns: repeat(1, 1fr);
   }
