@@ -44,7 +44,7 @@ const Navbar = () => {
   return (
     <div className='navbar'>
       <div className='container-logo'>
-        <img src={Logo} alt="" onClick={closeMenu} />
+        <Link to='/'><img src={Logo} alt="" onClick={closeMenu} /></Link>
       </div>
       <nav className={`nav ${isNavShow ? 'active' : ''}`}>
         <Dropdown items={items} dropdownTitle={text.header.bycicles} />

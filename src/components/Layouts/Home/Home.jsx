@@ -54,8 +54,8 @@ const Home = () => {
     <div className='home'>
       <Image />
       <div className='sections'>
-        {sections.map((section, index) => {
-          return <Section key={index} name={section.name} icon={section.icon} />
+        {sections.map(({ name, icon }, index) => {
+          return <Section key={index} name={name} icon={icon} />
         })}
       </div>
       <div className="home__creation">
@@ -73,8 +73,8 @@ const Home = () => {
         </div>
       </div>
       <div className='advantages'>
-        {advantages.map((adv, index) => {
-          return <Advantage key={index} name={adv.name} icon={adv.icon} description={adv?.description} />
+        {advantages.map(({ name, icon, description}, index) => {
+          return <Advantage key={index} name={name} icon={icon} description={description} />
         })}
       </div>
     </div>
