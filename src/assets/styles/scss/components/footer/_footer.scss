@@ -32,6 +32,10 @@
         margin-top: 2px;
         color: rgb(83, 187, 228);
       }
+
+      @media screen and (max-width: 620px) {
+        justify-content: center;
+      }
     }
 
     &--data-email {
@@ -45,6 +49,10 @@
         margin-top: 4px;
         color: rgb(83, 187, 228);
       }
+
+      @media screen and (max-width: 620px) {
+        justify-content: center;
+      }
     }
 
     &--payment-title {
@@ -56,6 +64,18 @@
       font-weight: 500;
       letter-spacing: 2px;
       margin-bottom: 28px;
+    }
+
+    @media screen and (max-width: 1300px) {
+      font-size: .9em;
+    }
+
+    @media screen and (max-width: 950px) {
+      font-size: .8em;
+    }
+
+    @media screen and (max-width: 620px) {
+      text-align: center;
     }
   }
 
@@ -79,6 +99,18 @@
       margin-bottom: 15px;
       cursor: pointer;
     }
+
+    @media screen and (max-width: 1300px) {
+      font-size: .9em;
+    }
+
+    @media screen and (max-width: 950px) {
+      font-size: .8em;
+    }
+
+    @media screen and (max-width: 620px) {
+      text-align: center;
+    }
   }
 
   &__shipments {
@@ -96,6 +128,25 @@
       margin-bottom: 15px;
       cursor: pointer;
     }
+
+    @media screen and (max-width: 1300px) {
+      font-size: .9em;
+    }
+
+    @media screen and (max-width: 950px) {
+      font-size: .8em;
+    }
+
+    @media screen and (max-width: 920px) {
+      grid-column: 2/3;
+      margin: 0 auto;
+      padding-left: 15px;
+    }
+
+    @media screen and (max-width: 620px) {
+      grid-column: 1/2;
+      text-align: center;
+    }
   }
 
   &__privacy {
@@ -110,6 +161,10 @@
       text-align: left;
       font-size: .95em;
       letter-spacing: 2px;
+
+      @media screen and (max-width: 1100px) {
+        text-align: center;
+      }
     }
 
     &--terms {
@@ -122,7 +177,34 @@
       p {
         margin: 0 20px;
         font-size: 1.2em;
+        cursor: pointer;
       }
+
+      @media screen and (max-width: 1100px) {
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+
+      @media screen and (max-width: 540px) {
+        flex-direction: column;
+        text-align: center;
+
+        p {
+          margin-bottom: 20px;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1300px) {
+      font-size: .9em;
+    }
+
+    @media screen and (max-width: 1100px) {
+      font-size: .8em;
+    }
+
+    @media screen and (max-width: 1100px) {
+      flex-direction: column-reverse;
     }
   }
 
@@ -132,5 +214,13 @@
 
   &__companys {
     margin-bottom: 50px;
+  }
+
+  @media screen and (max-width: 920px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (max-width: 620px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

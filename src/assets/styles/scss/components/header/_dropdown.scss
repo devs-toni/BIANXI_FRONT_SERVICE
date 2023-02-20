@@ -23,18 +23,19 @@
   padding: 1rem 0.6rem;
   cursor: pointer;
   width: 100%;
+  transition: all .4s ease-in-out;
+
+  &:hover {
+    border-bottom: 1px solid silver;
+    border-image: linear-gradient(to right,
+        transparent 20%,
+        #1a1b1b,
+        transparent 80%) 30;
+  }
 
   @media screen and (max-width: 768px) {
     padding: 0;
   }
-}
-
-.dropdown_activator:hover {
-  border-bottom: 1px solid silver;
-  border-image: linear-gradient(to right,
-      transparent 20%,
-      #1a1b1b,
-      transparent 80%) 30;
 }
 
 .dropdown_item_list {
@@ -73,7 +74,7 @@
   font-weight: 600;
   text-decoration: none;
   padding: 0.8rem;
-  transition: all 0.1s linear;
+  transition: all 0.4s ease-in-out;
 
   @media screen and (max-width: 768px) {
     width: auto;
