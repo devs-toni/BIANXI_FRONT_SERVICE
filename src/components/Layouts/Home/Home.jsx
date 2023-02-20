@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
 import Image from './Image';
 import Section from './Section';
-import LanguageContext from '../../context/LanguageContext';
-import logoImage from '../../assets/images/logo-image.png';
+import LanguageContext from '../../../context/LanguageContext';
+import logoImage from '../../../assets/images/logo-image.png';
 import Advantage from './Advantage';
-import Footer from '../Footer/Footer';
+import Footer from '../../Footer/Footer';
 import { faTruckFast, faMoneyBill1Wave, faTriangleExclamation, faBicycle, faRoad, faMountain, faBolt, faCity } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
@@ -77,7 +77,6 @@ const Home = () => {
           return <Advantage key={index} name={adv.name} icon={adv.icon} description={adv?.description} />
         })}
       </div>
-      <Footer></Footer>
     </div>
   )
 }

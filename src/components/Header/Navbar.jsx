@@ -23,17 +23,22 @@ const Navbar = () => {
 
   const items = [
     {
-      ref: "/product-category/bicicletas/road",
+      ref: "/product-category/bycicles/road",
       text: text.header.road
     },
     {
-      ref: "/product-category/bicicletas/mtb",
+      ref: "/product-category/bycicles/mtb",
       text: text.header.mtb
     },
     {
-      ref: "/product-category/bicicletas/e-bike",
+      ref: "/product-category/bycicles/ebike",
       text: text.header.ebike
-    }
+    },
+    {
+      ref: "/product-category/bycicles/city",
+      text: text.header.city
+    },
+
   ];
 
   return (

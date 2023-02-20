@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import LanguageContext from '../../context/LanguageContext';
-import cover from '../../assets/images/cover.jpg';
+import LanguageContext from '../../../context/LanguageContext';
 
 const Image = () => {
 
