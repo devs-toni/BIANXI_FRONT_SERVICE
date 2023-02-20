@@ -117,7 +117,7 @@
         cursor: pointer;
       }
 
-      span {
+      span.active {
         background-color: var.$bianchi-color;
         border-radius: 50%;
         font-size: .35em;

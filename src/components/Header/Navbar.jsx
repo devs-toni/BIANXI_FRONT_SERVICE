@@ -8,11 +8,12 @@ import { FiMenu } from 'react-icons/fi';
 import { FaUserAlt } from 'react-icons/fa';
 import { GrClose } from 'react-icons/gr';
 import { IoIosCart } from 'react-icons/io';
-
+import CartContext from '../../context/CartContext';
 
 const Navbar = () => {
   const [isNavShow, setIsNavShow] = useState(false);
   const { text } = useContext(LanguageContext);
+  const { totalProducts } = useContext(CartContext);
 
   const handleMenu = (e) => {
     setIsNavShow(!isNavShow);
@@ -57,7 +58,7 @@ const Navbar = () => {
       <div className="navbar__extra-icons">
         <button className='navbar__extra-icons--cart'>
           <IoIosCart />
-          <span>1</span>
+          <span className={`${totalProducts.length > 0 && 'active'}`}>{totalProducts.length > 0 && totalProducts.length}</span>
         </button>
         <button className='navbar__extra-icons--hamburguer' onClick={handleMenu}>
           {isNavShow ? <GrClose /> : <FiMenu />}

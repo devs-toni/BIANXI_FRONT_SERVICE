@@ -18,3 +18,9 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+button {
+  border: none;
+  outline: none;
+  background: none;
+}

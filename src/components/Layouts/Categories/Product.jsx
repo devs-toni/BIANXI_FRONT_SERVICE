@@ -2,13 +2,16 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
+import CartContext from '../../../context/CartContext';
+import AddToCartButton from './AddToCartButton';
 
 const Product = ({ name, price, toPrice, type, offer, stock }) => {
 
   const { text } = useContext(LanguageContext);
-  const [addedToCart, setAddedToCart] = useState(false);
+  const { handleAddCart } = useContext(CartContext)
   const [isFavourite, setsetIsFavourite] = useState(false);
   const [image, setImage] = useState();
+  const [productSave, setProductSave] = useState({});
   const [initPrice, setInitPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(0);
   const [toFinalPrice, setToFinalPrice] = useState(0);
@@ -16,13 +19,22 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
   useEffect(() => {
     setImageProduct();
     preparePrices();
-  }, [name])
+  }, [name]);
 
   const setImageProduct = () => {
     setImage(require?.(`../../../assets/images/${type}/${name}.png`));
   };
 
   const preparePrices = () => {
+    setProductSave({
+      name,
+      price,
+      toPrice,
+      finalPrice: finalPrice,
+      type,
+      offer,
+      stock
+    });
     if (offer > 0) {
       const percentage = Math.ceil((parseInt(price) * offer) / 100);
       setFinalPrice(formatNumberES(price - percentage, 2));

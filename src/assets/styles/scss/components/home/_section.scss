@@ -7,6 +7,10 @@
   justify-content: center;
   margin: 0 auto;
 
+  &__link {
+    text-align: center;
+  }
+
   &__section {
     min-width: 260px;
     padding: 20px 50px;
@@ -21,10 +25,6 @@
     border-radius: 40px;
     cursor: pointer;
     transition: all .4s ease-in-out;
-
-    &--link {
-      text-align: center;
-    }
 
     &--image {
       font-size: 6em;
