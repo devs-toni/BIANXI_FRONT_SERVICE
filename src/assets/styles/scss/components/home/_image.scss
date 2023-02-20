@@ -64,8 +64,14 @@
   @media screen and (max-width: 600px) {
     min-height: 400px;
   }
+  @media screen and (max-width: 550px) {
+    min-height: 380px;
+  }
   @media screen and (max-width: 500px) {
     min-height: 350px;
+  }
+  @media screen and (max-width: 450px) {
+    min-height: 300px;
   }
   @media screen and (max-width: 400px) {
     min-height: 250px;

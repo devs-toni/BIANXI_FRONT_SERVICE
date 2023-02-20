@@ -34,11 +34,16 @@
       flex-direction: column;
       margin-top: 30px;
     }
+
+    @media screen and (max-width: 450px) {
+      font-size: .8em;
+    }
   }
 
   &__description {
     width: 60%;
     margin-top: 50px;
+
 
     &--title {
       text-align: end;
@@ -60,6 +65,10 @@
       @media screen and (max-width: 770px) {
         width: 100%;
         text-align: center;
+      }
+
+      @media screen and (max-width: 450px) {
+        font-size: 2.3em;
       }
     }
 
@@ -103,6 +112,10 @@
     @media screen and (max-width: 770px) {
       width: 100%;
       margin-top: 10px;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: .8em;
     }
   }
 }
