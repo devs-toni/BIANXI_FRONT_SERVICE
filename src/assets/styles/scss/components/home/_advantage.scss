@@ -12,6 +12,7 @@
     justify-content: start;
     align-items: center;
     color: var.$bianchi-color;
+    margin-bottom: 40px;
 
     &--image {
       font-size: 4.4em;
@@ -26,5 +27,12 @@
       margin-top: 20px;
       color: black;
     }
+  }
+
+  @media screen and (max-width: 1300px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media screen and (max-width: 690px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

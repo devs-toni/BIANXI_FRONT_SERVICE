@@ -53,7 +53,7 @@
         "warranty": "Garantía"
       },
       "know": {
-        "title": "Conoces más",
+        "title": "Conocer más",
         "history": "Historia",
         "color": "Celeste",
         "models": "Modelos Históricos",
@@ -65,6 +65,11 @@
         "time": "Tiempo de entrega",
         "free": "Envío Gratis",
         "change": "Devoluciones"
+      },
+      "privacy" : {
+        "title": "Todos los derechos reservados MuntingsBikers",
+        "conditions": "Términos y condiciones",
+        "politic": "Política de privacidad"
       }
     },
 
