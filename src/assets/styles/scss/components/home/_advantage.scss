@@ -21,17 +21,26 @@
 
     &--name {
       font-size: 1.5em;
+
+      @media screen and (max-width: 320px) {
+        font-size: 1em;
+      }
     }
 
     &--description {
       margin-top: 20px;
       color: black;
+
+      @media screen and (max-width: 320px) {
+        font-size: .9em;
+      }
     }
   }
 
   @media screen and (max-width: 1300px) {
     grid-template-columns: repeat(2, 1fr);
   }
+
   @media screen and (max-width: 690px) {
     grid-template-columns: repeat(1, 1fr);
   }

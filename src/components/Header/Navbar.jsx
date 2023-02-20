@@ -55,11 +55,11 @@ const Navbar = () => {
         </button>
       </nav>
       <div className="navbar__extra-icons">
-        <button className='nabvar__extra-icons--cart'>
+        <button className='navbar__extra-icons--cart'>
           <IoIosCart />
-          <span>New</span>
+          <span>1</span>
         </button>
-        <button className='nabvar__extra-icons--hamburguer' onClick={handleMenu}>
+        <button className='navbar__extra-icons--hamburguer' onClick={handleMenu}>
           {isNavShow ? <GrClose /> : <FiMenu />}
         </button>
       </div>

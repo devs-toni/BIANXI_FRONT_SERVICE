@@ -1,3 +1,4 @@
+@use '../../abstracts/variables' as var;
 @use './link';
 @use './dropdown';
 
@@ -12,21 +13,26 @@
     cursor: pointer;
     margin: 0 50px;
 
-    @media screen and (max-width: 768px) {
-      margin: 0 20px;
+    @media screen and (max-width: 770px) {
+      margin: auto 20px;
+    }
+
+    @media screen and (max-width: 770px) {
+      width: 15%;
+      margin: auto 10px;
     }
   }
 
   &__nav {
     flex-grow: 1;
-    margin-right: 100px;
+    margin-right: 10px;
     display: flex;
     align-items: center;
     justify-content: end;
     width: 100%;
     transition: all .5s ease-in-out;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 770px) {
       overflow: hidden;
       height: 100vh;
       transition: all 0.5s ease;
@@ -61,12 +67,12 @@
         width: 100vw !important;
         right: 0;
         left: 0;
-        top: 90px;
+        top: 80px;
       }
     }
 
-    &__user {
-      font-size: 1.2em;
+    &--user {
+      font-size: 1.4em;
       width: 3%;
       min-width: 50px;
 
@@ -74,7 +80,7 @@
         cursor: pointer;
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 770px) {
         width: 100%;
         margin: 20px 0;
         font-size: .8em;
@@ -93,15 +99,17 @@
     z-index: 200;
     color: white !important;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 770px) {
       display: block;
     }
   }
 
   &__extra-icons {
+    align-self: center;
+    margin-right: 20px;
 
     &--cart {
-      font-size: 1.6em;
+      font-size: 1.8em;
       width: 3%;
       min-width: 50px;
 
@@ -109,9 +117,38 @@
         cursor: pointer;
       }
 
-      @media screen and (max-width: 768px) {
+      span {
+        background-color: var.$bianchi-color;
+        border-radius: 50%;
+        font-size: .35em;
+        min-width: 14px;
+        min-height: 12px;
+        position: absolute;
+        top: 20px;
+        right: 25px;
+        color: white;
+        padding: 1px;
+
+        @media screen and (max-width: 770px) {
+          right: 125px;
+          top: 30px;
+        }
+
+        @media screen and (max-width: 420px) {
+          right: 65px;
+          top: 22px;
+        }
+      }
+
+      @media screen and (max-width: 770px) {
         width: 100%;
-        font-size: 1.1em;
+        font-size: 2em;
+      }
+
+
+      @media screen and (max-width: 420px) {
+        font-size: 1.6em;
+        min-width: 30px;
       }
     }
 
@@ -125,13 +162,26 @@
       position: relative;
       z-index: 200;
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 770px) {
         display: block;
       }
 
-      @media screen and (max-width: 768px) {
+      @media screen and (max-width: 770px) {
         display: block;
       }
+
+      @media screen and (max-width: 420px) {
+        margin: 5px 10px;
+        font-size: 1.6em;
+      }
+    }
+
+    @media screen and (max-width: 770px) {
+      display: flex;
+      flex-flow: row nowrap;
+    }
+    @media screen and (max-width: 420px) {
+      margin-right: 10px;
     }
   }
 }
