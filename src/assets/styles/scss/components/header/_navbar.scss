@@ -118,25 +118,26 @@
       }
 
       span.active {
-        background-color: var.$bianchi-color;
+        background-color: red;
         border-radius: 50%;
-        font-size: .35em;
-        min-width: 14px;
+        font-size: .45em;
+        min-width: 18px;
         min-height: 12px;
         position: absolute;
-        top: 20px;
-        right: 25px;
+        top: 10px;
+        right: 20px;
         color: white;
-        padding: 1px;
+        font-weight: 100;
+        padding: 4px;
 
         @media screen and (max-width: 770px) {
-          right: 125px;
-          top: 30px;
+          right: 115px;
+          top: 20px;
         }
 
         @media screen and (max-width: 420px) {
-          right: 65px;
-          top: 22px;
+          right: 55px;
+          top: 15px;
         }
       }
 

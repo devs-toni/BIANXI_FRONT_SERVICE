@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import Product from './Product';
 
+
 const Category = () => {
 
   const productsDb = require('./database.json');

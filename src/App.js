@@ -9,13 +9,13 @@ function App() {
 
   return (
     <>
-      <LanguageProvider>
+      {<LanguageProvider>
         <CartProvider>
           <Navbar />
           <MyRouter />
         </CartProvider>
         <Footer />
-      </LanguageProvider>
+      </LanguageProvider>}
     </>
   );
 }

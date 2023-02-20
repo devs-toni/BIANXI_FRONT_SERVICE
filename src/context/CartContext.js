@@ -6,13 +6,15 @@ const CartProvider = ({ children }) => {
   const [totalProducts, setTotalProducts] = useState([]);
 
   const handleAddCart = (product) => {
-
-    if (!totalProducts.some(p => p.name === product.name)) {
-      setTotalProducts([product, ...totalProducts]);
-    }
+     setTotalProducts([product, ...totalProducts]);
   }
 
-  const data = { totalProducts, handleAddCart };
+   const getTotalProducts = (name) => {
+    const array =  totalProducts.filter(p => p.name === name);
+    return array[0] === false ? null : array;
+  } 
+
+  const data = { totalProducts, handleAddCart, getTotalProducts };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
 }

@@ -3,26 +3,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import CartContext from '../../../context/CartContext';
-import AddToCartButton from './AddToCartButton';
 
 const Product = ({ name, price, toPrice, type, offer, stock }) => {
 
   const { text } = useContext(LanguageContext);
-  const { handleAddCart } = useContext(CartContext)
-  const [isFavourite, setsetIsFavourite] = useState(false);
+  const { handleAddCart, getTotalProducts } = useContext(CartContext)
+
   const [image, setImage] = useState();
   const [productSave, setProductSave] = useState({});
+
   const [initPrice, setInitPrice] = useState(0);
   const [finalPrice, setFinalPrice] = useState(0);
   const [toFinalPrice, setToFinalPrice] = useState(0);
 
+  const [productsInCart, setProductsInCart] = useState(0);
+
   useEffect(() => {
-    setImageProduct();
+    setPreConfigProduct();
     preparePrices();
   }, [name]);
 
-  const setImageProduct = () => {
+  const setPreConfigProduct = () => {
     setImage(require?.(`../../../assets/images/${type}/${name}.png`));
+    setProductsInCart(0);
+    let numberOfArticles = getTotalProducts(name);
+    setProductsInCart(numberOfArticles.length);
   };
 
   const preparePrices = () => {
@@ -38,7 +43,7 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
     if (offer > 0) {
       const percentage = Math.ceil((parseInt(price) * offer) / 100);
       setFinalPrice(formatNumberES(price - percentage, 2));
-      setInitPrice(formatNumberES(price, 2))
+      setInitPrice(formatNumberES(price, 2));
     } else {
       setToFinalPrice(formatNumberES(toPrice, 2));
       setFinalPrice(formatNumberES(price, 2));
@@ -54,12 +59,23 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
     return n;
   }
 
+  const handleCart = (product) => {
+    handleAddCart(product);
+    setProductsInCart(prevState => prevState + 1);
+  }
+
   return (
     <div className='products__product'>
       {
         offer > 0 &&
         <div className='offer'>
           <p>{text.product.offer}</p>
+        </div>
+      }
+      {
+        productsInCart > 0 &&
+        <div className='items'>
+          <span className=''>{productsInCart}</span>
         </div>
       }
       <div>
@@ -71,7 +87,7 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
         </div>
         <div className="products__product--options">
           <div className="products__product--options-btn">
-            <button className={`${stock === 0 && 'empty'}`}>{text.product.addCart}</button>
+            <button className={`${stock === 0 && 'empty'}`} onClick={() => handleCart(productSave)}>{text.product.addCart}</button>
             <FontAwesomeIcon icon={faHeart} />
           </div>
         </div>

@@ -12,6 +12,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
   };
 
   const keyHandler = event => {
+    console.log(event.target);
     if (event.key === "Escape" && isOpen) {
       setIsOpen(false);
     }
@@ -32,7 +33,6 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
 
   useEffect(() => {
     if (isOpen) {
-      dropdownListRef.current.querySelector("a").focus();
       document.addEventListener("mousedown", clickOutsideHandler);
     } else {
       document.addEventListener("mousedown", clickOutsideHandler);
@@ -40,7 +40,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
   }, [isOpen]);
 
   return (
-    <div className='dropdown_wrapper' onKeyUp={keyHandler}>
+    <div className='dropdown_wrapper' onKeyDown={keyHandler}>
       <p
         className='dropdown_activator'
         aria-haspopup="true"
@@ -80,7 +80,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
         {items.map((item, index) => {
           return (
             <li className='item_list' key={index}>
-              <Link to={item.ref}>{item.text}</Link>
+              <Link to={item.ref} onClick={clickHandler}>{item.text}</Link>
             </li>
           );
         })}
