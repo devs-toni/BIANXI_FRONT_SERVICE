@@ -7,15 +7,12 @@ const CartProvider = ({ children }) => {
 
   const handleAddProduct = (product) => {
     setTotalProducts([product, ...totalProducts]);
-    console.log(totalProducts);
     localStorage.setItem("cart", JSON.stringify([product, ...totalProducts]));
   }
 
   const handleRemoveProduct = (product) => {
 
     const index = totalProducts.findIndex(p => p.id === product?.id);
-    console.log(totalProducts);
-    console.log(index);
     if (index !== -1) {
       const arr = [...totalProducts];
       arr.splice(index, 1);
