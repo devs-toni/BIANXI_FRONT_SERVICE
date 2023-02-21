@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import CartContext from '../../../context/CartContext';
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Product = ({ name, price, toPrice, type, offer, stock }) => {
 
@@ -59,9 +60,13 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
     return n;
   }
 
-  const handleCart = (product) => {
-    handleAddCart(product);
-    setProductsInCart(prevState => prevState + 1);
+  const handleCart = (product, operation) => {
+    if (operation === '+') {
+      handleAddCart(product);
+      setProductsInCart(prevState => prevState + 1);
+    } else {
+
+    }
   }
 
   return (
@@ -70,12 +75,6 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
         offer > 0 &&
         <div className='offer'>
           <p>{text.product.offer}</p>
-        </div>
-      }
-      {
-        productsInCart > 0 &&
-        <div className='items'>
-          <span className=''>{productsInCart}</span>
         </div>
       }
       <div>
@@ -87,7 +86,11 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
         </div>
         <div className="products__product--options">
           <div className="products__product--options-btn">
-            <button className={`${stock === 0 && 'empty'}`} onClick={() => handleCart(productSave)}>{text.product.addCart}</button>
+            <div>
+              <FontAwesomeIcon className={`cart ${stock === 0 && 'empty'}`} onClick={() => handleCart(productSave, '-')} icon={faMinus} />
+              <p className={`${stock === 0 && 'empty'}`}>{productsInCart}</p>
+              <FontAwesomeIcon className={`cart ${stock === 0 && 'empty'}`} onClick={() => handleCart(productSave, '+')} icon={faPlus} />
+            </div>
             <FontAwesomeIcon icon={faHeart} />
           </div>
         </div>

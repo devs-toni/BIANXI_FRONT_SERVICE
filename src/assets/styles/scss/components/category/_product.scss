@@ -6,27 +6,10 @@
   margin-top: 60px;
 
   &__product {
-    margin: 30px 10px;
+    margin: 40px 10px;
     text-align: center;
     font-weight: 800;
     font-size: 1.2em;
-
-    .items {
-      text-transform: uppercase;
-      margin-bottom: -21px;
-      position: relative;
-      right: -35%;
-      top: 5%;
-      z-index: 100;
-      color: white;
-      font-size: .9em;
-
-      span {
-        border-radius: 50%;
-        padding: .3rem .6rem;
-        background-color: red;
-      }
-    }
 
     &--image {
       width: 17vw;
@@ -101,67 +84,90 @@
     &--options {
 
       &-btn {
-        width: 90%;
+        width: 100%;
         margin: 20px auto;
         margin-right: 10px;
+        display: flex;
+        justify-content: center;
 
+        div {
+          display: flex;
+          padding-left: 50px;
+          margin-right: 20px;
 
-        button {
-          font-size: .9em;
-          width: 60%;
-          border-radius: 6px;
-          margin: 0 auto;
-          cursor: pointer;
-          padding: 15px 30px;
-          background: linear-gradient(to right, #02b4ae 50%, var.$bianchi-color 50%);
-          background-size: 200% 100%;
-          background-position: right bottom;
-          transition: all .8s ease-out;
+          p {
+            margin: 12px 10px 0 10px;
 
-          &:hover {
-            background-position: left bottom;
+            &.empty {
+              opacity: .2;
+            }
           }
 
-          &.empty {
-            cursor: inherit;
-            pointer-events: none;
-          }
 
-          @media screen and (max-width: 2130px) {
-            width: 70%;
-          }
+          svg {
+            color: white;
+            background: linear-gradient(to right, #00a59f 50%, var.$bianchi-color 50%);
+            transition: all .4s ease-out;
 
-          @media screen and (max-width: 1850px) {
-            font-size: .8em;
-          }
+            &.cart {
+              font-size: 1.2em;
+              width: 50%;
+              border-radius: 6px;
+              margin: 0 auto;
+              cursor: pointer;
+              margin: 5px 10px;
+              padding: 7px 10px;
+              background-size: 200% 100%;
+              background-position: right bottom;
+              opacity: 1;
 
-          @media screen and (max-width: 1390px) {
-            width: 75%;
-          }
 
-          @media screen and (max-width: 1160px) {
-            width: 78%;
-          }
+              &:hover {
+                background-position: left bottom;
+              }
+            }
 
-          @media screen and (max-width: 1050px) {
-            width: 62%;
-          }
+            &.empty {
+              cursor: inherit;
+              pointer-events: none;
+              opacity: .2;
+            }
 
-          @media screen and (max-width: 770px) {
-            width: 50%;
-          }
+            @media screen and (max-width: 2130px) {
+              width: 70%;
+            }
 
-          @media screen and (max-width: 470px) {
-            width: 60%;
+            @media screen and (max-width: 1850px) {
+              font-size: .8em;
+            }
 
-          }
+            @media screen and (max-width: 1390px) {
+              width: 75%;
+            }
 
-          @media screen and (max-width: 350px) {
-            width: 75%;
-            padding: 10px 15px;
+            @media screen and (max-width: 1160px) {
+              width: 78%;
+            }
+
+            @media screen and (max-width: 1050px) {
+              width: 62%;
+            }
+
+            @media screen and (max-width: 770px) {
+              width: 50%;
+            }
+
+            @media screen and (max-width: 470px) {
+              width: 60%;
+
+            }
+
+            @media screen and (max-width: 350px) {
+              width: 75%;
+              padding: 10px 15px;
+            }
           }
         }
-
       }
 
       svg {
@@ -208,30 +214,42 @@
       border: 5px solid black;
 
       @media screen and (min-width: 2700px) {
-        margin: -72% auto;
+        margin: -50% auto;
+      }
+
+      @media screen and (max-width: 2700px) {
+        margin: -53% auto;
       }
 
       @media screen and (max-width: 2500px) {
-        margin: -75% auto;
+        margin: -55% auto;
       }
 
       @media screen and (max-width: 2300px) {
-        margin: -78% auto;
+        margin: -56% auto;
       }
 
       @media screen and (max-width: 2100px) {
-        margin: -85% auto;
+        margin: -58% auto;
       }
 
       @media screen and (max-width: 1950px) {
-        margin: -90% auto;
+        margin: -62% auto;
       }
 
+      @media screen and (max-width: 1750px) {
+        margin: -69% auto;
+      }
+
+      @media screen and (max-width: 1600px) {
+        margin: -74% auto;
+      }
+      
       @media screen and (max-width: 1450px) {
-        margin: -95% auto;
+        margin: -82% auto;
       }
 
-      @media screen and (max-width: 1250px) {
+      @media screen and (max-width: 1300px) {
         margin: -100% auto;
       }
 
@@ -295,29 +313,46 @@
 
   .offer {
     border-radius: 5px;
-    transform: rotate(-10deg);
     height: 20px;
     width: fit-content;
     text-transform: uppercase;
     padding: .3rem .4rem;
     margin-bottom: -30px;
     position: relative;
-    top: 5%;
+    top: 0%;
+    left: 16%;
     z-index: 100;
     color: white;
     font-size: .9em;
     background-color: var.$bianchi-color;
 
     @media screen and (min-width: 2300px) {
-      margin-left: 0;
+      left: 13%;
     }
 
-    @media screen and (max-width: 2100px) {
-      margin-left: -1em;
+    @media screen and (max-width: 2300px) {
+      left: 10%;
+    }
+
+    @media screen and (max-width: 1900px) {
+      left: 7%;
+    }
+
+    @media screen and (max-width: 1700px) {
+      left: 0%;
+    }
+
+    @media screen and (max-width: 1450px) {
+      left: -5%;
+      font-size: .8em;
+    }
+
+    @media screen and (max-width: 1150px) {
+      left: -10%;
     }
 
     @media screen and (max-width: 1050px) {
-      margin-left: .5em;
+      left: 0%;
     }
 
     @media screen and (max-width: 770px) {
