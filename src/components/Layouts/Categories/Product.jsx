@@ -1,18 +1,15 @@
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
-import CartContext from '../../../context/CartContext';
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { setProductPrice } from '../../../utils/utils';
+import { setProductPrice } from '../../../helpers/utils';
+import CartHandler from './CartHandler';
+import Badge from './Badge';
 
-const Product = ({ id, name, price, type, offer = 10, stock = 20, count = 0 }) => {
+const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) => {
 
   const { text } = useContext(LanguageContext);
-  const { handleAddProduct, handleRemoveProduct, findProductsById } = useContext(CartContext);
 
-  const numProducts = findProductsById(id);
-  const [number, setNumber] = useState(numProducts ? numProducts.length : 0);
   const [image, setImage] = useState({});
   const { final, init } = setProductPrice(offer, price);
   const productToSave = {
@@ -30,24 +27,10 @@ const Product = ({ id, name, price, type, offer = 10, stock = 20, count = 0 }) =
     setImage(image);
   }, [setImage, name])
 
-
-  const handleCart = (product, operation) => {
-    if (operation === '+') {
-      handleAddProduct(product);
-      setNumber(prevState => prevState + 1);
-    } else {
-      handleRemoveProduct(product);
-      if (number > 0) setNumber(prevState => prevState - 1);
-    }
-  }
-
   return (
     <div className='products__product'>
       {
-        offer > 0 &&
-        <div className='offer'>
-          <p>{text.product.offer}</p>
-        </div>
+        offer > 0 && <Badge classAttribute="offer" text={text.product.offer} />
       }
       <div>
         <img className={`products__product--image ${stock === 0 && 'empty'}`} src={image} alt={name} />
@@ -57,19 +40,12 @@ const Product = ({ id, name, price, type, offer = 10, stock = 20, count = 0 }) =
           {offer > 0 && <p className='products__product--price-container-price offer-price'>{final} €</p>}
         </div>
         <div className="products__product--options">
-          <div className="products__product--options-btn">
-            <div>
-              <FontAwesomeIcon className={`cart ${stock === 0 && 'empty'}`} onClick={() => handleCart(productToSave, '-')} icon={faMinus} />
-              <p className={`${stock === 0 && 'empty'}`}>{number}</p>
-              <FontAwesomeIcon className={`cart ${stock === 0 && 'empty'}`} onClick={() => handleCart(productToSave, '+')} icon={faPlus} />
-            </div>
-            <FontAwesomeIcon icon={faHeart} />
-          </div>
+          <CartHandler id={id} stock={stock} product={productToSave} />
         </div>
       </div>
       {
-        stock === 0 &&
-        < div className="empty-product">
+        stock === 0 && 
+        <div className='empty-product'>
           <p>{text.product.empty}</p>
         </div>
       }

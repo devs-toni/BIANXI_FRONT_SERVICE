@@ -118,27 +118,32 @@
       {
         "id": 23,
         "name": "T-Tronik Rebel 9.2 NX",
-        "price": 4649
+        "price": 4649,
+        "stock": 0
       },
       {
         "id": 24,
         "name": "T-Tronik Sport 9.1 Deore 12v",
-        "price": 3009
+        "price": 3009,
+        "stock": 0
       },
       {
         "id": 25,
         "name": "T-Tronik Sport 9.1 Deore 12vTRK",
-        "price": 3060
+        "price": 3060,
+        "stock": 0
       },
       {
         "id": 26,
         "name": "T-Tronik Sport 9.1 SX",
-        "price": 3009 
+        "price": 3009,
+        "stock": 0
       },
       {
         "id": 27,
         "name": "T-Tronik Sport 9.2 Altus",
-        "price": 2841
+        "price": 2841,
+        "stock": 0
       }
     ],
     "city": [

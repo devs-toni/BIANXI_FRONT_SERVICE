@@ -13,7 +13,7 @@ import CartContext from '../../context/CartContext';
 const Navbar = () => {
   const [isNavShow, setIsNavShow] = useState(false);
   const { text } = useContext(LanguageContext);
-  const { totalProducts } = useContext(CartContext);
+  const { numberTotalProducts } = useContext(CartContext);
 
   const menuRef = useRef(null);
   const activatorRef = useRef(null);
@@ -88,7 +88,7 @@ const Navbar = () => {
       <div className="navbar__extra-icons">
         <button className='navbar__extra-icons--cart'>
           <IoIosCart />
-          <span className={`${totalProducts?.length > 0 && 'active'}`}>{totalProducts?.length > 0 && totalProducts.length}</span>
+          <span className={`${numberTotalProducts > 0 && 'active'}`}>{numberTotalProducts > 0 && numberTotalProducts}</span>
         </button>
         <button className='navbar__extra-icons--hamburguer' onClick={handleMenu} ref={activatorRef}>
           {isNavShow ? <GrClose /> : <FiMenu />}

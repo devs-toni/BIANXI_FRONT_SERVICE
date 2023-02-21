@@ -201,115 +201,6 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .empty-product {
-
-    p {
-      font-weight: bolder;
-      font-size: 1.1em;
-      margin: -70% auto;
-      width: 30%;
-      text-align: center;
-      border-radius: 10px;
-      padding: 10px 10px;
-      border: 5px solid black;
-
-      @media screen and (min-width: 2700px) {
-        margin: -50% auto;
-      }
-
-      @media screen and (max-width: 2700px) {
-        margin: -53% auto;
-      }
-
-      @media screen and (max-width: 2500px) {
-        margin: -55% auto;
-      }
-
-      @media screen and (max-width: 2300px) {
-        margin: -56% auto;
-      }
-
-      @media screen and (max-width: 2100px) {
-        margin: -58% auto;
-      }
-
-      @media screen and (max-width: 1950px) {
-        margin: -62% auto;
-      }
-
-      @media screen and (max-width: 1750px) {
-        margin: -69% auto;
-      }
-
-      @media screen and (max-width: 1600px) {
-        margin: -74% auto;
-      }
-      
-      @media screen and (max-width: 1450px) {
-        margin: -82% auto;
-      }
-
-      @media screen and (max-width: 1300px) {
-        margin: -100% auto;
-      }
-
-      @media screen and (max-width: 1050px) {
-        margin: -70% auto;
-      }
-
-      @media screen and (max-width: 950px) {
-        margin: -80% auto;
-      }
-
-      @media screen and (max-width: 770px) {
-        margin: -55% auto;
-      }
-
-      @media screen and (max-width: 720px) {
-        margin: -60% auto;
-      }
-
-      @media screen and (max-width: 680px) {
-        margin: -62% auto;
-      }
-
-      @media screen and (max-width: 620px) {
-        margin: -64% auto;
-      }
-
-      @media screen and (max-width: 580px) {
-        margin: -66% auto;
-      }
-
-      @media screen and (max-width: 520px) {
-        margin: -68% auto;
-      }
-
-      @media screen and (max-width: 500px) {
-        margin: -75% auto;
-      }
-
-      @media screen and (max-width: 480px) {
-        margin: -78% auto;
-      }
-
-      @media screen and (max-width: 420px) {
-        margin: -82% auto;
-      }
-
-      @media screen and (max-width: 350px) {
-        margin: -88% auto;
-      }
-
-      @media screen and (max-width: 320px) {
-        margin: -95% auto;
-      }
-
-      @media screen and (max-width: 280px) {
-        margin: -100% auto;
-      }
-    }
-  }
 
   .offer {
     border-radius: 5px;
@@ -385,6 +276,121 @@
 
     @media screen and (max-width: 420px) {
       margin-left: .2em;
+    }
+  }
+}
+
+.empty-product {
+
+  p {
+    font-weight: bolder;
+    font-size: 1.1em;
+    margin: 0 auto;
+    position: relative;
+    bottom: 18em;
+    width: 30%;
+    text-align: center;
+    border-radius: 10px;
+    padding: 10px 10px;
+    border: 5px solid black;
+
+    @media screen and (min-width: 2700px) {
+      bottom: 18em;
+    }
+
+    @media screen and (max-width: 2700px) {
+      bottom: 17em;
+    }
+
+    @media screen and (max-width: 2500px) {
+      bottom: 16.5em;
+    }
+
+    @media screen and (max-width: 2300px) {
+      bottom: 16em;
+    }
+
+    @media screen and (max-width: 2100px) {
+      bottom: 15.5em;
+    }
+
+    @media screen and (max-width: 1950px) {
+      bottom: 15em;
+    }
+
+    @media screen and (max-width: 1750px) {
+      bottom: 14.5em;
+    }
+
+    @media screen and (max-width: 1600px) {
+      bottom: 14em;
+    }
+
+    @media screen and (max-width: 1450px) {
+      bottom: 13em;
+    }
+
+    @media screen and (max-width: 1300px) {
+      bottom: 14em;
+    }
+
+    @media screen and (max-width: 770px) {
+      bottom: 18em;
+
+    }
+
+    @media screen and (max-width: 720px) {
+      bottom: 18em;
+    }
+
+    @media screen and (max-width: 680px) {
+      bottom: 17em;
+
+    }
+
+    @media screen and (max-width: 620px) {
+      bottom: 16em;
+
+    }
+
+    @media screen and (max-width: 580px) {
+      bottom: 16em;
+
+    }
+
+    @media screen and (max-width: 520px) {
+      bottom: 15em;
+
+    }
+
+    @media screen and (max-width: 500px) {
+      bottom: 15em;
+
+    }
+
+    @media screen and (max-width: 480px) {
+      bottom: 15em;
+
+    }
+
+    @media screen and (max-width: 420px) {
+      bottom: 16em;
+
+    }
+
+    @media screen and (max-width: 350px) {
+      bottom: 15em;
+
+    }
+
+    @media screen and (max-width: 320px) {
+      bottom: 15em;
+
+    }
+
+    @media screen and (max-width: 280px) {
+      bottom: 14em;
+
     }
   }
 }
