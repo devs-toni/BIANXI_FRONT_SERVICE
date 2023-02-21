@@ -1,6 +1,6 @@
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import CartContext from '../../../context/CartContext';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -8,14 +8,12 @@ import { setProductPrice } from '../../../utils/utils';
 
 const Product = ({ id, name, price, type, offer = 10, stock = 20, count = 0 }) => {
 
-  const image = require(`../../../assets/images/${type}/${name}.png`);
-
   const { text } = useContext(LanguageContext);
   const { handleAddProduct, handleRemoveProduct, findProductsById } = useContext(CartContext);
-  
+
   const numProducts = findProductsById(id);
   const [number, setNumber] = useState(numProducts ? numProducts.length : 0);
-
+  const [image, setImage] = useState({});
   const { final, init } = setProductPrice(offer, price);
   const productToSave = {
     id,
@@ -26,6 +24,12 @@ const Product = ({ id, name, price, type, offer = 10, stock = 20, count = 0 }) =
     offer,
     count
   };
+
+  useEffect(() => {
+    const image = require(`./../../../assets/images/${type}/${name}.png`);
+    setImage(image);
+  }, [setImage, name])
+
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
