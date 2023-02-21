@@ -1,6 +1,6 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import c0 from '../../../assets/images/carousel/carousel-0.jpg';
 import c1 from '../../../assets/images/carousel/carousel-4.jpg';
 import c2 from '../../../assets/images/carousel/carousel-1.jpg';
@@ -8,48 +8,51 @@ import c3 from '../../../assets/images/carousel/carousel-3.jpg';
 import c4 from '../../../assets/images/carousel/carousel-2.jpg';
 
 const Image = () => {
-
   const carousel = useRef(null);
+
+
   const rightArrow = useRef(null);
   const leftArrow = useRef(null);
   const [position, setPosition] = useState(0);
+  const [manualPosition, setManualPosition] = useState(0);
 
+  function handleCarousel() {
+    if (position < 4) {
+      setPosition(position + 1);
+    } else {
+      setPosition(0);
+    }
+  }
 
-/*   useEffect(() => {
-    getSlide();
-  }, [position]) */
-
-  const handleClick = (e) => {
+  function handleManualCarousel(e) {
     if (rightArrow.current.contains(e.target)) {
-      if (position < 4) {
-        setPosition(prevState => prevState + 1);
-        carousel.current.style.transform = `translateX(${(position + 1) * -20}%)`;
+      if (manualPosition < 4) {
+        setManualPosition(prevState => prevState + 1);
       }
     } else {
-      if (position > 0) {
-        setPosition(prevState => prevState - 1);
-        carousel.current.style.transform = `translateX(${(position - 1) * -20}%)`;
+      if (manualPosition > 0) {
+        setManualPosition(prevState => prevState - 1);
       }
     }
   }
 
-/*   function getSlide() {
-    setInterval(() => {
-      if (position < 3) {
-        setPosition(pos => pos + 1);
-        carousel.current.style.transform = `translateX(${((position) + 1) * -25}%)`;
-      } else {
-        setPosition(0);
-        carousel.current.style.transform = `translateX(0%)`;
-      }
-    }, 5000);
-  } */
+  useEffect(() => {
+    const interval = setInterval(() => { handleCarousel() }, 5000);
+    carousel.current.style.transform = `translateX(${(position) * -20}%)`;
+    setManualPosition(position);
+    return () => clearInterval(interval);
+  }, [position]);
+
+  useEffect(() => {
+    carousel.current.style.transform = `translateX(${(manualPosition) * -20}%)`;
+    setPosition(manualPosition);
+  }, [manualPosition]);
 
   return (
     <div className='carousel'>
       <div className='carousel__nav'>
-        <FontAwesomeIcon icon={faChevronLeft} ref={leftArrow} onClick={handleClick} />
-        <FontAwesomeIcon icon={faChevronRight} ref={rightArrow} onClick={handleClick} />
+        <FontAwesomeIcon icon={faChevronLeft} ref={leftArrow} onClick={handleManualCarousel} />
+        <FontAwesomeIcon icon={faChevronRight} ref={rightArrow} onClick={handleManualCarousel} />
       </div>
       <div className='carousel__images' ref={carousel}>
         <img src={c0} alt='Cover0' className='carousel__images--image' />

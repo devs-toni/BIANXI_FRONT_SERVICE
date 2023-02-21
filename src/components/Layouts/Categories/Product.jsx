@@ -44,10 +44,7 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) =>
         </div>
       </div>
       {
-        stock === 0 && 
-        <div className='empty-product'>
-          <p>{text.product.empty}</p>
-        </div>
+        stock === 0 && <Badge classAttribute="empty-product" text={text.product.empty} />
       }
     </div >
   );
