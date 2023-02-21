@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useId, useState } from 'react'
 import Image from './Image';
 import Section from './Section';
 import LanguageContext from '../../../context/LanguageContext';
@@ -58,8 +58,8 @@ const Home = () => {
     <div className='home'>
       <Image />
       <div className='sections'>
-        {sections.map(({ name, icon, path }, index) => {
-          return <Section key={index} name={name} icon={icon} path={path} />
+        {sections.map(({ name, icon, path }, i) => {
+          return <Section key={i} name={name} icon={icon} path={path} />
         })}
       </div>
       <div className="home__creation">
@@ -77,8 +77,8 @@ const Home = () => {
         </div>
       </div>
       <div className='advantages'>
-        {advantages.map(({ name, icon, description}, index) => {
-          return <Advantage key={index} name={name} icon={icon} description={description} />
+        {advantages.map(({ name, icon, description }, i) => {
+          return <Advantage key={i} name={name} icon={icon} description={description} />
         })}
       </div>
     </div>

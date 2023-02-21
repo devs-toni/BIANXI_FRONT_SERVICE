@@ -4,11 +4,14 @@ import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
 import CartContext from '../../../context/CartContext';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import useFormatNumber from '../../useFormatNumber';
 
-const Product = ({ name, price, toPrice, type, offer, stock }) => {
+const Product = ({ id, name, price, toPrice, type, offer, stock }) => {
 
   const { text } = useContext(LanguageContext);
-  const { handleAddCart, getTotalProducts } = useContext(CartContext)
+  const { handleAddProduct, handleRemoveProduct , findProductsById } = useContext(CartContext);
+
+  const { formatNumberES } = useFormatNumber();
 
   const [image, setImage] = useState();
   const [productSave, setProductSave] = useState({});
@@ -20,27 +23,11 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
   const [productsInCart, setProductsInCart] = useState(0);
 
   useEffect(() => {
-    setPreConfigProduct();
-    preparePrices();
-  }, [name]);
-
-  const setPreConfigProduct = () => {
     setImage(require?.(`../../../assets/images/${type}/${name}.png`));
-    setProductsInCart(0);
-    let numberOfArticles = getTotalProducts(name);
-    setProductsInCart(numberOfArticles.length);
-  };
 
-  const preparePrices = () => {
-    setProductSave({
-      name,
-      price,
-      toPrice,
-      finalPrice: finalPrice,
-      type,
-      offer,
-      stock
-    });
+    const numProducts = findProductsById(id);
+    numProducts && setProductsInCart(numProducts.length);
+
     if (offer > 0) {
       const percentage = Math.ceil((parseInt(price) * offer) / 100);
       setFinalPrice(formatNumberES(price - percentage, 2));
@@ -49,23 +36,25 @@ const Product = ({ name, price, toPrice, type, offer, stock }) => {
       setToFinalPrice(formatNumberES(toPrice, 2));
       setFinalPrice(formatNumberES(price, 2));
     }
-  }
-
-  const formatNumberES = (n, d = 0) => {
-    n = new Intl.NumberFormat("de-DE").format(parseFloat(n).toFixed(d));
-    if (d > 0) {
-      const decimals = n.indexOf(",") > -1 ? n.length - 1 - n.indexOf(",") : 0;
-      n = (decimals === 0) ? n + "," + "0".repeat(d) : n + "0".repeat(d - decimals);
-    }
-    return n;
-  }
+    setProductSave({
+      id,
+      name,
+      price,
+      toPrice,
+      finalPrice: finalPrice,
+      type,
+      offer,
+      stock
+    });
+  }, [id]);
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
-      handleAddCart(product);
+      handleAddProduct(product);
       setProductsInCart(prevState => prevState + 1);
     } else {
-
+      handleRemoveProduct(product);
+      if (productsInCart > 0) setProductsInCart(prevState => prevState - 1);
     }
   }
 

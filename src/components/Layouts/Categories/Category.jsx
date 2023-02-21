@@ -12,10 +12,6 @@ const Category = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    initialize();
-  }, [section]);
-
-  const initialize = () => {
     setProducts([]);
     switch (section) {
       case 'road':
@@ -34,14 +30,15 @@ const Category = () => {
         setProducts([]);
         break;
     }
-  }
+  }, [section]);
+
 
   return (
     <div className='category'>
       <h3 className="category__title">{type.toLowerCase()}</h3>
       <div className="products">
-        {products.length > 0 && products.map(({ name, since, until, offer, stock }, index) => {
-          return <Product key={index} name={name} price={since} toPrice={until} type={type} offer={offer} stock={stock} />
+        {products.length > 0 && products.map(({ id, name, since, until, offer, stock }) => {
+          return <Product key={id} id={id} name={name} price={since} toPrice={until} type={type} offer={offer} stock={stock} />
         })}
       </div>
     </div>
