@@ -12,7 +12,7 @@
     justify-content: space-between;
     margin: 0 auto;
     position: absolute;
-    top: 45%;
+    top: 500px;
 
     svg {
       opacity: .6;
@@ -40,7 +40,7 @@
     &--image {
       width: 20%;
       min-height: 1200px;
-      max-height: 80vh;
+      max-height: 1200px;
     }
   }
 

@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
@@ -7,7 +7,7 @@ const CartProvider = ({ children }) => {
 
   const handleAddProduct = (product) => {
     setTotalProducts([product, ...totalProducts]);
-    localStorage.setItem("cart", JSON.stringify([product, ...totalProducts]));
+    //localStorage.setItem("cart", JSON.stringify([product, ...totalProducts])); * /
   }
 
   const handleRemoveProduct = (product) => {

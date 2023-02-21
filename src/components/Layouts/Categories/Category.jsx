@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import Product from './Product';
@@ -8,7 +8,7 @@ const Category = () => {
 
   const productsDb = require('./database.json');
   const { type } = useParams();
-  const section = type && type;
+  const section = type;
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
