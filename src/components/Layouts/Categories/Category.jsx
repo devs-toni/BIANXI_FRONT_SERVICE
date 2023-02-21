@@ -8,8 +8,8 @@ const Category = () => {
 
   const productsDb = require('./database.json');
   const { type } = useParams();
-  const section = type;
   const [products, setProducts] = useState([]);
+  const section = type;
 
   useEffect(() => {
     setProducts([]);
@@ -30,19 +30,19 @@ const Category = () => {
         setProducts([]);
         break;
     }
-  }, [section]);
+  }, [section, productsDb]);
 
 
   return (
     <div className='category'>
       <h3 className="category__title">{type.toLowerCase()}</h3>
       <div className="products">
-        {products.length > 0 && products.map(({ id, name, since, until, offer, stock }) => {
-          return <Product key={id} id={id} name={name} price={since} toPrice={until} type={type} offer={offer} stock={stock} />
+        {products.length > 0 && products.map(({ id, name, price }) => {
+          return <Product key={id} id={id} name={name} price={price} type={type} />
         })}
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default Category;

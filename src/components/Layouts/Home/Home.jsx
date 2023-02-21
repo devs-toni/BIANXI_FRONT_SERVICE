@@ -1,10 +1,9 @@
-import React, { useContext, useId, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Image from './Image';
 import Section from './Section';
 import LanguageContext from '../../../context/LanguageContext';
 import logoImage from '../../../assets/images/logo-image.png';
 import Advantage from './Advantage';
-import Footer from '../../Footer/Footer';
 import { faTruckFast, faMoneyBill1Wave, faTriangleExclamation, faBicycle, faRoad, faMountain, faBolt, faCity } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
@@ -51,8 +50,8 @@ const Home = () => {
 
   }];
 
-  const [sections, setSections] = useState(initSections);
-  const [advantages, setAdvantages] = useState(initAdvantages);
+  const [sections] = useState(initSections);
+  const [advantages] = useState(initAdvantages);
 
   return (
     <div className='home'>

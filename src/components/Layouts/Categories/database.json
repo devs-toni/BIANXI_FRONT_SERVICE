@@ -4,234 +4,168 @@
       {
         "id": 1,    
         "name": "Methanol CV FS 9.3 XT",
-        "since": 4707,
-        "stock": 10,
-        "offer": 0
+        "price": 4707
       },
       {
         "id": 2,
         "name": "Methanol CV FS 9.2 XTR",
-        "since": 6195,
-        "stock": 10,
-        "offer": 0
+        "price": 6195
       },
       {
         "id": 3,
         "name": "Methanol CV FS 9.1 XX1",
-        "since": 9932,
-        "stock": 10,
-        "offer": 0
+        "price": 9932
       },
       {
         "id": 4,
         "name": "Methanol CV RS 9.3 XT",
-        "since": 4511,
-        "stock": 0,
-        "offer": 0
+        "price": 4511
       },
       {
         "id": 5,
         "name": "Methanol CV RS 9.1 XX1",
-        "since": 8475,
-        "stock": 10,
-        "offer": 0
+        "price": 8475
       },
       {
         "id": 6,
         "name": "Nitron 9.2 XT",
-        "since": 2784,
-        "stock": 10,
-        "offer": 20
+        "price": 2784
       },
       {
         "id": 7,
         "name": "Nitron 9.3 XT",
-        "since": 2317,
-        "stock": 10,
-        "offer": 0
+        "price": 2317
       },
       {
         "id": 8,
         "name": "Nitron 9.4 XT",
-        "since": 2015,
-        "stock": 10,
-        "offer": 10
+        "price": 2015
       },
       {
         "id": 9,
         "name": "Magma 9.2 Alivio",
-        "since": 703,
-        "stock": 0,
-        "offer": 0
+        "price": 703
       }
     ],
     "road": [
       {
         "id": 10,
         "name": "Aria-105",
-        "since": 3240,
-        "stock": 10,
-        "offer": 0
+        "price": 3240
       },
       {
         "id": 11,
         "name": "Oltre PRO Ultegra Di2",
-        "since": 7949,
-        "stock": 0,
-        "offer": 0
+        "price": 7949
       },
       {
         "id": 12,
         "name": "Oltre XR4 Red AXS 12v",
-        "since": 11049,
-        "stock": 10,
-        "offer": 0
+        "price": 11049
       },
       {
         "id": 13,
         "name": "Oltre Ultegra Di2",
-        "since": 5749,
-        "stock": 10,
-        "offer": 0
+        "price": 5749
       },
       {
         "id": 14,
         "name": "Oltre XR4 Ultegra Di2",
-        "since": 7403,
-        "stock": 10,
-        "offer": 0
+        "price": 7403
       },
       {
         "id": 15,
         "name": "Sprint 105",
-        "since": 2277,
-        "stock": 0,
-        "offer": 0
+        "price": 2277
       },
       {
         "id": 16,
         "name": "Sprint 105 Di2 Disc",
-        "since": 2733,
-        "until": 3799,
-        "stock": 10,
-        "offer": 0
+        "price": 2733
       },
       {
         "id": 17,
         "name": "Spring Ultegra",
-        "since": 3121,
-        "stock": 10,
-        "offer": 20
+        "price": 3121
       },
       {
         "id": 18,
         "name": "Oltre XR4 Ultegra Di2 Fulcrum",
-        "since": 8343,
-        "stock": 10,
-        "offer": 0
+        "price": 8343
       }
     ],
     "ebike": [
       {
         "id": 19,
         "name": "T-Tronik Performer 9.1 XTR",
-        "since": 8113,
-        "stock": 10,
-        "offer": 0
+        "price": 8113
       },
       {
         "id": 20,
         "name": "T-Tronik Performer 9.2 XT",
-        "since": 7059,
-        "stock": 0,
-        "offer": 0
+        "price": 7059
       },
       {
         "id": 21,
         "name": "T-Tronik Performer 9.3 XT",
-        "since": 6388,
-        "stock": 10,
-        "offer": 0
+        "price": 6388
       },
       {
         "id": 22,
         "name": "T-Tronik Rebel 9.1 XT",
-        "since": 5423,
-        "stock": 10,
-        "offer": 0
+        "price": 5423
       },
       {
         "id": 23,
         "name": "T-Tronik Rebel 9.2 NX",
-        "since": 4649,
-        "until": 5093,
-        "stock": 10,
-        "offer": 0
+        "price": 4649
       },
       {
         "id": 24,
         "name": "T-Tronik Sport 9.1 Deore 12v",
-        "since": 3009,
-        "stock": 0,
-        "offer": 0
+        "price": 3009
       },
       {
         "id": 25,
         "name": "T-Tronik Sport 9.1 Deore 12vTRK",
-        "since": 3060,
-        "stock": 10,
-        "offer": 0
+        "price": 3060
       },
       {
         "id": 26,
         "name": "T-Tronik Sport 9.1 SX",
-        "since": 3009,
-        "stock": 10,
-        "offer": 20
+        "price": 3009 
       },
       {
         "id": 27,
         "name": "T-Tronik Sport 9.2 Altus",
-        "since": 2841,
-        "stock": 10,
-        "offer": 0
+        "price": 2841
       }
     ],
     "city": [
       {
         "id": 28,
         "name": "C-Sport 2 Acera Step-Through",
-        "since": 789,
-        "stock": 10,
-        "offer": 0
+        "price": 789
       },
       {
         "id": 29,
         "name": "C-Sport 3 Acera",
-        "since": 807,
-        "stock": 0,
-        "offer": 0
+        "price": 807
       },
       {
         "id": 30,
         "name": "C-Sport 3 Alivio",
-        "since": 859,
-        "stock": 10,
-        "offer": 0
+        "price": 859
       },
       {
         "id": 31,
         "name": "C-Sport Cross Acera",
-        "since": 751,
-        "stock": 10,
-        "offer": 0
+        "price": 751
       },
       {
         "id": 32,
         "name": "C-Sport Cross Acera Step-Through",
-        "since": 751,
-        "stock": 10,
-        "offer": 0
+        "price": 751
       }
     ]
   }
