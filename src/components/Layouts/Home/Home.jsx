@@ -57,7 +57,7 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <Carousel images={images} autoPlay={false} showButtons={false}  />
+      <Carousel images={images} autoPlay={true} showButtons={true}  />
       <div className='sections'>
         {sections.map(({ name, icon, path }, i) => {
           return <Section key={i} name={name} icon={icon} path={path} />
