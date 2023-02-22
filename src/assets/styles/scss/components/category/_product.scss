@@ -10,12 +10,18 @@
     text-align: center;
     font-weight: 800;
     font-size: 1.2em;
-
+  
 
 
     &--image {
       width: 17vw;
       margin-bottom: 10px;
+      opacity: 0;
+      transition: all 3s;
+
+      &.loaded {
+        opacity: 1;
+      }
 
       &.selected {
         box-shadow: 0 0 5px 1px var.$bianchi-color;

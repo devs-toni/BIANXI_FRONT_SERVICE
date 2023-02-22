@@ -11,8 +11,9 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) =>
 
   const { text } = useContext(LanguageContext);
   const { findNumberProduct } = useContext(CartContext);
-  const [image, setImage] = useState({});
   const { final, init } = setProductPrice(offer, price);
+  const [image, setImage] = useState(name)
+  const [loaded, setLoaded] = useState(false);
   const productToSave = {
     id,
     name,
@@ -26,7 +27,8 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) =>
   useEffect(() => {
     const image = require(`./../../../assets/images/${type}/${name}.png`);
     setImage(image);
-  }, [setImage, name])
+  }, [setImage])
+  
 
   return (
     <div className={`products__product`}>
@@ -34,7 +36,7 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) =>
         offer > 0 && <Badge classAttribute="offer" text={text.product.offer} />
       }
       <div>
-        <img className={`products__product--image ${stock === 0 ? 'empty' : ''} ${findNumberProduct(id) > 0 ? 'selected' : ''}`} src={image} alt={name} />
+        <img className={`products__product--image ${stock === 0 ? 'empty' : ''} ${findNumberProduct(id) > 0 ? 'selected' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
         <p className='products__product--name'>{name}</p>
         <div className='products__product--price-container'>
           <p className={`products__product--price-container-price ${offer && 'erased'}`}>{offer > 0 ? init : final} €</p>
