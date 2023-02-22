@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import Image from './Image';
+import Carousel from './Carousel';
 import Section from './Section';
 import LanguageContext from '../../../context/LanguageContext';
 import logoImage from '../../../assets/images/logo-image.png';
@@ -50,12 +50,14 @@ const Home = () => {
 
   }];
 
+  const images = ['carousel-0.jpg', 'carousel-1.jpg', 'carousel-2.jpg','carousel-3.jpg', 'carousel-4.jpg'];
+
   const [sections] = useState(initSections);
   const [advantages] = useState(initAdvantages);
 
   return (
     <div className='home'>
-      <Image />
+      <Carousel images={images} autoPlay={false} showButtons={false}  />
       <div className='sections'>
         {sections.map(({ name, icon, path }, i) => {
           return <Section key={i} name={name} icon={icon} path={path} />
