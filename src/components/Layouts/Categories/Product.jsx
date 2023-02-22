@@ -2,6 +2,7 @@
 
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../../context/LanguageContext';
+import CartContext from '../../../context/CartContext';
 import { setProductPrice } from '../../../helpers/utils';
 import CartHandler from './CartHandler';
 import Badge from './Badge';
@@ -9,7 +10,7 @@ import Badge from './Badge';
 const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) => {
 
   const { text } = useContext(LanguageContext);
-
+  const { findNumberProduct } = useContext(CartContext);
   const [image, setImage] = useState({});
   const { final, init } = setProductPrice(offer, price);
   const productToSave = {
@@ -28,12 +29,12 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, count = 1 }) =>
   }, [setImage, name])
 
   return (
-    <div className='products__product'>
+    <div className={`products__product`}>
       {
         offer > 0 && <Badge classAttribute="offer" text={text.product.offer} />
       }
       <div>
-        <img className={`products__product--image ${stock === 0 && 'empty'}`} src={image} alt={name} />
+        <img className={`products__product--image ${stock === 0 ? 'empty' : ''} ${findNumberProduct(id) > 0 ? 'selected' : ''}`} src={image} alt={name} />
         <p className='products__product--name'>{name}</p>
         <div className='products__product--price-container'>
           <p className={`products__product--price-container-price ${offer && 'erased'}`}>{offer > 0 ? init : final} €</p>

@@ -1,18 +1,9 @@
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const CarouselImg = styled.img`
-width: 100vw;
-height: 90vh;
-opacity: 0;
-transition: 1s;
-&.loaded {
-  opacity: 1;
-}
-`;
+
 
 const Carousel = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -58,7 +49,7 @@ const Carousel = (props) => {
         </div>
       }
       <div className='carousel__images'>
-        <CarouselImg src={require(`../../../assets/images/carousel/${selectedImage}`)} alt='Cover' onLoad={() => setLoaded(true)} className={loaded ? 'loaded' : ''} />
+        <img src={require(`../../../assets/images/carousel/${selectedImage}`)} alt='Cover' onLoad={() => setLoaded(true)} className={`carousel__images--image ${loaded ? 'loaded' : ''}`} />
       </div>
     </div>
   )

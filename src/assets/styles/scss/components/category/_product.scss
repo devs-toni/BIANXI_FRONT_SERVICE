@@ -11,9 +11,16 @@
     font-weight: 800;
     font-size: 1.2em;
 
+
+
     &--image {
       width: 17vw;
       margin-bottom: 10px;
+
+      &.selected {
+        box-shadow: 0 0 5px 1px var.$bianchi-color;
+        border-radius: 10px;
+      }
 
       &.empty {
         opacity: .2;
