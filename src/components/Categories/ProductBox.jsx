@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import CartContext from '../../../context/CartContext';
+import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 
-const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, stock, total }) => {
+const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, stock }) => {
 
   const { findNumberProduct } = useContext(CartContext);
 
@@ -21,14 +21,13 @@ const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded,
 ProductBox.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  finalPrice: PropTypes.string.isRequired,
-  initPrice: PropTypes.string.isRequired,
+  finalPrice: PropTypes.number.isRequired,
+  initPrice: PropTypes.number.isRequired,
   image: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
   setLoaded: PropTypes.func.isRequired,
   containerClass: PropTypes.string.isRequired,
   offer: PropTypes.number,
   stock: PropTypes.number,
-  total: PropTypes.number,
 }
 export default ProductBox;

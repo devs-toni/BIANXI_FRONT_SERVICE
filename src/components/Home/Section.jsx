@@ -16,7 +16,7 @@ const Section = ({ name, icon, path }) => {
 
 Section.propTypes = {
   name: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
   path: PropTypes.string.isRequired
 }
 

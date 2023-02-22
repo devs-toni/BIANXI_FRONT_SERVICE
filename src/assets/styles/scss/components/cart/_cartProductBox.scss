@@ -1,0 +1,80 @@
+@use '../../abstracts/variables' as var;
+
+.cart-product-box {
+  display: flex;
+  font-size: 1.5em;
+  font-weight: 600;
+
+  &__image {
+    width: 15vw;
+    opacity: 0;
+    transition: all 3s;
+
+    &.loaded {
+      opacity: 1;
+    }
+
+    @media screen and (max-width: 1750px) {
+      width: 19vw;
+    }
+
+    @media screen and (max-width: 1550px) {
+      width: 21vw;
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 23vw;
+    }
+
+    @media screen and (max-width: 1150px) {
+      width: 25vw;
+    }
+
+    @media screen and (max-width: 1050px) {
+      width: 30vw;
+    }
+
+    @media screen and (max-width: 950px) {
+      width: 33vw;
+    }
+
+    @media screen and (max-width: 850px) {
+      width: 36vw;
+    }
+
+    @media screen and (max-width: 770px) {
+      width: 70vw;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 80vw;
+    }
+  }
+
+  &__name {
+    width: 50%;
+    text-align: left;
+    margin: 1em 12px;
+  }
+
+  &__price-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--price {
+      letter-spacing: .2px;
+      color: var.$bianchi-color;
+
+      &.offer-price {
+        font-size: 1.2em;
+        margin-left: 20px;
+      }
+
+      &.erased {
+        text-decoration: line-through;
+        font-size: .8em;
+      }
+    }
+  }
+}

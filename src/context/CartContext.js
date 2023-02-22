@@ -4,7 +4,7 @@ const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
 let totalItems = 0;
 items?.forEach(i => {
-  totalItems += i.count;
+  totalItems += i.total;
 });
 
 const CartProvider = ({ children }) => {
@@ -31,7 +31,7 @@ const CartProvider = ({ children }) => {
     const index = totalProducts.findIndex(p => p.id === product?.id);
 
     if (p) {
-      if (p?.count > 1) {
+      if (p.total > 1) {
         changeCountProduct(index, '-');
       } else {
         const arr = [...totalProducts];
@@ -43,7 +43,7 @@ const CartProvider = ({ children }) => {
   }
 
   const findNumberProduct = id => {
-    return totalProducts.find(p => p.id === id)?.count;
+    return totalProducts.find(p => p.id === id)?.total;
   }
 
   const getIndexProduct = id => {
@@ -51,8 +51,8 @@ const CartProvider = ({ children }) => {
   }
 
   const changeCountProduct = (index, op) => {
-    if (op === '+') totalProducts[index].count = totalProducts[index].count + 1;
-    else totalProducts[index].count = totalProducts[index].count - 1;
+    if (op === '+') totalProducts[index].total = totalProducts[index].total + 1;
+    else totalProducts[index].total = totalProducts[index].total - 1;
   }
 
   const data = { totalProducts, setTotalProducts, handleAddProduct, handleRemoveProduct, findNumberProduct, numberTotalProducts };

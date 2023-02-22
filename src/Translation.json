@@ -28,6 +28,9 @@
       "empty": "Agotado",
       "offer": "En Oferta"
     },
+    "cart": {
+      "empty": "No tienes nada en el carrito"
+    },
 
 
 

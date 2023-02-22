@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import Carousel from './Carousel';
 import Section from './Section';
-import LanguageContext from '../../../context/LanguageContext';
-import logoImage from '../../../assets/images/logo-image.png';
+import LanguageContext from '../../context/LanguageContext';
+import logoImage from '../../assets/images/logo-image.png';
 import Advantage from './Advantage';
 import { faTruckFast, faMoneyBill1Wave, faTriangleExclamation, faBicycle, faRoad, faMountain, faBolt, faCity } from '@fortawesome/free-solid-svg-icons';
 

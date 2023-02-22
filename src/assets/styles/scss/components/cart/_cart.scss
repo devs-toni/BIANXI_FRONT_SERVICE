@@ -1,5 +1,21 @@
+@use '../../abstracts/variables' as var;
+@use './cartProductBox';
 
 .cart {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  padding: var.$section-padding;
+  width: var.$section-category;
+  margin: 0;
+
+  &__title {
+    margin: 0 0 50px 2px;
+  }
+
+  &__product {
+    border: 3px solid #00b7b193;
+    padding: 1em;
+    margin: 30px 0;
+    width: 60%;
+    box-shadow: 0 0 15px 1px #00b7b146;
+    border-radius: 7px;
+  }
 }

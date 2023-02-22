@@ -47,7 +47,7 @@ const Carousel = ({images, autoPlay, showButtons}) => {
         </div>
       }
       <div className='carousel__images'>
-        <img src={require(`../../../assets/images/carousel/${selectedImage}`)} alt='Cover' onLoad={() => setLoaded(true)} className={`carousel__images--image ${loaded ? 'loaded' : ''}`} />
+        <img src={require(`../../assets/images/carousel/${selectedImage}`)} alt='Cover' onLoad={() => setLoaded(true)} className={`carousel__images--image ${loaded ? 'loaded' : ''}`} />
       </div>
     </div>
   )

@@ -14,7 +14,7 @@ const Advantage = ({ name, icon, description }) => {
 
 Advantage.propTypes = {
   name: PropTypes.string.isRequired,
-  icon: PropTypes.string.isRequired,
+  icon: PropTypes.object.isRequired,
   description: PropTypes.string
 }
 

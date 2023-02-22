@@ -1,14 +1,14 @@
 import React, { useContext, useState } from 'react'
-import CartContext from '../../../context/CartContext';
+import CartContext from '../../context/CartContext';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 
-const CartHandler = ({ id, stock, product, containerClass }) => {
+const CartHandler = ({ product, containerClass, stock }) => {
 
   const { handleAddProduct, handleRemoveProduct, findNumberProduct } = useContext(CartContext);
-  const numProducts = findNumberProduct(id);
+  const numProducts = findNumberProduct(product.id);
   const [number, setNumber] = useState(numProducts ? numProducts : 0);
 
   const handleCart = (product, operation) => {
@@ -35,9 +35,8 @@ const CartHandler = ({ id, stock, product, containerClass }) => {
 }
 
 CartHandler.propTypes = {
-  id : PropTypes.number.isRequired,
-  stock: PropTypes.number.isRequired,
   product: PropTypes.object.isRequired,
-  containerClass: PropTypes.string.isRequired
+  containerClass: PropTypes.string.isRequired,
+  stock: PropTypes.number.isRequired,
 }
 export default CartHandler;

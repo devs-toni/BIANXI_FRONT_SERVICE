@@ -4,11 +4,9 @@ import Dropdown from './Dropdown';
 import LanguageContext from '../../context/LanguageContext';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/images/logo.png';
-import { FiMenu } from 'react-icons/fi';
-import { FaUserAlt } from 'react-icons/fa';
-import { GrClose } from 'react-icons/gr';
-import { IoIosCart } from 'react-icons/io';
+import { faCartShopping, faUser, faBars, faXmark, faB } from '@fortawesome/free-solid-svg-icons';
 import CartContext from '../../context/CartContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Navbar = () => {
   const [isNavShow, setIsNavShow] = useState(false);
@@ -82,16 +80,16 @@ const Navbar = () => {
           <Link className='item-link'>{text.header.contact}</Link>
         </div>
         <button className='navbar__nav--user'>
-          <FaUserAlt />
+          <FontAwesomeIcon icon={faUser} />
         </button>
       </nav>
       <div className="navbar__extra-icons">
         <button className='navbar__extra-icons--cart'>
-          <Link to='products/cart'><IoIosCart /></Link>
+          <Link to='products/cart'><FontAwesomeIcon icon={faCartShopping} /></Link>
           <span className={`${numberTotalProducts > 0 && 'active'}`}>{numberTotalProducts > 0 && numberTotalProducts}</span>
         </button>
         <button className='navbar__extra-icons--hamburguer' onClick={handleMenu} ref={activatorRef}>
-          {isNavShow ? <GrClose /> : <FiMenu />}
+          {isNavShow ?  <FontAwesomeIcon icon={faXmark} /> :  <FontAwesomeIcon icon={faBars} />}
         </button>
       </div>
 

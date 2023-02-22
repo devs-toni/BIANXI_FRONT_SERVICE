@@ -11,6 +11,6 @@ const Badge = ({ text, containerClass }) => {
 
 Badge.propTypes = {
   text: PropTypes.string.isRequired,
-  classAttribute: PropTypes.string.isRequired
+  containerClass: PropTypes.string.isRequired
 }
 export default Badge;
