@@ -87,7 +87,7 @@ const Navbar = () => {
       </nav>
       <div className="navbar__extra-icons">
         <button className='navbar__extra-icons--cart'>
-          <IoIosCart />
+          <Link to='products/cart'><IoIosCart /></Link>
           <span className={`${numberTotalProducts > 0 && 'active'}`}>{numberTotalProducts > 0 && numberTotalProducts}</span>
         </button>
         <button className='navbar__extra-icons--hamburguer' onClick={handleMenu} ref={activatorRef}>

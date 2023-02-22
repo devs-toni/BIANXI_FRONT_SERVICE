@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import Carousel from './Carousel';
 import Section from './Section';
 import LanguageContext from '../../../context/LanguageContext';
@@ -10,7 +10,7 @@ const Home = () => {
 
   const { text } = useContext(LanguageContext);
 
-  const initSections = [{
+  const sections = [{
     name: text.header.road,
     icon: faRoad,
     path: "road"
@@ -31,7 +31,7 @@ const Home = () => {
     path: "city"
   }];
 
-  const initAdvantages = [{
+  const advantages = [{
     name: text.home.advantages.advantage1.name,
     icon: faTruckFast,
     description: text.home.advantages.advantage1.description
@@ -47,20 +47,24 @@ const Home = () => {
   {
     name: text.home.advantages.advantage4,
     icon: faBicycle
-
   }];
-
   const images = ['carousel-0.jpg', 'carousel-1.jpg', 'carousel-2.jpg','carousel-3.jpg', 'carousel-4.jpg'];
-
-  const [sections] = useState(initSections);
-  const [advantages] = useState(initAdvantages);
 
   return (
     <div className='home'>
-      <Carousel images={images} autoPlay={true} showButtons={true}  />
+      <Carousel 
+        images={images} 
+        autoPlay={true} 
+        showButtons={true}  
+      />
       <div className='sections'>
         {sections.map(({ name, icon, path }, i) => {
-          return <Section key={i} name={name} icon={icon} path={path} />
+          return <Section 
+                  key={i} 
+                  name={name} 
+                  icon={icon} 
+                  path={path} 
+                 />
         })}
       </div>
       <div className="home__creation">
@@ -78,8 +82,13 @@ const Home = () => {
         </div>
       </div>
       <div className='advantages'>
-        {advantages.map(({ name, icon, description }, i) => {
-          return <Advantage key={i} name={name} icon={icon} description={description} />
+        {advantages.map(({ name, icon, description = '' }, i) => {
+          return <Advantage 
+                  key={i} 
+                  name={name} 
+                  icon={icon} 
+                  description={description} 
+                 />
         })}
       </div>
     </div>

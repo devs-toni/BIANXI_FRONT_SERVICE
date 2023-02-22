@@ -1,11 +1,16 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const Badge = ({ text, classAttribute }) => {
+const Badge = ({ text, containerClass }) => {
   return (
-    <div className={classAttribute}>
+    <div className={containerClass}>
       <p>{text}</p>
     </div>
   )
 }
 
+Badge.propTypes = {
+  text: PropTypes.string.isRequired,
+  classAttribute: PropTypes.string.isRequired
+}
 export default Badge;

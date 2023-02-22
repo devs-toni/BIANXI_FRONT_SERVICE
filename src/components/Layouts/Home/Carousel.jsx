@@ -3,19 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-
-
-const Carousel = (props) => {
+const Carousel = ({images, autoPlay, showButtons}) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [selectedImage, setSelectedImage] = useState(props.images[0]);
+  const [selectedImage, setSelectedImage] = useState(images[0]);
   const [loaded, setLoaded] = useState(false);
 
   const previous = () => {
-    selectNewImage(selectedIndex, props.images, false);
+    selectNewImage(selectedIndex, images, false);
   }
 
   const next = () => {
-    selectNewImage(selectedIndex, props.images);
+    selectNewImage(selectedIndex, images);
   }
 
   const selectNewImage = (index, images, next = true) => {
@@ -31,10 +29,10 @@ const Carousel = (props) => {
   }
 
   useEffect(() => {
-    if (props?.autoPlay || !props.showButtons) {
+    if (autoPlay || !showButtons) {
       const interval = setInterval(() => {
         console.log('autoPlay');
-        selectNewImage(selectedIndex, props.images);
+        selectNewImage(selectedIndex, images);
       }, 3000);
       return () => clearInterval(interval);
     }
@@ -42,7 +40,7 @@ const Carousel = (props) => {
 
   return (
     <div className='carousel'>
-      {props.showButtons &&
+      {showButtons &&
         <div className="carousel__nav">
           <FontAwesomeIcon icon={faChevronLeft} onClick={previous} />
           <FontAwesomeIcon icon={faChevronRight} onClick={next} />

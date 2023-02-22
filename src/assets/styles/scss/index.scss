@@ -3,7 +3,10 @@
 @use './components/header/navbar';
 @use './components/home/home';
 @use './components/category/category';
+@use './components/cart/cart';
 @use './components/footer/footer';
+
+@use './components/page404';
 
 @use './abstracts/variables';
 @use './abstracts/animations';

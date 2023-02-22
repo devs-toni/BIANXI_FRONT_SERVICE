@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const Section = ({ name, icon, path }) => {
   return (
@@ -11,6 +12,12 @@ const Section = ({ name, icon, path }) => {
       </div>
     </Link>
   )
+}
+
+Section.propTypes = {
+  name: PropTypes.string.isRequired,
+  icon: PropTypes.string.isRequired,
+  path: PropTypes.string.isRequired
 }
 
 export default Section;

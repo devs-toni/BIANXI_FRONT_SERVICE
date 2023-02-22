@@ -1,0 +1,85 @@
+@use '../../abstracts/variables' as var;
+
+.product-box {
+
+  &__image {
+    width: 17vw;
+    margin-bottom: 10px;
+    opacity: 0;
+    transition: all 3s;
+
+    &.loaded {
+      opacity: 1;
+    }
+
+    &.selected {
+      box-shadow: 0 0 5px 1px var.$bianchi-color;
+      border-radius: 10px;
+    }
+
+    &.empty {
+      opacity: .2;
+    }
+
+    @media screen and (max-width: 1750px) {
+      width: 19vw;
+    }
+
+    @media screen and (max-width: 1550px) {
+      width: 21vw;
+    }
+
+    @media screen and (max-width: 1350px) {
+      width: 23vw;
+    }
+
+    @media screen and (max-width: 1150px) {
+      width: 25vw;
+    }
+
+    @media screen and (max-width: 1050px) {
+      width: 30vw;
+    }
+
+    @media screen and (max-width: 950px) {
+      width: 33vw;
+    }
+
+    @media screen and (max-width: 850px) {
+      width: 36vw;
+    }
+
+    @media screen and (max-width: 770px) {
+      width: 70vw;
+    }
+
+    @media screen and (max-width: 500px) {
+      width: 80vw;
+    }
+  }
+
+  &__name {
+    margin-bottom: 12px;
+  }
+
+  &__price-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &--price {
+      letter-spacing: .2px;
+      color: var.$bianchi-color;
+
+      &.offer-price {
+        font-size: 1.2em;
+        margin-left: 20px;
+      }
+
+      &.erased {
+        text-decoration: line-through;
+        font-size: .8em;
+      }
+    }
+  }
+}
