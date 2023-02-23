@@ -29,7 +29,9 @@
       "offer": "En Oferta"
     },
     "cart": {
-      "empty": "No tienes nada en el carrito"
+      "empty": "No tienes nada en el carrito",
+      "price": "Precio: ",
+      "delete": "Eliminar"
     },
 
 

@@ -31,7 +31,6 @@ const Carousel = ({images, autoPlay, showButtons}) => {
   useEffect(() => {
     if (autoPlay || !showButtons) {
       const interval = setInterval(() => {
-        console.log('autoPlay');
         selectNewImage(selectedIndex, images);
       }, 3000);
       return () => clearInterval(interval);

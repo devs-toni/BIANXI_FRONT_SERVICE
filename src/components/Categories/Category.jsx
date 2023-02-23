@@ -12,6 +12,7 @@ const Category = () => {
   const section = type;
 
   useEffect(() => {
+    console.log('renderizando categoria nueva');
     setProducts([]);
     switch (section) {
       case 'road':
@@ -32,9 +33,9 @@ const Category = () => {
     }
   }, [section, productsDb]);
 
-
   return (
     <div className='category'>
+    {console.log('renderizando categoria')}
       <h3 className="category__title">{type.toLowerCase()}</h3>
       <div className="products">
         {products.length > 0 && products.map(({ id, name, price, stock, offer }) => {

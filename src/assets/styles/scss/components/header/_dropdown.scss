@@ -42,11 +42,11 @@
   background: white;
   display: none;
   margin: 0;
-  z-index: 1000;
   position: absolute;
   box-shadow: 0 0 2px 0 gray;
   border-radius: 5px;
   padding: 0;
+  z-index: 3;
 
   &.active {
     display: grid;

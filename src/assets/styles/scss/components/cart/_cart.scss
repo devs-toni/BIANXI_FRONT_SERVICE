@@ -1,21 +1,115 @@
 @use '../../abstracts/variables' as var;
 @use './cartProductBox';
+@use './cartHandlerSection';
 
 .cart {
-  padding: var.$section-padding;
-  width: var.$section-category;
-  margin: 0;
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  position: absolute;
+  visibility: hidden;
+  z-index: 3;
+  transition: all .4s ease-in-out;
+  overflow: auto;
 
-  &__title {
-    margin: 0 0 50px 2px;
+  &.active {
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.616);
   }
 
-  &__product {
-    border: 3px solid #00b7b193;
-    padding: 1em;
-    margin: 30px 0;
-    width: 60%;
-    box-shadow: 0 0 15px 1px #00b7b146;
-    border-radius: 7px;
+  .cart-menu {
+    padding: 2em 0 3em 0;
+    overflow-y: hidden;
+    z-index: 5;
+    height: 110vh;
+    transition: all 0.5s ease;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: start;
+    pointer-events: auto;
+    position: absolute;
+    top: 0;
+    right: -20%;
+    width: 0;
+    line-height: 50px;
+    background-color: rgb(255, 255, 255);
+
+    &.active {
+      right: 0;
+      width: 30vw;
+    }
+
+    &__header {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 2em;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+
+      &--content {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-bottom: 3em;
+
+        &-title {
+          font-size: 2.9em;
+
+        }
+
+        &-icon {
+          font-size: 2.8em;
+          margin-right: 30px;
+        }
+      }
+
+      &--close {
+        padding: 0 1em;
+        cursor: pointer;
+        font-size: 1.8em;
+        align-self: center;
+        color: rgba(128, 128, 128, 0.534);
+      }
+    }
+
+    &__content {
+      padding: 2em 1em 0 .8em;
+
+      &--empty {
+        margin: 0 0 50px 2px;
+      }
+
+      &--product {
+        margin: 30px 0;
+        width: auto;
+        border-radius: 7px;
+
+        &-calc {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #fdfdfd;
+          padding-bottom: 1.5em;
+
+          .total {
+            width: 20%;
+            padding: 0 .8em;
+            font-size: 1.2em;
+            color: var.$bianchi-color;
+            text-align: center;
+            font-weight: 1000;
+          }
+        }
+      }
+    }
   }
+
+
+
+
 }

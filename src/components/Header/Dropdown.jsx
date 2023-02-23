@@ -1,21 +1,16 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, memo } from "react";
 import { Link } from "react-router-dom";
 
 
 const Dropdown = ({ items = [], dropdownTitle }) => {
+
   const activatorRef = useRef(null);
   const dropdownListRef = useRef(null);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
-  };
-
-  const keyHandler = event => {
-    console.log(event.target);
-    if (event.key === "Escape" && isOpen) {
-      setIsOpen(false);
-    }
   };
 
   const clickOutsideHandler = event => {
@@ -40,7 +35,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
   }, [isOpen]);
 
   return (
-    <div className='dropdown_wrapper' onKeyDown={keyHandler}>
+    <div className='dropdown_wrapper'>
       <p
         className='dropdown_activator'
         aria-haspopup="true"

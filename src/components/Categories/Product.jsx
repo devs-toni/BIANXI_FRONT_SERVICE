@@ -7,7 +7,7 @@ import Badge from './Badge';
 import ProductBox from './ProductBox';
 import PropTypes from 'prop-types';
 
-const Product = ({ id, name, price, type, offer = 10, stock = 10, total = 1 }) => {
+const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) => {
 
   const { text } = useContext(LanguageContext);
   const { final, init } = setProductPrice(offer, price);
@@ -25,6 +25,7 @@ const Product = ({ id, name, price, type, offer = 10, stock = 10, total = 1 }) =
   };
 
   useEffect(() => {
+
     const image = require(`../../assets/images/${type}/${name}.png`);
     setImage(image);
   }, [setImage])
@@ -49,11 +50,12 @@ const Product = ({ id, name, price, type, offer = 10, stock = 10, total = 1 }) =
         containerClass='product-box'
         offer={offer}
         stock={stock}
+        isCart={false}
       />
       <CartHandler
         product={productToSave}
         containerClass='cart-buttons'
-        stock={stock}
+        isCart={false}
       />
       {
         stock === 0 &&
@@ -63,7 +65,7 @@ const Product = ({ id, name, price, type, offer = 10, stock = 10, total = 1 }) =
       }
     </div >
   );
-};
+}
 
 Product.propTypes = {
   id: PropTypes.number.isRequired,

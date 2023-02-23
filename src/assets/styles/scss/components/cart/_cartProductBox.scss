@@ -1,79 +1,79 @@
 @use '../../abstracts/variables' as var;
 
 .cart-product-box {
+  width: 80%;
   display: flex;
   font-size: 1.5em;
   font-weight: 600;
+  flex-flow: row wrap;
+  border-right: 1px solid rgba(0, 0, 0, 0.123);
 
   &__image {
-    width: 15vw;
+    width: 40%;
     opacity: 0;
     transition: all 3s;
+    object-fit: contain;
 
     &.loaded {
       opacity: 1;
     }
 
-    @media screen and (max-width: 1750px) {
-      width: 19vw;
-    }
+    @media screen and (max-width: 1750px) {}
 
-    @media screen and (max-width: 1550px) {
-      width: 21vw;
-    }
+    @media screen and (max-width: 1550px) {}
 
-    @media screen and (max-width: 1350px) {
-      width: 23vw;
-    }
+    @media screen and (max-width: 1350px) {}
 
-    @media screen and (max-width: 1150px) {
-      width: 25vw;
-    }
+    @media screen and (max-width: 1150px) {}
 
-    @media screen and (max-width: 1050px) {
-      width: 30vw;
-    }
+    @media screen and (max-width: 1050px) {}
 
-    @media screen and (max-width: 950px) {
-      width: 33vw;
-    }
+    @media screen and (max-width: 950px) {}
 
-    @media screen and (max-width: 850px) {
-      width: 36vw;
-    }
+    @media screen and (max-width: 850px) {}
 
-    @media screen and (max-width: 770px) {
-      width: 70vw;
-    }
+    @media screen and (max-width: 770px) {}
 
-    @media screen and (max-width: 500px) {
-      width: 80vw;
-    }
-  }
-
-  &__name {
-    width: 50%;
-    text-align: left;
-    margin: 1em 12px;
+    @media screen and (max-width: 500px) {}
   }
 
   &__price-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 60%;
+
+    &--name {
+      width: 90%;
+      text-align: left;
+      padding-left: 20px;
+      font-size: .9em;
+      line-height: 30px;
+    }
 
     &--price {
+      width: 100%;
       letter-spacing: .2px;
       color: var.$bianchi-color;
+      text-align: left;
+      padding: 0 20px;
+      font-size: .8em;
+      letter-spacing: 1px;
+
+      span {
+        color: black;
+        font-size: .8em;
+        font-weight: 300;
+        letter-spacing: 0;
+      }
 
       &.offer-price {
-        font-size: 1.2em;
+        font-size: 1em;
         margin-left: 20px;
+        display: none;
       }
 
       &.erased {
         text-decoration: line-through;
         font-size: .8em;
+        display: none;
       }
     }
   }

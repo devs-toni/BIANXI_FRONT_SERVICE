@@ -1,17 +1,24 @@
 import React, { useContext } from 'react'
 import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
+import LanguageContext from '../../context/LanguageContext';
 
-const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, stock }) => {
+const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, stock, isCart }) => {
 
   const { findNumberProduct } = useContext(CartContext);
+  const { text } = useContext(LanguageContext);
 
   return (
     <div className={containerClass}>
       <img className={`${containerClass}__image ${stock === 0 ? 'empty' : ''} ${findNumberProduct(id) > 0 ? 'selected' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
-      <p className={`${containerClass}__name`}>{name}</p>
+      {!isCart &&
+        <p className={`${containerClass}__name`}>{name}</p>
+      }
       <div className={`${containerClass}__price-container`}>
-        <p className={`${containerClass}__price-container--price ${offer && 'erased'}`}>{offer > 0 ? initPrice : finalPrice} €</p>
+        {isCart &&
+          <p className={`${containerClass}__price-container--name`}>{name}</p>
+        }
+        <p className={`${containerClass}__price-container--price ${offer && 'erased'}`}><span>{text.cart.price}</span>{offer > 0 ? initPrice : finalPrice} €</p>
         {offer > 0 && <p className={`${containerClass}__price-container--price offer-price`}>{finalPrice} €</p>}
       </div>
     </div>
@@ -29,5 +36,6 @@ ProductBox.propTypes = {
   containerClass: PropTypes.string.isRequired,
   offer: PropTypes.number,
   stock: PropTypes.number,
+  isCart: PropTypes.bool.isRequired,
 }
 export default ProductBox;

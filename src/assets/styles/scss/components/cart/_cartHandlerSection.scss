@@ -1,0 +1,111 @@
+@use '../../abstracts/variables' as var;
+
+.cart-buttons-section {
+  width: 100%;
+  margin: 0 auto;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  background-color: #f8f8f8;
+  border-top: 1px solid rgba(197, 197, 197, 0.247);
+  padding: 10px 0;
+  justify-content: space-around;
+
+  &__cart {
+    display: flex;
+    border-radius: 6px;
+    margin-right: 20px;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(197, 197, 197, 0.247);
+    font-size: 1.3em;
+
+    &--number {
+      margin: 0 10px 0 10px;
+
+      &.empty {
+        opacity: .2;
+      }
+    }
+
+
+    &--handle {
+      color: black;
+      background: white;
+      transition: all .4s ease-out;
+      font-size: 1.2em;
+      width: 50%;
+      border-radius: 6px;
+      margin: 0 auto;
+      cursor: pointer;
+      margin: 5px 10px;
+      padding: 7px 10px;
+      background-size: 200% 100%;
+      background-position: right bottom;
+      opacity: 1;
+
+      &:hover {
+        background-position: left bottom;
+      }
+
+
+      &.empty {
+        cursor: inherit;
+        pointer-events: none;
+        opacity: .2;
+      }
+
+      @media screen and (max-width: 2130px) {
+        width: 70%;
+      }
+
+      @media screen and (max-width: 1850px) {
+        font-size: .8em;
+      }
+
+      @media screen and (max-width: 1390px) {
+        width: 75%;
+      }
+
+      @media screen and (max-width: 1160px) {
+        width: 78%;
+      }
+
+      @media screen and (max-width: 1050px) {
+        width: 62%;
+      }
+
+      @media screen and (max-width: 770px) {
+        width: 50%;
+      }
+
+      @media screen and (max-width: 470px) {
+        width: 60%;
+
+      }
+
+      @media screen and (max-width: 350px) {
+        width: 75%;
+        padding: 10px 15px;
+      }
+    }
+
+    &--remove {
+      display: flex;
+      align-items: center;
+
+
+      &-trash {
+
+        font-size: 1.2em;
+        margin-right: 15px;
+
+        &:hover {
+          opacity: .9;
+        }
+      }
+      &-p {
+      }
+    }
+  }
+}

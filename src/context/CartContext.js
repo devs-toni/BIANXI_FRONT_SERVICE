@@ -2,19 +2,17 @@ import { createContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
-let totalItems = 0;
-items?.forEach(i => {
-  totalItems += i.total;
-});
+
 
 const CartProvider = ({ children }) => {
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
-  const [numberTotalProducts, setNumberTotalProducts] = useState(totalItems);
+  const [isOpen, setIsOpen] = useState(false);
+
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
-  }, [totalProducts, numberTotalProducts]);
+  }, [totalProducts]);
 
   const handleAddProduct = (product) => {
     const indexProduct = getIndexProduct(product.id);
@@ -23,7 +21,6 @@ const CartProvider = ({ children }) => {
     } else {
       setTotalProducts([product, ...totalProducts]);
     }
-    setNumberTotalProducts(products => products + 1);
   }
 
   const handleRemoveProduct = (product) => {
@@ -38,7 +35,6 @@ const CartProvider = ({ children }) => {
         arr.splice(index, 1);
         setTotalProducts(arr);
       }
-      setNumberTotalProducts(products => products - 1);
     }
   }
 
@@ -55,7 +51,39 @@ const CartProvider = ({ children }) => {
     else totalProducts[index].total = totalProducts[index].total - 1;
   }
 
-  const data = { totalProducts, setTotalProducts, handleAddProduct, handleRemoveProduct, findNumberProduct, numberTotalProducts };
+  ///////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    if (isOpen) {
+      document.getElementById('root').style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.getElementById('root').style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
+    }
+  }, [isOpen]);
+
+  const handleCart = (e) => {
+    console.log('Hago algo');
+    setIsOpen(!isOpen);
+  }
+
+  const closeCart = (e) => {
+    isOpen && setIsOpen(false);
+  }
+
+
+  const data = {
+    totalProducts,
+    setTotalProducts,
+    handleAddProduct,
+    handleRemoveProduct,
+    findNumberProduct,
+    isOpen,
+    setIsOpen,
+    handleCart,
+    closeCart
+  };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
 }

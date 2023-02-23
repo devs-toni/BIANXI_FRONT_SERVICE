@@ -1,33 +1,25 @@
-import React from 'react'
-import { useContext, useState, useRef, useEffect } from 'react'
-import Dropdown from './Dropdown';
-import LanguageContext from '../../context/LanguageContext';
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/images/logo.png';
-import { faCartShopping, faUser, faBars, faXmark, faB } from '@fortawesome/free-solid-svg-icons';
-import CartContext from '../../context/CartContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { memo } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import logo from '../../assets/images/logo.png';
+import { faCartShopping, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
+import Logo from './Logo';
+import Navigator from './Navigator';
+import IconsContainer from './IconsContainer';
 
-const Navbar = () => {
+const Navbar = memo(({ items }) => {
   const [isNavShow, setIsNavShow] = useState(false);
-  const { text } = useContext(LanguageContext);
-  const { numberTotalProducts } = useContext(CartContext);
 
   const menuRef = useRef(null);
   const activatorRef = useRef(null);
-  
+
   const handleMenu = (e) => {
     setIsNavShow(!isNavShow);
   }
+
   const closeMenu = (e) => {
     isNavShow && setIsNavShow(false);
   }
-
-  const keyMenuHandler = event => {
-    if (event.key === "Escape" && isNavShow) {
-      setIsNavShow(false);
-    }
-  };
 
   const clickOutsideHandler = event => {
     if (menuRef.current) {
@@ -37,64 +29,56 @@ const Navbar = () => {
       ) {
         return;
       }
-
       setIsNavShow(false);
     }
   };
 
+
   useEffect(() => {
     if (isNavShow) {
       document.addEventListener("mousedown", clickOutsideHandler);
+      document.getElementById('root').style.overflow = 'hidden';
+      document.body.style.overflow = 'hidden';
     } else {
       document.addEventListener("mousedown", clickOutsideHandler);
+      document.getElementById('root').style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
     }
   }, [isNavShow]);
 
-  const items = [
-    {
-      ref: "product-category/bycicles/road",
-      text: text.header.road
-    },
-    {
-      ref: "product-category/bycicles/mtb",
-      text: text.header.mtb
-    },
-    {
-      ref: "product-category/bycicles/ebike",
-      text: text.header.ebike
-    },
-    {
-      ref: "product-category/bycicles/city",
-      text: text.header.city
-    }
-  ];
-
   return (
-    <div className='navbar' onKeyUp={keyMenuHandler}>
-      <div className='navbar__container-logo'>
-        <Link to='/'><img src={Logo} alt="" onClick={closeMenu} /></Link>
-      </div>
-      <nav className={`navbar__nav ${isNavShow ? 'active' : ''}`} ref={menuRef}>
-        <Dropdown items={items} dropdownTitle={text.header.bycicles} />
-        <div className="container-link">
-          <Link className='item-link'>{text.header.contact}</Link>
-        </div>
-        <button className='navbar__nav--user'>
-          <FontAwesomeIcon icon={faUser} />
-        </button>
-      </nav>
+    <div className='navbar'>
+      <Logo
+        containerClass='navbar__container-logo'
+        closeMenu={closeMenu}
+        logo={logo}
+      />
+      <Navigator
+        containerClass={`navbar__nav ${isNavShow ? 'active' : ''}`}
+        innerRef={menuRef}
+        items={items}
+      />
       <div className="navbar__extra-icons">
-        <button className='navbar__extra-icons--cart'>
-          <Link to='products/cart'><FontAwesomeIcon icon={faCartShopping} /></Link>
-          <span className={`${numberTotalProducts > 0 && 'active'}`}>{numberTotalProducts > 0 && numberTotalProducts}</span>
-        </button>
-        <button className='navbar__extra-icons--hamburguer' onClick={handleMenu} ref={activatorRef}>
-          {isNavShow ?  <FontAwesomeIcon icon={faXmark} /> :  <FontAwesomeIcon icon={faBars} />}
-        </button>
+        <IconsContainer
+          containerClass='navbar__extra-icons'
+          icon={faCartShopping}
+          isCart={true}
+        />
+        <IconsContainer
+          containerClass='navbar__extra-icons'
+          icon={faBars}
+          iconClose={faXmark}
+          isCart={false}
+          isNavShow={isNavShow}
+          handleMenu={handleMenu}
+          innerRef={activatorRef}
+        />
       </div>
-
     </div>
   )
-}
+})
 
+Navbar.propTypes = {
+  items: PropTypes.array.isRequired,
+}
 export default Navbar;
