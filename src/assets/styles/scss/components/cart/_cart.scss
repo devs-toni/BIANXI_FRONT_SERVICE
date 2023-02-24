@@ -1,7 +1,7 @@
 @use '../../abstracts/variables' as var;
 @use './cartProductBox';
-@use './cartHandlerSection';
 @use './cartFooter';
+@use './cartHandlerModal';
 
 .cart {
   display: flex;

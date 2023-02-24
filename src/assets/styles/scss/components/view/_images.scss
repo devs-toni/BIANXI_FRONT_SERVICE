@@ -1,6 +1,7 @@
-@use '../abstracts/variables' as var;
+@use '../../abstracts/variables' as var;
 
 .images {
+  min-width: 50%;
 
   &__main {
 

@@ -5,6 +5,7 @@ const ViewImages = ({ img, name }) => {
     <div className="images">
       <div className="images__main">
         <img src={img} alt={name} className="images__main--img" />
+        
       </div>
       <div className="images__secondary">
         <div className="images__secondary--images">

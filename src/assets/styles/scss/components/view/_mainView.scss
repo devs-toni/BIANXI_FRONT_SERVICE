@@ -1,4 +1,12 @@
-@use '../abstracts/variables' as var;
+@use '../../abstracts/variables' as var;
 @use './images';
 @use './details';
 @use './info';
+
+.view {
+  width: 60%;
+  padding: var.$section-padding;
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0 auto;
+}

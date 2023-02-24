@@ -1,46 +1,134 @@
-@use '../abstracts/variables' as var;
+@use '../../abstracts/variables' as var;
+@use './cartHandler';
 
 .info {
+  width: 50%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+
 
   &__main {
+    text-align: center;
 
-    &--name {}
+    &--name {
+      font-weight: bolder;
+      font-size: 3.4em;
+      margin-bottom: 50px;
+    }
 
-    &--short {}
+    &--short {
+      font-size: 1.4em;
+      font-style: italic;
+      margin-bottom: 120px;
+    }
 
-    &--price {}
+    &--price {
+      font-size: 3em;
+      color: var.$bianchi-color;
+      margin-bottom: 40px;
+    }
   }
 
   &__size {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(192, 186, 186, 0.658);
+    margin-bottom: 20px;
+    padding-bottom: 2em;
 
-    &--title {}
+    &--title {
+      font-weight: 500;
+      font-size: 1.2em;
+      margin-right: 20px;
+    }
 
     &--option {
+      cursor: pointer;
+      min-width: 250px;
+      border-radius: 5px;
+      padding: 15px 10px;
+      font-size: 1.1em;
+      align-self: center;
+      outline: none;
+
 
       option {}
     }
   }
 
   &__color {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-bottom: 2em;
 
-    &--title {}
+    &--title {
+      font-weight: 500;
+      font-size: 1.2em;
+      margin-right: 20px;
+    }
 
     &--colors {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+      border: 1px solid transparent;
+      cursor: pointer;
 
-      &-sel {}
+      &:hover {
+        border-color: black;
+      }
+
+      &:checked {
+        background-color: green !important;
+      }
     }
   }
 
-  &__empty {}
+  &__empty {
+    font-size: 1.2em;
+    color: red;
+    margin-bottom: 20px;
+  }
 
   &__buy {
+    display: flex;
+    width: 80%;
+    padding-bottom: 2em;
 
-    &--add {}
+    &--add {
+      width: 100%;
+      background-color: var.$bianchi-color;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1.4em;
+    }
+
+    svg.fa-heart {
+      margin-left: 40px;
+      width: 10%;
+      font-size: 2em;
+      align-self: center;
+      cursor: pointer;
+    }
   }
 
   &__share {
+    padding-top: 2em;
 
-    &--title {}
+    &--title {
+      font-weight: 400;
+      font-size: 1.4em;
+      margin-right: 20px;
+    }
 
     &--icons {
 

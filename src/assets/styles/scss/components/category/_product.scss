@@ -1,6 +1,5 @@
 @use '../../abstracts/variables' as var;
 @use './productBox';
-@use './cartHandler';
 
 .products {
   display: grid;
