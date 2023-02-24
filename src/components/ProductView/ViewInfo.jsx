@@ -45,14 +45,17 @@ const ViewInfo = ({ product, type, total = 1 }) => {
           })
         }
       </div>
-      <p className="info__empty">Agotado</p>
+      {
+        product.stock === 0 &&
+        <p className="info__empty">Agotado</p>
+      }
       <div className="info__buy">
         <CartHandler
           product={productStore}
           containerClass='cart-buttons'
           isCart={false}
         />
-        <button className="info__buy--add">{text.view.add}</button>
+        <button className={`info__buy--add ${product.stock === 0 && 'empty'}`}>{text.view.add}</button>
         <FontAwesomeIcon icon={faHeart} />
       </div>
       <div className="info__share">

@@ -1,6 +1,9 @@
 import React from 'react'
 
 const ViewImages = ({ img, name }) => {
+
+
+  
   return (
     <div className="images">
       <div className="images__main">
@@ -9,8 +12,9 @@ const ViewImages = ({ img, name }) => {
       </div>
       <div className="images__secondary">
         <div className="images__secondary--images">
-          <img src="" alt="" />
-          <img src="" alt="" />
+          <img src={img} alt={name} />
+          <img src={img} alt={name} />
+          <img src={img} alt={name} />
         </div>
       </div>
     </div>

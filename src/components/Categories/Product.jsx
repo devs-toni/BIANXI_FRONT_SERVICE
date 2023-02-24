@@ -42,11 +42,6 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
         isCart={false}
       />
       <NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
-      {/*       <CartHandler
-        product={productToSave}
-        containerClass='cart-buttons'
-        isCart={false}
-      /> */}
       {
         stock === 0 &&
         <Badge

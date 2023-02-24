@@ -1,20 +1,63 @@
 @use '../../abstracts/variables' as var;
 
 .details {
+  width: 100vw;
+  margin-top: 150px;
 
-  &__sections{
+  &__sections {
+    width: 100%;
+    border-bottom: 1px solid rgba(219, 218, 218, 0.671);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: start;
+    font-size: 1.3em;
 
-    &--description {}
-    &--features {}
+
+    &--description {
+      font-weight: 500;
+      width: 7%;
+      padding-bottom: 2.2em;
+      text-align: center;
+      cursor: pointer;
+
+      &.active {
+        border-bottom: 1px solid gray;
+      }
+    }
+
+    &--features {
+      font-weight: 500;
+      width: 12%;
+      padding-bottom: 2.2em;
+      text-align: center;
+      cursor: pointer;
+
+      &.active {
+        border-bottom: 1px solid gray;
+      }
+    }
   }
 
   &__info {
+    margin-top: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
 
     &--text {
+      width: 50%;
+      margin: 0 auto;
 
-      &-warning {}
-      &-description {}
+      &-warning {
+        font-size: 1.1em;
+      }
+
+      &-description {
+        font-size: 1.1em;
+      }
     }
+
     &--list {
 
       &-ul {

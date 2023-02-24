@@ -110,6 +110,11 @@
       padding: 10px 20px;
       cursor: pointer;
       font-size: 1.4em;
+
+      &.empty {
+        opacity: 0.4;
+        cursor: no-drop;
+      }
     }
 
     svg.fa-heart {

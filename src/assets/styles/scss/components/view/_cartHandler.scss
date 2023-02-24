@@ -22,14 +22,19 @@
     justify-content: center;
 
     &--number {
+      width: 40px;
       margin: 0 10px 0 10px;
-      font-size: 1.2em;
+      font-size: 1em;
+      outline: none;
+      border: none;
+      text-align: center;
+      cursor: default;
+      caret-color: transparent;
 
       &.empty {
         opacity: .2;
       }
     }
-
 
     &--handle {
       color: black;
