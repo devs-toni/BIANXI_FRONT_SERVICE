@@ -32,9 +32,15 @@
         #1a1b1b,
         transparent 80%) 30;
   }
+  
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 770px) {
     padding: 0;
+    color: white;
+  
+    &:hover {
+      border: none;
+    }
   }
 }
 
@@ -79,22 +85,24 @@
     padding: 0.8rem;
     transition: all 0.4s ease-in-out;
 
-    @media screen and (max-width: 768px) {
+
+    &:hover {
+      background-color: gray;
+      color: white;
+    }
+
+    @media screen and (max-width: 770px) {
       width: auto;
       padding: 0;
       padding-left: 0.4rem;
       height: 40px;
     }
-
-    &:hover {
-      background-color: gray;
-      color: white;
-
-      @media screen and (max-width: 768px) {
-        max-width: 48%;
-        color: inherit;
-        background-color: inherit;
-      }
-    }
   }
+
+  /* 
+  @media screen and (max-width: 770px) {
+    max-width: 48%;
+    color: white;
+    background-color: inherit;
+  } */
 }

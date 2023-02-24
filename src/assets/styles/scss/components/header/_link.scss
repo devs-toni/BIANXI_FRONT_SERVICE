@@ -23,6 +23,10 @@
     justify-content: center;
     align-items: center;
     transition: all .4s ease-in-out;
+
+    @media screen and (max-width: 770px) {
+      color: white;
+    }
   }
 
   &:hover {
@@ -33,17 +37,13 @@
         transparent 80%) 30 !important;
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 770px) {
     width: 100%;
+    font-size: 0.8em;
     height: auto;
 
     &:hover {
       border: none;
-      border-image: none;
     }
-  }
-  
-  @media screen and (max-width: 768px) {
-    font-size: 0.8em;
   }
 }

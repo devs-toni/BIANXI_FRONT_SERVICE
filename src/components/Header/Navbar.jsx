@@ -38,10 +38,12 @@ const Navbar = memo(({ items }) => {
     if (isNavShow) {
       document.addEventListener("mousedown", clickOutsideHandler);
       document.getElementById('root').style.overflow = 'hidden';
+      document.querySelector('.navbar__extra-icons--cart').style.opacity = '0';
       document.body.style.overflow = 'hidden';
     } else {
       document.addEventListener("mousedown", clickOutsideHandler);
       document.getElementById('root').style.overflow = 'auto';
+      document.querySelector('.navbar__extra-icons--cart').style.opacity = '1';
       document.body.style.overflow = 'auto';
     }
   }, [isNavShow]);

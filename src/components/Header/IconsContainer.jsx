@@ -23,7 +23,7 @@ const IconsContainer = ({ containerClass, icon, isCart, iconClose, isNavShow, ha
             (
               isNavShow
                 ?
-                <FontAwesomeIcon className={`${containerClass}--hamburguer`} icon={iconClose} onClick={handleMenu} ref={innerRef} />
+                <FontAwesomeIcon className={`${containerClass}--menu-close`} icon={iconClose} onClick={handleMenu} ref={innerRef} />
                 :
                 <FontAwesomeIcon className={`${containerClass}--hamburguer`} icon={icon} onClick={handleMenu} ref={innerRef} />
             )

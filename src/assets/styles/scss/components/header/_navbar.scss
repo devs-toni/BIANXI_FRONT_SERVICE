@@ -27,6 +27,10 @@
       width: 15%;
       margin: auto 10px;
     }
+
+    @media screen and (max-width: 310px) {
+      margin: 0;
+    }
   }
 
   &__nav {
@@ -40,8 +44,8 @@
 
     @media screen and (max-width: 770px) {
       overflow-y: hidden;
-      height: 110vh;
-      transition: all 0.3s ease;
+      height: 100vh;
+      transition: all 0.6s ease;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
@@ -52,7 +56,8 @@
       right: 0;
       width: 0;
       line-height: 50px;
-      background-color: rgb(230, 228, 228);
+      background-color: rgb(75, 74, 74);
+      color: white;
       z-index: 2;
 
       &.active {
@@ -92,23 +97,6 @@
     }
   }
 
-  .menu-close {
-    width: 50px;
-    max-width: 50px;
-    height: 50px;
-    display: none;
-    font-size: 2em;
-    margin: 15px 30px;
-    cursor: pointer;
-    position: relative;
-    z-index: 3;
-    color: white !important;
-
-    @media screen and (max-width: 770px) {
-      display: block;
-    }
-  }
-
   &__extra-icons {
     align-self: center;
     margin-right: 20px;
@@ -118,7 +106,7 @@
       font-size: 1.5em;
       width: 3%;
       min-width: 50px;
-      transition: all .2s ease-in-out;
+      transition: all .3s ease-in-out;
 
       &.hide {
         opacity: 0;
@@ -143,18 +131,23 @@
         border: .1px solid #039e99;
 
         @media screen and (max-width: 770px) {
-          right: 135px;
-          top: 20px;
+          right: 82px;
+          top: 16px;
         }
 
         @media screen and (max-width: 420px) {
-          right: 75px;
-          top: 15px;
+          right: 60px;
+          top: 20px;
+        }
+
+        @media screen and (max-width: 330px) {
+          right: 55px;
+          top: 25px;
         }
       }
 
       @media screen and (max-width: 770px) {
-        width: 100%;
+        width: auto;
         font-size: 2em;
       }
 
@@ -162,6 +155,10 @@
       @media screen and (max-width: 420px) {
         font-size: 1.6em;
         min-width: 30px;
+      }
+
+      @media screen and (max-width: 330px) {
+        font-size: 1.3em;
       }
     }
 
@@ -175,27 +172,54 @@
       position: relative;
       z-index: 4;
 
+
       @media screen and (max-width: 770px) {
         display: block;
       }
 
       @media screen and (max-width: 770px) {
         display: block;
+        width: auto;
       }
 
       @media screen and (max-width: 420px) {
         margin: 5px 10px;
         font-size: 1.6em;
       }
+
+      @media screen and (max-width: 330px) {
+        font-size: 1.3em;
+      }
+    }
+
+    &--menu-close {
+      width: 50px;
+      max-width: 50px;
+      display: none;
+      font-size: 2em;
+      margin: 15px 20px;
+      cursor: pointer;
+      position: relative;
+      z-index: 4;
+      color: white !important;
+
+      @media screen and (max-width: 770px) {
+        display: block;
+      }
     }
 
     @media screen and (max-width: 770px) {
       display: flex;
       flex-flow: row nowrap;
+      margin: 0;
     }
 
     @media screen and (max-width: 420px) {
       margin-right: 10px;
     }
+  }
+
+  @media screen and (max-width: 770px) {
+    padding: 1em 0 0 0;
   }
 }

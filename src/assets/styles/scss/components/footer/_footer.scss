@@ -179,6 +179,10 @@
       @media screen and (max-width: 1100px) {
         text-align: center;
       }
+ 
+      @media screen and (max-width: 300px) {
+        line-height: 20px;
+      }
     }
 
     &--terms {

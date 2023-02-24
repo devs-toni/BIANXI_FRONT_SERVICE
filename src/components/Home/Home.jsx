@@ -55,7 +55,7 @@ const Home = () => {
       <Carousel 
         images={images} 
         autoPlay={true} 
-        showButtons={true}  
+        showButtons={false}  
       />
       <div className='sections'>
         {sections.map(({ name, icon, path }, i) => {

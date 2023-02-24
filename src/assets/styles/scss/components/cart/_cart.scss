@@ -60,37 +60,42 @@
 
 
         &-title {
-          font-size: 2.9em;
+          font-size: auto;
         }
 
         &-icon {
           font-size: 2.8em;
           margin-right: 30px;
+
+          @media screen and (max-width: 770px) {
+            font-size: 2.4em;
+          }
+
+          @media screen and (max-width: 580px) {
+            font-size: 2em;
+          }
         }
 
         @media screen and (max-width: 770px) {
-          width: 60%;
-          padding-left: 1em;
-        }
-
-        @media screen and (max-width: 500px) {
-          font-size: .8em;
+          width: 40%;
           padding-left: 2em;
         }
 
-        @media screen and (max-width: 430px) {
-          font-size: .7em;
+        @media screen and (max-width: 540px) {
           padding-left: 3em;
         }
 
-        @media screen and (max-width: 360px) {
-          font-size: .7em;
+        @media screen and (max-width: 430px) {
+
           padding-left: 4em;
         }
 
         @media screen and (max-width: 360px) {
-          font-size: .6em;
-          padding-left: 4.5em;
+          padding-left: 5em;
+        }
+
+        @media screen and (max-width: 360px) {
+          padding-left: 5.5em;
         }
       }
 
