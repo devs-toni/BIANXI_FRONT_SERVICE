@@ -37,6 +37,16 @@
       "finishBtns": "Finalizar compra",
       "include":  "incluye"
     },
+    "view": {
+      "size": "Talla",
+      "color": "Color",
+      "empty": "Agotado",
+      "add": "Añadir al carrito",
+      "share": "Compartir",
+      "detailInfo": "Descripción",
+      "detailMore": "Información Adicional",
+      "warning": "*La fotografía puede no coincidir con el montaje ofertado."
+    },
 
 
 

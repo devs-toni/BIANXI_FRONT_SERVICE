@@ -1,0 +1,20 @@
+@use '../abstracts/variables' as var;
+
+.images {
+
+  &__main {
+
+    &--img {}
+  }
+
+  &__secondary {
+    
+    &--images {
+
+
+      img {
+        
+      }
+    }
+  }
+}

@@ -2,7 +2,6 @@
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { setProductPrice } from '../../helpers/utils';
-import CartHandler from './CartHandler';
 import Badge from './Badge';
 import ProductBox from './ProductBox';
 import PropTypes from 'prop-types';
@@ -14,16 +13,6 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
   const { final, init } = setProductPrice(offer, price);
   const [image, setImage] = useState(name)
   const [loaded, setLoaded] = useState(false);
-  const productToSave = {
-    id,
-    name,
-    init,
-    final,
-    type,
-    offer,
-    stock,
-    total
-  };
 
   useEffect(() => {
     const image = require(`../../assets/images/${type}/${name}.png`);
@@ -52,7 +41,7 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
         stock={stock}
         isCart={false}
       />
-      <NavLink to={`/product/options/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+      <NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
       {/*       <CartHandler
         product={productToSave}
         containerClass='cart-buttons'

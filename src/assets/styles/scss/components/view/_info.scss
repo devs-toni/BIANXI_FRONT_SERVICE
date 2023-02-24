@@ -1,0 +1,50 @@
+@use '../abstracts/variables' as var;
+
+.info {
+
+  &__main {
+
+    &--name {}
+
+    &--short {}
+
+    &--price {}
+  }
+
+  &__size {
+
+    &--title {}
+
+    &--option {
+
+      option {}
+    }
+  }
+
+  &__color {
+
+    &--title {}
+
+    &--colors {
+
+      &-sel {}
+    }
+  }
+
+  &__empty {}
+
+  &__buy {
+
+    &--add {}
+  }
+
+  &__share {
+
+    &--title {}
+
+    &--icons {
+
+      svg {}
+    }
+  }
+}

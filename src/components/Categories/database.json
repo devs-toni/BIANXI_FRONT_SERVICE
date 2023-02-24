@@ -2,7 +2,7 @@
   "products": {
     "mtb": [
       {
-        "id": 1,    
+        "id": 1,
         "name": "Methanol CV FS 9.3 XT",
         "price": 4707
       },
@@ -51,7 +51,13 @@
       {
         "id": 10,
         "name": "Aria-105",
-        "price": 3240
+        "price": 3240,
+        "sizes": [
+          "XS","S","M","L","XL","XXL"
+        ],
+        "colors": [
+          "red", "blue"
+        ]
       },
       {
         "id": 11,

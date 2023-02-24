@@ -16,7 +16,7 @@ export const MyRouter = () => {
           <Route path=":type" element={<Category />} />
         </Route>
         <Route path="product/options">
-          <Route path=":id" element={<ProductView />} />
+          <Route path=":type/:id" element={<ProductView />} />
         </Route>
       </Route>
       <Route path='*' element={<Page404 />} />

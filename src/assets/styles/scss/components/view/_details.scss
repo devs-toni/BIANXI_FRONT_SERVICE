@@ -1,0 +1,25 @@
+@use '../abstracts/variables' as var;
+
+.details {
+
+  &__sections{
+
+    &--description {}
+    &--features {}
+  }
+
+  &__info {
+
+    &--text {
+
+      &-warning {}
+      &-description {}
+    }
+    &--list {
+
+      &-ul {
+        li {}
+      }
+    }
+  }
+}
