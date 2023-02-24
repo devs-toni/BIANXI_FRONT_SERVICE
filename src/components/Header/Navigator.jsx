@@ -18,7 +18,6 @@ const Navigator = ({ containerClass, items, innerRef }) => {
         containerClass='container-link'
         text={text.header.contact}
       />
-      {    console.log('renderizando navbar')}
       <FontAwesomeIcon className='navbar__nav--user' icon={faUser} />
     </nav>
   )

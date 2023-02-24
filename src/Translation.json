@@ -29,9 +29,13 @@
       "offer": "En Oferta"
     },
     "cart": {
-      "empty": "No tienes nada en el carrito",
+      "empty": "Vacío",
       "price": "Precio: ",
-      "delete": "Eliminar"
+      "delete": "Eliminar",
+      "subTotal": "Subtotal:",
+      "total": "Total:",
+      "finishBtns": "Finalizar compra",
+      "include":  "incluye"
     },
 
 

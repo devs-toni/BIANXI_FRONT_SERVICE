@@ -25,7 +25,6 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
   };
 
   useEffect(() => {
-
     const image = require(`../../assets/images/${type}/${name}.png`);
     setImage(image);
   }, [setImage])
@@ -43,7 +42,7 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
         id={id}
         name={name}
         finalPrice={final}
-        initPrice={init}
+        initPrice={`${init}`}
         image={image}
         loaded={loaded}
         setLoaded={setLoaded}

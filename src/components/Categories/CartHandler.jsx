@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, memo } from 'react'
 import CartContext from '../../context/CartContext';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,23 +6,30 @@ import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../context/LanguageContext';
 
-const CartHandler = ({ product, containerClass, isCart }) => {
+const CartHandler = memo(({ product, containerClass, isCart }) => {
 
-  const { handleAddProduct, handleRemoveProduct, findNumberProduct } = useContext(CartContext);
+  const { handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged } = useContext(CartContext);
   const { text } = useContext(LanguageContext);
   const numProducts = findNumberProduct(product.id);
   const [number, setNumber] = useState(numProducts ? numProducts : 0);
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
+      //setNumber(prevState => prevState + 1);
       handleAddProduct(product);
-      setNumber(prevState => prevState + 1);
 
     } else {
+      //if (number > 0) setNumber(prevState => prevState - 1);
       handleRemoveProduct(product);
-      if (number > 0) setNumber(prevState => prevState - 1);
     }
   }
+
+  useEffect(() => {
+    const total = findNumberProduct(product.id);
+    console.log(total);
+    setNumber(total ? total : 0);
+
+  }, [countChanged]);
 
 
   return (
@@ -49,7 +56,7 @@ const CartHandler = ({ product, containerClass, isCart }) => {
       }
     </div>
   )
-}
+})
 
 CartHandler.propTypes = {
   product: PropTypes.object.isRequired,

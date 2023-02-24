@@ -1,18 +1,19 @@
 @use '../../abstracts/variables' as var;
 @use './cartProductBox';
 @use './cartHandlerSection';
+@use './cartFooter';
 
 .cart {
   display: flex;
   flex-flow: row nowrap;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   top: 0;
   position: absolute;
   visibility: hidden;
   z-index: 3;
   transition: all .4s ease-in-out;
-  overflow: auto;
+  overflow: hidden;
 
   &.active {
     visibility: visible;
@@ -21,10 +22,10 @@
 
   .cart-menu {
     padding: 2em 0 3em 0;
-    overflow-y: hidden;
+    overflow-y: auto;
     z-index: 5;
-    height: 110vh;
-    transition: all 0.5s ease;
+    height: 100vh;
+    transition: all 0.8s ease-in-out;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -32,59 +33,109 @@
     pointer-events: auto;
     position: absolute;
     top: 0;
-    right: -20%;
-    width: 0;
+    min-width: 600px;
+    right: -100%;
+    width: 30vw;
     line-height: 50px;
     background-color: rgb(255, 255, 255);
+    max-height: 100%;
 
     &.active {
       right: 0;
-      width: 30vw;
     }
 
     &__header {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding-bottom: 2em;
       border-bottom: 1px solid rgba(0, 0, 0, 0.123);
+      padding-bottom: 2em;
 
       &--content {
-        width: 90%;
+        width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
-        padding-bottom: 3em;
+        margin-left: -50px;
+
 
         &-title {
           font-size: 2.9em;
-
         }
 
         &-icon {
           font-size: 2.8em;
           margin-right: 30px;
         }
+
+        @media screen and (max-width: 770px) {
+          width: 60%;
+          padding-left: 1em;
+        }
+
+        @media screen and (max-width: 500px) {
+          font-size: .8em;
+          padding-left: 2em;
+        }
+
+        @media screen and (max-width: 430px) {
+          font-size: .7em;
+          padding-left: 3em;
+        }
+
+        @media screen and (max-width: 360px) {
+          font-size: .7em;
+          padding-left: 4em;
+        }
+
+        @media screen and (max-width: 360px) {
+          font-size: .6em;
+          padding-left: 4.5em;
+        }
       }
 
       &--close {
         padding: 0 1em;
         cursor: pointer;
-        font-size: 1.8em;
+        font-size: 2em;
         align-self: center;
         color: rgba(128, 128, 128, 0.534);
+        transition: all .3s ease-in-out;
+        z-index: 5;
+
+        &:hover {
+          transform: rotate(180deg);
+        }
+
+        @media screen and (max-width: 770px) {
+          color: white;
+
+          &:hover {
+            transform: none;
+          }
+        }
+
+        @media screen and (max-width: 500px) {
+          font-size: 1.5em;
+        }
+      }
+
+      @media screen and (max-width: 770px) {
+        flex-direction: row-reverse;
       }
     }
 
     &__content {
-      padding: 2em 1em 0 .8em;
-
-      &--empty {
-        margin: 0 0 50px 2px;
-      }
+      padding: 2em 1em 3em .8em;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-flow: column;
+      justify-content: start;
+      align-items: center;
 
       &--product {
-        margin: 30px 0;
+        margin: 10px 30px;
         width: auto;
         border-radius: 7px;
 
@@ -94,7 +145,7 @@
           justify-content: center;
           align-items: center;
           background-color: #fdfdfd;
-          padding-bottom: 1.5em;
+          padding: 1.5em 0;
 
           .total {
             width: 20%;
@@ -103,13 +154,47 @@
             color: var.$bianchi-color;
             text-align: center;
             font-weight: 1000;
+
+            @media screen and (max-width: 540px) {
+              text-align: center;
+              width: fit-content;
+              font-size: 1.5em;
+            }
+          }
+
+          @media screen and (max-width: 540px) {
+            flex-flow: column wrap;
           }
         }
       }
     }
+
+    &__empty {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 0 50px 2px;
+      line-height: 15em;
+      opacity: .4;
+
+      &--title {}
+
+      &--svg {
+        font-size: 4em;
+        margin-right: 20px;
+      }
+    }
+
+    @media screen and (max-width: 770px) {
+      width: 100%;
+      background-color: rgb(61, 58, 58);
+      color: white;
+    }
+
+    @media screen and (max-width: 600px) {
+      min-width: auto;
+    }
   }
-
-
-
-
 }

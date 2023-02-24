@@ -104,8 +104,21 @@
           opacity: .9;
         }
       }
-      &-p {
+
+      @media screen and (max-width: 770px) {
+        color: black;
+      }
+
+      @media screen and (max-width: 460px) {
+        margin-top: 20px;
       }
     }
+  }
+
+  @media screen and (max-width: 460px) {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
   }
 }

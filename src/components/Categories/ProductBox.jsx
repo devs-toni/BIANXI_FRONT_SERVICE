@@ -18,7 +18,7 @@ const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded,
         {isCart &&
           <p className={`${containerClass}__price-container--name`}>{name}</p>
         }
-        <p className={`${containerClass}__price-container--price ${offer && 'erased'}`}><span>{text.cart.price}</span>{offer > 0 ? initPrice : finalPrice} €</p>
+        <p className={`${containerClass}__price-container--price ${offer && 'erased'}`}><span>{isCart && text.cart.price}</span>{offer > 0 ? initPrice : finalPrice} €</p>
         {offer > 0 && <p className={`${containerClass}__price-container--price offer-price`}>{finalPrice} €</p>}
       </div>
     </div>
@@ -28,8 +28,8 @@ const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded,
 ProductBox.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  finalPrice: PropTypes.number.isRequired,
-  initPrice: PropTypes.number.isRequired,
+  finalPrice: PropTypes.string.isRequired,
+  initPrice: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
   setLoaded: PropTypes.func.isRequired,

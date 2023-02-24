@@ -8,11 +8,17 @@ const CartProvider = ({ children }) => {
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [countChanged, setCountChanged] = useState(false);
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
   }, [totalProducts]);
+
+  useEffect(() => {
+    countChanged &&
+      localStorage.setItem("cart", JSON.stringify(totalProducts));
+    return () => { setCountChanged(false) }
+  }, [countChanged]);
 
   const handleAddProduct = (product) => {
     const indexProduct = getIndexProduct(product.id);
@@ -21,6 +27,7 @@ const CartProvider = ({ children }) => {
     } else {
       setTotalProducts([product, ...totalProducts]);
     }
+    setCountChanged(true);
   }
 
   const handleRemoveProduct = (product) => {
@@ -35,6 +42,7 @@ const CartProvider = ({ children }) => {
         arr.splice(index, 1);
         setTotalProducts(arr);
       }
+      setCountChanged(true);
     }
   }
 
@@ -51,6 +59,18 @@ const CartProvider = ({ children }) => {
     else totalProducts[index].total = totalProducts[index].total - 1;
   }
 
+  const getTotalPriceCart = () => {
+    let total = 0;
+    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+    return total;
+  }
+
+  const getIVAPriceCart = () => {
+    let total = 0;
+    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+    return (total * 21) / 100 ;
+  }
+
   ///////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -64,7 +84,6 @@ const CartProvider = ({ children }) => {
   }, [isOpen]);
 
   const handleCart = (e) => {
-    console.log('Hago algo');
     setIsOpen(!isOpen);
   }
 
@@ -82,7 +101,10 @@ const CartProvider = ({ children }) => {
     isOpen,
     setIsOpen,
     handleCart,
-    closeCart
+    closeCart,
+    countChanged,
+    getTotalPriceCart,
+    getIVAPriceCart
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
