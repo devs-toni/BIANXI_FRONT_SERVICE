@@ -68,7 +68,13 @@ const CartProvider = ({ children }) => {
   const getIVAPriceCart = () => {
     let total = 0;
     totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return (total * 21) / 100 ;
+    return (total * 21) / 100;
+  }
+
+  const deleteAllProductRepeats = (id) => {
+    totalProducts.forEach(p => p.id === id && (p.total = 1));
+    setTotalProducts(totalProducts.filter(p => p.id !== id));
+    setCountChanged(true);
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +110,8 @@ const CartProvider = ({ children }) => {
     closeCart,
     countChanged,
     getTotalPriceCart,
-    getIVAPriceCart
+    getIVAPriceCart,
+    deleteAllProductRepeats
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>

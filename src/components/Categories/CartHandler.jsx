@@ -8,25 +8,22 @@ import LanguageContext from '../../context/LanguageContext';
 
 const CartHandler = memo(({ product, containerClass, isCart }) => {
 
-  const { handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged } = useContext(CartContext);
+  const { handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged, deleteAllProductRepeats } = useContext(CartContext);
   const { text } = useContext(LanguageContext);
   const numProducts = findNumberProduct(product.id);
   const [number, setNumber] = useState(numProducts ? numProducts : 0);
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
-      //setNumber(prevState => prevState + 1);
       handleAddProduct(product);
 
     } else {
-      //if (number > 0) setNumber(prevState => prevState - 1);
       handleRemoveProduct(product);
     }
   }
 
   useEffect(() => {
     const total = findNumberProduct(product.id);
-    console.log(total);
     setNumber(total ? total : 0);
 
   }, [countChanged]);
@@ -43,7 +40,7 @@ const CartHandler = memo(({ product, containerClass, isCart }) => {
         isCart
           ?
           (
-            <div className={`${containerClass}__cart--remove`}>
+            <div className={`${containerClass}__cart--remove`} onClick={() => deleteAllProductRepeats(product.id)}>
               <FontAwesomeIcon icon={faTrash} className={`${containerClass}__cart--remove-trash`} />
               <p className={`${containerClass}__cart--remove-text`}>{text.cart.delete}</p>
             </div>

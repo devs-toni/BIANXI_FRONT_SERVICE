@@ -14,10 +14,10 @@ const Navigator = ({ containerClass, items, innerRef }) => {
   return (
     <nav className={containerClass} ref={innerRef}>
       <Dropdown items={items} dropdownTitle={text.header.bycicles} />
-      <NavbarLink
+{/*       <NavbarLink
         containerClass='container-link'
         text={text.header.contact}
-      />
+      /> */}
       <FontAwesomeIcon className='navbar__nav--user' icon={faUser} />
     </nav>
   )

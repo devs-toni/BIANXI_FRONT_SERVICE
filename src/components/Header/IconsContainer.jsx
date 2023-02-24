@@ -13,8 +13,8 @@ const IconsContainer = ({ containerClass, icon, isCart, iconClose, isNavShow, ha
         isCart
           ?
           (
-            <button className={`${containerClass}--cart ${isNavShow ? 'hide' : ''}`}>
-              <FontAwesomeIcon icon={icon} onClick={handleCart} />
+            <button className={`${containerClass}--cart ${isNavShow ? 'hide' : ''}`} onClick={handleCart} >
+              <FontAwesomeIcon icon={icon} />
               <span className={`${totalProducts.length > 0 && 'active'}`}>{totalProducts.length > 0 && totalProducts.length}</span>
             </button>
           )

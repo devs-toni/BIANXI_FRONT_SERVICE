@@ -24,7 +24,7 @@
       }
     },
     "product": {
-      "addCart": "Añadir al Carrito",
+      "view": "Seleccionar opciones",
       "empty": "Agotado",
       "offer": "En Oferta"
     },

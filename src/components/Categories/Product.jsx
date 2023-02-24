@@ -6,6 +6,7 @@ import CartHandler from './CartHandler';
 import Badge from './Badge';
 import ProductBox from './ProductBox';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) => {
 
@@ -51,11 +52,12 @@ const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) =>
         stock={stock}
         isCart={false}
       />
-      <CartHandler
+      <NavLink to={`/product/options/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+      {/*       <CartHandler
         product={productToSave}
         containerClass='cart-buttons'
         isCart={false}
-      />
+      /> */}
       {
         stock === 0 &&
         <Badge

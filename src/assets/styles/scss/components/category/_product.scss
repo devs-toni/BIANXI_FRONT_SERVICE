@@ -13,6 +13,25 @@
     font-weight: 800;
     font-size: 1.2em;
 
+    &--visit {
+      width: 40%;
+      background-color: var.$bianchi-color;
+      padding: 1.5em 1.8em;
+      display: block;
+      border-radius: 6px;
+      margin: 16px auto;
+      font-size: .9em;
+      cursor: pointer;
+      background: linear-gradient(to right, #00a59f 50%, var.$bianchi-color 50%);
+      transition: all .4s ease-out;
+      background-size: 200% 100%;
+      background-position: right bottom;
+
+      &:hover {
+        background-position: left bottom;
+      }
+    }
+
     @media screen and (max-width: 1050px) {
       margin: 15px 5px;
     }
@@ -31,7 +50,7 @@
   }
 
   .empty-product {
-    
+
     p {
       font-weight: bolder;
       font-size: 1.1em;
