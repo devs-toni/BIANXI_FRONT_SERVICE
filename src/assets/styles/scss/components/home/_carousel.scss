@@ -36,14 +36,14 @@
     justify-content: space-between;
     align-items: center;
     transition: all 1s ease-in-out;
-    max-height: 90vh;
+    height: 90vh;
 
     &--image {
       width: 100vw;
-      height: 100%;
+      height: 90vh;
       opacity: 0;
       transition: 1s;
-      object-fit: contain;
+      object-fit: cover;
 
       &.loaded {
         opacity: 1;
