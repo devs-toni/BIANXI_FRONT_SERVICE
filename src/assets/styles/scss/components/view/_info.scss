@@ -2,7 +2,7 @@
 @use './cartHandler';
 
 .info {
-  width: 50%;
+  width: 60%;
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
@@ -109,7 +109,7 @@
       border-radius: 5px;
       padding: 10px 20px;
       cursor: pointer;
-      font-size: 1.4em;
+      font-size: 1.3em;
 
       &.empty {
         opacity: 0.4;

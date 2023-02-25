@@ -12,11 +12,6 @@
       opacity: 1;
     }
 
-    &.selected {
-      box-shadow: 0 0 5px 1px var.$bianchi-color;
-      border-radius: 10px;
-    }
-
     &.empty {
       opacity: .2;
     }

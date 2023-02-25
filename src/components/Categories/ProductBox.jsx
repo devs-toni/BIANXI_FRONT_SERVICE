@@ -10,7 +10,7 @@ const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded,
 
   return (
     <div className={containerClass}>
-      <img className={`${containerClass}__image ${stock === 0 ? 'empty' : ''} ${findNumberProduct(id) > 0 ? 'selected' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
+      <img className={`${containerClass}__image ${stock === 0 ? 'empty' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
       {!isCart &&
         <p className={`${containerClass}__name`}>{name}</p>
       }
