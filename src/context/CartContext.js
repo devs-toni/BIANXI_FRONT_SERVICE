@@ -107,6 +107,14 @@ const CartProvider = ({ children }) => {
     setCountChanged(true);
   }
 
+
+
+  // Stock Calculator
+
+  const productIsEmpty = () => {
+    
+  };
+
   //////////////////////////////////////////////////////////////////////// VISUAL
 
   const [isOpen, setIsOpen] = useState(false);

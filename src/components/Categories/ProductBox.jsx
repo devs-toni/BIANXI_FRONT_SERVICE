@@ -3,14 +3,14 @@ import CartContext from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../context/LanguageContext';
 
-const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, stock, isCart }) => {
+const ProductBox = ({ id, name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty }) => {
 
   const { findNumberProduct } = useContext(CartContext);
   const { text } = useContext(LanguageContext);
 
   return (
     <div className={containerClass}>
-      <img className={`${containerClass}__image ${stock === 0 ? 'empty' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
+      <img className={`${containerClass}__image ${isEmpty ? 'empty' : ''} ${loaded ? 'loaded' : ''}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
       {!isCart &&
         <p className={`${containerClass}__name`}>{name}</p>
       }
@@ -37,5 +37,6 @@ ProductBox.propTypes = {
   offer: PropTypes.number,
   stock: PropTypes.number,
   isCart: PropTypes.bool.isRequired,
+  isEmpty: PropTypes.bool.isRequired,
 }
 export default ProductBox;

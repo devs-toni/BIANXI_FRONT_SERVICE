@@ -20,9 +20,12 @@
       padding-bottom: 2.2em;
       text-align: center;
       cursor: pointer;
+      transition: all .5s ease-in-out;
+      border-bottom: 3px solid rgba(128, 128, 128, 0);
+
 
       &.active {
-        border-bottom: 1px solid gray;
+        border-bottom: 3px solid gray;
       }
     }
 
@@ -32,22 +35,34 @@
       padding-bottom: 2.2em;
       text-align: center;
       cursor: pointer;
+      transition: all .5s ease-in-out;
+      border-bottom: 3px solid rgba(128, 128, 128, 0);
 
       &.active {
-        border-bottom: 1px solid gray;
+        border-bottom: 3px solid gray;
+
       }
     }
   }
 
   &__info {
     margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
+    position: relative;
+    padding-bottom: 5em;
 
     &--text {
+      position: absolute;
+      opacity: 0;
+      left: 0;
+      right: 0;
+      overflow-y: hidden;
       width: 50%;
       margin: 0 auto;
+      transition: all .4s ease;
 
       &-warning {
         font-size: 1.1em;
@@ -55,13 +70,76 @@
 
       &-description {
         font-size: 1.1em;
+        margin-top: 40px;
+        line-height: 30px
+      }
+
+      &.active {
+        opacity: 1;
       }
     }
 
-    &--list {
+    &--table {
+      position: absolute;
+      overflow-y: hidden;
+      opacity: 0;
 
-      &-ul {
-        li {}
+      width: 100%;
+      transition: all .4s ease;
+
+      &-tab {
+        margin: 0 auto;
+        width: 40%;
+        padding: 2em;
+
+        tbody {
+          font-size: 1.1em;
+
+          .row {
+            margin: 0 auto;
+            text-align: left;
+            height: 40px;
+
+
+            .column-name {
+              width: 15%;
+            }
+
+            .column-value {
+              width: 80%;
+              text-align: right;
+              font-style: italic;
+              width: 100%;
+              overflow: hidden;
+
+              span {
+                position: relative;
+                display: inline-block;
+
+                p {
+                  margin: 0;
+                  padding: 0;
+                  display: inline-block;
+                }
+
+                &::before {
+                  content: "";
+                  width: 1920px;
+                  height: 1px;
+                  background-color: rgba(0, 0, 0, .1);
+                  position: absolute;
+                  right: calc(110%);
+                  top: calc(50% - 1px);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      &.active {
+        opacity: 1;
+
       }
     }
   }

@@ -5,7 +5,6 @@ import ProductDetails from './ProductDetails';
 import ViewImages from './ViewImages';
 import ViewInfo from './ViewInfo';
 
-
 const ProductView = () => {
 
   const { productsUrl } = require('../../config.js');
@@ -28,11 +27,22 @@ const ProductView = () => {
 
   return (
     <>
-      <div className="view">
-        <ViewImages img={image} name={product.name} />
-        <ViewInfo product={product} type={type} />
-      </div>
-      <ProductDetails description={product?.description} features={product?.datasheet} />
+      {
+        product ?
+          (
+            <>
+              <div className="view">
+                <ViewImages img={image} name={product.name} />
+                <ViewInfo product={product} type={type} />
+              </div>
+              <ProductDetails description={product?.description} features={product?.datasheet} />
+            </>
+          )
+          :
+          (
+            <p>Loading</p>
+          )
+      }
     </>
   )
 }

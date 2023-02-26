@@ -83,11 +83,11 @@
       cursor: pointer;
 
       &:hover {
-        border-color: black;
+        opacity: .6;
       }
 
-      &:checked {
-        background-color: green !important;
+      &.active {
+        transform: scale(1.2);
       }
     }
   }

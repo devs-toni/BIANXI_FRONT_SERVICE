@@ -12,7 +12,8 @@ const Cart = () => {
 
   const { totalProducts, isOpen, handleCart } = useContext(CartContext);
   const { text } = useContext(LanguageContext);
-  const [loaded, setLoaded] = useState(false);
+
+  const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
     <div className={`cart ${isOpen ? 'active' : ''}`}>
@@ -28,29 +29,27 @@ const Cart = () => {
           {
             totalProducts?.length > 0
               ?
-              totalProducts.map(({ id, name, initPrice, finalPrice, type, offer, stock, total }, index) => {
-
+              totalProducts.map(({ id, name, initPrice, finalPrice, type, offer, isEmpty, total }, i) => {
                 return (
-                  <div className='cart-menu__content--product' key={index}>
+                  <div className='cart-menu__content--product' key={i}>
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
-                        key={index}
                         id={id}
                         name={name}
                         finalPrice={finalPrice}
-                        initPrice={`${initPrice}`}
+                        initPrice={typeof(initPrice) === "string" ? initPrice : `${initPrice}`}
                         image={require(`../../assets/images/${type}/${name}.png`)}
-                        loaded={loaded}
-                        setLoaded={setLoaded}
+                        loaded={imgLoaded}
+                        setLoaded={setImgLoaded}
                         containerClass='cart-product-box'
                         offer={offer}
-                        stock={stock}
                         isCart={true}
+                        isEmpty={isEmpty ? isEmpty : false}
                       />
                       <p className='total'>{calcTotalPrice(total, finalPrice)} €</p>
                     </div>
                     <CartHandler
-                      product={{ id, name, initPrice, finalPrice, type, offer, stock, total }}
+                      product={{ id, name, initPrice, finalPrice, type, offer, total }}
                       containerClass='cart-buttons-section'
                       isCart={true}
                     />

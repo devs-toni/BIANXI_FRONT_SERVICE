@@ -82,8 +82,6 @@ const CartHandler = memo(({ product, containerClass, isCart, innerRef }) => {
                 icon={faMinus}
                 onClick={removeCount}
               />
-              {console.log("Numero temporal: " + tempNumber)}
-              {console.log("Numero current: " + currentNumber)}
               <input
                 type="text"
                 max={product.stock}
