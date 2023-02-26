@@ -28,7 +28,7 @@ const Cart = () => {
           {
             totalProducts?.length > 0
               ?
-              totalProducts.map(({ id, name, init, final, type, offer, stock, total }, index) => {
+              totalProducts.map(({ id, name, initPrice, finalPrice, type, offer, stock, total }, index) => {
 
                 return (
                   <div className='cart-menu__content--product' key={index}>
@@ -37,8 +37,8 @@ const Cart = () => {
                         key={index}
                         id={id}
                         name={name}
-                        finalPrice={final}
-                        initPrice={`${init}`}
+                        finalPrice={finalPrice}
+                        initPrice={`${initPrice}`}
                         image={require(`../../assets/images/${type}/${name}.png`)}
                         loaded={loaded}
                         setLoaded={setLoaded}
@@ -47,10 +47,10 @@ const Cart = () => {
                         stock={stock}
                         isCart={true}
                       />
-                      <p className='total'>{calcTotalPrice(total, final)} €</p>
+                      <p className='total'>{calcTotalPrice(total, finalPrice)} €</p>
                     </div>
                     <CartHandler
-                      product={{ id, name, init, final, type, offer, stock, total }}
+                      product={{ id, name, initPrice, finalPrice, type, offer, stock, total }}
                       containerClass='cart-buttons-section'
                       isCart={true}
                     />

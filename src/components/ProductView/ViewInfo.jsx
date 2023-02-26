@@ -1,40 +1,59 @@
 import { faHeart } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
+import CartContext from '../../context/CartContext';
 import LanguageContext from '../../context/LanguageContext';
 import { setProductPrice } from '../../helpers/utils';
 import CartHandler from '../Categories/CartHandler'
 
-const ViewInfo = ({ product, type, total = 1 }) => {
+const ViewInfo = ({ product, total = 1 }) => {
 
   const { text } = useContext(LanguageContext);
-  const { id, name, price, offer, stock, sizes, colors } = product;
-  const { init, final } = setProductPrice(offer, price);
-  const [productStore, setProductStore] = useState({ ...{ id, name, offer, stock, sizes, colors }, total, type, init, final })
+  const { addItemsToCart, countChange, findNumberProduct, totalProducts, getProduct } = useContext(CartContext);
+  const [productStore, setProductStore] = useState({});
+  const inputNumberRef = useRef();
+
+  useEffect(() => {
+    inputNumberRef.current.value = findNumberProduct(product.id);
+    setProductStore(totalProducts[getProduct()]);
+  }, [countChange]);
+
+  useEffect(() => {
+    const { price, offer } = product;
+    const { init: initPrice, final: finalPrice } = setProductPrice(offer, price);
+    setProductStore({ ...product, total, initPrice, finalPrice })
+  }, [product])
+
+
+  const handleCartAddition = () => {
+    addItemsToCart(productStore, parseInt(inputNumberRef.current.value));
+  };
+
 
   return (
     <div className="info">
       <div className="info__main">
-        <p className="info__main--name">{name}</p>
-        <p className="info__main--short">EVERY STRADA IS POSSIBLE</p>
-        <p className="info__main--price">{setProductPrice(offer, price).final} €</p>
+        <p className="info__main--name">{productStore.name}</p>
+        <p className="info__main--short">{productStore.sentence}</p>
+        <p className="info__main--price">{productStore.finalPrice} €</p>
       </div>
       <div className="info__size">
         <p className="info__size--title">{text.view.size}</p>
         <select className="info__size--option" name="size" id="size">
           <option value="">{text.view.select}</option>
           {
-            sizes?.map((size, index) => {
-              return (<option key={index} value={size}>{size}</option>
-              )
-            })
+            productStore.sizes?.sort((a, b) => a.id > b.id ? 1 : -1)
+              .map(({ size }, index) => {
+                return (<option key={index} value={size}>{size}</option>
+                )
+              })
           }
         </select>
       </div>
       <div className="info__color">
         <p className="info__color--title">{text.view.color}</p>
         {
-          colors?.map((color, index) => {
+          productStore.colors?.map(({ color }, index) => {
             const style = {
               color,
               backgroundColor: color
@@ -47,15 +66,16 @@ const ViewInfo = ({ product, type, total = 1 }) => {
       </div>
       {
         product.stock === 0 &&
-        <p className="info__empty">Agotado</p>
+        <p className="info__empty">{text.view.empty}</p>
       }
       <div className="info__buy">
         <CartHandler
           product={productStore}
           containerClass='cart-buttons'
           isCart={false}
+          innerRef={inputNumberRef}
         />
-        <button className={`info__buy--add ${product.stock === 0 && 'empty'}`}>{text.view.add}</button>
+        <button className={`info__buy--add ${product.stock === 0 && 'empty'}`} onClick={handleCartAddition}>{text.view.add}</button>
         <FontAwesomeIcon icon={faHeart} />
       </div>
       <div className="info__share">
@@ -68,4 +88,4 @@ const ViewInfo = ({ product, type, total = 1 }) => {
   )
 }
 
-export default ViewInfo
+export default ViewInfo;

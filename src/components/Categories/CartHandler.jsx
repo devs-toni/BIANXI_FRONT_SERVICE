@@ -5,15 +5,16 @@ import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../context/LanguageContext';
 
-const CartHandler = memo(({ product, containerClass, isCart }) => {
+const CartHandler = memo(({ product, containerClass, isCart, innerRef }) => {
 
   const { text } = useContext(LanguageContext);
-  const inputNumber = useRef();
 
   // CartHandler synchronized with all the products saved in the cart // IS CART
-  const { handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged, deleteAllProductRepeats } = useContext(CartContext);
+  const { totalProducts, handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged, deleteAllProductRepeats } = useContext(CartContext);
   const numProducts = findNumberProduct(product.id);
-  const [number, setNumber] = useState(numProducts ? numProducts : 0);
+
+  const [currentNumber, setCurrentNumber] = useState(numProducts);
+  const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
@@ -26,25 +27,22 @@ const CartHandler = memo(({ product, containerClass, isCart }) => {
 
   useEffect(() => {
     const total = findNumberProduct(product.id);
-    setNumber(total ? total : 0);
-
-  }, [countChanged]);
+    setCurrentNumber(total ? total : 0);
+    setTempNumber(total ? total : 0);
+  }, [numProducts, countChanged, totalProducts])
 
 
   // CartHandler with previous number selection and after this you can add all of them to the cart // IS NOT CART
 
-  const [currentValue, setCurrentValue] = useState(number)
-
   const addCount = () => {
-    const next = parseInt(inputNumber.current.value) + 1;
-    inputNumber.current.value = next <= product.stock ? setCurrentValue(parseInt(next)) : inputNumber.current.value;
-    
+    const next = parseInt(innerRef.current.value) + 1;
+    innerRef.current.value = next <= product.stock ? setTempNumber(parseInt(next)) : innerRef.current.value;
+
   }
 
   const removeCount = () => {
-    const next = parseInt(inputNumber.current.value) - 1;
-    inputNumber.current.value = next > 0 ? setCurrentValue(parseInt(next)) : inputNumber.current.value;
-
+    const next = parseInt(innerRef.current.value) - 1;
+    innerRef.current.value = next >= 0 ? setTempNumber(parseInt(next)) : innerRef.current.value;
   }
 
 
@@ -61,7 +59,7 @@ const CartHandler = memo(({ product, containerClass, isCart }) => {
                 onClick={() => handleCart(product, '-')}
                 icon={faMinus}
               />
-              <p className={`${containerClass}__cart--number ${product.stock === 0 && 'empty'}`}>{number}</p>
+              <p className={`${containerClass}__cart--number ${product.stock === 0 && 'empty'}`}>{currentNumber}</p>
               <FontAwesomeIcon
                 className={`${containerClass}__cart--handle ${product.stock === 0 && 'empty'}`}
                 onClick={() => handleCart(product, '+')}
@@ -84,17 +82,19 @@ const CartHandler = memo(({ product, containerClass, isCart }) => {
                 icon={faMinus}
                 onClick={removeCount}
               />
+              {console.log("Numero temporal: " + tempNumber)}
+              {console.log("Numero current: " + currentNumber)}
               <input
                 type="text"
                 max={product.stock}
                 min={0}
                 className={`${containerClass}__cart--number ${product.stock === 0 && 'empty'}`}
-                value={currentValue}
-                onChange={() => {}}
+                value={tempNumber}
+                onChange={() => { }}
                 onKeyDown={(e) => {
                   e.preventDefault();
                 }}
-                ref={inputNumber}
+                ref={innerRef}
               />
               <FontAwesomeIcon
                 className={`${containerClass}__cart--handle ${product.stock === 0 && 'empty'}`}
@@ -113,5 +113,6 @@ CartHandler.propTypes = {
   product: PropTypes.object.isRequired,
   containerClass: PropTypes.string.isRequired,
   isCart: PropTypes.bool.isRequired,
+  innerRef: PropTypes.object,
 }
 export default CartHandler;

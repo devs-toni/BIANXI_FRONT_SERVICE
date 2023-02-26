@@ -7,7 +7,7 @@ import ProductBox from './ProductBox';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 
-const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1 }) => {
+const Product = ({ id, name, price, type, offer = 0, stock = 10, total = 1, rest }) => {
 
   const { text } = useContext(LanguageContext);
   const { final, init } = setProductPrice(offer, price);
@@ -57,6 +57,7 @@ Product.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  rest: PropTypes.object.isRequired,
   offer: PropTypes.number,
   stock: PropTypes.number,
   total: PropTypes.number,

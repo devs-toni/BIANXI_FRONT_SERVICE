@@ -6,44 +6,47 @@ const items = JSON.parse(localStorage.getItem('cart'));
 
 const CartProvider = ({ children }) => {
 
+  ////////////////////////////////////////////////////////////////////////////// LOGIC
+
+  // Total of products in cart
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
-  const [isOpen, setIsOpen] = useState(false);
+  // Control the sum of products that you already have in cart
   const [countChanged, setCountChanged] = useState(false);
 
+  // When total products is updated, localStorage is updated
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
   }, [totalProducts]);
 
+  // When you sum products that you already have in cart, localStorage is updated
   useEffect(() => {
     countChanged &&
       localStorage.setItem("cart", JSON.stringify(totalProducts));
+
     return () => { setCountChanged(false) }
   }, [countChanged]);
 
+  // Add products in cart modal directly with live changes
   const handleAddProduct = (product) => {
     const indexProduct = getIndexProduct(product.id);
-    if (indexProduct !== -1) {
+    if (indexProduct !== -1)
       changeCountProduct(indexProduct, '+');
-    } else {
+    else
       setTotalProducts([product, ...totalProducts]);
-    }
-    setCountChanged(true);
+
   }
 
   const handleRemoveProduct = (product) => {
     const p = totalProducts.find(p => p.id === product?.id);
     const index = totalProducts.findIndex(p => p.id === product?.id);
-
-    if (p) {
-      if (p.total > 1) {
+    if (p)
+      if (p.total > 1)
         changeCountProduct(index, '-');
-      } else {
+      else {
         const arr = [...totalProducts];
         arr.splice(index, 1);
         setTotalProducts(arr);
       }
-      setCountChanged(true);
-    }
   }
 
   const findNumberProduct = id => {
@@ -54,9 +57,23 @@ const CartProvider = ({ children }) => {
     return totalProducts.findIndex(p => p.id === id);
   }
 
+  const getProduct = (id) => {
+    return totalProducts[getIndexProduct(id)];
+  }
+
   const changeCountProduct = (index, op) => {
-    if (op === '+') totalProducts[index].total = totalProducts[index].total + 1;
-    else totalProducts[index].total = totalProducts[index].total - 1;
+    const product = totalProducts[index];
+
+    if (op === '+')
+      if (product.stock >= product.total + 1) {
+        product.total = product.total + 1;
+        setCountChanged(true);
+      }
+    if (op === '-')
+      if (product.stock >= 0) {
+        product.total = product.total - 1;
+        setCountChanged(true);
+      }
   }
 
   const getTotalPriceCart = () => {
@@ -72,13 +89,27 @@ const CartProvider = ({ children }) => {
   }
 
   const deleteAllProductRepeats = (id) => {
-    totalProducts.forEach(p => p.id === id && (p.total = 1));
+    totalProducts.map(p => p.id === id && (p.total = 1));
     setTotalProducts(totalProducts.filter(p => p.id !== id));
     setCountChanged(true);
   }
 
-  ///////////////////////////////////////////////////////////////////////////////////////
+  const addItemsToCart = (item, total) => {
+    const indexProduct = getIndexProduct(item.id);
+    if (indexProduct !== -1) {
+      totalProducts[indexProduct].total = total;
+      //totalProducts[indexProduct].stock = totalProducts[indexProduct].stock - total;
+    } else {
+      item.total = total;
+      //item.stock = item.stock - total;
+      setTotalProducts([item, ...totalProducts]);
+    }
+    setCountChanged(true);
+  }
 
+  //////////////////////////////////////////////////////////////////////// VISUAL
+
+  const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     if (isOpen) {
       document.getElementById('root').style.overflow = 'hidden';
@@ -111,7 +142,9 @@ const CartProvider = ({ children }) => {
     countChanged,
     getTotalPriceCart,
     getIVAPriceCart,
-    deleteAllProductRepeats
+    deleteAllProductRepeats,
+    addItemsToCart,
+    getProduct
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>

@@ -13,8 +13,6 @@ const ViewImages = ({ img, name }) => {
       <div className="images__secondary">
         <div className="images__secondary--images">
           <img src={img} alt={name} />
-          <img src={img} alt={name} />
-          <img src={img} alt={name} />
         </div>
       </div>
     </div>
