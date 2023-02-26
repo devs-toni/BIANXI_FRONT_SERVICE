@@ -18,7 +18,6 @@ CREATE TABLE products (
     type        VARCHAR(10)            NOT NULL,
     price       INT                    NOT NULL,
     offer       INT                    NOT NULL,
-    stock       INT                    NOT NULL,
     sentence    TEXT                   NOT NULL,    
     description VARCHAR(255)           NOT NULL,    
     PRIMARY KEY (id)
@@ -38,6 +37,19 @@ CREATE TABLE sizes (
    size        CHAR(3)            NOT NULL,
    FOREIGN KEY (product_id)       REFERENCES products (id) ON DELETE CASCADE,
    PRIMARY KEY (id)
+);
+
+CREATE TABLE stock_colors_sizes (
+   id          BIGINT             AUTO_INCREMENT NOT NULL,
+   product_id  BIGINT             NOT NULL,
+   config_id   BIGINT             NOT NULL,
+   color_id    BIGINT             NOT NULL,
+   size_id     BIGINT             NOT NULL,
+   stock       INT                NOT NULL,
+   FOREIGN KEY (product_id)       REFERENCES products (id) ON DELETE CASCADE,
+   FOREIGN KEY (color_id)         REFERENCES colors (id) ON DELETE CASCADE,
+   FOREIGN KEY (size_id)          REFERENCES sizes (id) ON DELETE CASCADE,
+   PRIMARY KEY (config_id)
 );
 
 CREATE TABLE datasheets (
