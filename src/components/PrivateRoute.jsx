@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Redirect, Route } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const [token, setToken] = useState('valid');
-
+  const { navigate } = useNavigate();
   return (
-    <Route {...rest}>{token ? <Component /> : <Redirect to='/' />}</Route>
+    <Route {...rest}>{token ? <Component /> : navigate("/")}</Route>
   )
 }
 

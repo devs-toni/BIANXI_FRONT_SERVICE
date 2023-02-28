@@ -3,10 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
 import CartContext from '../../context/CartContext';
 import LanguageContext from '../../context/LanguageContext';
-import CartHandler from '../Categories/CartHandler';
-import ProductBox from '../Categories/ProductBox';
+import { CartHandler, ProductBox, CartFooter } from '../index';
+
 import { calcTotalPrice } from '../../helpers/utils';
-import CartFooter from './CartFooter';
 
 const Cart = () => {
 

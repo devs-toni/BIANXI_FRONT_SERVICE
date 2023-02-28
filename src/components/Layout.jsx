@@ -1,9 +1,7 @@
 import React, { useContext } from 'react'
-import Footer from './Footer/Footer';
+import {Navbar, Footer, Cart} from './index';
 import LanguageContext from '../context/LanguageContext';
-import Navbar from './Header/Navbar';
 import { MyRouter } from '../router/MyRouter';
-import Cart from './Cart/Cart';
 
 const Layout = () => {
 

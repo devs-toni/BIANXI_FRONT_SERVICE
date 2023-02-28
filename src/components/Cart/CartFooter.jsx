@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import LanguageContext from '../../context/LanguageContext';
 import CartContext from '../../context/CartContext';

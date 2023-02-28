@@ -22,7 +22,6 @@ const Category = () => {
     getCategoryProducts();
   }, [type]);
 
-
   return (
     <>
       {
