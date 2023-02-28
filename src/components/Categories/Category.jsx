@@ -1,17 +1,18 @@
 import axios from 'axios';
 import React from 'react';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import Product from './Product';
+import { useProduct } from '../../context/ProductContext';
+import { Product } from '../index';
 
 const Category = () => {
 
   const { productsUrl } = require('../../config.js');
   const { type } = useParams();
-  const [products, setProducts] = useState(null);
+  const { vars } = useProduct();
+  const { products, setProducts } = vars;
 
   useEffect(() => {
-    setProducts([]);
     const getCategoryProducts = async () => {
       const result = await axios.get(`${productsUrl}/get/type/${type}`)
         .then(response => {
@@ -34,7 +35,6 @@ const Category = () => {
                   return <Product key={index} product={product} />
                 })}
               </div>
-              {console.log(products)}
             </div>
           )
           :

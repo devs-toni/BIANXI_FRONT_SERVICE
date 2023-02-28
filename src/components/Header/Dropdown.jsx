@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, memo } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 
@@ -21,7 +21,6 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
       ) {
         return;
       }
-
       setIsOpen(false);
     }
   };
@@ -33,6 +32,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
       document.addEventListener("mousedown", clickOutsideHandler);
     }
   }, [isOpen]);
+
 
   return (
     <div className='dropdown_wrapper'>

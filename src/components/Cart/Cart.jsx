@@ -33,7 +33,6 @@ const Cart = () => {
                   <div className='cart-menu__content--product' key={i}>
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
-                        id={id}
                         name={name}
                         finalPrice={finalPrice}
                         initPrice={typeof(initPrice) === "string" ? initPrice : `${initPrice}`}

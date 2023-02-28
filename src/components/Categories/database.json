@@ -1,52 +1,5 @@
 {
   "products": {
-    "mtb": [
-      {
-        "id": 1,
-        "name": "Methanol CV FS 9.3 XT",
-        "price": 4707
-      },
-      {
-        "id": 2,
-        "name": "Methanol CV FS 9.2 XTR",
-        "price": 6195
-      },
-      {
-        "id": 3,
-        "name": "Methanol CV FS 9.1 XX1",
-        "price": 9932
-      },
-      {
-        "id": 4,
-        "name": "Methanol CV RS 9.3 XT",
-        "price": 4511
-      },
-      {
-        "id": 5,
-        "name": "Methanol CV RS 9.1 XX1",
-        "price": 8475
-      },
-      {
-        "id": 6,
-        "name": "Nitron 9.2 XT",
-        "price": 2784
-      },
-      {
-        "id": 7,
-        "name": "Nitron 9.3 XT",
-        "price": 2317
-      },
-      {
-        "id": 8,
-        "name": "Nitron 9.4 XT",
-        "price": 2015
-      },
-      {
-        "id": 9,
-        "name": "Magma 9.2 Alivio",
-        "price": 703
-      }
-    ],
     "road": [
       {
         "id": 10,

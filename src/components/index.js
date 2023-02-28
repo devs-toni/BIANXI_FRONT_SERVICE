@@ -1,7 +1,7 @@
 export { default as Cart } from './Cart/Cart';
 export { default as CartFooter } from './Cart/CartFooter';
 export { default as Badge } from './Categories/Badge';
-export { default as CartHandler } from './Categories/CartHandler';
+export { default as CartHandler } from './Cart/CartHandler';
 export { default as Category } from './Categories/Category';
 export { default as Product } from './Categories/Product';
 export { default as ProductBox } from './Categories/ProductBox';
