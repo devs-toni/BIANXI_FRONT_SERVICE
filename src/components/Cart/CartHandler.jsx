@@ -1,20 +1,28 @@
-import React, { useContext, useState, useEffect, memo, useRef } from 'react'
-import CartContext from '../../context/CartContext';
+import React, { useContext, useState, useEffect, memo } from 'react'
+import { useCart } from '../../context/CartContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../context/LanguageContext';
+import { useProduct } from '../../context/ProductContext';
 
-const CartHandler = memo(({ product, containerClass, isCart, innerRef }) => {
+const CartHandler = memo(({ product, containerClass, isCart }) => {
 
   const { text } = useContext(LanguageContext);
 
-  // CartHandler synchronized with all the products saved in the cart // IS CART
-  const { totalProducts, handleAddProduct, handleRemoveProduct, findNumberProduct, countChanged, deleteAllProductRepeats } = useContext(CartContext);
+  const { vars: cartVars, funcs, extra } = useCart();
+  const { totalProducts } = cartVars;
+  const { handleAddProduct, handleRemoveProduct } = funcs;
+  const { findNumberProduct, deleteAllProductRepeats } = extra;
+
+  const { vars: productVars } = useProduct();
+  const { color, size } = productVars;
+
   const numProducts = findNumberProduct(product.id);
 
+  // CartHandler synchronized with all the products saved in the cart // IS CART
+
   const [currentNumber, setCurrentNumber] = useState(numProducts);
-  const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
 
   const handleCart = (product, operation) => {
     if (operation === '+') {
@@ -28,23 +36,33 @@ const CartHandler = memo(({ product, containerClass, isCart, innerRef }) => {
   useEffect(() => {
     const total = findNumberProduct(product.id);
     setCurrentNumber(total ? total : 0);
-    setTempNumber(total ? total : 0);
-  }, [numProducts, countChanged, totalProducts])
+  }, [totalProducts])
 
 
   // CartHandler with previous number selection and after this you can add all of them to the cart // IS NOT CART
 
-  const addCount = () => {
-    const next = parseInt(innerRef.current.value) + 1;
-    innerRef.current.value = next <= product.stock ? setTempNumber(parseInt(next)) : innerRef.current.value;
 
+  const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
+
+  const addCount = () => {
+    getConfigurationStock();
+    setTempNumber(prevState => prevState + 1);
   }
 
   const removeCount = () => {
-    const next = parseInt(innerRef.current.value) - 1;
-    innerRef.current.value = next >= 0 ? setTempNumber(parseInt(next)) : innerRef.current.value;
+    if (tempNumber > 0)
+      setTempNumber(prevState => prevState - 1);
   }
 
+  const getConfigurationStock = () => {
+    console.log(color);
+    console.log(size);
+  }
+
+  useEffect(() => {
+    const total = findNumberProduct(product.id);
+    setTempNumber(total ? total : 0);
+  }, [totalProducts])
 
 
   return (
@@ -92,7 +110,6 @@ const CartHandler = memo(({ product, containerClass, isCart, innerRef }) => {
                 onKeyDown={(e) => {
                   e.preventDefault();
                 }}
-                ref={innerRef}
               />
               <FontAwesomeIcon
                 className={`${containerClass}__cart--handle ${product.stock === 0 && 'empty'}`}
@@ -111,6 +128,5 @@ CartHandler.propTypes = {
   product: PropTypes.object.isRequired,
   containerClass: PropTypes.string.isRequired,
   isCart: PropTypes.bool.isRequired,
-  innerRef: PropTypes.object,
 }
 export default CartHandler;

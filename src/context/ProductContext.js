@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { setProductPrice, isEmptyMethod } from '../helpers/utils';
 
 const ProductContext = createContext();
 
@@ -8,22 +9,29 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }) => {
 
-  const [products, setProducts] = useState(null);
   const [current, setCurrent] = useState(null);
   const [color, setColor] = useState(1);
   const [size, setSize] = useState('M');
+  const [updatedPrices, setUpdatedPrices] = useState(null)
+  const [isEmptyProduct, setIsEmptyProduct] = useState(false);
 
+  useEffect(() => {
+    if (current) {
+      setUpdatedPrices(setProductPrice(current.offer, current.price));
+      setIsEmptyProduct(isEmptyMethod(current.configuration));
+    }
+  }, [current]);
 
   const data = {
     vars: {
-      products,
-      setProducts,
       current,
       setCurrent,
       color,
       setColor,
       size,
-      setSize
+      setSize,
+      isEmptyProduct,
+      updatedPrices
     },
     funcs: {
 

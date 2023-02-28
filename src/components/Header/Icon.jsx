@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
-import CartContext from '../../context/CartContext';
+import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { useCart } from '../../context/CartContext';
 
 const Icon = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, innerRef }) => {
 
-  const { handleCart, totalProducts } = useContext(CartContext);
+  const { modal, vars } = useCart();
+  const { handleCart } = modal;
+  const { totalProducts } = vars;
 
   const hasItems = (totalProducts.length > 0) ? true : false;
   const hasItemsStyles = hasItems ? 'active' : '';

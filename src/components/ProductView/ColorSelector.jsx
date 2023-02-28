@@ -1,20 +1,18 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { useProduct } from '../../context/ProductContext';
-import { colorsUrl } from '../../config';
-import { get } from '../../helpers/rest.js';
 import uuid from 'react-uuid';
+import { useGlobal } from '../../context/GlobalContext';
 
 const ColorSelector = () => {
 
   const { text } = useContext(LanguageContext);
   const { vars } = useProduct();
   const { color, setColor } = vars;
-  const [currentColors, setCurrentColors] = useState(null);
 
-  useEffect(() => {
-    get(setCurrentColors, `${colorsUrl}/get/all`);
-  }, []);
+  const { colors } = useGlobal();
+  const { colors: allColors } = colors;
+
 
   const handleColor = ({ target }) => {
     const { value } = target;
@@ -27,8 +25,8 @@ const ColorSelector = () => {
     <div className="info__color">
       <p className="info__color--title">{text.view.color}</p>
       {
-        currentColors &&
-        currentColors.map(({ id, color }) => {
+        allColors &&
+        allColors.map(({ id, color }) => {
           const style = {
             color,
             backgroundColor: color

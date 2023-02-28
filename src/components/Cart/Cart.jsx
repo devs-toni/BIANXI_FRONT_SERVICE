@@ -1,7 +1,7 @@
 import { faXmark, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
-import CartContext from '../../context/CartContext';
+import { useCart } from '../../context/CartContext';
 import LanguageContext from '../../context/LanguageContext';
 import { CartHandler, ProductBox, CartFooter } from '../index';
 
@@ -9,8 +9,12 @@ import { calcTotalPrice } from '../../helpers/utils';
 
 const Cart = () => {
 
-  const { totalProducts, isOpen, handleCart } = useContext(CartContext);
   const { text } = useContext(LanguageContext);
+
+  const { vars, modal } = useCart();
+  const { totalProducts } = vars;
+  const { isOpen, handleCart } = modal;
+
 
   const [imgLoaded, setImgLoaded] = useState(false);
 
@@ -35,7 +39,7 @@ const Cart = () => {
                       <ProductBox
                         name={name}
                         finalPrice={finalPrice}
-                        initPrice={typeof(initPrice) === "string" ? initPrice : `${initPrice}`}
+                        initPrice={typeof (initPrice) === "string" ? initPrice : `${initPrice}`}
                         image={require(`../../assets/images/${type}/${name}.png`)}
                         loaded={imgLoaded}
                         setLoaded={setImgLoaded}
@@ -61,7 +65,7 @@ const Cart = () => {
               </div>
           }
         </div>
-        {/* <CartFooter /> */}
+        <CartFooter />
       </div>
     </div>
   )

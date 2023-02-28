@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { LanguageProvider } from './context/LanguageContext';
-import { CartProvider } from './context/CartContext';
 import { ProductProvider } from './context/ProductContext';
+import { CartProvider } from './context/CartContext';
+import { GlobalProvider } from './context/GlobalContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -13,7 +14,9 @@ root.render(
     <LanguageProvider>
       <ProductProvider>
         <CartProvider>
-          <App />
+          <GlobalProvider>
+            <App />
+          </GlobalProvider>
         </CartProvider>
       </ProductProvider>
     </LanguageProvider>

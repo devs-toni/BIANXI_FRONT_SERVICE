@@ -11,7 +11,10 @@ const ProductView = () => {
 
   const { vars } = useProduct();
   const { current: product, setCurrent: setProduct } = vars;
+
   const [image, setImage] = useState({});
+
+
 
   useEffect(() => {
     const getProduct = async () => {
@@ -28,7 +31,7 @@ const ProductView = () => {
           <>
             <div className="view">
               <Images img={image} name={product.name} />
-              <Info product={product} type={type} />
+              <Info />
             </div>
             <Details description={product?.description} features={product?.datasheet} />
           </>
