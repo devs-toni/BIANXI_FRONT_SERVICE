@@ -1,11 +1,8 @@
-import React, { memo } from 'react'
-import { useState, useRef, useEffect } from 'react'
-import logo from '../../assets/images/logo.png';
+import React, { memo, useState, useRef, useEffect } from 'react'
+import { Logo, Navigator, Icon } from '../index';
 import { faCartShopping, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import logo from '../../assets/images/logo.png';
 import PropTypes from 'prop-types';
-import Logo from './Logo';
-import Navigator from './Navigator';
-import IconsContainer from './IconsContainer';
 
 const Navbar = memo(({ items }) => {
   const [isNavShow, setIsNavShow] = useState(false);
@@ -33,17 +30,17 @@ const Navbar = memo(({ items }) => {
     }
   };
 
+  const showStyles = isNavShow ? 'active' : '';
+  const hideStyles = isNavShow ? 'hide' : '';
 
   useEffect(() => {
     if (isNavShow) {
       document.addEventListener("mousedown", clickOutsideHandler);
       document.getElementById('root').style.overflow = 'hidden';
-      document.querySelector('.navbar__extra-icons--cart').style.opacity = '0';
       document.body.style.overflow = 'hidden';
     } else {
       document.addEventListener("mousedown", clickOutsideHandler);
       document.getElementById('root').style.overflow = 'auto';
-      document.querySelector('.navbar__extra-icons--cart').style.opacity = '1';
       document.body.style.overflow = 'auto';
     }
   }, [isNavShow]);
@@ -56,17 +53,17 @@ const Navbar = memo(({ items }) => {
         logo={logo}
       />
       <Navigator
-        containerClass={`navbar__nav ${isNavShow ? 'active' : ''}`}
+        containerClass={`${showStyles} navbar__nav`}
         innerRef={menuRef}
         items={items}
       />
       <div className="navbar__extra-icons">
-        <IconsContainer
-          containerClass='navbar__extra-icons'
+        <Icon
+          containerClass={`${hideStyles} navbar__extra-icons`}
           icon={faCartShopping}
           isCart={true}
         />
-        <IconsContainer
+        <Icon
           containerClass='navbar__extra-icons'
           icon={faBars}
           iconClose={faXmark}

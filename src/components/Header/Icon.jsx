@@ -1,11 +1,14 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CartContext from '../../context/CartContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import PropTypes from 'prop-types'
 
-const IconsContainer = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, innerRef }) => {
+const Icon = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, innerRef }) => {
 
   const { handleCart, totalProducts } = useContext(CartContext);
+
+  const hasItems = (totalProducts.length > 0) ? true : false;
+  const hasItemsStyles = hasItems ? 'active' : '';
 
   return (
     <div className={containerClass}>
@@ -13,9 +16,9 @@ const IconsContainer = ({ containerClass, icon, isCart, iconClose, isNavShow, ha
         isCart
           ?
           (
-            <button className={`${containerClass}--cart ${isNavShow ? 'hide' : ''}`} onClick={handleCart} >
+            <button className={`${containerClass}--cart`} onClick={handleCart} >
               <FontAwesomeIcon icon={icon} />
-              <span className={`${totalProducts.length > 0 && 'active'}`}>{totalProducts.length > 0 && totalProducts.length}</span>
+              <span className={hasItemsStyles}>{hasItems && totalProducts.length}</span>
             </button>
           )
           :
@@ -33,7 +36,7 @@ const IconsContainer = ({ containerClass, icon, isCart, iconClose, isNavShow, ha
   )
 }
 
-IconsContainer.propTypes = {
+Icon.propTypes = {
   containerClass: PropTypes.string.isRequired,
   icon: PropTypes.object.isRequired,
   iconClose: PropTypes.object,
@@ -43,4 +46,4 @@ IconsContainer.propTypes = {
   innerRef: PropTypes.object
 }
 
-export default IconsContainer
+export default Icon

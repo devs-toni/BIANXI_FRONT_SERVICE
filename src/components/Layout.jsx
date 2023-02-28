@@ -1,7 +1,7 @@
-import React, { useContext } from 'react'
-import {Navbar, Footer, Cart} from './index';
+import React, { useContext } from 'react';
 import LanguageContext from '../context/LanguageContext';
 import { MyRouter } from '../router/MyRouter';
+import { Navbar, Footer, Cart } from './index';
 
 const Layout = () => {
 

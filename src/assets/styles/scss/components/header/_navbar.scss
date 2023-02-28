@@ -45,7 +45,7 @@
     @media screen and (max-width: 770px) {
       overflow-y: hidden;
       height: 100vh;
-      transition: all 0.6s ease;
+      transition: all 0.6s left;
       display: flex;
       flex-flow: column nowrap;
       align-items: center;
@@ -53,19 +53,18 @@
       pointer-events: none;
       position: absolute;
       top: 0;
-      right: 0;
-      width: 0;
+      right: -70%;
+      width: 50%;
       line-height: 50px;
       background-color: rgb(75, 74, 74);
       color: white;
       z-index: 2;
 
       &.active {
-        width: 50%;
         pointer-events: auto;
         font-size: 1.5em;
         margin-right: 0;
-        right: -5%;
+        right: 0;
 
         @media screen and (max-width: 480px) {
           width: 100vw !important;
@@ -101,19 +100,29 @@
     align-self: center;
     margin-right: 20px;
     z-index: 2;
+    transition: all .3s ease-in-out;
+
+    &.hide {
+      opacity: 0;
+
+      @media screen and (max-width: 480px) {
+        opacity: 1;
+      }
+    }
 
     &--cart {
+      opacity: 1;
       font-size: 1.5em;
       width: 3%;
       min-width: 50px;
       transition: all .3s ease-in-out;
 
-      &.hide {
-        opacity: 0;
-      }
-
       svg {
         cursor: pointer;
+
+        &.hide {
+          opacity: 0;
+        }
       }
 
       span.active {
@@ -171,6 +180,7 @@
       cursor: pointer;
       position: relative;
       z-index: 4;
+      color: black;
 
 
       @media screen and (max-width: 770px) {
@@ -205,6 +215,20 @@
 
       @media screen and (max-width: 770px) {
         display: block;
+      }
+
+      @media screen and (max-width: 480px) {
+        color: black !important;
+      }
+
+
+      @media screen and (max-width: 420px) {
+        margin: 0;
+        font-size: 1.5em;
+      }
+
+      @media screen and (max-width: 330px) {
+        font-size: 1.3em;
       }
     }
 

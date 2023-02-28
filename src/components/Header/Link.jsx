@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { Link as LinkRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 export const Link = ({ containerClass, text }) => {
   return (

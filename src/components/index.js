@@ -7,7 +7,7 @@ export { default as Product } from './Categories/Product';
 export { default as ProductBox } from './Categories/ProductBox';
 export { default as Footer } from './Footer/Footer';
 export { default as Dropdown } from './Header/Dropdown';
-export { default as IconsContainer } from './Header/IconsContainer';
+export { default as Icon } from './Header/Icon';
 
 export * from './Header/Link';
 
