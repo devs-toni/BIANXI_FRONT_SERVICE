@@ -22,9 +22,9 @@ const CartProvider = ({ children }) => {
   useEffect(() => {
     countChanged &&
       localStorage.setItem("cart", JSON.stringify(totalProducts));
-
     return () => { setCountChanged(false) }
   }, [countChanged]);
+
 
   // Add products in cart modal directly with live changes
   const handleAddProduct = (product) => {
@@ -33,7 +33,6 @@ const CartProvider = ({ children }) => {
       changeCountProduct(indexProduct, '+');
     else
       setTotalProducts([product, ...totalProducts]);
-
   }
 
   const handleRemoveProduct = (product) => {
@@ -63,6 +62,7 @@ const CartProvider = ({ children }) => {
 
   const changeCountProduct = (index, op) => {
     const product = totalProducts[index];
+    
 
     if (op === '+')
       if (product.stock >= product.total + 1) {

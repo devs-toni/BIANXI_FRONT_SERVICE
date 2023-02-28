@@ -1,27 +1,22 @@
-const { productsUrl, sizesUrl, colorsUrl } = require('../config.js');
+import axios from 'axios';
 
-export const getAllColors = async (axios, setter) => {
-  await axios.get(`${colorsUrl}/get/all`)
-    .then(response => {
-      setter(response.data);
-    })
-    .catch(error => {
-      console.error("Error fetching data ", error);
-    })
-    .finally(() => {
+export const get = async (set, url, isProductView) => {
+  const data = await fetchData(url);
+  set(data);
 
-    })
+  if (isProductView) return data.name;
 }
 
-export const getAllSizes = async (axios, setter) => {
-  await axios.get(`${sizesUrl}/get/all`)
-    .then(response => {
-      setter(response.data);
+const fetchData = async (url) => {
+  const data = await axios.get(url)
+    .then(({ data }) => {
+      return data;
     })
     .catch(error => {
       console.error("Error fetching data ", error);
     })
     .finally(() => {
 
-    })
+    });
+  return data;
 }

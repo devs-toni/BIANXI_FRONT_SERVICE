@@ -23,6 +23,15 @@ export const setProductPrice = (offer, price) => {
 export const calcTotalPrice = (total, price) => {
   const totalPrice = parseFloat(`${total}`.replace('.', ''), 2);
   const productPrice = parseFloat(`${price}`.replace('.', ''), 2);
-  
+
   return formatNumberES(totalPrice * productPrice, 2);
 };
+
+
+export const isEmptyMethod = (configurations) => {
+  let sumStock = 0;
+  configurations.forEach(({ stock }) => {
+    sumStock += stock;
+  })
+  return !sumStock ? true : false;
+}

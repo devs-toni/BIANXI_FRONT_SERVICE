@@ -1,26 +1,19 @@
-import axios from 'axios';
 import React from 'react';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useProduct } from '../../context/ProductContext';
 import { Product } from '../index';
+import { get } from '../../helpers/rest';
+import { productsUrl } from '../../config.js';
 
 const Category = () => {
 
-  const { productsUrl } = require('../../config.js');
   const { type } = useParams();
   const { vars } = useProduct();
   const { products, setProducts } = vars;
 
   useEffect(() => {
-    const getCategoryProducts = async () => {
-      const result = await axios.get(`${productsUrl}/get/type/${type}`)
-        .then(response => {
-          return response.data;
-        });
-      setProducts(result);
-    }
-    getCategoryProducts();
+    get(setProducts, `${productsUrl}/get/type/${type}`);
   }, [type]);
 
   return (

@@ -1,47 +1,39 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import ProductDetails from './ProductDetails';
-import ViewImages from './ViewImages';
-import ViewInfo from './ViewInfo';
+import { useProduct } from '../../context/ProductContext';
+import { Details, Images, Info } from '../index';
+import { useParams } from 'react-router-dom';
+import { get } from '../../helpers/rest';
+import { productsUrl } from '../../config.js';
 
 const ProductView = () => {
 
-  const { productsUrl } = require('../../config.js');
   const { id, type } = useParams();
+
+  const { vars } = useProduct();
+  const { current: product, setCurrent: setProduct } = vars;
   const [image, setImage] = useState({});
-  const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const getProductById = async (id) => {
-      const data = await axios.get(`${productsUrl}/get/${id}`)
-        .then(response => {
-          return response.data;
-        });
-      setProduct(data);
-      const image = require(`../../assets/images/${type}/${data.name}.png`);
-      setImage(image);
+    const getProduct = async () => {
+      const name = await get(setProduct, `${productsUrl}/get/${id}`, true);
+      setImage(require(`../../assets/images/${type}/${name}.png`));
     }
-    getProductById(id);
+    getProduct();
   }, [id]);
 
   return (
     <>
       {
         product ?
-          (
-            <>
-              <div className="view">
-                <ViewImages img={image} name={product.name} />
-                <ViewInfo product={product} type={type} />
-              </div>
-              <ProductDetails description={product?.description} features={product?.datasheet} />
-            </>
-          )
+          <>
+            <div className="view">
+              <Images img={image} name={product.name} />
+              <Info product={product} type={type} />
+            </div>
+            <Details description={product?.description} features={product?.datasheet} />
+          </>
           :
-          (
-            <p>Loading</p>
-          )
+          <p>Loading</p>
       }
     </>
   )

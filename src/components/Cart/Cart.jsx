@@ -61,7 +61,7 @@ const Cart = () => {
               </div>
           }
         </div>
-        <CartFooter />
+        {/* <CartFooter /> */}
       </div>
     </div>
   )

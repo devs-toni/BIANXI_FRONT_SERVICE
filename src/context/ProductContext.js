@@ -9,11 +9,21 @@ export const useProduct = () => {
 export const ProductProvider = ({ children }) => {
 
   const [products, setProducts] = useState(null);
+  const [current, setCurrent] = useState(null);
+  const [color, setColor] = useState(1);
+  const [size, setSize] = useState('M');
+
 
   const data = {
     vars: {
-      products, 
-      setProducts
+      products,
+      setProducts,
+      current,
+      setCurrent,
+      color,
+      setColor,
+      size,
+      setSize
     },
     funcs: {
 

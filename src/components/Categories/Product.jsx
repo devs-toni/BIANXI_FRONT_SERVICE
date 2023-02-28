@@ -1,17 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../context/LanguageContext';
-import { setProductPrice } from '../../helpers/utils';
+import { setProductPrice, isEmptyMethod } from '../../helpers/utils';
 import { Badge, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const isEmptyMethod = (configurations) => {
-  let sumStock = 0;
-  configurations.forEach(({ stock }) => {
-    sumStock += stock;
-  })
-  return !sumStock ? true : false;
-}
 
 const Product = ({ product, total = 1 }) => {
   const { text } = useContext(LanguageContext);
