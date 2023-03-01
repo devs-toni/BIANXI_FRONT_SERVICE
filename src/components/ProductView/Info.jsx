@@ -16,8 +16,7 @@ const Info = ({ total = 1 }) => {
   const { products } = useGlobal();
   const { products: allProducts, setProducts } = products;
 
-  const { extra, vars } = useCart();
-  const { findNumberProduct } = extra;
+  const { vars } = useCart();
   const { totalProducts } = vars;
 
   const { vars: productVars } = useProduct();
@@ -27,9 +26,6 @@ const Info = ({ total = 1 }) => {
   const { funcs } = useCart();
   const { handleAddSpecificNumberProduct } = funcs;
 
-
-  //const numProducts = findNumberProduct(product.id);
-  //const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
   const [tempNumber, setTempNumber] = useState(0);
 
   const totalRef = useRef();
@@ -58,8 +54,8 @@ const Info = ({ total = 1 }) => {
             <p className="info__main--short">{sentence}</p>
             <p className="info__main--price">{updatedPrices.final} €</p>
           </div>
-          <SizeSelector />
-          <ColorSelector />
+          <SizeSelector product={product} />
+          <ColorSelector product={product} />
             <p className={`${emptyStyles} info__empty`}>{text.view.empty}</p> 
           <div className="info__buy">
             <CartSelector

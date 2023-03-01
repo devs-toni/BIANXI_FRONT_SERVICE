@@ -96,6 +96,24 @@ export const getCartProductConfigurations = (products, id) => {
   return products?.filter(p => p.id == id)[0]?.config;
 }
 
-export const getMatchConfiguration = (array, selectedSize, selectedColor ) => {
+export const getMatchConfiguration = (array, selectedSize, selectedColor) => {
   return array?.filter(({ sizes, color }) => (sizes.size == selectedSize && color.id == selectedColor))[0];
+}
+
+export const setProductConfigurations = (item) => {
+  let colors = new Set();
+  let colorsIds = new Set();
+  let sizes = new Set();
+
+  const colorsAndSizes = item.configuration.map(({ sizes, color }) => {
+    return [sizes, color]
+  });
+  colorsAndSizes.flat().forEach(cnf => {
+    if (cnf?.size) sizes.add(cnf.size);
+    if (cnf?.color) {
+      colors.add(cnf.color);
+      colorsIds.add(cnf.id);
+    }
+  });
+  return { colors, colorsIds, sizes }
 }

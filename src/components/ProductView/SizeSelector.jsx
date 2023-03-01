@@ -1,30 +1,35 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
-import { useGlobal } from '../../context/GlobalContext';
+import { setProductConfigurations } from '../../helpers/utils';
 
-const SizeSelector = () => {
+const SizeSelector = ({ product }) => {
 
   const { text } = useContext(LanguageContext);
   const { vars } = useProduct();
   const { size, setSize } = vars;
 
-  const { sizes } = useGlobal();
-  const { sizes: allSizes } = sizes;
+  const [sizes, setSizes] = useState([]);
 
   const handleSize = ({ target }) => {
     const { value } = target;
     setSize(value);
   }
 
+  useEffect(() => {
+    const { sizes: res } = setProductConfigurations(product);
+    setSizes([...res]);
+  }, [product])
+
+
   return (
     <div className="info__size">
       <p className="info__size--title">{text.view.size}</p>
       <select className="info__size--option" onChange={handleSize} value={size}>
         {
-          allSizes &&
-          allSizes.map(({ size }) => {
+          sizes &&
+          sizes.map(size => {
             return (
               <option key={uuid()} value={size}>{size}</option>
             )

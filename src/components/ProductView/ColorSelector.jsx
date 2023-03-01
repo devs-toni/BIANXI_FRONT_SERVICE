@@ -1,17 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
-import { useGlobal } from '../../context/GlobalContext';
+import { setProductConfigurations } from '../../helpers/utils';
 
-const ColorSelector = () => {
+const ColorSelector = ({ product }) => {
 
   const { text } = useContext(LanguageContext);
   const { vars } = useProduct();
   const { color, setColor } = vars;
 
-  const { colors } = useGlobal();
-  const { colors: allColors } = colors;
+  const [colors, setColors] = useState([])
 
 
   const handleColor = ({ target }) => {
@@ -19,14 +18,24 @@ const ColorSelector = () => {
     setColor(value);
   }
 
+  useEffect(() => {
+    const { colors: res, colorsIds: ids } = setProductConfigurations(product);
+    const finalArray = [];
+    [...res].forEach((c, index) => {
+      finalArray.push({ color: c, id: [...ids][index] });
+    });
+    setColors(finalArray);
+  }, [product])
+
   const isActive = (id) => (color == id) ? "active" : "";
 
   return (
     <div className="info__color">
       <p className="info__color--title">{text.view.color}</p>
+      {console.log(colors)}
       {
-        allColors &&
-        allColors.map(({ id, color }) => {
+        colors &&
+        colors.map(({ color, id }) => {
           const style = {
             color,
             backgroundColor: color
