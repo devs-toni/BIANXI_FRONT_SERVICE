@@ -20,7 +20,7 @@ const Info = ({ total = 1 }) => {
   const { totalProducts } = vars;
 
   const { vars: productVars } = useProduct();
-  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig, setSize } = productVars;
+  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig, setSize, size } = productVars;
   const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
 
   const { funcs } = useCart();
@@ -36,11 +36,12 @@ const Info = ({ total = 1 }) => {
   }
 
   const emptyStyles = (isEmptyProduct || isEmptyConfig) ? 'empty' : '';
+  const emptyStylesText = ((isEmptyProduct || isEmptyConfig) && size) ? 'empty' : '';
 
 
   useEffect(() => {
     setTempNumber(0);
-    setSize('M');
+    setSize('');
   }, [totalProducts])
 
 
@@ -56,7 +57,7 @@ const Info = ({ total = 1 }) => {
           </div>
           <SizeSelector product={product} />
           <ColorSelector product={product} />
-            <p className={`${emptyStyles} info__empty`}>{text.view.empty}</p> 
+            <p className={`${emptyStylesText} info__empty`}>{text.view.empty}</p> 
           <div className="info__buy">
             <CartSelector
               containerClass='cart-buttons'

@@ -11,7 +11,7 @@ export const ProductProvider = ({ children }) => {
 
   const [current, setCurrent] = useState(null);
   const [color, setColor] = useState(1);
-  const [size, setSize] = useState('M');
+  const [size, setSize] = useState('');
   const [updatedPrices, setUpdatedPrices] = useState(null)
   const [isEmptyProduct, setIsEmptyProduct] = useState(false);
   const [isEmptyConfig, setIsEmptyConfig] = useState(false);

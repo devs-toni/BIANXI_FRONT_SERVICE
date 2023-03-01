@@ -19,7 +19,7 @@ const SizeSelector = ({ product }) => {
 
   useEffect(() => {
     const { sizes: res } = setProductConfigurations(product);
-    setSizes([...res]);
+    setSizes(['', ...res]);
   }, [product])
 
 
@@ -29,14 +29,15 @@ const SizeSelector = ({ product }) => {
       <select className="info__size--option" onChange={handleSize} value={size}>
         {
           sizes &&
-          sizes.map(size => {
+          sizes.map((size, index) => {
+
             return (
               <option key={uuid()} value={size}>{size}</option>
             )
           })
         }
       </select>
-    </div>
+    </div >
   )
 }
 

@@ -10,7 +10,7 @@ const ColorSelector = ({ product }) => {
   const { vars } = useProduct();
   const { color, setColor } = vars;
 
-  const [colors, setColors] = useState([])
+  const [colors, setColors] = useState([]);
 
 
   const handleColor = ({ target }) => {
@@ -32,7 +32,6 @@ const ColorSelector = ({ product }) => {
   return (
     <div className="info__color">
       <p className="info__color--title">{text.view.color}</p>
-      {console.log(colors)}
       {
         colors &&
         colors.map(({ color, id }) => {

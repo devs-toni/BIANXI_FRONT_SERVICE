@@ -83,6 +83,6 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
 CartSelector.propTypes = {
   containerClass: PropTypes.string.isRequired,
   innerRef: PropTypes.object.isRequired,
-  setVal: PropTypes.func.isRequired
+  setVal: PropTypes.func.isRequired,
 }
 export default CartSelector;
