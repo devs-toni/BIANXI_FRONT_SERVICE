@@ -96,6 +96,12 @@
     font-size: 1.2em;
     color: red;
     margin-bottom: 20px;
+    opacity: 0;
+    transition: all .4s ease;
+
+    &.empty {
+      opacity: 1;
+    }
   }
 
   &__buy {
@@ -110,6 +116,7 @@
       padding: 10px 20px;
       cursor: pointer;
       font-size: 1.3em;
+      transition: .4s all ease;
 
       &.empty {
         opacity: 0.4;

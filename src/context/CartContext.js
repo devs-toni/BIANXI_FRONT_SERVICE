@@ -1,5 +1,11 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { useProduct } from "./ProductContext";
+import {
+  addProductToCart,
+  updateProductTotal,
+  addConfigurationToProduct,
+  updateConfigurationStock
+} from "../helpers/utils";
 
 const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
@@ -8,12 +14,12 @@ export const useCart = () => {
   return useContext(CartContext);
 }
 
-
 export const CartProvider = ({ children }) => {
 
   ////////////////////////////////////////////////////////////////////////////// LOGIC
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
+
   const { vars } = useProduct();
   const { currentConfig } = vars;
 
@@ -25,38 +31,38 @@ export const CartProvider = ({ children }) => {
 
   // Singular Actions
 
-  const handleAddProduct = (product) => {
-    const indexProduct = getIndexProduct(product.id);
-    if (indexProduct !== -1) {
-      const updatedProducts = totalProducts.map(prod => {
-        if (prod.id === product.id) {
-          prod.total = prod.total + 1;
-        }
-        return prod;
-      })
-      setTotalProducts(updatedProducts);
-    } else
-      setTotalProducts([product, ...totalProducts]);
-  }
-
-  const handleRemoveProduct = (product) => {
-    const p = totalProducts.find(p => p.id === product?.id);
-    const index = totalProducts.findIndex(p => p.id === product?.id);
-    if (p)
-      if (p.total > 1) {
+  /*   const handleAddProduct = (product) => {
+      const indexProduct = getIndexProduct(product.id);
+      if (indexProduct !== -1) {
         const updatedProducts = totalProducts.map(prod => {
           if (prod.id === product.id) {
-            prod.total = prod.total - 1;
+            prod.total = prod.total + 1;
           }
           return prod;
         })
         setTotalProducts(updatedProducts);
-      } else {
-        const arr = [...totalProducts];
-        arr.splice(index, 1);
-        setTotalProducts(arr);
-      }
-  }
+      } else
+        setTotalProducts([product, ...totalProducts]);
+    } */
+
+  /*   const handleRemoveProduct = (product) => {
+      const p = totalProducts.find(p => p.id === product?.id);
+      const index = totalProducts.findIndex(p => p.id === product?.id);
+      if (p)
+        if (p.total > 1) {
+          const updatedProducts = totalProducts.map(prod => {
+            if (prod.id === product.id) {
+              prod.total = prod.total - 1;
+            }
+            return prod;
+          })
+          setTotalProducts(updatedProducts);
+        } else {
+          const arr = [...totalProducts];
+          arr.splice(index, 1);
+          setTotalProducts(arr);
+        }
+    } */
 
   const findNumberProduct = id => {
     return totalProducts.find(p => p.id === id)?.total;
@@ -65,73 +71,54 @@ export const CartProvider = ({ children }) => {
   const getIndexProduct = id => {
     return totalProducts.findIndex(p => p.id === id);
   }
-  const getIndexConfig = id => {
-    let index;
-    totalProducts.forEach(p => {
-      index = p.config.findIndex(cnf => cnf.id == id)
-    })
-    return index;
+
+  const getIndexConfig = (configId, indexProduct) => {
+    return totalProducts[indexProduct].config.findIndex(c => c.id == configId);
   }
 
   const getProduct = (id) => {
     return totalProducts[getIndexProduct(id)];
   }
 
-  const getTotalPriceCart = () => {
-    let total = 0;
-    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return total;
-  }
+  /*   const getTotalPriceCart = () => {
+      let total = 0;
+      totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+      return total;
+    }
+  
+    const getIVAPriceCart = () => {
+      let total = 0;
+      totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+      return (total * 21) / 100;
+    } */
 
-  const getIVAPriceCart = () => {
-    let total = 0;
-    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return (total * 21) / 100;
-  }
+  /*   const deleteAllProductRepeats = (id) => {
+      totalProducts.map(p => p.id === id && (p.total = 1));
+      setTotalProducts(totalProducts.filter(p => p.id !== id));
+    } */
 
-  const deleteAllProductRepeats = (id) => {
-    totalProducts.map(p => p.id === id && (p.total = 1));
-    setTotalProducts(totalProducts.filter(p => p.id !== id));
-  }
-
-  const handleAddSpecificNumberProduct = (item, total) => {
-    const { id, name, offer, price, type, final } = item;
-    total = parseInt(total);
-    const config = [{ ...currentConfig }];
-
+  const handleAddSpecificNumberProduct = (item, numberProductsAdded) => {
+    numberProductsAdded = parseInt(numberProductsAdded);
+    const tempConfigurations = [{ ...currentConfig }];
+    // Searching product in cart
     const indexProduct = getIndexProduct(item.id);
-
     if (indexProduct !== -1) {
-      const updatedProducts = totalProducts.map(prod => {
-        if (prod.id === item.id) {
-          prod.total = parseInt(prod.total) + parseInt(total);
-        }
-        return prod;
-      });
-      const indexConfig = getIndexConfig(currentConfig.id);
-      console.log(indexConfig);
+      // Update general total
+      const updatedProducts = updateProductTotal(totalProducts, item, numberProductsAdded)
+      // Searching configuration in product
+      const indexConfig = getIndexConfig(currentConfig.id, indexProduct);
       if (indexConfig !== -1) {
-        updatedProducts.filter(prod => prod.id == item.id)[0].config.map(cnf => {
-          if (cnf.id === currentConfig.id) {
-            cnf.total = parseInt(cnf.total) + total;
-            cnf.stock = parseInt(cnf.stock) - total;
-          }
-        });
+        // Update previous configuration
+        updateConfigurationStock(updatedProducts, item, currentConfig, numberProductsAdded);
       } else {
-        config[0].total = total;
-        config[0].stock = config[0].stock - total;
-        updatedProducts.filter(prod => prod.id == item.id)[0].config.push(config[0]);
+        // Add new configuration
+        addConfigurationToProduct(currentConfig, numberProductsAdded, updatedProducts, item);
       }
-
       setTotalProducts(updatedProducts);
-
     } else {
-      config[0].total = total;
-      config[0].stock = config[0].stock - total;
-      const necessaryItem = {
-        id, name, offer, price, final, type, total, config
-      }
-      setTotalProducts([necessaryItem, ...totalProducts]);
+      // Add new product to cart
+      const preparedItem = addProductToCart(item, numberProductsAdded, tempConfigurations);
+      setTotalProducts([preparedItem, ...totalProducts]);
     }
   }
 
@@ -163,15 +150,15 @@ export const CartProvider = ({ children }) => {
       setTotalProducts,
     },
     funcs: {
-      handleAddProduct,
-      handleRemoveProduct,
+      //handleAddProduct,
+      //handleRemoveProduct,
       handleAddSpecificNumberProduct,
-      deleteAllProductRepeats,
+      //deleteAllProductRepeats,
     },
     extra: {
       findNumberProduct,
-      getTotalPriceCart,
-      getIVAPriceCart,
+      //getTotalPriceCart,
+      //getIVAPriceCart,
       getProduct
     },
     modal: {

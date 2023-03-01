@@ -4,35 +4,42 @@ import { useCart } from '../../context/CartContext';
 import { useProduct } from '../../context/ProductContext';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
+import { getCartProductConfigurations, getMatchConfiguration } from '../../helpers/utils';
 
 const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
 
-  const { vars: cartVars, extra } = useCart();
+  const { vars: cartVars } = useCart();
   const { totalProducts } = cartVars;
-  const { findNumberProduct } = extra;
 
   const { vars: productVars } = useProduct();
-  const { current: product, color, size, setIsEmptyConfig, setCurrentConfig } = productVars;
+  const { current: product, color: selectedColor, size: selectedSize, setIsEmptyConfig, currentConfig, setCurrentConfig } = productVars;
 
   const [tempStock, setTempStock] = useState(0);
 
   useEffect(() => {
     const getConfigurationStock = () => {
-      const { configuration } = product;
-      const configurationSelected = configuration.map((conf) => {
-        if (conf.color.id == color && conf.sizes.size == size) return conf;
-      });
-      const selectedConfig = configurationSelected.filter(conf => conf)[0];
-      setCurrentConfig(selectedConfig ? selectedConfig : null);
-      return selectedConfig?.stock;
+      const allProductConfigurations = getCartProductConfigurations(totalProducts, product.id);
+      const configMatch = getMatchConfiguration(allProductConfigurations, selectedSize, selectedColor);
+      // If this product is already in cart the stock will be diferent
+      if (configMatch) {
+        setCurrentConfig(configMatch);
+        return configMatch?.stock;
+        // Else the product stock is the initial stock got in backend
+      } else {
+        const { configuration } = product;
+        const configMatch = getMatchConfiguration(configuration, selectedSize, selectedColor);
+        setCurrentConfig(configMatch ? configMatch : null);
+        return configMatch?.stock;
+      }
     };
+
     if (product) {
       const stock = getConfigurationStock();
       setIsEmptyConfig(stock ? false : true);
       setTempStock(stock ? stock : 0);
       setVal(0);
     }
-  }, [color, size])
+  }, [selectedColor, selectedSize, totalProducts, product])
 
 
   const addCount = () => {
@@ -45,23 +52,18 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
       setVal(prevState => prevState - 1);
   }
 
-  useEffect(() => {
-    const total = findNumberProduct(product.id);
-    setVal(total ? total : 0);
-  }, [totalProducts])
+  const emptyConfigurationStyles = (currentConfig?.stock === 0 || !currentConfig) ? 'empty' : '';
 
   return (
     <div className={`${containerClass}__cart`}>
       <FontAwesomeIcon
-        className={`${containerClass}__cart--handle ${product.stock === 0 && 'empty'}`}
+        className={`${containerClass}__cart--handle ${emptyConfigurationStyles}`}
         icon={faMinus}
         onClick={removeCount}
       />
       <input
         type="text"
-        max={product.stock}
-        min={0}
-        className={`${containerClass}__cart--number ${product.stock === 0 && 'empty'}`}
+        className={`${containerClass}__cart--number ${emptyConfigurationStyles}`}
         value={val}
         ref={innerRef}
         onChange={() => { }}
@@ -70,7 +72,7 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
         }}
       />
       <FontAwesomeIcon
-        className={`${containerClass}__cart--handle ${product.stock === 0 && 'empty'}`}
+        className={`${containerClass}__cart--handle ${emptyConfigurationStyles}`}
         icon={faPlus}
         onClick={addCount}
       />

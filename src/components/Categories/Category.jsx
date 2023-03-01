@@ -1,7 +1,7 @@
 import React from 'react';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
-import { useProduct } from '../../context/ProductContext';
+import { useGlobal } from '../../context/GlobalContext';
 import { Product } from '../index';
 import { get } from '../../helpers/rest';
 import { productsUrl } from '../../config.js';
@@ -9,8 +9,9 @@ import { productsUrl } from '../../config.js';
 const Category = () => {
 
   const { type } = useParams();
-  const { vars } = useProduct();
-  const { products, setProducts } = vars;
+  const { products } = useGlobal();
+  const { products: allProducts, setProducts } = products;
+
 
   useEffect(() => {
     get(setProducts, `${productsUrl}/get/type/${type}`);
@@ -19,12 +20,12 @@ const Category = () => {
   return (
     <>
       {
-        products ?
+        allProducts ?
           (
             <div className='category'>
               <h3 className="category__title">{type.toLowerCase()}</h3>
               <div className="products">
-                {products.length > 0 && products.map((product, index) => {
+                {allProducts.length > 0 && allProducts.map((product, index) => {
                   return <Product key={index} product={product} />
                 })}
               </div>

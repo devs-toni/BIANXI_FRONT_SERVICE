@@ -30,6 +30,7 @@
       text-align: center;
       cursor: default;
       caret-color: transparent;
+      transition: all .4s ease;
 
       &.empty {
         opacity: .2;
@@ -48,6 +49,7 @@
       background-size: 200% 100%;
       background-position: right bottom;
       opacity: 1;
+      transition: all .4s ease;
 
       &:hover {
         background-position: left bottom;

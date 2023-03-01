@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
 import { useProduct } from '../../context/ProductContext';
@@ -16,19 +16,21 @@ const Info = ({ total = 1 }) => {
   const { products } = useGlobal();
   const { products: allProducts, setProducts } = products;
 
-  const { extra } = useCart();
+  const { extra, vars } = useCart();
   const { findNumberProduct } = extra;
+  const { totalProducts } = vars;
 
   const { vars: productVars } = useProduct();
-  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig } = productVars;
+  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig, setSize } = productVars;
   const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
 
   const { funcs } = useCart();
   const { handleAddSpecificNumberProduct } = funcs;
 
 
-  const numProducts = findNumberProduct(product.id);
-  const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
+  //const numProducts = findNumberProduct(product.id);
+  //const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
+  const [tempNumber, setTempNumber] = useState(0);
 
   const totalRef = useRef();
 
@@ -38,6 +40,13 @@ const Info = ({ total = 1 }) => {
   }
 
   const emptyStyles = (isEmptyProduct || isEmptyConfig) ? 'empty' : '';
+
+
+  useEffect(() => {
+    setTempNumber(0);
+    setSize('M');
+  }, [totalProducts])
+
 
   return (
     <>
@@ -51,11 +60,7 @@ const Info = ({ total = 1 }) => {
           </div>
           <SizeSelector />
           <ColorSelector />
-          {
-            (isEmptyProduct || isEmptyConfig)
-            &&
-            <p className="info__empty">{text.view.empty}</p>
-          }
+            <p className={`${emptyStyles} info__empty`}>{text.view.empty}</p> 
           <div className="info__buy">
             <CartSelector
               containerClass='cart-buttons'

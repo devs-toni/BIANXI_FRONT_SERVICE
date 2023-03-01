@@ -1,3 +1,5 @@
+///////////////////////////////////////////////// PRODUCT : CONFIGURE
+
 export const formatNumberES = (n, d = 0) => {
   n = new Intl.NumberFormat("de-DE").format(parseFloat(n).toFixed(d));
   if (d > 0) {
@@ -34,4 +36,66 @@ export const isEmptyMethod = (configurations) => {
     sumStock += stock;
   })
   return !sumStock ? true : false;
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////// CART : ADDITION
+
+export const addProductToCart = (item, numberProductsAdded, arrayConfigurations) => {
+  const { id, name, offer, price, type, final } = item;
+  arrayConfigurations = [updateNewConfigurationStock(arrayConfigurations[0], numberProductsAdded)];
+  const necessaryItem = {
+    id,
+    name,
+    offer,
+    price,
+    final,
+    type,
+    total: numberProductsAdded,
+    config: arrayConfigurations
+  }
+  return necessaryItem;
+}
+
+export const addConfigurationToProduct = (configuration, numberProductsAdded, updatedProducts, item) => {
+  const updatedConfig = updateNewConfigurationStock(configuration, numberProductsAdded);
+  updatedProducts.filter(product => product.id == item.id)[0].config.push(updatedConfig);
+}
+
+const updateNewConfigurationStock = (configuration, addition) => {
+  const nextStock = configuration.stock - addition;
+  configuration = {
+    ...configuration,
+    total: addition,
+    stock: nextStock
+  }
+  return configuration;
+}
+
+export const updateConfigurationStock = (products, item, config, add) => {
+  products.filter(prod => prod.id == item.id)[0].config.map(cnf => {
+    if (cnf.id === config.id) {
+      cnf.total = parseInt(cnf.total) + add;
+      cnf.stock = parseInt(cnf.stock) - add;
+    }
+  });
+}
+
+export const updateProductTotal = (products, item, numberProductsAdded) => {
+  return products.map(prod => {
+    if (prod.id === item.id) {
+      prod.total = parseInt(prod.total) + parseInt(numberProductsAdded);
+    }
+    return prod;
+  });
+}
+
+////////////////////////////////////////////////////////////////////////////// UTIL METHODS
+
+export const getCartProductConfigurations = (products, id) => {
+  return products?.filter(p => p.id == id)[0]?.config;
+}
+
+export const getMatchConfiguration = (array, selectedSize, selectedColor ) => {
+  return array?.filter(({ sizes, color }) => (sizes.size == selectedSize && color.id == selectedColor))[0];
 }
