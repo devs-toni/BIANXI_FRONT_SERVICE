@@ -14,6 +14,8 @@ export const ProductProvider = ({ children }) => {
   const [size, setSize] = useState('M');
   const [updatedPrices, setUpdatedPrices] = useState(null)
   const [isEmptyProduct, setIsEmptyProduct] = useState(false);
+  const [isEmptyConfig, setIsEmptyConfig] = useState(false);
+  const [currentConfig, setCurrentConfig] = useState(null)
 
   useEffect(() => {
     if (current) {
@@ -31,7 +33,11 @@ export const ProductProvider = ({ children }) => {
       size,
       setSize,
       isEmptyProduct,
-      updatedPrices
+      updatedPrices,
+      isEmptyConfig,
+      setIsEmptyConfig,
+      currentConfig,
+      setCurrentConfig
     },
     funcs: {
 

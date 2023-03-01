@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, useContext } from "react";
+import { useProduct } from "./ProductContext";
 
 const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
@@ -13,9 +14,12 @@ export const CartProvider = ({ children }) => {
   ////////////////////////////////////////////////////////////////////////////// LOGIC
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
+  const { vars } = useProduct();
+  const { currentConfig } = vars;
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
+    console.log(totalProducts)
   }, [totalProducts]);
 
 
@@ -61,6 +65,13 @@ export const CartProvider = ({ children }) => {
   const getIndexProduct = id => {
     return totalProducts.findIndex(p => p.id === id);
   }
+  const getIndexConfig = id => {
+    let index;
+    totalProducts.forEach(p => {
+      index = p.config.findIndex(cnf => cnf.id == id)
+    })
+    return index;
+  }
 
   const getProduct = (id) => {
     return totalProducts[getIndexProduct(id)];
@@ -84,18 +95,43 @@ export const CartProvider = ({ children }) => {
   }
 
   const handleAddSpecificNumberProduct = (item, total) => {
+    const { id, name, offer, price, type, final } = item;
+    total = parseInt(total);
+    const config = [{ ...currentConfig }];
+
     const indexProduct = getIndexProduct(item.id);
+
     if (indexProduct !== -1) {
       const updatedProducts = totalProducts.map(prod => {
         if (prod.id === item.id) {
-          prod.total = total;
+          prod.total = parseInt(prod.total) + parseInt(total);
         }
         return prod;
-      })
+      });
+      const indexConfig = getIndexConfig(currentConfig.id);
+      console.log(indexConfig);
+      if (indexConfig !== -1) {
+        updatedProducts.filter(prod => prod.id == item.id)[0].config.map(cnf => {
+          if (cnf.id === currentConfig.id) {
+            cnf.total = parseInt(cnf.total) + total;
+            cnf.stock = parseInt(cnf.stock) - total;
+          }
+        });
+      } else {
+        config[0].total = total;
+        config[0].stock = config[0].stock - total;
+        updatedProducts.filter(prod => prod.id == item.id)[0].config.push(config[0]);
+      }
+
       setTotalProducts(updatedProducts);
+
     } else {
-      item.total = total;
-      setTotalProducts([item, ...totalProducts]);
+      config[0].total = total;
+      config[0].stock = config[0].stock - total;
+      const necessaryItem = {
+        id, name, offer, price, final, type, total, config
+      }
+      setTotalProducts([necessaryItem, ...totalProducts]);
     }
   }
 

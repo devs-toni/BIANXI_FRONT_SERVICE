@@ -1,29 +1,43 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
 import { useProduct } from '../../context/ProductContext';
 import { SizeSelector, ColorSelector, CartHandler } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import CartSelector from './CartSelector';
+import { useGlobal } from '../../context/GlobalContext';
 
 
 const Info = ({ total = 1 }) => {
 
   const { text } = useContext(LanguageContext);
+
+  const { products } = useGlobal();
+  const { products: allProducts, setProducts } = products;
+
+  const { extra } = useCart();
+  const { findNumberProduct } = extra;
+
   const { vars: productVars } = useProduct();
-  const { isEmptyProduct, current: product, updatedPrices } = productVars;
+  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig } = productVars;
   const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
 
-  const { vars: cartVars, funcs, extra } = useCart();
-  const { totalProducts } = cartVars;
+  const { funcs } = useCart();
   const { handleAddSpecificNumberProduct } = funcs;
-  const { findNumberProduct, getProduct } = extra;
+
+
+  const numProducts = findNumberProduct(product.id);
+  const [tempNumber, setTempNumber] = useState(numProducts ? numProducts : 0);
+
+  const totalRef = useRef();
 
   const handleCartAddition = () => {
-    handleAddSpecificNumberProduct(product);
+    const { current } = totalRef;
+    handleAddSpecificNumberProduct({ ...product, ...updatedPrices }, current.value);
   }
 
-  const emptyStyles = isEmptyProduct ? 'empty' : '';
+  const emptyStyles = (isEmptyProduct || isEmptyConfig) ? 'empty' : '';
 
   return (
     <>
@@ -38,15 +52,16 @@ const Info = ({ total = 1 }) => {
           <SizeSelector />
           <ColorSelector />
           {
-            isEmptyProduct
+            (isEmptyProduct || isEmptyConfig)
             &&
             <p className="info__empty">{text.view.empty}</p>
           }
           <div className="info__buy">
-            <CartHandler
-              product={product}
+            <CartSelector
               containerClass='cart-buttons'
-              isCart={false}
+              innerRef={totalRef}
+              val={tempNumber}
+              setVal={setTempNumber}
             />
             <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
             <FontAwesomeIcon icon={faHeart} />

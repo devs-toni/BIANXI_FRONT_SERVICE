@@ -53,7 +53,6 @@ const Cart = () => {
                     <CartHandler
                       product={{ id, name, initPrice, finalPrice, type, offer, total }}
                       containerClass='cart-buttons-section'
-                      isCart={true}
                     />
                   </div>
                 )
