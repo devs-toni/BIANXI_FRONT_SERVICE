@@ -54,6 +54,9 @@
       font-size: 1.1em;
       align-self: center;
       outline: none;
+      background-color: #F5FEFE;
+      border: 1px solid #4fb6b6;
+      color: #4fb6b6;
 
 
       option {}
@@ -75,12 +78,11 @@
     }
 
     &--colors {
-      width: 40px;
-      height: 40px;
       border-radius: 50%;
-      margin-right: 10px;
+      margin: 0 10px;
       border: 1px solid transparent;
       cursor: pointer;
+
 
       &:hover {
         opacity: .6;
@@ -88,6 +90,8 @@
 
       &.active {
         transform: scale(1.2);
+        border: 3px solid rgb(0, 0, 0);
+        padding: 2px;
       }
     }
   }
@@ -110,10 +114,10 @@
     padding-bottom: 2em;
 
     &--add {
-      width: 100%;
+      width: 45%;
       background-color: var.$bianchi-color;
       border-radius: 5px;
-      padding: 10px 20px;
+      padding: 20px 0;
       cursor: pointer;
       font-size: 1.3em;
       transition: .4s all ease;
@@ -125,9 +129,10 @@
     }
 
     svg.fa-heart {
-      margin-left: 40px;
+      margin-left: 5px;
       width: 10%;
-      font-size: 2em;
+      font-size: 1.6em;
+      opacity: .3;
       align-self: center;
       cursor: pointer;
     }

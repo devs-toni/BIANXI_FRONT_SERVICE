@@ -19,7 +19,7 @@ const SizeSelector = ({ product }) => {
 
   useEffect(() => {
     const { sizes: res } = setProductConfigurations(product);
-    setSizes(['', ...res]);
+    setSizes([...res]);
   }, [product])
 
 
@@ -32,7 +32,10 @@ const SizeSelector = ({ product }) => {
           sizes.map((size, index) => {
 
             return (
-              <option key={uuid()} value={size}>{size}</option>
+              <React.Fragment key={uuid()}>
+                {index === 0 && <option key={uuid()} value="">Choose option</option>}
+                <option key={uuid()} value={size}>{size}</option>
+              </React.Fragment>
             )
           })
         }

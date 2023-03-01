@@ -1,58 +1,5 @@
 {
   "products": {
-    "road": [
-      {
-        "id": 10,
-        "name": "Aria-105",
-        "price": 3240,
-        "sizes": [
-          "XS","S","M","L","XL","XXL"
-        ],
-        "colors": [
-          "red", "blue"
-        ]
-      },
-      {
-        "id": 11,
-        "name": "Oltre PRO Ultegra Di2",
-        "price": 7949
-      },
-      {
-        "id": 12,
-        "name": "Oltre XR4 Red AXS 12v",
-        "price": 11049
-      },
-      {
-        "id": 13,
-        "name": "Oltre Ultegra Di2",
-        "price": 5749
-      },
-      {
-        "id": 14,
-        "name": "Oltre XR4 Ultegra Di2",
-        "price": 7403
-      },
-      {
-        "id": 15,
-        "name": "Sprint 105",
-        "price": 2277
-      },
-      {
-        "id": 16,
-        "name": "Sprint 105 Di2 Disc",
-        "price": 2733
-      },
-      {
-        "id": 17,
-        "name": "Spring Ultegra",
-        "price": 3121
-      },
-      {
-        "id": 18,
-        "name": "Oltre XR4 Ultegra Di2 Fulcrum",
-        "price": 8343
-      }
-    ],
     "ebike": [
       {
         "id": 19,

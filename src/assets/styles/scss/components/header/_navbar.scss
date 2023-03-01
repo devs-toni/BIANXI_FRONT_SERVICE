@@ -96,6 +96,19 @@
     }
   }
 
+  &__charge {
+    min-width: 140px;
+    font-weight: 600;
+    font-size: 1.2em;
+    align-self: center;
+    margin-left: -20px;
+    cursor: pointer;
+
+    @media screen and (max-width:770px) {
+      display: none;
+    }
+  }
+
   &__extra-icons {
     align-self: center;
     margin-right: 20px;
@@ -133,7 +146,7 @@
         min-height: 12px;
         position: absolute;
         top: 14px;
-        right: 55px;
+        right: 175px;
         color: white;
         font-weight: 100;
         padding: 2px;
@@ -201,6 +214,8 @@
         font-size: 1.3em;
       }
     }
+
+
 
     &--menu-close {
       width: 50px;

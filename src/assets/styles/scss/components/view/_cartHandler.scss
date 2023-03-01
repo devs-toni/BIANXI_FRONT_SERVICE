@@ -12,17 +12,18 @@
   &__cart {
     display: flex;
     border-radius: 6px;
-    padding: 20px;
+    padding: 20px 5px;
     align-items: center;
     background-color: white;
-    border: 1px solid rgba(197, 197, 197, 0.247);
+    border: 1px solid rgba(197, 197, 197, 0.425);
     font-size: 1.3em;
-    width: 50%;
+    width: 25%;
     justify-content: center;
+    margin-right: 12px;
 
     &--number {
       width: 40px;
-      margin: 0 10px 0 10px;
+      margin: 0 2px 0 2px;
       font-size: 1em;
       outline: none;
       border: none;
@@ -30,6 +31,7 @@
       cursor: default;
       caret-color: transparent;
       transition: all .4s ease;
+      font-weight: 500;
 
       &.empty {
         opacity: .2;
@@ -40,12 +42,11 @@
       color: black;
       background: white;
       transition: all .4s ease-out;
-      font-size: 1.3em;
+      font-size: 1em;
       width: auto;
       border-radius: 6px;
-      margin: 0 20px;
+      margin: 0 15px;
       cursor: pointer;
-      background-size: 200% 100%;
       background-position: right bottom;
       opacity: 1;
       transition: all .4s ease;
@@ -122,7 +123,6 @@
   }
 
   &__like {
-
     display: none;
   }
 

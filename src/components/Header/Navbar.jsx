@@ -3,9 +3,14 @@ import { Logo, Navigator, Icon } from '../index';
 import { faCartShopping, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/images/logo.png';
 import PropTypes from 'prop-types';
+import { useCart } from '../../context/CartContext';
+import { formatNumberES } from '../../helpers/utils';
 
 const Navbar = memo(({ items }) => {
   const [isNavShow, setIsNavShow] = useState(false);
+  const { extra, modal } = useCart();
+  const { getTotalPriceCart } = extra;
+  const { handleCart } = modal;
 
   const menuRef = useRef(null);
   const activatorRef = useRef(null);
@@ -73,6 +78,7 @@ const Navbar = memo(({ items }) => {
           innerRef={activatorRef}
         />
       </div>
+      <p className="navbar__charge" onClick={handleCart}>{formatNumberES(getTotalPriceCart(), 2)} €</p>
     </div>
   )
 })
