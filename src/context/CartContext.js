@@ -4,7 +4,8 @@ import {
   addProductToCart,
   updateProductTotal,
   addConfigurationToProduct,
-  updateConfigurationStock
+  updateConfigurationStock,
+  removeConfigInProduct
 } from "../helpers/utils";
 
 const CartContext = createContext();
@@ -28,9 +29,6 @@ export const CartProvider = ({ children }) => {
     console.log(totalProducts)
   }, [totalProducts]);
 
-
-
-
   const handleAddProduct = (idProduct, idConf) => {
     const updatedProducts = updateProductTotal(totalProducts, idProduct, 1);
     updateConfigurationStock(updatedProducts, idProduct, idConf, 1);
@@ -41,6 +39,28 @@ export const CartProvider = ({ children }) => {
     const updatedProducts = updateProductTotal(totalProducts, idProduct, -1);
     updateConfigurationStock(updatedProducts, idProduct, idConf, -1);
     setTotalProducts(updatedProducts);
+  }
+
+  const removeProduct = (id) => {
+    const updatedProducts = totalProducts.filter(prod => prod.id !== id);
+    setTotalProducts(updatedProducts);
+  }
+
+  const handleRemoveConfig = (idProduct, idConf, totalProductInConf) => {
+    const updatedProducts = updateProductTotal(totalProducts, idProduct, totalProductInConf * -1);
+    const newUpdatedProducts = removeConfigInProduct(updatedProducts, idProduct, idConf);
+    const configsLength = newUpdatedProducts.map(prod => {
+      if (prod.id == idProduct) {
+        return prod.config.length;
+      }
+    });
+
+    if (configsLength.join(('').split('')) == 0) {
+      const updatedProducts = newUpdatedProducts.filter(prod => prod.id !== idProduct);
+      setTotalProducts(updatedProducts);
+
+    } else
+      setTotalProducts(newUpdatedProducts);
   }
 
   const findNumberProduct = id => {
@@ -135,6 +155,8 @@ export const CartProvider = ({ children }) => {
     funcs: {
       handleAddProduct,
       handleRemoveProduct,
+      handleRemoveConfig,
+      removeProduct,
       handleAddSpecificNumberProduct,
       //deleteAllProductRepeats,
     },

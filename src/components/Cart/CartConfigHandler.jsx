@@ -1,7 +1,5 @@
 import React, { useContext, useState, memo } from 'react'
 import { useCart } from '../../context/CartContext';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import LanguageContext from '../../context/LanguageContext';
 import Handler from './Handler';
@@ -12,7 +10,7 @@ const CartConfigHandler = memo(({ product }) => {
   const { text } = useContext(LanguageContext);
 
   const { funcs } = useCart();
-  const { handleAddProduct, handleRemoveProduct } = funcs;
+  const { handleAddProduct, handleRemoveProduct, handleRemoveConfig } = funcs;
 
   const { config, id } = product;
   const [configs, setConfigs] = useState(config);
@@ -25,36 +23,34 @@ const CartConfigHandler = memo(({ product }) => {
 
   const handleRemove = (idProduct, conf) => {
     const { id: idConf, total } = conf;
-    if (total > 0)
+    if (total > 1)
       handleRemoveProduct(idProduct, idConf);
   }
 
+  const handleRemoveConf = (idProduct, conf) => {
+    const { id: idConf, total } = conf;
+    handleRemoveConfig(idProduct, idConf, total);
+  }
+
   return (
-    <div className="footer-product">
-      <div className='footer-product__all-handlers'>
-        {
-          configs
-          &&
-          configs.map(cnf => {
-            return (
-              <Handler
-                key={uuid()}
-                add={() => handleAdd(id, cnf)}
-                remove={() => handleRemove(id, cnf)}
-                product={product}
-                conf={cnf}
-              />)
-          })
-        }
-      </div>
-      <div className={`footer-product__remove`}>
-        <FontAwesomeIcon
-          icon={faTrash}
-          className={`footer-product__remove--trash`}
-        />
-        <p className={`footer-product__remove--text`}>{text.cart.delete}</p>
-      </div>
+    <div className='all-handlers'>
+      {
+        configs
+        &&
+        configs.map(cnf => {
+          return (
+            <Handler
+              key={uuid()}
+              add={() => handleAdd(id, cnf)}
+              remove={() => handleRemove(id, cnf)}
+              product={product}
+              conf={cnf}
+              removeConfig={() => handleRemoveConf(id, cnf)}
+            />)
+        })
+      }
     </div>
+
   )
 })
 

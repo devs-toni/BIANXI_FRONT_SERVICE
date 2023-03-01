@@ -90,6 +90,18 @@ export const updateProductTotal = (products, idItem, numberProductsAdded) => {
   });
 }
 
+
+//////////////////////////////////////////////////////////////////////////////////////// CART : REMOVAL
+
+export const removeConfigInProduct = (products, idProduct, idConf) => {
+  return products?.map(prod => {
+    if (prod.id == idProduct) {
+      prod.config = prod.config.filter(cnf => cnf.id != idConf)
+    }
+    return prod;
+  })
+}
+
 ////////////////////////////////////////////////////////////////////////////// UTIL METHODS
 
 export const getCartProductConfigurations = (products, id) => {

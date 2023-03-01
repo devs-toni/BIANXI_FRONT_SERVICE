@@ -12,9 +12,10 @@ const Cart = () => {
 
   const { text } = useContext(LanguageContext);
 
-  const { vars, modal } = useCart();
+  const { vars, modal, funcs } = useCart();
   const { totalProducts } = vars;
   const { isOpen, handleCart } = modal;
+  const { removeProduct } = funcs;
 
 
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -37,6 +38,10 @@ const Cart = () => {
               totalProducts.map(({ id, name, final, type, offer, price, total, config }) => {
                 return (
                   <div className='cart-menu__content--product' key={uuid()}>
+                    <FontAwesomeIcon 
+                    icon={faXmark} 
+                    className='cart-menu__content--product-close'
+                    onClick={() => removeProduct(id)} />
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
                         name={name}
@@ -51,7 +56,7 @@ const Cart = () => {
                       <p className='total'>{calcTotalPrice(total, final)} €</p>
                     </div>
                     <CartConfigHandler
-                      product={{ id, name, final, type, offer, price, total, config  }}
+                      product={{ id, name, final, type, offer, price, total, config }}
                     />
                   </div>
                 )

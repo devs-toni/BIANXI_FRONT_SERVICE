@@ -1,7 +1,6 @@
 @use '../../abstracts/variables' as var;
-@use './handler';
 
-.footer-product {
+.all-handlers {
   width: 100%;
   margin: 0 auto;
   margin-right: 10px;
@@ -11,35 +10,126 @@
   border-top: 1px solid rgba(197, 197, 197, 0.247);
   padding: 10px 0;
   justify-content: space-around;
+  flex-flow: column wrap;
 
-  &__all-handlers {
+  &__row {
     display: flex;
-    flex-flow: column wrap;
-    justify-content: start;
-    width: 70%;
+    margin-bottom: 10px;
+    justify-content: space-around;
   }
 
-  &__remove {
+  .handler {
     display: flex;
-    align-items: center;
-    cursor: pointer;
 
-    &--trash {
+    &__data {
+      display: flex;
+      width: fit-content;
 
-      font-size: 1.2em;
-      margin-right: 15px;
+      &--prop {
+        display: flex;
+        align-items: center;
 
-      &:hover {
-        opacity: .9;
+        .size {
+          margin-right: 10px;
+        }
+
+        .sizeName {
+          min-width: 40px;
+          font-size: 1.2em;
+          margin-right: 15px;
+          font-weight: 500;
+        }
+
+        .color {
+          margin-right: 10px;
+        }
+
+        .color-container {
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+        }
       }
     }
 
-    @media screen and (max-width: 770px) {
-      color: black;
+    &__form {
+      height: 100%;
+      margin-left: 30px;
+      display: flex;
+      justify-content: space-around;
+
+      &--cart {
+        display: flex;
+        border-radius: 6px;
+        padding: 2px 6px;
+        align-items: center;
+        background-color: white;
+        border: 1px solid rgba(197, 197, 197, 0.247);
+        width: fit-content;
+        justify-content: center;
+        border: 1px solid rgba(190, 186, 186, 0.575);
+
+        .minus,
+        .plus {
+          color: black;
+          background: white;
+          transition: all .4s ease-out;
+          width: 20px;
+          height: 20px;
+          border-radius: 6px;
+          cursor: pointer;
+          background-size: 200% 200%;
+          background-position: right bottom;
+          opacity: 1;
+          padding: 0 9px;
+          transition: all .4s ease;
+
+          &:hover {
+            background-position: left bottom;
+          }
+
+          &.empty {
+            cursor: inherit;
+            pointer-events: none;
+            opacity: .2;
+          }
+        }
+
+        .number {
+          width: 40px;
+          margin: 0 10px 0 10px;
+          outline: none;
+          border: none;
+          text-align: center;
+          cursor: default;
+          caret-color: transparent;
+          transition: all .4s ease;
+          border-right: 1px solid rgba(214, 214, 214, 0.596);
+          border-left: 1px solid rgba(214, 214, 214, 0.596);
+          padding: 0 5px;
+          font-size: 1.2em;
+        }
+      }
     }
 
-    @media screen and (max-width: 460px) {
-      margin-top: 20px;
+    &__remove {
+      font-size: 1.5em;
+      opacity: .8;
+      align-self: center;
+
+      cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      @media screen and (max-width: 770px) {
+        color: black;
+      }
+
+      @media screen and (max-width: 460px) {
+        margin-top: 20px;
+      }
     }
   }
 }
