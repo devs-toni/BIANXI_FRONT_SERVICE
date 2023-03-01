@@ -8,7 +8,7 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
-  const offerStyles = offer ? 'erased' : '';
+  const offerStyles = (offer && !isCart) ? 'erased' : '';
 
   const setNameCart = isCart && <p className={`${containerClass}__price-container--name`}>{name}</p>;
   const setName = !isCart && <p className={`${containerClass}__name`}>{name}</p>;
@@ -22,7 +22,9 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
       {setName}
       <div className={`${containerClass}__price-container`}>
         {setNameCart}
-        <p className={`${containerClass}__price-container--price ${offerStyles}`}><span>{isCart && text.cart.price}</span>{offerPreviousPrice} €</p>
+        <p className={`${containerClass}__price-container--price ${offerStyles}`}>
+          <span>{isCart && text.cart.price}</span>
+        {initPrice ? offerPreviousPrice : finalPrice} €</p>
         {offerPrice}
       </div>
     </div>
@@ -32,13 +34,13 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
 ProductBox.propTypes = {
   name: PropTypes.string.isRequired,
   finalPrice: PropTypes.string.isRequired,
-  initPrice: PropTypes.string.isRequired,
+  initPrice: PropTypes.string,
   image: PropTypes.string.isRequired,
   loaded: PropTypes.bool.isRequired,
   setLoaded: PropTypes.func.isRequired,
   containerClass: PropTypes.string.isRequired,
   offer: PropTypes.number,
   isCart: PropTypes.bool.isRequired,
-  isEmpty: PropTypes.bool.isRequired,
+  isEmpty: PropTypes.bool,
 }
 export default ProductBox;

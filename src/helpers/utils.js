@@ -72,18 +72,18 @@ const updateNewConfigurationStock = (configuration, addition) => {
   return configuration;
 }
 
-export const updateConfigurationStock = (products, item, config, add) => {
-  products.filter(prod => prod.id == item.id)[0].config.map(cnf => {
-    if (cnf.id === config.id) {
+export const updateConfigurationStock = (products, idProduct, idConfig, add) => {
+  products.filter(prod => prod.id == idProduct)[0].config.map(cnf => {
+    if (cnf.id == idConfig) {
       cnf.total = parseInt(cnf.total) + add;
       cnf.stock = parseInt(cnf.stock) - add;
     }
   });
 }
 
-export const updateProductTotal = (products, item, numberProductsAdded) => {
+export const updateProductTotal = (products, idItem, numberProductsAdded) => {
   return products.map(prod => {
-    if (prod.id === item.id) {
+    if (prod.id === idItem) {
       prod.total = parseInt(prod.total) + parseInt(numberProductsAdded);
     }
     return prod;

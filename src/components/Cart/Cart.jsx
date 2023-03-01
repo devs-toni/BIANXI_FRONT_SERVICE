@@ -3,9 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext, useState } from 'react'
 import { useCart } from '../../context/CartContext';
 import LanguageContext from '../../context/LanguageContext';
-import { CartHandler, ProductBox, CartFooter } from '../index';
+import { CartConfigHandler, ProductBox, CartFooter } from '../index';
 
 import { calcTotalPrice } from '../../helpers/utils';
+import uuid from 'react-uuid';
 
 const Cart = () => {
 
@@ -29,30 +30,28 @@ const Cart = () => {
           </div>
         </div>
         <div className='cart-menu__content'>
+          {console.log()}
           {
             totalProducts?.length > 0
               ?
-              totalProducts.map(({ id, name, initPrice, finalPrice, type, offer, isEmpty, total }, i) => {
+              totalProducts.map(({ id, name, final, type, offer, price, total, config }) => {
                 return (
-                  <div className='cart-menu__content--product' key={i}>
+                  <div className='cart-menu__content--product' key={uuid()}>
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
                         name={name}
-                        finalPrice={finalPrice}
-                        initPrice={typeof (initPrice) === "string" ? initPrice : `${initPrice}`}
+                        finalPrice={final}
                         image={require(`../../assets/images/${type}/${name}.png`)}
                         loaded={imgLoaded}
                         setLoaded={setImgLoaded}
                         containerClass='cart-product-box'
                         offer={offer}
                         isCart={true}
-                        isEmpty={isEmpty ? isEmpty : false}
                       />
-                      <p className='total'>{calcTotalPrice(total, finalPrice)} €</p>
+                      <p className='total'>{calcTotalPrice(total, final)} €</p>
                     </div>
-                    <CartHandler
-                      product={{ id, name, initPrice, finalPrice, type, offer, total }}
-                      containerClass='cart-buttons-section'
+                    <CartConfigHandler
+                      product={{ id, name, final, type, offer, price, total, config  }}
                     />
                   </div>
                 )

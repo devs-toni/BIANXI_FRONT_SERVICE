@@ -29,7 +29,7 @@ const Layout = () => {
   return (
     <>
       <Navbar items={items} />
-      {/* <Cart /> */}
+      <Cart />
       <MyRouter />
       <Footer />
     </>

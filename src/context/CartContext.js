@@ -29,40 +29,19 @@ export const CartProvider = ({ children }) => {
   }, [totalProducts]);
 
 
-  // Singular Actions
 
-  /*   const handleAddProduct = (product) => {
-      const indexProduct = getIndexProduct(product.id);
-      if (indexProduct !== -1) {
-        const updatedProducts = totalProducts.map(prod => {
-          if (prod.id === product.id) {
-            prod.total = prod.total + 1;
-          }
-          return prod;
-        })
-        setTotalProducts(updatedProducts);
-      } else
-        setTotalProducts([product, ...totalProducts]);
-    } */
 
-  /*   const handleRemoveProduct = (product) => {
-      const p = totalProducts.find(p => p.id === product?.id);
-      const index = totalProducts.findIndex(p => p.id === product?.id);
-      if (p)
-        if (p.total > 1) {
-          const updatedProducts = totalProducts.map(prod => {
-            if (prod.id === product.id) {
-              prod.total = prod.total - 1;
-            }
-            return prod;
-          })
-          setTotalProducts(updatedProducts);
-        } else {
-          const arr = [...totalProducts];
-          arr.splice(index, 1);
-          setTotalProducts(arr);
-        }
-    } */
+  const handleAddProduct = (idProduct, idConf) => {
+    const updatedProducts = updateProductTotal(totalProducts, idProduct, 1);
+    updateConfigurationStock(updatedProducts, idProduct, idConf, 1);
+    setTotalProducts(updatedProducts);
+  }
+
+  const handleRemoveProduct = (idProduct, idConf) => {
+    const updatedProducts = updateProductTotal(totalProducts, idProduct, -1);
+    updateConfigurationStock(updatedProducts, idProduct, idConf, -1);
+    setTotalProducts(updatedProducts);
+  }
 
   const findNumberProduct = id => {
     return totalProducts.find(p => p.id === id)?.total;
@@ -80,17 +59,17 @@ export const CartProvider = ({ children }) => {
     return totalProducts[getIndexProduct(id)];
   }
 
-  /*   const getTotalPriceCart = () => {
-      let total = 0;
-      totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-      return total;
-    }
-  
-    const getIVAPriceCart = () => {
-      let total = 0;
-      totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-      return (total * 21) / 100;
-    } */
+  const getTotalPriceCart = () => {
+    let total = 0;
+    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+    return total;
+  }
+
+  const getIVAPriceCart = () => {
+    let total = 0;
+    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+    return (total * 21) / 100;
+  }
 
   /*   const deleteAllProductRepeats = (id) => {
       totalProducts.map(p => p.id === id && (p.total = 1));
@@ -98,18 +77,20 @@ export const CartProvider = ({ children }) => {
     } */
 
   const handleAddSpecificNumberProduct = (item, numberProductsAdded) => {
+    const { id: idItem } = item;
+    const { id: idConfig } = currentConfig;
     numberProductsAdded = parseInt(numberProductsAdded);
     const tempConfigurations = [{ ...currentConfig }];
     // Searching product in cart
     const indexProduct = getIndexProduct(item.id);
     if (indexProduct !== -1) {
       // Update general total
-      const updatedProducts = updateProductTotal(totalProducts, item, numberProductsAdded)
+      const updatedProducts = updateProductTotal(totalProducts, idItem, numberProductsAdded)
       // Searching configuration in product
-      const indexConfig = getIndexConfig(currentConfig.id, indexProduct);
+      const indexConfig = getIndexConfig(idConfig, indexProduct);
       if (indexConfig !== -1) {
         // Update previous configuration
-        updateConfigurationStock(updatedProducts, item, currentConfig, numberProductsAdded);
+        updateConfigurationStock(updatedProducts, idItem, idConfig, numberProductsAdded);
       } else {
         // Add new configuration
         addConfigurationToProduct(currentConfig, numberProductsAdded, updatedProducts, item);
@@ -120,6 +101,8 @@ export const CartProvider = ({ children }) => {
       const preparedItem = addProductToCart(item, numberProductsAdded, tempConfigurations);
       setTotalProducts([preparedItem, ...totalProducts]);
     }
+
+    setIsOpen(true);
   }
 
   //////////////////////////////////////////////////////////////////////// VISUAL
@@ -150,15 +133,15 @@ export const CartProvider = ({ children }) => {
       setTotalProducts,
     },
     funcs: {
-      //handleAddProduct,
-      //handleRemoveProduct,
+      handleAddProduct,
+      handleRemoveProduct,
       handleAddSpecificNumberProduct,
       //deleteAllProductRepeats,
     },
     extra: {
       findNumberProduct,
-      //getTotalPriceCart,
-      //getIVAPriceCart,
+      getTotalPriceCart,
+      getIVAPriceCart,
       getProduct
     },
     modal: {
