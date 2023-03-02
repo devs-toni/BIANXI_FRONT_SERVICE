@@ -9,7 +9,7 @@ import CartSelector from './CartSelector';
 import { useGlobal } from '../../context/GlobalContext';
 
 
-const Info = ({ total = 1 }) => {
+const Info = ({ total = 1, setActivator }) => {
 
   const { text } = useContext(LanguageContext);
 
@@ -56,7 +56,7 @@ const Info = ({ total = 1 }) => {
             <p className="info__main--price">{updatedPrices.final} €</p>
           </div>
           <SizeSelector product={product} />
-          <ColorSelector product={product} />
+          <ColorSelector product={product} setActivator={setActivator} />
             <p className={`${emptyStylesText} info__empty`}>{text.view.empty}</p> 
           <div className="info__buy">
             <CartSelector

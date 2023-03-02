@@ -7,8 +7,16 @@
     margin-bottom: 50px;
     display: flex;
     justify-content: center;
+    transition: all .5s ease-in-out;
 
-    &--img {}
+    &--img {
+      opacity: 0;
+      transition: .5s;
+
+      &.loaded {
+        opacity: 1;
+      }
+    }
   }
 
   &__secondary {
@@ -23,7 +31,8 @@
         max-width: 200px;
         margin-right: 5px;
         cursor: pointer;
-        opacity: .4;
+        opacity: .3;
+        transition: all .4s ease;
 
         &.active {
           opacity: 1;

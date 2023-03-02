@@ -14,12 +14,13 @@ const ProductView = () => {
 
   const [image, setImage] = useState({});
 
+  const [colorActivatorImage, setColorActivatorImage] = useState(0);
 
 
   useEffect(() => {
     const getProduct = async () => {
       const name = await get(setProduct, `${productsUrl}/get/${id}`, true);
-      setImage(require(`../../assets/images/${type}/${name}.png`));
+      setImage(require(`../../assets/images/${type}/${name}-0.png`));
     }
     getProduct();
   }, [id]);
@@ -30,8 +31,8 @@ const ProductView = () => {
         product ?
           <>
             <div className="view">
-              <Images img={image} name={product.name} />
-              <Info />
+              <Images img={image} name={product.name} activator={colorActivatorImage} />
+              <Info setActivator={setColorActivatorImage} />
             </div>
             <Details description={product?.description} features={product?.datasheet} />
           </>

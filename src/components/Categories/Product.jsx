@@ -19,7 +19,7 @@ const Product = ({ product, total = 1 }) => {
   useEffect(() => {
 
     setUpdatePrices(setProductPrice(offer, price));
-    setImage(require(`../../assets/images/${type}/${name}.png`));
+    setImage(require(`../../assets/images/${type}/${name}-0.png`));
     setIsEmptyProduct(isEmptyMethod(configuration));
 
   }, [product])

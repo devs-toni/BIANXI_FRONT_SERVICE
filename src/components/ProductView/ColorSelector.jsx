@@ -4,7 +4,7 @@ import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import { setProductConfigurations } from '../../helpers/utils';
 
-const ColorSelector = ({ product }) => {
+const ColorSelector = ({ product, setActivator }) => {
 
   const { text } = useContext(LanguageContext);
   const { vars } = useProduct();
@@ -13,9 +13,10 @@ const ColorSelector = ({ product }) => {
   const [colors, setColors] = useState([]);
 
 
-  const handleColor = ({ target }) => {
+  const handleColor = ({ target }, index) => {
     const { value } = target;
     setColor(value);
+    setActivator(index);
   }
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const ColorSelector = ({ product }) => {
       <p className="info__color--title">{text.view.color}</p>
       {
         colors &&
-        colors.map(({ color, id }) => {
+        colors.map(({ color, id }, index) => {
           const style = {
             color,
             backgroundColor: color
@@ -45,7 +46,7 @@ const ColorSelector = ({ product }) => {
               key={uuid()}
               className={`${isActive(id)} info__color--colors`}
               style={style}
-              onClick={handleColor}
+              onClick={(e) => handleColor(e, index)}
               value={id}
             />
           )

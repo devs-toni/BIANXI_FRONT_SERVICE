@@ -46,7 +46,7 @@ const Cart = () => {
                       <ProductBox
                         name={name}
                         finalPrice={final}
-                        image={require(`../../assets/images/${type}/${name}.png`)}
+                        image={require(`../../assets/images/${type}/${name}-0.png`)}
                         loaded={imgLoaded}
                         setLoaded={setImgLoaded}
                         containerClass='cart-product-box'
