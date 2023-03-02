@@ -20,7 +20,7 @@ const Images = memo(({ name, activator }) => {
   }
 
   const changeImage = (key) => {
-    if (selectedSource !== key) {
+    if (selectedSource !== parseInt(key)) {
       setLoaded(false);
       setTimeout(() => {
         setSelectedSource(parseInt(key));
