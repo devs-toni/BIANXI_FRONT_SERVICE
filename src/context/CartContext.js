@@ -26,7 +26,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
-    console.log(totalProducts)
+    //console.log(totalProducts)
   }, [totalProducts]);
 
   const handleAddProduct = (idProduct, idConf) => {

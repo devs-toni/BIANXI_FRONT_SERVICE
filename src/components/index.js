@@ -24,3 +24,4 @@ export { default as Images } from './ProductView/Images';
 export { default as Info } from './ProductView/Info';
 export { default as ProductView } from './ProductView/ProductView';
 export { default as SizeSelector } from './ProductView/SizeSelector';
+export { default as Loader } from './Loader';

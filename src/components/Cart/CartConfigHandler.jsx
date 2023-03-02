@@ -35,8 +35,6 @@ const CartConfigHandler = memo(({ product }) => {
   return (
     <div className='all-handlers'>
       {
-        configs
-        &&
         configs.map(cnf => {
           return (
             <Handler

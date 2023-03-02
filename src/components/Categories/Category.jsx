@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from "react";
 import { useParams } from 'react-router-dom';
 import { useGlobal } from '../../context/GlobalContext';
-import { Product } from '../index';
+import { Loader, Product } from '../index';
 import { get } from '../../helpers/rest';
 import { productsUrl } from '../../config.js';
 
@@ -33,7 +33,7 @@ const Category = () => {
           )
           :
           (
-            <p>Loading</p>
+            <Loader />
           )
       }
     </>

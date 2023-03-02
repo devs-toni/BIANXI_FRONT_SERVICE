@@ -26,6 +26,7 @@ const ColorSelector = ({ product, setActivator }) => {
       finalArray.push({ color: c, id: [...ids][index] });
     });
     setColors(finalArray);
+
   }, [product])
 
   const isActive = (id) => (color == id) ? "active" : "";

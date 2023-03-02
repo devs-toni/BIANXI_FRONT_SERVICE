@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react'
 import LanguageContext from '../../context/LanguageContext';
 import { setProductPrice, isEmptyMethod } from '../../helpers/utils';
-import { Badge, ProductBox } from '../index';
+import { Badge, Loader, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -13,23 +13,24 @@ const Product = ({ product, total = 1 }) => {
   const [isEmptyProduct, setIsEmptyProduct] = useState(false);
   const [image, setImage] = useState(null);
   const [isImgLoaded, setIsImgLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
 
 
   useEffect(() => {
-
     setUpdatePrices(setProductPrice(offer, price));
     setImage(require(`../../assets/images/${type}/${name}-0.png`));
     setIsEmptyProduct(isEmptyMethod(configuration));
-
+    setLoaded(true);
   }, [product])
 
 
 
   return (
-    <>
+
+    <div className='products__product'>
       {
-        updatePrices
+        loaded
           ?
           (
             <div className='products__product'>
@@ -64,9 +65,9 @@ const Product = ({ product, total = 1 }) => {
             </div>
           )
           :
-          <p>Loading Product ....</p>
+          <Loader />
       }
-    </ >
+    </div>
   );
 }
 

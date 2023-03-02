@@ -1,7 +1,7 @@
 @use '../../abstracts/variables' as var;
 
 .footer {
-  margin-top: 40px;
+  margin-top: auto;
   background-color: var.$bg-color-footer;
   padding: 50px 20px;
   display: grid;

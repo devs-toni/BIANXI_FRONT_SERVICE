@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
-import { Details, Images, Info } from '../index';
+import { Details, Images, Info, Loader } from '../index';
 import { useParams } from 'react-router-dom';
 import { get } from '../../helpers/rest';
 import { productsUrl } from '../../config.js';
@@ -28,7 +28,8 @@ const ProductView = () => {
   return (
     <>
       {
-        product ?
+        product
+          ?
           <>
             <div className="view">
               <Images img={image} name={product.name} activator={colorActivatorImage} />
@@ -37,7 +38,7 @@ const ProductView = () => {
             <Details description={product?.description} features={product?.datasheet} />
           </>
           :
-          <p>Loading</p>
+          <Loader />
       }
     </>
   )
