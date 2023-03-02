@@ -13,11 +13,11 @@
     font-size: 1.2em;
 
     &--visit {
-      width: 40%;
+      width: 36%;
       background-color: var.$bianchi-color;
-      padding: 1.3em .4em;
+      padding: 1.2em .3em;
       display: block;
-      border-radius: 6px;
+      border-radius: 4px;
       margin: 16px auto;
       font-size: 1em;
       letter-spacing: 1px;
@@ -62,16 +62,16 @@
   .empty-product {
 
     p {
-      font-weight: bolder;
+      font-weight: 500;
       font-size: 1.1em;
       margin: 0 auto;
       position: relative;
       bottom: 18em;
-      width: 30%;
+      width: 18%;
       text-align: center;
-      border-radius: 10px;
+      border-radius: 6px;
       padding: 10px 10px;
-      border: 5px solid black;
+      border: 3px solid black;
 
       @media screen and (min-width: 2700px) {
         bottom: 18em;

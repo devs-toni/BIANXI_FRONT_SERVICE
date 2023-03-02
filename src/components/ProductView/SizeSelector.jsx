@@ -28,9 +28,7 @@ const SizeSelector = ({ product }) => {
       <p className="info__size--title">{text.view.size}</p>
       <select className="info__size--option" onChange={handleSize} value={size}>
         {
-          sizes &&
-          sizes.map((size, index) => {
-
+          sizes && sizes.sort((a, b) => a > b ? 1 : -1).map((size, index) => {
             return (
               <React.Fragment key={uuid()}>
                 {index === 0 && <option key={uuid()} value="">Choose option</option>}

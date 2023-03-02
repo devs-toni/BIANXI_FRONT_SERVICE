@@ -13,6 +13,10 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
     setIsOpen(!isOpen);
   };
 
+  const closeHandler = () => {
+    setIsOpen(false);
+  }
+
   const clickOutsideHandler = event => {
     if (dropdownListRef.current) {
       if (
@@ -35,12 +39,11 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
 
 
   return (
-    <div className='dropdown_wrapper'>
+    <div className='dropdown_wrapper' onMouseEnter={clickHandler} onMouseLeave={closeHandler}>
       <p
         className='dropdown_activator'
         aria-haspopup="true"
         aria-controls={dropdownTitle}
-        onClick={clickHandler}
         ref={activatorRef}
       >
         {dropdownTitle}{" "}

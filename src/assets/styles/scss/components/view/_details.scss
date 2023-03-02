@@ -46,23 +46,20 @@
   }
 
   &__info {
-    margin-top: 10px;
     margin-top: 20px;
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
+    min-height: 40%;
     position: relative;
     padding-bottom: 5em;
 
     &--text {
-      position: absolute;
-      opacity: 0;
+      display: none;
       left: 0;
       right: 0;
-      overflow-y: hidden;
       width: 50%;
       margin: 0 auto;
-      transition: all .4s ease;
 
       &-warning {
         font-size: 1.1em;
@@ -75,21 +72,18 @@
       }
 
       &.active {
-        opacity: 1;
+        display: block;
       }
     }
 
     &--table {
-      position: absolute;
-      overflow-y: hidden;
-      opacity: 0;
-
       width: 100%;
       transition: all .4s ease;
+      display: none;
 
       &-tab {
         margin: 0 auto;
-        width: 40%;
+        width: 32%;
         padding: 2em;
 
         tbody {
@@ -98,11 +92,11 @@
           .row {
             margin: 0 auto;
             text-align: left;
-            height: 40px;
+            height: 50px;
 
 
             .column-name {
-              width: 15%;
+              width: 20%;
             }
 
             .column-value {
@@ -124,11 +118,11 @@
 
                 &::before {
                   content: "";
-                  width: 1920px;
+                  width: 1000px;
                   height: 1px;
                   background-color: rgba(0, 0, 0, .1);
                   position: absolute;
-                  right: calc(110%);
+                  right: calc(120%);
                   top: calc(50% - 1px);
                 }
               }
@@ -138,8 +132,7 @@
       }
 
       &.active {
-        opacity: 1;
-
+        display: flex;
       }
     }
   }
