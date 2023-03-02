@@ -35,7 +35,7 @@ const ColorSelector = ({ product, setActivator }) => {
       <p className="info__color--title">{text.view.color}</p>
       {
         colors &&
-        colors.map(({ color, id }, index) => {
+        colors.sort((a, b) => a.id > b.id ? 1 : -1).map(({ color, id }, index) => {
           const style = {
             color,
             backgroundColor: color

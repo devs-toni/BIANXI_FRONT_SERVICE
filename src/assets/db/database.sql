@@ -18,7 +18,7 @@ CREATE TABLE products (
     type        VARCHAR(10)            NOT NULL,
     price       INT                    NOT NULL,
     offer       INT                    NOT NULL,
-    sentence    TEXT                   NOT NULL,    
+    sentence    TEXT                   NULL,    
     description VARCHAR(255)           NOT NULL,    
     PRIMARY KEY (id)
 );
