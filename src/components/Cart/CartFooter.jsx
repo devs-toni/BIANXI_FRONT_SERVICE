@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { NavLink } from 'react-router-dom';
-import LanguageContext from '../../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 
 const CartFooter = () => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
   const { extra } = useCart();
   const { getTotalPriceCart, getIVAPriceCart } = extra;
 

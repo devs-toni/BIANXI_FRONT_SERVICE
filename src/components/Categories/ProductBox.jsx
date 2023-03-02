@@ -1,10 +1,11 @@
-import React, { useContext } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React from 'react'
+import { useLanguage } from '../../context/LanguageContext';
 import PropTypes from 'prop-types';
 
 const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
+
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
@@ -24,7 +25,7 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
         {setNameCart}
         <p className={`${containerClass}__price-container--price ${offerStyles}`}>
           <span>{isCart && text.cart.price}</span>
-        {initPrice ? offerPreviousPrice : finalPrice} €</p>
+          {initPrice ? offerPreviousPrice : finalPrice} €</p>
         {offerPrice}
       </div>
     </div>

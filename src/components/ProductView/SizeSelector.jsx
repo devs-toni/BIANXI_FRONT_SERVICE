@@ -1,12 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import LanguageContext from '../../context/LanguageContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import { setProductConfigurations } from '../../helpers/utils';
+import { useLanguage } from '../../context/LanguageContext';
 
 const SizeSelector = ({ product }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
+  
   const { vars } = useProduct();
   const { size, setSize } = vars;
 

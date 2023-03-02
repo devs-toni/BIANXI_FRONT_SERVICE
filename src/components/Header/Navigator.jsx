@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React from 'react'
+import { useLanguage } from '../../context/LanguageContext';
 import { Dropdown } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
@@ -7,7 +7,8 @@ import PropTypes from 'prop-types'
 
 const Navigator = ({ containerClass, items, innerRef }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
+
 
   return (
     <nav className={containerClass} ref={innerRef}>

@@ -1,13 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
-import LanguageContext from '../../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Handler = ({ add, remove, product, conf, removeConfig }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   const [style, setStyle] = useState({ backgroundColor: conf.color.color });
 

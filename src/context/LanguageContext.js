@@ -1,10 +1,15 @@
-import { createContext,useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const LanguageContext = createContext();
 const initialLanguage = 'es';
 const translations = require('../Translation.json');
 
-const LanguageProvider = ({children}) => {
+export const useLanguage = () => {
+  return useContext(LanguageContext);
+}
+
+export const LanguageProvider = ({ children }) => {
+  
   const [language, setLanguage] = useState(initialLanguage);
   const [text, setText] = useState(translations[language]);
 
@@ -18,9 +23,6 @@ const LanguageProvider = ({children}) => {
     }
   };
 
-  const data = {text,language,handleLanguage};
+  const data = { text, language, handleLanguage };
   return <LanguageContext.Provider value={data}>{children}</LanguageContext.Provider>
 }
-
-export {LanguageProvider};
-export default LanguageContext;

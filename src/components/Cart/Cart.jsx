@@ -1,8 +1,8 @@
 import { faXmark, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { useCart } from '../../context/CartContext';
-import LanguageContext from '../../context/LanguageContext';
+import { useLanguage } from '../../context/LanguageContext';
 import { CartConfigHandler, ProductBox, CartFooter } from '../index';
 
 import { calcTotalPrice } from '../../helpers/utils';
@@ -10,7 +10,7 @@ import uuid from 'react-uuid';
 
 const Cart = () => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   const { vars, modal, funcs } = useCart();
   const { totalProducts } = vars;

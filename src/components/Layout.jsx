@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import LanguageContext from '../context/LanguageContext';
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Footer, Cart } from './index';
 
 const Layout = () => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   const items = [
     {

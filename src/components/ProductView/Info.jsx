@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import LanguageContext, { useLanguage } from '../../context/LanguageContext';
 import { useCart } from '../../context/CartContext';
 import { useProduct } from '../../context/ProductContext';
 import { SizeSelector, ColorSelector, CartHandler, Loader } from '../index';
@@ -11,7 +11,7 @@ import { useGlobal } from '../../context/GlobalContext';
 
 const Info = ({ total = 1, setActivator }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   const { products } = useGlobal();
   const { products: allProducts, setProducts } = products;

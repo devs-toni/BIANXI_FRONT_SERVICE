@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react';
-import LanguageContext from '../../context/LanguageContext';
+import React, { useState } from 'react';
+import { useLanguage } from '../../context/LanguageContext';
 import PropTypes from 'prop-types';
 
 const Details = ({ description, features }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
+
   const [sectionActive, setSectionActive] = useState("description");
   const isActive = (target) => sectionActive === target ? 'active' : '';
 

@@ -1,13 +1,11 @@
-import React, { useContext, useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { useCart } from '../../context/CartContext';
 import PropTypes from 'prop-types';
-import LanguageContext from '../../context/LanguageContext';
 import Handler from './Handler';
 import uuid from 'react-uuid';
 
 const CartConfigHandler = memo(({ product }) => {
 
-  const { text } = useContext(LanguageContext);
 
   const { funcs } = useCart();
   const { handleAddProduct, handleRemoveProduct, handleRemoveConfig } = funcs;
@@ -16,7 +14,7 @@ const CartConfigHandler = memo(({ product }) => {
   const [configs, setConfigs] = useState(config);
 
   const handleAdd = (idProduct, conf) => {
-    const { id: idConf, stock, total } = conf;
+    const { id: idConf, stock } = conf;
     if (stock > 0)
       handleAddProduct(idProduct, idConf);
   }

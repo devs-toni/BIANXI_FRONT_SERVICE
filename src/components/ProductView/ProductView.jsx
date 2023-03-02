@@ -16,7 +16,6 @@ const ProductView = () => {
 
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
 
-
   useEffect(() => {
     const getProduct = async () => {
       const name = await get(setProduct, `${productsUrl}/get/${id}`, true);

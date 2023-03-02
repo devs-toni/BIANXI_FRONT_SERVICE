@@ -1,13 +1,15 @@
-import React, { useContext, useState, useEffect } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React, { useState, useEffect } from 'react'
 import { setProductPrice, isEmptyMethod } from '../../helpers/utils';
 import { Badge, Loader, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { useLanguage } from '../../context/LanguageContext';
 
 
 const Product = ({ product, total = 1 }) => {
-  const { text } = useContext(LanguageContext);
+  
+  const { text } = useLanguage();
+
   const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
   const [updatePrices, setUpdatePrices] = useState(null)
   const [isEmptyProduct, setIsEmptyProduct] = useState(false);

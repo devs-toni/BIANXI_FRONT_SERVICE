@@ -8,6 +8,7 @@ const Images = memo(({ name, activator }) => {
   const { vars } = useProduct();
   const { current: product } = vars;
   const { colors: colorsProduct } = setProductConfigurations(product);
+  
   const colors = [...colorsProduct];
 
   const [selectedSource, setSelectedSource] = useState(0);

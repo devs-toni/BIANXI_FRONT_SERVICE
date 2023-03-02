@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React, { useEffect, useState } from 'react'
+import { useLanguage } from '../../context/LanguageContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import { setProductConfigurations } from '../../helpers/utils';
 
 const ColorSelector = ({ product, setActivator }) => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
+
   const { vars } = useProduct();
   const { color, setColor } = vars;
 

@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React from 'react'
+import { useLanguage } from '../../context/LanguageContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'
 
 const Footer = () => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   return (
     <>

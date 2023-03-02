@@ -1,12 +1,12 @@
-import React, { useContext } from 'react'
-import LanguageContext from '../../context/LanguageContext';
+import React from 'react'
+import { useLanguage } from '../../context/LanguageContext';
 import { Carousel, Section, Advantage } from '../index';
 import { faTruckFast, faMoneyBill1Wave, faTriangleExclamation, faBicycle, faRoad, faMountain, faBolt, faCity } from '@fortawesome/free-solid-svg-icons';
 import logoImage from '../../assets/images/logo-image.png';
 
 const Home = () => {
 
-  const { text } = useContext(LanguageContext);
+  const { text } = useLanguage();
 
   const sections = [{
     name: text.header.road,

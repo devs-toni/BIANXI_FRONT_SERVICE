@@ -25,9 +25,15 @@ const Category = () => {
             <div className='category'>
               <h3 className="category__title">{type.toLowerCase()}</h3>
               <div className="products">
-                {allProducts.length > 0 && allProducts.map((product, index) => {
-                  return <Product key={index} product={product} />
-                })}
+                {
+                  allProducts.length > 0
+                    ?
+                    allProducts.map((product, index) => {
+                      return <Product key={index} product={product} />
+                    })
+                    :
+                    <p>Empty</p>
+                }
               </div>
             </div>
           )

@@ -7,7 +7,9 @@ import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 
 const Navbar = memo(({ items }) => {
+
   const [isNavShow, setIsNavShow] = useState(false);
+  
   const { extra, modal } = useCart();
   const { getTotalPriceCart } = extra;
   const { handleCart } = modal;
