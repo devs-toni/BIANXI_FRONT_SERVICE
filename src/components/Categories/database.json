@@ -1,57 +1,6 @@
 {
   "products": {
-    "ebike": [
-      {
-        "id": 19,
-        "name": "T-Tronik Performer 9.1 XTR",
-        "price": 8113
-      },
-      {
-        "id": 20,
-        "name": "T-Tronik Performer 9.2 XT",
-        "price": 7059
-      },
-      {
-        "id": 21,
-        "name": "T-Tronik Performer 9.3 XT",
-        "price": 6388
-      },
-      {
-        "id": 22,
-        "name": "T-Tronik Rebel 9.1 XT",
-        "price": 5423
-      },
-      {
-        "id": 23,
-        "name": "T-Tronik Rebel 9.2 NX",
-        "price": 4649,
-        "stock": 0
-      },
-      {
-        "id": 24,
-        "name": "T-Tronik Sport 9.1 Deore 12v",
-        "price": 3009,
-        "stock": 0
-      },
-      {
-        "id": 25,
-        "name": "T-Tronik Sport 9.1 Deore 12vTRK",
-        "price": 3060,
-        "stock": 0
-      },
-      {
-        "id": 26,
-        "name": "T-Tronik Sport 9.1 SX",
-        "price": 3009,
-        "stock": 0
-      },
-      {
-        "id": 27,
-        "name": "T-Tronik Sport 9.2 Altus",
-        "price": 2841,
-        "stock": 0
-      }
-    ],
+
     "city": [
       {
         "id": 28,
