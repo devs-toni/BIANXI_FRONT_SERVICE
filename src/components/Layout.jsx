@@ -30,8 +30,8 @@ const Layout = () => {
   return (
     <>
       <Navbar items={items} />
-{/*       <Login />
- */}      <Cart />
+      <Login />
+      <Cart />
       <MyRouter />
       <Footer />
     </>

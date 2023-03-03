@@ -3,13 +3,13 @@
 .login {
   position: absolute;
   right: 3%;
-  top: 6%;
+  top: 10%;
   display: flex;
   flex-flow: column wrap;
   z-index: 5;
-  background-color: white;
+  background-color: rgb(61, 58, 58);
+  color: white;
   padding: 1.5em 1.6em;
-  box-shadow: 0 0 30px 20px rgba(228, 227, 227, 0.397);
   justify-content: center;
   border-radius: 4px;
   opacity: 0;
@@ -17,8 +17,23 @@
   transition: all .4s ease;
 
   &.active {
-    width: 330px;
+    width: 260px;
     opacity: 1;
+
+    @media screen and (max-width: 770px) {
+      width: 42%;
+      height: 100vh;
+      top: 0;
+      right: 0;
+      margin: 0 auto;
+      border-radius: 0;
+    }
+
+    @media screen and (max-width: 480px) {
+      width: 89vw !important;
+      height: 50vh;
+      top: 9%;
+    }
   }
 
   &__title {
@@ -33,7 +48,7 @@
     right: 5%;
     font-weight: lighter;
     font-size: 1.6em;
-    color: rgba(0, 0, 0, 0.199);
+    color: white;
     transition: .5s all ease;
     cursor: pointer;
 
@@ -91,13 +106,8 @@
   }
 
   &__register {
-    opacity: .5;
     width: 100%;
     text-align: center;
     font-weight: 800;
-
-    &:hover {
-      opacity: 1;
-    }
   }
 }

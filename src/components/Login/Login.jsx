@@ -6,7 +6,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { Connection } from '../../helpers/HTTP_Connection';
 import { usersUrl } from '../../config';
-import axios from 'axios';
 
 export const Login = () => {
 
@@ -40,6 +39,7 @@ export const Login = () => {
   const isActiveStyles = isActive ? 'active' : '';
 
   return (
+
     <div className={`${isActiveStyles} login`}>
       <h2 className="login__title">{text.login.signin}</h2>
       <FontAwesomeIcon

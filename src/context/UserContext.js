@@ -13,8 +13,6 @@ export const UserProvider = ({ children }) => {
   const [loginStatus, setLoginStatus] = useState(false)
 
 
-  // VISUAL
-
   const [isActive, setIsActive] = useState(false);
 
   const handleLogin = (e) => {
