@@ -120,6 +120,11 @@
         margin-top: 20px;
       }
     }
+
+    @media screen and (max-width: 550px) {
+      min-width: 140px;
+      padding: 14px 5px;
+    }
   }
 
   &__like {

@@ -4,9 +4,16 @@
 @use './info';
 
 .view {
-  width: 60%;
+  width: 70%;
   padding: var.$section-padding;
   display: flex;
   flex-flow: row nowrap;
   margin: 100px auto;
+
+  @media screen and (max-width: 1300px) {
+    flex-flow: column wrap;
+    width: 80%;
+    margin: 0 auto;
+    padding: 0;
+  }
 }

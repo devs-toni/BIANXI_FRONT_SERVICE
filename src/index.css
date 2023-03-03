@@ -59,3 +59,22 @@ input[type="radio"]:checked:before {
 input {
   all: unset;
 }
+
+@media screen and (max-width: 1300px) {
+  input[type="radio"]:before {
+    width: 40%;
+    height: 40%;
+  }
+
+  input[type="radio"] {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+    input[type="radio"] {
+    width: 25px;
+    height: 25px;
+  }
+}
