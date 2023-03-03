@@ -16,6 +16,10 @@
     display: flex;
     margin-bottom: 10px;
     justify-content: space-around;
+
+    @media screen and (max-width: 448px) {
+      flex-flow: column wrap;
+    }
   }
 
   .handler {
@@ -31,6 +35,10 @@
 
         .size {
           margin-right: 10px;
+
+          @media screen and (max-width: 500px) {
+            margin-right: 5px;
+          }
         }
 
         .sizeName {
@@ -38,10 +46,18 @@
           font-size: 1.2em;
           margin-right: 15px;
           font-weight: 500;
+
+          @media screen and (max-width: 500px) {
+            margin-right: 5px;
+          }
         }
 
         .color {
           margin-right: 10px;
+
+          @media screen and (max-width: 500px) {
+            margin-right: 5px;
+          }
         }
 
         .color-container {
@@ -49,6 +65,10 @@
           height: 15px;
           border-radius: 50%;
         }
+      }
+
+      @media screen and (max-width: 372px) {
+        margin: 0 auto;
       }
     }
 
@@ -110,6 +130,14 @@
           font-size: 1.2em;
         }
       }
+
+      @media screen and (max-width: 500px) {
+        margin-left: 20px;
+      }
+
+      @media screen and (max-width: 372px) {
+        margin-left: 0;
+      }
     }
 
     &__remove {
@@ -127,9 +155,26 @@
         color: black;
       }
 
-      @media screen and (max-width: 460px) {
-        margin-top: 20px;
+      @media screen and (max-width: 448px) {
+        margin: 20px 0;
       }
     }
+
+    @media screen and (max-width: 770px) {
+      color: black;
+    }
+
+    @media screen and (max-width: 448px) {
+      justify-content: center;
+    }
+
+    @media screen and (max-width: 372px) {
+      flex-flow: column wrap;
+      justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    color: black;
   }
 }

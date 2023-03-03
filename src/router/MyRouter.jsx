@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Category, ProductView, Home } from "../components/index";
+import { Category, ProductView, Home, PrivateRoute } from "../components/index";
 import React from 'react';
 
 export const MyRouter = () => {
@@ -8,6 +8,7 @@ export const MyRouter = () => {
     <Routes>
       <Route path="/">
         <Route index element={<Home />} />
+        <Route path="login" element={<Home />}/>
         <Route path="product-category/bycicles">
           <Route path=":type" element={<Category />} />
         </Route>

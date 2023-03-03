@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useLanguage } from '../../context/LanguageContext';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { Connection } from '../../helpers/HTTP_Connection';
 import { usersUrl } from '../../config';
@@ -12,6 +12,8 @@ export const Login = () => {
 
   const { text } = useLanguage();
   const { modal } = useUser();
+  const navigate = useNavigate();
+
   const { isActive, handleClose } = modal;
 
   const [formUser, setFormUser] = useState({
@@ -24,11 +26,15 @@ export const Login = () => {
     setFormUser({ ...formUser, [name]: value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { post } = Connection();
-    post(`${usersUrl}/verify`, {body: formUser})
-    .then(data => console.log(data));
+    await post(`${usersUrl}/verify`, { body: formUser })
+      .then(data => {
+
+      });
+
+    navigate("/login");
   }
 
   const isActiveStyles = isActive ? 'active' : '';

@@ -39,7 +39,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
 
 
   return (
-    <div className='dropdown_wrapper' onMouseEnter={clickHandler} onMouseLeave={closeHandler}>
+    <div className='dropdown_wrapper' onClick={clickHandler}>
       <p
         className='dropdown_activator'
         aria-haspopup="true"

@@ -30,25 +30,32 @@
   }
 
   &__images {
-    width: 500vw;
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
     transition: all 1s ease-in-out;
-    height: 90vh;
 
     &--image {
-      width: 100vw;
-      height: 90vh;
+      width: 100%;
       opacity: 0;
       transition: 1s;
       object-fit: cover;
+
+      @media screen and (max-width: 1190px) {
+        object-fit: contain;
+      }
+
+      @media screen and (max-width: 500px) {
+        min-height: 300px;
+      }
 
       &.loaded {
         opacity: 1;
       }
     }
+
+    @media screen and (max-width: 1190px) {}
   }
 
   &::before,
@@ -75,76 +82,7 @@
     margin-bottom: 0;
   }
 
-  @media screen and (max-width: 1600px) {
-    min-height: 900px;
-  }
-
-  @media screen and (max-width: 1500px) {
-    min-height: 850px;
-  }
-
-  @media screen and (max-width: 1400px) {
-    min-height: 800px;
-  }
-
-  @media screen and (max-width: 1300px) {
-    min-height: 750px;
-  }
-
-  @media screen and (max-width: 1200px) {
-    min-height: 700px;
-  }
-
-  @media screen and (max-width: 1100px) {
-    min-height: 650px;
-  }
-
-  @media screen and (max-width: 1000px) {
-    min-height: 600px;
-  }
-
-  @media screen and (max-width: 900px) {
-    min-height: 550px;
-  }
-
-  @media screen and (max-width: 800px) {
-    min-height: 500px;
-  }
-
-  @media screen and (max-width: 700px) {
-    min-height: 450px;
-  }
-
-  @media screen and (max-width: 600px) {
-    min-height: 400px;
-  }
-
-  @media screen and (max-width: 550px) {
-    min-height: 380px;
-  }
-
-  @media screen and (max-width: 500px) {
-    min-height: 350px;
-  }
-
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width:500px) {
     min-height: 300px;
-  }
-
-  @media screen and (max-width: 400px) {
-    min-height: 250px;
-  }
-
-  @media screen and (max-width: 300px) {
-    min-height: 200px;
-  }
-
-  @media screen and (max-width: 200px) {
-    min-height: 150px;
-  }
-
-  @media screen and (max-width: 1080px) {
-    justify-content: left;
-    align-items: start;
   }
 }

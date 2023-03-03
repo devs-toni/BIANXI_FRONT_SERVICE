@@ -10,8 +10,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
 
   const [token, setToken] = useState('');
-
-
+  const [loginStatus, setLoginStatus] = useState(false)
 
 
   // VISUAL
@@ -27,6 +26,10 @@ export const UserProvider = ({ children }) => {
   }
 
   const data = {
+    vars: {
+      loginStatus,
+      setLoginStatus
+    },
     modal: {
       isActive,
       setIsActive,
