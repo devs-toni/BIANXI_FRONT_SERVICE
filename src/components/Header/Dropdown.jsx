@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
-
-const Dropdown = ({ items = [], dropdownTitle }) => {
+const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
 
   const activatorRef = useRef(null);
   const dropdownListRef = useRef(null);
@@ -13,8 +13,9 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
     setIsOpen(!isOpen);
   };
 
-  const closeHandler = () => {
+  const close = () => {
     setIsOpen(false);
+    closeMenu();
   }
 
   const clickOutsideHandler = event => {
@@ -78,7 +79,7 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
         {items.map((item, index) => {
           return (
             <li className='item_list' key={index}>
-              <Link to={item.ref} onClick={clickHandler}>{item.text}</Link>
+              <Link to={item.ref} onClick={close}>{item.text}</Link>
             </li>
           );
         })}
@@ -87,4 +88,10 @@ const Dropdown = ({ items = [], dropdownTitle }) => {
   );
 }
 
+
+Dropdown.propTypes = {
+  items: PropTypes.array.isRequired,
+  dropdownTitle: PropTypes.string.isRequired,
+  closeMenu: PropTypes.string.isRequired
+}
 export default Dropdown;

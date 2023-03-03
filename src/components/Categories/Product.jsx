@@ -55,14 +55,6 @@ const Product = ({ product, total = 1 }) => {
               isEmpty={isEmptyProduct}
             />
             < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
-            {
-              isEmptyProduct
-              &&
-              <Badge
-                containerClass="empty-product"
-                text={text.product.empty}
-              />
-            }
           </>
           :
           <Loader />

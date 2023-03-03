@@ -1,6 +1,7 @@
 import React from 'react'
 import { useLanguage } from '../../context/LanguageContext';
 import PropTypes from 'prop-types';
+import Badge from './Badge';
 
 const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty }) => {
 
@@ -28,6 +29,14 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
           {initPrice ? offerPreviousPrice : finalPrice} €</p>
         {offerPrice}
       </div>
+      {
+        isEmpty
+        &&
+        <Badge
+          containerClass="empty-product"
+          text={text.product.empty}
+        />
+      }
     </div>
   )
 }

@@ -1,6 +1,32 @@
 @use '../../abstracts/variables' as var;
 
 .product-box {
+  position: relative;
+
+  .empty-product {
+    position: absolute;
+    bottom: 0;
+    top: 5rem;
+    right: 0;
+    left: 0;
+    width: 60%;
+    height: 80%;
+    display: flex;
+    margin: 0 auto;
+
+
+    p {
+      font-weight: 500;
+      font-size: 1.1em;
+      margin: 0 auto;
+      width: fit-content;
+      height: fit-content;
+      text-align: center;
+      border-radius: 6px;
+      padding: 10px 10px;
+      border: 3px solid black;
+    }
+  }
 
   &__image {
     width: 21vw;

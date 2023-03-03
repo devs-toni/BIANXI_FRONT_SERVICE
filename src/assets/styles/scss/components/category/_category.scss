@@ -22,26 +22,11 @@
   }
 
   @media screen and (max-width: 1550px) {
-    width: 60%;
-  }
-
-  @media screen and (max-width: 1350px) {
-    width: 60%;
-  }
-
-  @media screen and (max-width: 1150px) {
-    width: 62%;
-  }
-
-  @media screen and (max-width: 950px) {
-    width: 62%;
-  }
-
-  @media screen and (max-width: 850px) {
     width: 70%;
   }
 
-  @media screen and (max-width: 500px) {
+  @media screen and (min-width: 270px) and (max-width: 1350px) {
+    width: 80%;
     padding: 0;
   }
 }

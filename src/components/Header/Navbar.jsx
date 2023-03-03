@@ -63,6 +63,7 @@ const Navbar = memo(({ items }) => {
         containerClass={`${showStyles} navbar__nav`}
         innerRef={menuRef}
         items={items}
+        closeMenu={closeMenu}
       />
       <div className="navbar__extra-icons">
         <Icon
