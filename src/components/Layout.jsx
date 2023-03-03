@@ -2,6 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Footer, Cart } from './index';
+import Login from './Login/Login';
 
 const Layout = () => {
 
@@ -29,6 +30,7 @@ const Layout = () => {
   return (
     <>
       <Navbar items={items} />
+      <Login />
       <Cart />
       <MyRouter />
       <Footer />

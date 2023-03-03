@@ -90,15 +90,10 @@
       }
     },
     "login": {
-      "title": "Registrate ahora",
-      "firstname": "Nombre",
-      "lastname": "Apellido",
-      "email": "Email",
+      "email": "Correo electrónico",
       "password": "Contraseña",
-      "signup": "Registrate",
-      "orsocial": "o inicia sesión con:",
       "signin": "Acceder",
-      "remember": "Recordar",
+      "remember": "Recuerdame",
       "forgot": "Has olvidado la contraseña?",
       "create": "¿Crear una cuenta?"
     },

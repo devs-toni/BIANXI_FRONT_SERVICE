@@ -7,7 +7,7 @@ import { useLanguage } from '../../context/LanguageContext';
 
 
 const Product = ({ product, total = 1 }) => {
-  
+
   const { text } = useLanguage();
 
   const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
@@ -34,38 +34,36 @@ const Product = ({ product, total = 1 }) => {
       {
         loaded
           ?
-          (
-            <div className='products__product'>
-              {
-                offer > 0 &&
-                <Badge
-                  containerClass="offer"
-                  text={text.product.offer}
-                />
-              }
-              <ProductBox
-                name={name}
-                finalPrice={updatePrices.final}
-                initPrice={updatePrices.init === 0 ? `${updatePrices.init}` : updatePrices.init}
-                image={image}
-                loaded={isImgLoaded}
-                setLoaded={setIsImgLoaded}
-                containerClass='product-box'
-                offer={offer}
-                isCart={false}
-                isEmpty={isEmptyProduct}
+          <>
+            {
+              offer > 0 &&
+              <Badge
+                containerClass="offer"
+                text={text.product.offer}
               />
-              < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
-              {
-                isEmptyProduct
-                &&
-                <Badge
-                  containerClass="empty-product"
-                  text={text.product.empty}
-                />
-              }
-            </div>
-          )
+            }
+            <ProductBox
+              name={name}
+              finalPrice={updatePrices.final}
+              initPrice={updatePrices.init === 0 ? `${updatePrices.init}` : updatePrices.init}
+              image={image}
+              loaded={isImgLoaded}
+              setLoaded={setIsImgLoaded}
+              containerClass='product-box'
+              offer={offer}
+              isCart={false}
+              isEmpty={isEmptyProduct}
+            />
+            < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+            {
+              isEmptyProduct
+              &&
+              <Badge
+                containerClass="empty-product"
+                text={text.product.empty}
+              />
+            }
+          </>
           :
           <Loader />
       }

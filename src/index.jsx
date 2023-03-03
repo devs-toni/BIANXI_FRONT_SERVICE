@@ -7,17 +7,20 @@ import { LanguageProvider } from './context/LanguageContext';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import { GlobalProvider } from './context/GlobalContext';
+import { UserProvider } from './context/UserContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <LanguageProvider>
       <ProductProvider>
-        <CartProvider>
-          <GlobalProvider>
-            <App />
-          </GlobalProvider>
-        </CartProvider>
+        <UserProvider>
+          <CartProvider>
+            <GlobalProvider>
+              <App />
+            </GlobalProvider>
+          </CartProvider>
+        </UserProvider>
       </ProductProvider>
     </LanguageProvider>
   </BrowserRouter>

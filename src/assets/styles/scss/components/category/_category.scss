@@ -3,7 +3,7 @@
 
 .category {
   padding: var.$section-padding;
-  width: var.$section-category;
+  width: fit-content;
   margin: 0 auto;
 
   &__title {
@@ -18,27 +18,27 @@
   }
 
   @media screen and (max-width: 1750px) {
-    width: 80%;
+    width: 60%;
   }
 
   @media screen and (max-width: 1550px) {
-    width: 80%;
+    width: 60%;
   }
 
   @media screen and (max-width: 1350px) {
-    width: 80%;
+    width: 60%;
   }
 
   @media screen and (max-width: 1150px) {
-    width: 82%;
+    width: 62%;
   }
 
   @media screen and (max-width: 950px) {
-    width: 82%;
+    width: 62%;
   }
 
   @media screen and (max-width: 850px) {
-    width: 90%;
+    width: 70%;
   }
 
   @media screen and (max-width: 500px) {

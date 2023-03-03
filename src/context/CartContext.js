@@ -7,6 +7,7 @@ import {
   updateConfigurationStock,
   removeConfigInProduct
 } from "../helpers/utils";
+import { useUser } from "./UserContext";
 
 const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
@@ -128,6 +129,9 @@ export const CartProvider = ({ children }) => {
   //////////////////////////////////////////////////////////////////////// VISUAL
 
   const [isOpen, setIsOpen] = useState(false);
+  const { modal } = useUser();
+  const { handleClose: closeLogin } = modal;
+
   useEffect(() => {
     if (isOpen) {
       document.getElementById('root').style.overflow = 'hidden';
@@ -140,6 +144,7 @@ export const CartProvider = ({ children }) => {
 
   const handleCart = (e) => {
     setIsOpen(!isOpen);
+    closeLogin();
   }
 
   const closeCart = (e) => {

@@ -63,10 +63,7 @@ CREATE TABLE datasheets (
 
 CREATE TABLE users (
     id         BIGINT             AUTO_INCREMENT NOT NULL,
-    firstName  VARCHAR(60)        NOT NULL,
-    lastName   VARCHAR(60)        NOT NULL, 
     email      VARCHAR(255)       NOT NULL, 
-    username   VARCHAR(30)        NOT NULL, 
     password   VARCHAR(255)       NOT NULL, 
     PRIMARY KEY (id)
 ); 

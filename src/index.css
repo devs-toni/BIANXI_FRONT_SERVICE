@@ -55,3 +55,7 @@ input[type="radio"]:before {
 input[type="radio"]:checked:before {
   background: transparent;
 }
+
+input {
+  all: unset;
+}
