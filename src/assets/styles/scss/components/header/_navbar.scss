@@ -18,6 +18,14 @@
     img {
       transform: scale(1.2);
       cursor: pointer;
+
+      @media screen and (max-width: 400px) {
+        transform: scale(1.1);
+      }
+
+      @media screen and (max-width: 300px) {
+        transform: scale(1);
+      }
     }
 
     @media screen and (max-width: 770px) {
@@ -26,11 +34,19 @@
 
     @media screen and (max-width: 770px) {
       width: 15%;
+      margin: auto 30px;
+    }
+
+    @media screen and (max-width: 350px) {
+      margin: auto 15px;
+    }
+
+    @media screen and (max-width: 300px) {
       margin: auto 10px;
     }
 
-    @media screen and (max-width: 310px) {
-      margin: 0;
+    @media screen and (max-width: 285px) {
+      margin: auto 5px;
     }
   }
 
@@ -221,7 +237,7 @@
 
     &--menu-close {
       width: 50px;
-      max-width: 50px;
+      max-width: 38px;
       display: none;
       font-size: 2em;
       margin: 15px 20px;
