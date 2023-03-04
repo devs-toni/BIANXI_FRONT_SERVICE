@@ -1,6 +1,6 @@
 import React, { memo, useRef, useEffect } from 'react'
 import { Logo, Navigator, Icon } from '../index';
-import { faCartShopping, faBars, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faBars, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/images/logo.png';
 import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
@@ -11,7 +11,7 @@ const Navbar = memo(({ items }) => {
 
   const { UI_ACTIONS, handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch } = handleUi();
-  
+
   const { extra } = useCart();
   const { getTotalPriceCart } = extra;
 
@@ -34,48 +34,60 @@ const Navbar = memo(({ items }) => {
   const showStyles = ui_state.menuIsOpen ? 'active' : '';
   const hideStyles = ui_state.menuIsOpen ? 'hide' : '';
 
-  useEffect(() => {
-    if (ui_state.menuIsOpen) {
-      document.addEventListener("mousedown", clickOutsideHandler);
-      document.getElementById('root').style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.addEventListener("mousedown", clickOutsideHandler);
-      document.getElementById('root').style.overflow = 'auto';
-      document.body.style.overflow = 'auto';
-    }
-  }, [ui_state.menuIsOpen]);
-
   return (
     <div className='navbar'>
-      <Logo
-        containerClass='navbar__container-logo'
-        closeMenu={() => {ui_dispatch({type: UI_ACTIONS.CLOSE_MENU})}}
-        logo={logo}
-      />
-      <Navigator
-        containerClass={`${showStyles} navbar__nav`}
-        innerRef={menuRef}
-        items={items}
-        closeMenu={() => {ui_dispatch({type: UI_ACTIONS.CLOSE_MENU})}}
-      />
-      <div className="navbar__extra-icons">
-        <Icon
-          containerClass={`${hideStyles} navbar__extra-icons`}
-          icon={faCartShopping}
-          isCart={true}
-        />
-        <Icon
-          containerClass='navbar__extra-icons'
-          icon={faBars}
-          iconClose={faXmark}
-          isCart={false}
-          isNavShow={ui_state.menuIsOpen}
-          handleMenu={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_MENU})}}
-          innerRef={activatorRef}
+      <div>
+        <Logo
+          containerClass='navbar__container-logo'
+          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) }}
+          logo={logo}
         />
       </div>
-      <p className="navbar__charge" onClick={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_CART})}}>{formatNumberES(getTotalPriceCart(), 2)} €</p>
+      <div className='navbar__options'>
+        <Navigator
+          containerClass={`${showStyles} navbar__options--nav`}
+          innerRef={menuRef}
+          items={items}
+          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) }}
+        />
+        <div className="navbar__options--icons">
+          <Icon
+            isMenu={false}
+            isCart={false}
+            containerClass={`${hideStyles} navbar__options--icons`}
+            btnClass='user'
+            icon={faUser}
+            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN }) }}
+          />
+          <Icon
+            isMenu={false}
+            isCart={true}
+            containerClass={`${hideStyles} navbar__options--icons`}
+            btnClass='cart'
+            icon={faCartShopping}
+            handler={() => ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })}
+          />
+          <Icon
+            isMenu={false}
+            isCart={false}
+            containerClass={`${hideStyles} navbar__options--icons`}
+            btnClass='search'
+            icon={faMagnifyingGlass}
+            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH }) }}
+            innerRef={activatorRef}
+          />
+          <Icon
+            isMenu={true}
+            isCart={false}
+            containerClass='navbar__options--icons'
+            btnClass='hamburguer'
+            icon={faBars}
+            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU }) }}
+            innerRef={activatorRef}
+          />
+          <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(), 2)} €</p>
+        </div>
+      </div>
     </div>
   )
 })

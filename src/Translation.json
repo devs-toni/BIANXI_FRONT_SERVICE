@@ -93,9 +93,11 @@
       "email": "Correo electrónico",
       "password": "Contraseña",
       "signin": "Acceder",
-      "remember": "Recuerdame",
-      "forgot": "Has olvidado la contraseña?",
-      "create": "¿Crear una cuenta?"
+      "error": "Error! Email/Contraseña Incorrectos",
+      "logout": "Salir",
+      "create": "¿Crear una cuenta?",
+      "hi": "Hola",
+      "likes": "Favoritos"
     },
     "error": {
       "ops": "Opps!",

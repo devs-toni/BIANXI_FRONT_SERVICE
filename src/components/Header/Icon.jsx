@@ -3,50 +3,55 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
 import { useUI } from '../../context/UIContext';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const Icon = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, innerRef }) => {
+const Icon = ({ isMenu, isCart, containerClass, btnClass, icon, innerRef, handler }) => {
 
   const { vars } = useCart();
   const { totalProducts } = vars;
 
   const { UI_ACTIONS, handleUi } = useUI();
-  const { dispatch: ui_dispatch } = handleUi();
-  
+  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+
   const hasItems = (totalProducts.length > 0) ? true : false;
   const hasItemsStyles = hasItems ? 'active' : '';
 
   return (
-    <div className={containerClass}>
+    <button className={`${containerClass}-${btnClass} nav-icon`} onClick={handler}>
       {
-        isCart
+        isMenu
           ?
           (
-            <button className={`${containerClass}--cart`} onClick={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_CART})}} >
-              <FontAwesomeIcon icon={icon} />
-              <span className={hasItemsStyles}>{hasItems && totalProducts.length}</span>
-            </button>
+            ui_state.menuIsOpen
+              ?
+              <FontAwesomeIcon className={`${containerClass}-menu-close`} icon={faXmark} ref={innerRef} />
+              :
+              <FontAwesomeIcon icon={icon} ref={innerRef} />
           )
           :
           (
-            (
-              isNavShow
-                ?
-                <FontAwesomeIcon className={`${containerClass}--menu-close`} icon={iconClose} onClick={handleMenu} ref={innerRef} />
-                :
-                <FontAwesomeIcon className={`${containerClass}--hamburguer`} icon={icon} onClick={handleMenu} ref={innerRef} />
-            )
+            <>
+              <FontAwesomeIcon icon={icon} />
+              {
+                isCart
+                &&
+                <span className={hasItemsStyles}>{hasItems && totalProducts.length}</span>
+              }
+            </>
           )
       }
-    </div>
+    </button>
   )
 }
 
 Icon.propTypes = {
+  isMenu: PropTypes.bool.isRequired,
+  handler: PropTypes.func.isRequired,
   containerClass: PropTypes.string.isRequired,
+  btnClass: PropTypes.string.isRequired,
   icon: PropTypes.object.isRequired,
+
   iconClose: PropTypes.object,
-  isCart: PropTypes.bool.isRequired,
-  handleMenu: PropTypes.func,
   innerRef: PropTypes.object
 }
 

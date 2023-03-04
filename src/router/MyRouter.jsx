@@ -8,7 +8,6 @@ export const MyRouter = () => {
     <Routes>
       <Route path="/">
         <Route index element={<Home />} />
-        <Route path="login" element={<Home />}/>
         <Route path="product-category/bycicles">
           <Route path=":type" element={<Category />} />
         </Route>

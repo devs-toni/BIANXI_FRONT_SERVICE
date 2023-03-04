@@ -20,11 +20,6 @@ const Navigator = ({ containerClass, items, innerRef, closeMenu }) => {
         dropdownTitle={text.header.bycicles}
         closeMenu={closeMenu}
       />
-      <FontAwesomeIcon
-        className='navbar__nav--user'
-        icon={faUser}
-        onClick={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_LOGIN})}}
-      />
     </nav>
   )
 }

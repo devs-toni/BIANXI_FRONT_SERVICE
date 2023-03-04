@@ -1,9 +1,9 @@
 @use '../../abstracts/variables' as var;
 
 .login {
-  position: absolute;
-  right: 3%;
+  position: fixed;
   top: 10%;
+  right: 0;
   display: flex;
   flex-flow: column wrap;
   z-index: 5;
@@ -19,17 +19,33 @@
   &.active {
     width: 260px;
     opacity: 1;
+    right: 3%;
+  }
 
-    @media screen and (max-width: 770px) {
+  @media screen and (max-width: 770px) {
+    width: 0;
+    height: 100vh;
+    right: auto;
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    border-radius: 0;
+
+    &.active {
       width: 42%;
       height: 100vh;
       top: 0;
-      right: 0;
+      left: 0;
+      right: 100%;
       margin: 0 auto;
       border-radius: 0;
     }
+  }
 
-    @media screen and (max-width: 480px) {
+
+  @media screen and (max-width: 480px) {
+
+    &.active {
       width: 89vw !important;
       height: 50vh;
       top: 9%;
@@ -103,11 +119,30 @@
         background-position: left bottom;
       }
     }
+
+    &--error {
+      color: red;
+      text-align: center;
+      margin: 0 auto;
+      width: 80%;
+      margin-bottom: 20px;
+    }
   }
 
   &__register {
     width: 100%;
     text-align: center;
     font-weight: 800;
+  }
+
+  &__name {
+    margin: 10px 0;
+  }
+
+  &__link {
+    width: fit-content;
+    margin: 10px 0;
+    cursor: pointer;
+
   }
 }

@@ -29,22 +29,22 @@ export const UIProvider = ({ children }) => {
     switch (action.type) {
 
       case UI_ACTIONS.HANDLE_LOGIN:
-        return { loginIsOpen: !state.loginIsOpen };
+        return { ...state, loginIsOpen: !state.loginIsOpen };
 
       case UI_ACTIONS.CLOSE_LOGIN:
-        return { loginIsOpen: state.loginIsOpen ? false : '' };
+        return { ...state, loginIsOpen: state.loginIsOpen ? false : '' };
 
       case UI_ACTIONS.HANDLE_MENU:
-        return { menuIsOpen: !state.menuIsOpen };
+        return { ...state, menuIsOpen: !state.menuIsOpen };
 
       case UI_ACTIONS.CLOSE_MENU:
-        return { menuIsOpen: state.menuIsOpen ? false : '' };
+        return { ...state, menuIsOpen: state.menuIsOpen ? false : '' };
 
       case UI_ACTIONS.HANDLE_CART:
-        return { cartIsOpen: !state.cartIsOpen };
+        return { ...state, cartIsOpen: !state.cartIsOpen };
 
       case UI_ACTIONS.CLOSE_CART:
-        return { cartIsOpen: state.cartIsOpen ? false : '' };
+        return { ...state, cartIsOpen: state.cartIsOpen ? false : '' };
 
       default:
         break;
@@ -55,17 +55,6 @@ export const UIProvider = ({ children }) => {
   const handleUi = () => {
     return { state, dispatch };
   }
-
-  useEffect(() => {
-    if (state.cartIsOpen) {
-      document.getElementById('root').style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.getElementById('root').style.overflow = 'auto';
-      document.body.style.overflow = 'auto';
-    }
-  }, [state.cartIsOpen]);
-
 
   const data = {
     UI_ACTIONS,
