@@ -18,6 +18,21 @@
   &.active {
     opacity: 1;
     width: 26%;
+
+    @media screen and (max-width: 1900px) {
+      width: 40%;
+    }
+
+    @media screen and (max-width: 1000px) {
+      width: 60%;
+    }
+
+    @media screen and (max-width: 770px) {
+      width: 70%;
+    }
+    @media screen and (max-width: 500px) {
+      width: 80%;
+    }
   }
 
   &__container {
@@ -57,7 +72,7 @@
 
     form {
       width: 100%;
-      
+
       input {
         width: 100%;
         padding: 1em .4em;

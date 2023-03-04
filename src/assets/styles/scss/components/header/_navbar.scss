@@ -23,6 +23,11 @@
         transform: scale(1);
       }
 
+      @media screen and (max-width: 320px) {
+        box-shadow: 0 0 10px 1px rgba(128, 128, 128, 0.397);
+        border-radius: 3px;
+      }
+
       @media screen and (max-width: 300px) {
         transform: scale(.9);
       }
@@ -38,6 +43,11 @@
 
     @media screen and (max-width: 350px) {
       margin: auto 7px;
+    }
+
+    @media screen and (max-width: 320px) {
+      margin: 0 20%;
+      transform: scale(1.1);
     }
 
     @media screen and (max-width: 300px) {
