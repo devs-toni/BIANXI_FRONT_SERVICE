@@ -9,11 +9,11 @@ export const useUser = () => {
 
 export const UserProvider = ({ children }) => {
 
-
   const init = {
     logged: false,
     error: '',
     username: '',
+    id: 0
   }
 
   const USER_ACTIONS = {
@@ -29,21 +29,24 @@ export const UserProvider = ({ children }) => {
       case USER_ACTIONS.LOGIN_ERROR:
         return {
           logged: false,
+          error: action.payload,
           username: '',
-          error: action.payload
+          id: 0
         };
 
       case USER_ACTIONS.LOGIN_SUCCESS:
         return {
           logged: true,
           error: '',
-          username: action.payload
+          username: action.payload.username,
+          id: action.payload.id
         }
       case USER_ACTIONS.LOGOUT:
         return {
           logged: false,
           error: '',
-          username: ''
+          username: '',
+          id: 0
         }
       default:
         break;

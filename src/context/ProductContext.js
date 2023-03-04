@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
+import { productsUrl } from '../config';
+import { Connection } from '../helpers/HTTP_Connection';
 import { setProductPrice } from '../helpers/utils';
+import { useUser } from './UserContext';
 
 const ProductContext = createContext();
 
@@ -8,6 +11,22 @@ export const useProduct = () => {
 }
 
 export const ProductProvider = ({ children }) => {
+
+
+  const { USER_ACTIONS, handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch } = handleUser();
+
+  const addLike = (idProduct, idUser) => {
+    const { post } = Connection();
+    post(`${productsUrl}/like/add`, {
+      body: {
+        product: idProduct,
+        user: idUser
+      }
+    }).then(data => {
+      console.log(data);
+    })
+  }
 
   const PRODUCT_ACTIONS = {
     SET_PRODUCT: "SET_PRODUCT",
@@ -45,6 +64,7 @@ export const ProductProvider = ({ children }) => {
       case PRODUCT_ACTIONS.SET_CONFIG:
         return { ...state, config: action.payload };
       case PRODUCT_ACTIONS.HANDLE_LIKE:
+        addLike(state.product.id, user_state.id);
         return { ...state, like: !state.like }
 
       default:
@@ -60,7 +80,6 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const { product } = state;
-
     if (product?.configuration) {
       dispatch({ type: PRODUCT_ACTIONS.SET_PRICES, payload: { offer: product.offer, price: product.price } });
     }
@@ -70,6 +89,7 @@ export const ProductProvider = ({ children }) => {
     PRODUCT_ACTIONS,
     configureProduct
   }
+
   return (
     <ProductContext.Provider value={data}>{children}</ProductContext.Provider>
   )

@@ -14,15 +14,15 @@ root.render(
   <BrowserRouter>
     <LanguageProvider>
       <UIProvider>
-        <ProductProvider>
-          <UserProvider>
+        <UserProvider>
+          <ProductProvider>
             <CartProvider>
               <GlobalProvider>
                 <App />
               </GlobalProvider>
             </CartProvider>
-          </UserProvider>
-        </ProductProvider>
+          </ProductProvider>
+        </UserProvider>
       </UIProvider>
     </LanguageProvider>
   </BrowserRouter>

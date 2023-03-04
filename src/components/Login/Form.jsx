@@ -32,10 +32,9 @@ const Form = ({ handler }) => {
     await post(`${usersUrl}/verify`, { body: formUser })
       .then(data => {
         if (!data) {
-          user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: text.login.error });
-        }
-        else {
-          user_dispatch({ type: USER_ACTIONS.LOGIN_SUCCESS, payload: formUser.email })
+          user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: { error: text.login.error } });
+        } else {
+          user_dispatch({ type: USER_ACTIONS.LOGIN_SUCCESS, payload: { username: formUser.email, id: data } })
         }
       });
   }

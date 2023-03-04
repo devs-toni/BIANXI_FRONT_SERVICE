@@ -86,4 +86,13 @@ CREATE TABLE order_products (
     FOREIGN KEY (order_id)        REFERENCES orders (id) ON DELETE CASCADE,
     FOREIGN KEY (product_id)      REFERENCES products (id) ON DELETE CASCADE,
     PRIMARY KEY (id)
-); 
+);
+
+CREATE TABLE likes (
+    id          BIGINT            AUTO_INCREMENT NOT NULL,
+    product_id  BIGINT            NOT NULL,
+    user_id     BIGINT            NOT NULL,
+    FOREIGN KEY (product_id)      REFERENCES products (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id)         REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+)
