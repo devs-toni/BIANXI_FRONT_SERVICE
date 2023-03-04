@@ -17,12 +17,16 @@ export const UIProvider = ({ children }) => {
 
     HANDLE_CART: "HANDLE_CART",
     CLOSE_CART: "CLOSE_CART",
+
+    HANDLE_SEARCH: "HANDLE_SEARCH",
+    CLOSE_SEARCH: "CLOSE_SEARCH",
   }
 
   const initialState = {
     loginIsOpen: false,
     menuIsOpen: false,
-    cartIsOpen: false
+    cartIsOpen: false,
+    searchIsOpen: false
   }
 
   const UiReducer = (state, action) => {
@@ -46,6 +50,12 @@ export const UIProvider = ({ children }) => {
       case UI_ACTIONS.CLOSE_CART:
         return { ...state, cartIsOpen: state.cartIsOpen ? false : '' };
 
+      case UI_ACTIONS.HANDLE_SEARCH:
+        return { ...state, searchIsOpen: !state.searchIsOpen };
+
+      case UI_ACTIONS.CLOSE_SEARCH:
+        return { ...state, searchIsOpen: state.searchIsOpen ? false : '' };
+
       default:
         break;
     }
@@ -55,6 +65,18 @@ export const UIProvider = ({ children }) => {
   const handleUi = () => {
     return { state, dispatch };
   }
+
+/*     const clickOutsideHandler = event => {
+    if (menuRef.current) {
+      if (
+        menuRef.current.contains(event.target) ||
+        activatorRef.current.contains(event.target)
+      ) {
+        return;
+      }
+      //setIsNavShow(false);
+    }
+  }; */
 
   const data = {
     UI_ACTIONS,

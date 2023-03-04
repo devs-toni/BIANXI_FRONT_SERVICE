@@ -3,6 +3,7 @@ import { useLanguage } from '../context/GlobalContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Footer, Cart } from './index';
 import Login from './Login/Login';
+import Search from './Search';
 
 const Layout = () => {
 
@@ -31,6 +32,7 @@ const Layout = () => {
     <>
       <Navbar items={items} />
       <Login />
+      <Search />
       <Cart />
       <MyRouter />
       <Footer />

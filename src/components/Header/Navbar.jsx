@@ -1,4 +1,4 @@
-import React, { memo, useRef, useEffect } from 'react'
+import React, { memo, useRef } from 'react'
 import { Logo, Navigator, Icon } from '../index';
 import { faCartShopping, faBars, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/images/logo.png';
@@ -18,28 +18,47 @@ const Navbar = memo(({ items }) => {
   const menuRef = useRef(null);
   const activatorRef = useRef(null);
 
-
-  const clickOutsideHandler = event => {
-    if (menuRef.current) {
-      if (
-        menuRef.current.contains(event.target) ||
-        activatorRef.current.contains(event.target)
-      ) {
-        return;
-      }
-      //setIsNavShow(false);
-    }
-  };
-
   const showStyles = ui_state.menuIsOpen ? 'active' : '';
   const hideStyles = ui_state.menuIsOpen ? 'hide' : '';
+
+  const handleClickLogin = () => {
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+  }
+
+  const handleClickMenu = () => {
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+  }
+
+  const handleClickSearch = () => {
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+  }
+
+  const handleClickCart = () => {
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+  }
+
+  const handleClickDropdown = () => {
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_CART })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+  }
 
   return (
     <div className='navbar'>
       <div>
         <Logo
           containerClass='navbar__container-logo'
-          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) }}
+          closeMenu={handleClickDropdown}
           logo={logo}
         />
       </div>
@@ -48,8 +67,7 @@ const Navbar = memo(({ items }) => {
           containerClass={`${showStyles} navbar__options--nav`}
           innerRef={menuRef}
           items={items}
-          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-          }}
+          closeMenu={handleClickDropdown}
         />
         <div className="navbar__options--icons">
           <Icon
@@ -58,10 +76,7 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='user'
             icon={faUser}
-            handler={() => {
-              ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN })
-              ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-            }}
+            handler={handleClickLogin}
           />
           <Icon
             isMenu={false}
@@ -69,11 +84,7 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='cart'
             icon={faCartShopping}
-            handler={() => {
-              ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })
-              ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-              ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-            }}
+            handler={handleClickCart}
           />
           <Icon
             isMenu={false}
@@ -81,11 +92,7 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='search'
             icon={faMagnifyingGlass}
-            handler={() => {
-               ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH }) 
-               ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) 
-               ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) 
-               }}
+            handler={handleClickSearch}
             innerRef={activatorRef}
           />
           <Icon
@@ -94,10 +101,7 @@ const Navbar = memo(({ items }) => {
             containerClass='navbar__options--icons'
             btnClass='hamburguer'
             icon={faBars}
-            handler={() => {
-               ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU }) 
-               ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) 
-               }}
+            handler={handleClickMenu}
             innerRef={activatorRef}
           />
           <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(), 2)} €</p>

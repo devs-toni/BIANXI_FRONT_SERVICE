@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useUI } from "../../context/UIContext";
 
 const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
+
+  const { UI_ACTIONS, handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
 
   const activatorRef = useRef(null);
   const dropdownListRef = useRef(null);
@@ -13,7 +17,7 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
     setIsOpen(!isOpen);
   };
 
-  const close = () => {
+  const handleClick = () => {
     setIsOpen(false);
     closeMenu();
   }
@@ -79,7 +83,7 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
         {items.map((item, index) => {
           return (
             <li className='item_list' key={index}>
-              <Link to={item.ref} onClick={close}>{item.text}</Link>
+              <Link to={item.ref} onClick={handleClick}>{item.text}</Link>
             </li>
           );
         })}
