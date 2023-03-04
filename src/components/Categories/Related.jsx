@@ -20,7 +20,7 @@ const Related = ({ type, price }) => {
         setRelatedProducts(getProductRelateds(data, price))
       })
       .catch(error => console.error(error));
-  }, []);
+  }, [type, price]);
 
   return (
     <>
@@ -30,7 +30,7 @@ const Related = ({ type, price }) => {
           (
             <div className="related">
               <h3 className="related__title">{text.view.relatedTitle}</h3>
-              <div className="related__products">
+              <div className="relate-products">
                 {
                   relatedProducts.length > 0
                     ?
@@ -39,7 +39,8 @@ const Related = ({ type, price }) => {
                         key={index}
                         product={product}
                         isSearch={false}
-                        containerClass="related_products"
+                        isRelated={true}
+                        containerClass="relate-products"
                         boxClass="relate-product-box"
                       />
                     })
@@ -60,7 +61,7 @@ const Related = ({ type, price }) => {
 
 Related.propTypes = {
   type: PropTypes.string.isRequired,
-  price: PropTypes.string.isRequired
+  price: PropTypes.number.isRequired
 }
 
 export default Related;

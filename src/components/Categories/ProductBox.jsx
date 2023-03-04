@@ -2,11 +2,26 @@ import React from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import PropTypes from 'prop-types';
 import Badge from './Badge';
+import { useNavigate } from 'react-router-dom';
 
-const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty, isSearch }) => {
+const ProductBox = ({ 
+  name, 
+  finalPrice, 
+  initPrice, 
+  image, 
+  loaded, 
+  setLoaded, 
+  containerClass, 
+  offer, 
+  isCart, 
+  isRelated, 
+  isEmpty, 
+  isSearch,
+  type,
+  id }) => {
 
   const { text } = useLanguage();
-
+  const navigate = useNavigate();
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
@@ -20,13 +35,19 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
 
   return (
     <div className={containerClass}>
-      <img className={`${containerClass}__image ${emptyStyles} ${loadedStyles}`} src={image} onLoad={() => setLoaded(true)} alt={name} />
+      <img
+        className={`${containerClass}__image ${emptyStyles} ${loadedStyles} ${isRelated && 'point'}`}
+        src={image}
+        onLoad={() => setLoaded(true)}
+        alt={name}
+        onClick={() => isRelated && navigate(`/product/options/${type}/${id}`)}
+      />
       {setName}
       <div className={`${containerClass}__price-container`}>
         {setNameCart}
 
         {
-          !isSearch
+          (!isSearch)
             ?
             <>
               <p className={`${containerClass}__price-container--price ${offerStyles}`}>
@@ -41,8 +62,11 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
         }
 
       </div>
+      {console.log(isRelated)}
+      {console.log(isSearch)}
+      {console.log(isEmpty)}
       {
-        (isEmpty && !isSearch)
+        (isEmpty && !isSearch && !isRelated)
         &&
         <Badge
           containerClass="empty-product"
@@ -63,6 +87,9 @@ ProductBox.propTypes = {
   containerClass: PropTypes.string.isRequired,
   offer: PropTypes.number,
   isCart: PropTypes.bool.isRequired,
+  isRelated: PropTypes.bool,
   isEmpty: PropTypes.bool,
+  type: PropTypes.string,
+  id: PropTypes.number,
 }
 export default ProductBox;

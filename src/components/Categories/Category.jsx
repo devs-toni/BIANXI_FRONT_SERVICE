@@ -48,6 +48,7 @@ const Category = () => {
                         key={index}
                         product={product}
                         isSearch={type ? false : true}
+                        isRelated={false}
                         containerClass={containerClass}
                         boxClass={boxClass}
                       />

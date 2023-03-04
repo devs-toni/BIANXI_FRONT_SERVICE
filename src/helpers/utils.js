@@ -145,11 +145,13 @@ export const getProductRelateds = (products, price) => {
   const responseArray = [];
 
   downArray.forEach((p, ind) => {
-    if (ind < 5) {
-      if (ind % 2 === 0) responseArray.push(downArray[ind > 0 ? ind - 2 : ind]);
-      else responseArray.push(upArraySorted[ind > 0 ? ind - 1 : ind - 2]);
+    if (responseArray.length < 4) {
+      if (ind % 2 === 0) {
+        if (downArray[ind]) responseArray.push(downArray[ind]);
+      } else
+        if (upArraySorted[ind]) responseArray.push(upArraySorted[ind]);
     }
-  })
-
+  });
+  console.log(responseArray);
   return responseArray;
 } 

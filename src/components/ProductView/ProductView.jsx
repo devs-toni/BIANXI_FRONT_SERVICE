@@ -22,6 +22,7 @@ const ProductView = () => {
         setImage(require(`../../assets/images/${type}/${data.name}-0.png`));
         product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: { product: data } })
       });
+    window.scrollTo(0, 0);
   }, [id]);
 
   return (
@@ -40,13 +41,13 @@ const ProductView = () => {
                 setActivator={setColorActivatorImage}
               />
             </div>
-            <Details 
-            description={product_state.product.description} 
-            features={product_state.product.datasheet} 
+            <Details
+              description={product_state.product.description}
+              features={product_state.product.datasheet}
             />
-            <Related 
-            type={type} 
-            price={product_state.product.price}
+            <Related
+              type={type}
+              price={product_state.product.price}
             />
           </>
           :
