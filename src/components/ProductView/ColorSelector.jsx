@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import { setProductConfigurations } from '../../helpers/utils';
@@ -8,15 +8,14 @@ const ColorSelector = ({ product, setActivator }) => {
 
   const { text } = useLanguage();
 
-  const { vars } = useProduct();
-  const { color, setColor } = vars;
+  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
+  const { state: product_state, dispatch: product_dispatch } = configureProduct();
 
-  const [colors, setColors] = useState([]);
-
+   const [colors, setColors] = useState([]); 
 
   const handleColor = ({ target }, index) => {
     const { value } = target;
-    setColor(value);
+    product_dispatch({ type: PRODUCT_ACTIONS.SET_COLOR, payload: { color: value } });
     setActivator(index);
   }
 
@@ -30,7 +29,7 @@ const ColorSelector = ({ product, setActivator }) => {
 
   }, [product])
 
-  const isActive = (id) => (color == id) ? "active" : "";
+  const isActive = (id) => (product_state.color == id) ? "active" : "";
 
   return (
     <div className="info__color">

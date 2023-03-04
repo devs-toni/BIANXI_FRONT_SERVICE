@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import PropTypes from 'prop-types';
 
 const Details = ({ description, features }) => {

@@ -12,27 +12,10 @@ export const UserProvider = ({ children }) => {
   const [token, setToken] = useState('');
   const [loginStatus, setLoginStatus] = useState(false)
 
-
-  const [isActive, setIsActive] = useState(false);
-
-  const handleLogin = (e) => {
-    setIsActive(!isActive);
-  }
-
-  const handleClose = (e) => {
-    isActive && setIsActive(false);
-  }
-
   const data = {
     vars: {
       loginStatus,
       setLoginStatus
-    },
-    modal: {
-      isActive,
-      setIsActive,
-      handleLogin,
-      handleClose
     }
 
   }

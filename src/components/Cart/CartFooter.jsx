@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 

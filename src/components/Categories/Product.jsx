@@ -3,7 +3,7 @@ import { setProductPrice, isEmptyMethod } from '../../helpers/utils';
 import { Badge, Loader, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 
 
 const Product = ({ product, total = 1 }) => {

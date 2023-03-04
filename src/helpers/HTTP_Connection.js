@@ -18,8 +18,7 @@ export const Connection = () => {
         if (!options.body) delete options.body;
 
         setTimeout(() => controller.abort(), 2000);
-        console.log(endpoint)
-        console.log(options)
+
         return fetch(endpoint, options)
             .then((res) => res.ok ? res.json() : Promise.reject({
                     err: true,

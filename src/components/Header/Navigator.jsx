@@ -1,16 +1,17 @@
 import React from 'react'
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { Dropdown } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types'
-import { useUser } from '../../context/UserContext';
+import { useUI } from '../../context/UIContext';
 
 const Navigator = ({ containerClass, items, innerRef, closeMenu }) => {
 
   const { text } = useLanguage();
-  const { modal } = useUser();
-  const { handleLogin } = modal;
+
+  const { UI_ACTIONS, handleUi } = useUI();
+  const { dispatch: ui_dispatch } = handleUi();
 
   return (
     <nav className={containerClass} ref={innerRef}>
@@ -22,7 +23,7 @@ const Navigator = ({ containerClass, items, innerRef, closeMenu }) => {
       <FontAwesomeIcon
         className='navbar__nav--user'
         icon={faUser}
-        onClick={handleLogin}
+        onClick={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_LOGIN})}}
       />
     </nav>
   )

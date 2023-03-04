@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const Handler = ({ add, remove, product, conf, removeConfig }) => {

@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useNavigate } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
 import { Connection } from '../../helpers/HTTP_Connection';
 import { usersUrl } from '../../config';
+import { useUI } from '../../context/UIContext';
 
 export const Login = () => {
 
   const { text } = useLanguage();
-  const { modal } = useUser();
-  const navigate = useNavigate();
 
-  const { isActive, handleClose } = modal;
+  const navigate = useNavigate();
 
   const [formUser, setFormUser] = useState({
     email: '',
     password: ''
   });
+
+  const { UI_ACTIONS, handleUi } = useUI();
+  const {state: ui_state, dispatch: ui_dispatch} = handleUi();
 
   const handleInput = ({ target }) => {
     const { name, value } = target;
@@ -36,7 +37,7 @@ export const Login = () => {
     navigate("/login");
   }
 
-  const isActiveStyles = isActive ? 'active' : '';
+  const isActiveStyles = ui_state.loginIsOpen ? 'active' : '';
 
   return (
 
@@ -45,7 +46,7 @@ export const Login = () => {
       <FontAwesomeIcon
         icon={faXmark}
         className="login__close"
-        onClick={handleClose}
+        onClick={() => {ui_dispatch({type: UI_ACTIONS.CLOSE_LOGIN})}}
       />
       <form onSubmit={handleSubmit} className="login__form">
         <input

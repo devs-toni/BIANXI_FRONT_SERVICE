@@ -1,53 +1,49 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
-import LanguageContext, { useLanguage } from '../../context/LanguageContext';
+import React, { useEffect, useRef, useState } from 'react'
+import { useLanguage } from '../../context/GlobalContext';
 import { useCart } from '../../context/CartContext';
 import { useProduct } from '../../context/ProductContext';
-import { SizeSelector, ColorSelector, CartHandler, Loader } from '../index';
+import { SizeSelector, ColorSelector, Loader } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import CartSelector from './CartSelector';
-import { useGlobal } from '../../context/GlobalContext';
 
 
 const Info = ({ total = 1, setActivator }) => {
 
   const { text } = useLanguage();
 
-  const { products } = useGlobal();
-  const { products: allProducts, setProducts } = products;
-
   const { vars } = useCart();
   const { totalProducts } = vars;
 
-  const { vars: productVars } = useProduct();
-  const { isEmptyProduct, isEmptyConfig, current: product, updatedPrices, currentConfig, setSize, size } = productVars;
-  const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
-  const [loaded, setLoaded] = useState(updatedPrices ? true : false);
+  const { configureProduct } = useProduct();
+  const { state: product_state } = configureProduct();
+  const { name, sentence } = product_state.product;
+
 
   const { funcs } = useCart();
   const { handleAddSpecificNumberProduct } = funcs;
 
-  const [tempNumber, setTempNumber] = useState(0);
+  const [tempStock, setTempStock] = useState(0);
+  const [loaded, setLoaded] = useState(product_state.updatedPrices ? true : false);
 
   const totalRef = useRef();
 
   const handleCartAddition = () => {
     const { current } = totalRef;
-    handleAddSpecificNumberProduct({ ...product, ...updatedPrices }, current.value);
+    handleAddSpecificNumberProduct({ ...product_state.product, ...product_state.updatedPrices }, current.value);
   }
 
-  const emptyStyles = (isEmptyProduct || isEmptyConfig) ? 'empty' : '';
-  const emptyStylesText = ((isEmptyProduct || isEmptyConfig) && size) ? 'empty' : '';
+  const emptyStyles = (product_state.config?.stock === 0 || !product_state.config) ? 'empty' : '';
+  const emptyStylesText = ((product_state.config?.stock === 0 || !product_state.config) && product_state.size) ? 'empty' : '';
 
 
   useEffect(() => {
-    setTempNumber(0);
-    setSize('');
+    setTempStock(0);
   }, [totalProducts]);
 
   useEffect(() => {
     setLoaded(true);
-  }, [updatedPrices])
+  }, [product_state.updatedPrices])
 
 
 
@@ -60,17 +56,17 @@ const Info = ({ total = 1, setActivator }) => {
             <div className="info__main">
               <p className="info__main--name">{name}</p>
               <p className="info__main--short">{sentence}</p>
-              <p className="info__main--price">{updatedPrices.final} €</p>
+              <p className="info__main--price">{product_state.updatedPrices.final} €</p>
             </div>
-            <SizeSelector product={product} />
-            <ColorSelector product={product} setActivator={setActivator} />
+            <SizeSelector product={product_state.product} />
+            <ColorSelector product={product_state.product} setActivator={setActivator} />
             <p className={`${emptyStylesText} info__empty`}>{text.view.empty}</p>
             <div className="info__buy">
               <CartSelector
                 containerClass='cart-buttons'
                 innerRef={totalRef}
-                val={tempNumber}
-                setVal={setTempNumber}
+                val={tempStock}
+                setVal={setTempStock}
               />
               <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
               <FontAwesomeIcon icon={faHeart} />

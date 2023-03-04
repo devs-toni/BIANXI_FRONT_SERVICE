@@ -2,46 +2,49 @@ import { faXmark, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useState } from 'react'
 import { useCart } from '../../context/CartContext';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { CartConfigHandler, ProductBox, CartFooter } from '../index';
 
 import { calcTotalPrice } from '../../helpers/utils';
 import uuid from 'react-uuid';
+import { useUI } from '../../context/UIContext';
 
 const Cart = () => {
 
   const { text } = useLanguage();
 
-  const { vars, modal, funcs } = useCart();
+  const { vars, funcs } = useCart();
   const { totalProducts } = vars;
-  const { isOpen, handleCart } = modal;
   const { removeProduct } = funcs;
+
+
+  const { UI_ACTIONS, handleUi } = useUI();
+  const {state: ui_state, dispatch: ui_dispatch} = handleUi();
 
 
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className={`cart ${isOpen ? 'active' : ''}`}>
-      <div className={`cart-menu ${isOpen ? 'active' : ''}`} >
+    <div className={`cart ${ui_state.cartIsOpen ? 'active' : ''}`}>
+      <div className={`cart-menu ${ui_state.cartIsOpen ? 'active' : ''}`} >
         <div className='cart-menu__header'>
-          <FontAwesomeIcon icon={faXmark} onClick={handleCart} className='cart-menu__header--close' />
+          <FontAwesomeIcon icon={faXmark} onClick={() => {ui_dispatch({ type: UI_ACTIONS.HANDLE_CART})}} className='cart-menu__header--close' />
           <div className='cart-menu__header--content'>
             <FontAwesomeIcon className='cart-menu__header--content-icon' icon={faCartShopping} />
             <h1 className='cart-menu__header--content-title'>Cart</h1>
           </div>
         </div>
         <div className='cart-menu__content'>
-          {console.log()}
           {
             totalProducts?.length > 0
               ?
               totalProducts.map(({ id, name, final, type, offer, price, total, config }) => {
                 return (
                   <div className='cart-menu__content--product' key={uuid()}>
-                    <FontAwesomeIcon 
-                    icon={faXmark} 
-                    className='cart-menu__content--product-close'
-                    onClick={() => removeProduct(id)} />
+                    <FontAwesomeIcon
+                      icon={faXmark}
+                      className='cart-menu__content--product-close'
+                      onClick={() => removeProduct(id)} />
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
                         name={name}

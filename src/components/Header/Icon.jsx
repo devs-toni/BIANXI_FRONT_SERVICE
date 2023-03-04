@@ -2,13 +2,16 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
+import { useUI } from '../../context/UIContext';
 
 const Icon = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, innerRef }) => {
 
-  const { modal, vars } = useCart();
-  const { handleCart } = modal;
+  const { vars } = useCart();
   const { totalProducts } = vars;
 
+  const { UI_ACTIONS, handleUi } = useUI();
+  const { dispatch: ui_dispatch } = handleUi();
+  
   const hasItems = (totalProducts.length > 0) ? true : false;
   const hasItemsStyles = hasItems ? 'active' : '';
 
@@ -18,7 +21,7 @@ const Icon = ({ containerClass, icon, isCart, iconClose, isNavShow, handleMenu, 
         isCart
           ?
           (
-            <button className={`${containerClass}--cart`} onClick={handleCart} >
+            <button className={`${containerClass}--cart`} onClick={() => {ui_dispatch({type: UI_ACTIONS.HANDLE_CART})}} >
               <FontAwesomeIcon icon={icon} />
               <span className={hasItemsStyles}>{hasItems && totalProducts.length}</span>
             </button>
@@ -43,7 +46,6 @@ Icon.propTypes = {
   icon: PropTypes.object.isRequired,
   iconClose: PropTypes.object,
   isCart: PropTypes.bool.isRequired,
-  isNavShow: PropTypes.bool,
   handleMenu: PropTypes.func,
   innerRef: PropTypes.object
 }

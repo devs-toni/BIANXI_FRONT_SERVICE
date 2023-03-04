@@ -1,21 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import { setProductConfigurations } from '../../helpers/utils';
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 
 const SizeSelector = ({ product }) => {
 
   const { text } = useLanguage();
-  
-  const { vars } = useProduct();
-  const { size, setSize } = vars;
+
+  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
+  const { state: product_state, dispatch: product_dispatch } = configureProduct();
 
   const [sizes, setSizes] = useState([]);
 
   const handleSize = ({ target }) => {
     const { value } = target;
-    setSize(value);
+    product_dispatch({ type: PRODUCT_ACTIONS.SET_SIZE, payload: value });
   }
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const SizeSelector = ({ product }) => {
   return (
     <div className="info__size">
       <p className="info__size--title">{text.view.size}</p>
-      <select className="info__size--option" onChange={handleSize} value={size}>
+      <select className="info__size--option" onChange={handleSize} value={product_state.size}>
         {
           sizes && sizes.sort((a, b) => a > b ? 1 : -1).map((size, index) => {
             return (

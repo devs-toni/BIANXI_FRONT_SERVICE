@@ -32,7 +32,7 @@ export const calcTotalPrice = (total, price) => {
 
 export const isEmptyMethod = (configurations) => {
   let sumStock = 0;
-  configurations.forEach(({ stock }) => {
+  configurations?.forEach(({ stock }) => {
     sumStock += stock;
   })
   return !sumStock ? true : false;

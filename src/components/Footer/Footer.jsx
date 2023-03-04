@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLanguage } from '../../context/LanguageContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope } from '@fortawesome/free-regular-svg-icons'

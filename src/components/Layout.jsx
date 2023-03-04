@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import { useLanguage } from '../context/GlobalContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Footer, Cart } from './index';
 import Login from './Login/Login';

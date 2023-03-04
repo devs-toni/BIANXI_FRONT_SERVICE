@@ -7,7 +7,7 @@ import {
   updateConfigurationStock,
   removeConfigInProduct
 } from "../helpers/utils";
-import { useUser } from "./UserContext";
+import { useUI } from "./UIContext";
 
 const CartContext = createContext();
 const items = JSON.parse(localStorage.getItem('cart'));
@@ -22,8 +22,11 @@ export const CartProvider = ({ children }) => {
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
 
-  const { vars } = useProduct();
-  const { currentConfig } = vars;
+  const { UI_ACTIONS, handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+
+  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
+  const { state: product_state } = configureProduct();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));
@@ -92,16 +95,11 @@ export const CartProvider = ({ children }) => {
     return (total * 21) / 100;
   }
 
-  /*   const deleteAllProductRepeats = (id) => {
-      totalProducts.map(p => p.id === id && (p.total = 1));
-      setTotalProducts(totalProducts.filter(p => p.id !== id));
-    } */
-
   const handleAddSpecificNumberProduct = (item, numberProductsAdded) => {
     const { id: idItem } = item;
-    const { id: idConfig } = currentConfig;
+    const { id: idConfig } = product_state.config;
     numberProductsAdded = parseInt(numberProductsAdded);
-    const tempConfigurations = [{ ...currentConfig }];
+    const tempConfigurations = [{ ...product_state.config }];
     // Searching product in cart
     const indexProduct = getIndexProduct(item.id);
     if (indexProduct !== -1) {
@@ -114,7 +112,7 @@ export const CartProvider = ({ children }) => {
         updateConfigurationStock(updatedProducts, idItem, idConfig, numberProductsAdded);
       } else {
         // Add new configuration
-        addConfigurationToProduct(currentConfig, numberProductsAdded, updatedProducts, item);
+        addConfigurationToProduct(product_state.config, numberProductsAdded, updatedProducts, item);
       }
       setTotalProducts(updatedProducts);
     } else {
@@ -123,34 +121,10 @@ export const CartProvider = ({ children }) => {
       setTotalProducts([preparedItem, ...totalProducts]);
     }
 
-    setIsOpen(true);
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
   }
 
   //////////////////////////////////////////////////////////////////////// VISUAL
-
-  const [isOpen, setIsOpen] = useState(false);
-  const { modal } = useUser();
-  const { handleClose: closeLogin } = modal;
-
-  useEffect(() => {
-    if (isOpen) {
-      document.getElementById('root').style.overflow = 'hidden';
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.getElementById('root').style.overflow = 'auto';
-      document.body.style.overflow = 'auto';
-    }
-  }, [isOpen]);
-
-  const handleCart = (e) => {
-    setIsOpen(!isOpen);
-    closeLogin();
-  }
-
-  const closeCart = (e) => {
-    isOpen && setIsOpen(false);
-  }
-
 
   const data = {
     vars: {
@@ -170,12 +144,6 @@ export const CartProvider = ({ children }) => {
       getTotalPriceCart,
       getIVAPriceCart,
       getProduct
-    },
-    modal: {
-      isOpen,
-      setIsOpen,
-      handleCart,
-      closeCart,
     }
   }
 

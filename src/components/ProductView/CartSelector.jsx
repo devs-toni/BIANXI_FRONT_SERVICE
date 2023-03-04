@@ -11,35 +11,34 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
   const { vars: cartVars } = useCart();
   const { totalProducts } = cartVars;
 
-  const { vars: productVars } = useProduct();
-  const { current: product, color: selectedColor, size: selectedSize, setIsEmptyConfig, currentConfig, setCurrentConfig } = productVars;
+  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
+  const { state: product_state, dispatch: product_dispatch } = configureProduct();
 
   const [tempStock, setTempStock] = useState(0);
 
   useEffect(() => {
     const getConfigurationStock = () => {
-      const allProductConfigurations = getCartProductConfigurations(totalProducts, product.id);
-      const configMatch = getMatchConfiguration(allProductConfigurations, selectedSize, selectedColor);
+      const allProductConfigurations = getCartProductConfigurations(totalProducts, product_state.product.id);
+      const configMatch = getMatchConfiguration(allProductConfigurations, product_state.size, product_state.color);
       // If this product is already in cart the stock will be diferent
       if (configMatch) {
-        setCurrentConfig(configMatch);
+        product_dispatch({ type: PRODUCT_ACTIONS.SET_CONFIG, payload: configMatch ? configMatch : null });
         return configMatch?.stock;
         // Else the product stock is the initial stock got in backend
       } else {
-        const { configuration } = product;
-        const configMatch = getMatchConfiguration(configuration, selectedSize, selectedColor);
-        setCurrentConfig(configMatch ? configMatch : null);
+        const { configuration } = product_state.product;
+        const configMatch = getMatchConfiguration(configuration, product_state.size, product_state.color);
+        product_dispatch({ type: PRODUCT_ACTIONS.SET_CONFIG, payload: configMatch ? configMatch : null });
         return configMatch?.stock;
       }
     };
 
-    if (product) {
+    if (product_state.product) {
       const stock = getConfigurationStock();
-      setIsEmptyConfig(stock ? false : true);
       setTempStock(stock ? stock : 0);
       setVal(0);
     }
-  }, [selectedColor, selectedSize, totalProducts, product])
+  }, [product_state.color, product_state.size, totalProducts, product_state.product])
 
 
   const addCount = () => {
@@ -52,7 +51,7 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
       setVal(prevState => prevState - 1);
   }
 
-  const emptyConfigurationStyles = (currentConfig?.stock === 0 || !currentConfig) ? 'empty' : '';
+  const emptyConfigurationStyles = (product_state.config?.stock === 0 || !product_state.config) ? 'empty' : '';
 
   return (
     <div className={`${containerClass}__cart`}>

@@ -92,6 +92,6 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
 Dropdown.propTypes = {
   items: PropTypes.array.isRequired,
   dropdownTitle: PropTypes.string.isRequired,
-  closeMenu: PropTypes.string.isRequired
+  closeMenu: PropTypes.func.isRequired
 }
 export default Dropdown;
