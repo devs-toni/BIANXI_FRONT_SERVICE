@@ -46,7 +46,8 @@
       "detailInfo": "Descripción",
       "detailMore": "Información Adicional",
       "warning": "*La fotografía puede no coincidir con el montaje ofertado.",
-      "select": "Elige una opción"
+      "select": "Elige una opción",
+      "relatedTitle": "Productos Relacionados"
     },
     "footer": {
       "contact": {

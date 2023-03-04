@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
-import { Details, Images, Info, Loader } from '../index';
+import { Category, Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
 import { productsUrl } from '../../config.js';
 import { Connection } from '../../helpers/HTTP_Connection';
@@ -35,6 +35,7 @@ const ProductView = () => {
               <Info setActivator={setColorActivatorImage} />
             </div>
             <Details description={product_state.product.description} features={product_state.product.datasheet} />
+            <Related />
           </>
           :
           <Loader />
