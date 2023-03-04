@@ -152,6 +152,5 @@ export const getProductRelateds = (products, price) => {
         if (upArraySorted[ind]) responseArray.push(upArraySorted[ind]);
     }
   });
-  console.log(responseArray);
   return responseArray;
 } 

@@ -19,6 +19,7 @@ export const UserProvider = ({ children }) => {
   const USER_ACTIONS = {
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGIN_ERROR: "LOGIN_ERROR",
+    HANDLE_LIKE: "HANDLE_LIKE",
     LOGOUT: "LOGOUT",
   }
 

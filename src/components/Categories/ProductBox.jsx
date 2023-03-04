@@ -62,9 +62,6 @@ const ProductBox = ({
         }
 
       </div>
-      {console.log(isRelated)}
-      {console.log(isSearch)}
-      {console.log(isEmpty)}
       {
         (isEmpty && !isSearch && !isRelated)
         &&

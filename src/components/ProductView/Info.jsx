@@ -6,9 +6,10 @@ import { SizeSelector, ColorSelector, Loader } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import CartSelector from './CartSelector';
+import { useUser } from '../../context/UserContext';
 
 
-const Info = ({ total = 1, setActivator }) => {
+const Info = ({ total = 1, setActivator, isLike, handleLike }) => {
 
   const { text } = useLanguage();
 
@@ -17,6 +18,9 @@ const Info = ({ total = 1, setActivator }) => {
 
   const { configureProduct } = useProduct();
   const { state: product_state } = configureProduct();
+
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
   const { name, sentence } = product_state.product;
 
 
@@ -69,7 +73,11 @@ const Info = ({ total = 1, setActivator }) => {
                 setVal={setTempStock}
               />
               <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
-              <FontAwesomeIcon icon={faHeart} />
+              {
+                user_state.logged
+                &&
+                <FontAwesomeIcon icon={faHeart} onClick={handleLike} className={isLike ? 'like' : ''} />
+              }
             </div>
             <div className="info__share">
               <p className="info__share--title">{text.view.share}</p>

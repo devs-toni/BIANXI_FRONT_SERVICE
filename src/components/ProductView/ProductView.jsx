@@ -39,6 +39,8 @@ const ProductView = () => {
               />
               <Info
                 setActivator={setColorActivatorImage}
+                handleLike={() => { product_dispatch({ type: PRODUCT_ACTIONS.HANDLE_LIKE }) }}
+                isLike={product_state.like}
               />
             </div>
             <Details

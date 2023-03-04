@@ -15,7 +15,8 @@ export const ProductProvider = ({ children }) => {
     SET_SIZE: "SET_SIZE",
     SET_PRICES: "SET_PRICES",
     SET_EMPTY_PRODUCT: "SET_EMPTY_PRODUCT",
-    SET_CONFIG: "SET_CONFIG"
+    SET_CONFIG: "SET_CONFIG",
+    HANDLE_LIKE: "HANDLE_LIKE"
   }
 
   const init = {
@@ -25,6 +26,7 @@ export const ProductProvider = ({ children }) => {
     size: '',
     updatedPrices: '',
     empty: false,
+    like: false
   }
 
   const reducer = (state, action) => {
@@ -42,6 +44,9 @@ export const ProductProvider = ({ children }) => {
         return { ...state, empty: true };
       case PRODUCT_ACTIONS.SET_CONFIG:
         return { ...state, config: action.payload };
+      case PRODUCT_ACTIONS.HANDLE_LIKE:
+        return { ...state, like: !state.like }
+
       default:
         break;
     }
