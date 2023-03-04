@@ -48,7 +48,8 @@ const Navbar = memo(({ items }) => {
           containerClass={`${showStyles} navbar__options--nav`}
           innerRef={menuRef}
           items={items}
-          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) }}
+          closeMenu={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+          }}
         />
         <div className="navbar__options--icons">
           <Icon
@@ -57,7 +58,10 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='user'
             icon={faUser}
-            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN }) }}
+            handler={() => {
+              ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN })
+              ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+            }}
           />
           <Icon
             isMenu={false}
@@ -65,7 +69,11 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='cart'
             icon={faCartShopping}
-            handler={() => ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })}
+            handler={() => {
+              ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })
+              ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+              ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+            }}
           />
           <Icon
             isMenu={false}
@@ -73,7 +81,11 @@ const Navbar = memo(({ items }) => {
             containerClass={`${hideStyles} navbar__options--icons`}
             btnClass='search'
             icon={faMagnifyingGlass}
-            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH }) }}
+            handler={() => {
+               ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH }) 
+               ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) 
+               ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU }) 
+               }}
             innerRef={activatorRef}
           />
           <Icon
@@ -82,7 +94,10 @@ const Navbar = memo(({ items }) => {
             containerClass='navbar__options--icons'
             btnClass='hamburguer'
             icon={faBars}
-            handler={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU }) }}
+            handler={() => {
+               ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU }) 
+               ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) 
+               }}
             innerRef={activatorRef}
           />
           <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(), 2)} €</p>
