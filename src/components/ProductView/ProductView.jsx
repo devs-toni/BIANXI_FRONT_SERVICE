@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
-import { Category, Details, Images, Info, Loader, Related } from '../index';
+import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
 import { productsUrl } from '../../config.js';
 import { Connection } from '../../helpers/HTTP_Connection';
@@ -31,11 +31,23 @@ const ProductView = () => {
           ?
           <>
             <div className="view">
-              <Images img={image} name={product_state.product.name} activator={colorActivatorImage} />
-              <Info setActivator={setColorActivatorImage} />
+              <Images
+                img={image}
+                name={product_state.product.name}
+                activator={colorActivatorImage}
+              />
+              <Info
+                setActivator={setColorActivatorImage}
+              />
             </div>
-            <Details description={product_state.product.description} features={product_state.product.datasheet} />
-            <Related />
+            <Details
+              description={product_state.product.description}
+              features={product_state.product.datasheet}
+            />
+            <Related
+              type={type}
+              price={product_state.product.price}
+            />
           </>
           :
           <Loader />

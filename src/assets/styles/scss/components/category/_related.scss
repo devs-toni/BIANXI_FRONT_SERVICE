@@ -1,0 +1,17 @@
+@use '../../abstracts/variables' as var;
+
+.related {
+  width: 60%;
+  margin: 0 auto;
+
+  &__title {
+    font-size: 3.5em;
+    font-weight: lighter;
+  }
+
+  &__products {}
+
+
+}
+
+.relate-product-box {}
