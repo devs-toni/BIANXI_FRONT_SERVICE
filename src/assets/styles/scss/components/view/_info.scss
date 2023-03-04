@@ -198,6 +198,7 @@
       &.empty {
         opacity: 0.4;
         cursor: no-drop;
+        pointer-events: none;
       }
 
       @media screen and (max-width: 550px) {

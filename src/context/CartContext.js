@@ -96,32 +96,35 @@ export const CartProvider = ({ children }) => {
   }
 
   const handleAddSpecificNumberProduct = (item, numberProductsAdded) => {
-    const { id: idItem } = item;
-    const { id: idConfig } = product_state.config;
-    numberProductsAdded = parseInt(numberProductsAdded);
-    const tempConfigurations = [{ ...product_state.config }];
-    // Searching product in cart
-    const indexProduct = getIndexProduct(item.id);
-    if (indexProduct !== -1) {
-      // Update general total
-      const updatedProducts = updateProductTotal(totalProducts, idItem, numberProductsAdded)
-      // Searching configuration in product
-      const indexConfig = getIndexConfig(idConfig, indexProduct);
-      if (indexConfig !== -1) {
-        // Update previous configuration
-        updateConfigurationStock(updatedProducts, idItem, idConfig, numberProductsAdded);
-      } else {
-        // Add new configuration
-        addConfigurationToProduct(product_state.config, numberProductsAdded, updatedProducts, item);
-      }
-      setTotalProducts(updatedProducts);
-    } else {
-      // Add new product to cart
-      const preparedItem = addProductToCart(item, numberProductsAdded, tempConfigurations);
-      setTotalProducts([preparedItem, ...totalProducts]);
-    }
 
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
+    if (numberProductsAdded > 0) {
+      const { id: idItem } = item;
+      const { id: idConfig } = product_state.config;
+      numberProductsAdded = parseInt(numberProductsAdded);
+      const tempConfigurations = [{ ...product_state.config }];
+      // Searching product in cart
+      const indexProduct = getIndexProduct(item.id);
+      if (indexProduct !== -1) {
+        // Update general total
+        const updatedProducts = updateProductTotal(totalProducts, idItem, numberProductsAdded)
+        // Searching configuration in product
+        const indexConfig = getIndexConfig(idConfig, indexProduct);
+        if (indexConfig !== -1) {
+          // Update previous configuration
+          updateConfigurationStock(updatedProducts, idItem, idConfig, numberProductsAdded);
+        } else {
+          // Add new configuration
+          addConfigurationToProduct(product_state.config, numberProductsAdded, updatedProducts, item);
+        }
+        setTotalProducts(updatedProducts);
+      } else {
+        // Add new product to cart
+        const preparedItem = addProductToCart(item, numberProductsAdded, tempConfigurations);
+        setTotalProducts([preparedItem, ...totalProducts]);
+      }
+
+      ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
+    }
   }
 
   //////////////////////////////////////////////////////////////////////// VISUAL
