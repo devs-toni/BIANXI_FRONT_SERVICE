@@ -1,9 +1,12 @@
 import './assets/styles/scss/index.scss';
-import { Layout } from './components/index';
+import { Layout, Footer } from './components/index';
 
 function App() {
   return (
-    <Layout />
+    <>
+      <Layout />
+      <Footer />
+    </>
   )
 }
 

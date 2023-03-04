@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 
 
-const Product = ({ product, total = 1 }) => {
+const Product = ({ product, total = 1, isSearch, containerClass, boxClass }) => {
 
   const { text } = useLanguage();
 
@@ -30,13 +30,13 @@ const Product = ({ product, total = 1 }) => {
 
   return (
 
-    <div className='products__product'>
+    <div className={`${containerClass}__product`}>
       {
         loaded
           ?
           <>
             {
-              offer > 0 &&
+              (offer > 0 && !isSearch) &&
               <Badge
                 containerClass="offer"
                 text={text.product.offer}
@@ -49,12 +49,16 @@ const Product = ({ product, total = 1 }) => {
               image={image}
               loaded={isImgLoaded}
               setLoaded={setIsImgLoaded}
-              containerClass='product-box'
+              containerClass={boxClass}
               offer={offer}
               isCart={false}
               isEmpty={isEmptyProduct}
+              isSearch={isSearch}
             />
-            < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+            {!isSearch
+              &&
+              < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+            }
           </>
           :
           <Loader />
@@ -65,6 +69,9 @@ const Product = ({ product, total = 1 }) => {
 
 Product.propTypes = {
   product: PropTypes.object.isRequired,
+  isSearch: PropTypes.bool.isRequired,
+  boxClass: PropTypes.string.isRequired,
+  containerClass: PropTypes.string.isRequired,
   total: PropTypes.number
 }
 

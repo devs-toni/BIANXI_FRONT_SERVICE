@@ -5,8 +5,9 @@
 @use './components/view/mainView';
 @use './components/footer/footer';
 @use './components/loader';
-@use './components//user/login';
-@use './components/search';
+@use './components/user/login';
+@use './components/search/search';
+@use './components/search/categorySearch';
 
 @use './abstracts/variables';
 @use './abstracts/animations';

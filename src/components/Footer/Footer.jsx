@@ -9,7 +9,7 @@ const Footer = () => {
   const { text } = useLanguage();
 
   return (
-    <>
+    <div className='footer-container'>
       <div className='footer'>
         <div className="footer__contact">
           <p className="footer__contact--title">{text.footer.contact.title.toUpperCase()}</p>
@@ -60,7 +60,7 @@ const Footer = () => {
           <p>{text.footer.privacy.politic.toUpperCase()}</p>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

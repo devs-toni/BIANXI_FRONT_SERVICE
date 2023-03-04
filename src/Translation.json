@@ -99,6 +99,9 @@
       "hi": "Hola",
       "likes": "Favoritos"
     },
+    "search": {
+      "title": "resultados encontrados para:"
+    },
     "error": {
       "ops": "Opps!",
       "notFound": "Página no encontrada",

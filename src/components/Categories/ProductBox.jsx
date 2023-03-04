@@ -3,7 +3,7 @@ import { useLanguage } from '../../context/GlobalContext';
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 
-const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty }) => {
+const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, containerClass, offer, isCart, isEmpty, isSearch }) => {
 
   const { text } = useLanguage();
 
@@ -24,13 +24,25 @@ const ProductBox = ({ name, finalPrice, initPrice, image, loaded, setLoaded, con
       {setName}
       <div className={`${containerClass}__price-container`}>
         {setNameCart}
-        <p className={`${containerClass}__price-container--price ${offerStyles}`}>
-          <span>{isCart && text.cart.price}</span>
-          {initPrice ? offerPreviousPrice : finalPrice} €</p>
-        {offerPrice}
+
+        {
+          !isSearch
+            ?
+            <>
+              <p className={`${containerClass}__price-container--price ${offerStyles}`}>
+                <span>{isCart && text.cart.price}</span>
+                {initPrice ? offerPreviousPrice : finalPrice} €</p>
+              {offerPrice}
+            </>
+            :
+            <>
+              <p className={`${containerClass}__price-container--price`}>{finalPrice} €</p>
+            </>
+        }
+
       </div>
       {
-        isEmpty
+        (isEmpty && !isSearch)
         &&
         <Badge
           containerClass="empty-product"

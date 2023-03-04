@@ -10,6 +10,9 @@ export const MyRouter = () => {
         <Route index element={<Home />} />
         <Route path="product-category/bycicles">
           <Route path=":type" element={<Category />} />
+          <Route path="search">
+            <Route path=":name" element={<Category />} />
+          </Route>
         </Route>
         <Route path="product/options">
           <Route path=":type/:id" element={<ProductView />} />

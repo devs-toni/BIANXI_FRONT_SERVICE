@@ -1,6 +1,7 @@
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 import { useUI } from '../context/UIContext';
 
 const Search = () => {
@@ -8,6 +9,7 @@ const Search = () => {
   const { UI_ACTIONS, handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch } = handleUi();
 
+  const navigate = useNavigate();
   const [input, setInput] = useState('')
 
   const handleChange = ({ target }) => {
@@ -17,7 +19,15 @@ const Search = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    navigate(`/product-category/bycicles/search/${input}`);
+    setInput('');
+    ui_dispatch({type: UI_ACTIONS.CLOSE_SEARCH});
   }
+  
+  useEffect(() => {
+    setInput('');
+  }, [ui_state.searchIsOpen])
+
 
   return (
     <div className={`search ${ui_state.searchIsOpen ? "active" : ""}`}>

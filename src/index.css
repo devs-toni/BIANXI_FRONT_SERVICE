@@ -60,6 +60,12 @@ input {
   all: unset;
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 60.7vh;
+}
+
 @media screen and (max-width: 1300px) {
   input[type="radio"]:before {
     width: 40%;
