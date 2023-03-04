@@ -40,13 +40,13 @@ const ProductView = () => {
                 setActivator={setColorActivatorImage}
               />
             </div>
-            <Details
-              description={product_state.product.description}
-              features={product_state.product.datasheet}
+            <Details 
+            description={product_state.product.description} 
+            features={product_state.product.datasheet} 
             />
-            <Related
-              type={type}
-              price={product_state.product.price}
+            <Related 
+            type={type} 
+            price={product_state.product.price}
             />
           </>
           :

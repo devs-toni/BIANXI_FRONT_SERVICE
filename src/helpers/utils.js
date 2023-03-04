@@ -129,3 +129,27 @@ export const setProductConfigurations = (item) => {
   });
   return { colors, colorsIds, sizes }
 }
+
+export const getProductRelateds = (products, price) => {
+
+  const sortArray = products.sort((a, b) => a.price < b.price ? 1 : -1);
+
+  const downArrayWithNulls = sortArray.map(p => p.price < price ? p : null);
+  const upArrayWithNulls = sortArray.map(p => p.price > price ? p : null);
+
+  const downArray = downArrayWithNulls.filter(p => p != null);
+  const upArray = upArrayWithNulls.filter(p => p != null);
+
+  const upArraySorted = upArray.sort((a, b) => a.price > b.price ? 1 : -1);
+
+  const responseArray = [];
+
+  downArray.forEach((p, ind) => {
+    if (ind < 5) {
+      if (ind % 2 === 0) responseArray.push(downArray[ind > 0 ? ind - 2 : ind]);
+      else responseArray.push(upArraySorted[ind > 0 ? ind - 1 : ind - 2]);
+    }
+  })
+
+  return responseArray;
+} 

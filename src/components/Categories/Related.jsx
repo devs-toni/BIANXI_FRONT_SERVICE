@@ -4,8 +4,10 @@ import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
 import { Connection } from '../../helpers/HTTP_Connection';
+import PropTypes from 'prop-types';
+import { getProductRelateds } from '../../helpers/utils';
 
-const Related = () => {
+const Related = ({ type, price }) => {
 
   const { text } = useLanguage();
 
@@ -13,11 +15,11 @@ const Related = () => {
 
   useEffect(() => {
     const { get } = Connection();
-
-    /*     get(`${productsUrl}/search/${}`)
-          .then(data => setProducts(data))
-          .catch(error => console.error(error)); */
-
+    get(`${productsUrl}/get/type/${type}`)
+      .then(data => {
+        setRelatedProducts(getProductRelateds(data, price))
+      })
+      .catch(error => console.error(error));
   }, []);
 
   return (
@@ -55,5 +57,10 @@ const Related = () => {
     </>
   );
 };
+
+Related.propTypes = {
+  type: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired
+}
 
 export default Related;
