@@ -5,7 +5,7 @@ import { useUI } from '../../context/UIContext';
 import { useUser } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
 
-const LoggedMenu = ({ closeIcon }) => {
+const LoggedMenu = () => {
 
   const { text } = useLanguage();
   const navigate = useNavigate();
@@ -16,7 +16,8 @@ const LoggedMenu = ({ closeIcon }) => {
   const { state: user_state, dispatch: user_dispatch } = handleUser();
 
   const showLikes = () => {
-    navigate("/")
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    navigate("/product-category/bycicles/favourites");
   }
   const isActiveStyles = ui_state.loginIsOpen ? 'active' : '';
 

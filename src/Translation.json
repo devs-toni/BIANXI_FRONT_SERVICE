@@ -95,13 +95,16 @@
       "password": "Contraseña",
       "signin": "Acceder",
       "error": "Error! Email/Contraseña Incorrectos",
-      "logout": "Salir",
+      "logout": "Desconectarse",
       "create": "¿Crear una cuenta?",
       "hi": "Hola",
-      "likes": "Favoritos"
+      "likes": "Lista de favoritos"
     },
     "search": {
       "title": "resultados encontrados para:"
+    },
+    "likes": {
+      "title": "Favoritos"
     },
     "error": {
       "ops": "Opps!",

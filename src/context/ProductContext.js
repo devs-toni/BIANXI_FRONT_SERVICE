@@ -19,10 +19,20 @@ export const ProductProvider = ({ children }) => {
   const addLike = (idProduct, idUser) => {
     const { post } = Connection();
     post(`${productsUrl}/like/add`, {
-      body: {
-        product: idProduct,
-        user: idUser
-      }
+      body: [
+        idProduct, idUser
+      ]
+    }).then(data => {
+      console.log(data);
+    })
+  }
+
+  const deleteLike = (idProduct, idUser) => {
+    const { del } = Connection();
+    del(`${productsUrl}/like/delete`, {
+      body: [
+        idProduct, idUser
+      ]
     }).then(data => {
       console.log(data);
     })
@@ -35,7 +45,9 @@ export const ProductProvider = ({ children }) => {
     SET_PRICES: "SET_PRICES",
     SET_EMPTY_PRODUCT: "SET_EMPTY_PRODUCT",
     SET_CONFIG: "SET_CONFIG",
-    HANDLE_LIKE: "HANDLE_LIKE"
+    HANDLE_LIKE: "HANDLE_LIKE",
+    LIKE_FALSE: "LIKE_FALSE",
+    LIKE_TRUE: "LIKE_TRUE",
   }
 
   const init = {
@@ -64,9 +76,13 @@ export const ProductProvider = ({ children }) => {
       case PRODUCT_ACTIONS.SET_CONFIG:
         return { ...state, config: action.payload };
       case PRODUCT_ACTIONS.HANDLE_LIKE:
-        addLike(state.product.id, user_state.id);
+        if (state.like) deleteLike(state.product.id, user_state.id);
+        else addLike(state.product.id, user_state.id);
         return { ...state, like: !state.like }
-
+      case PRODUCT_ACTIONS.LIKE_FALSE:
+        return { ...state, like: false };
+      case PRODUCT_ACTIONS.LIKE_TRUE:
+        return { ...state, like: true };
       default:
         break;
     }
@@ -80,10 +96,33 @@ export const ProductProvider = ({ children }) => {
 
   useEffect(() => {
     const { product } = state;
+    const { get } = Connection();
+
     if (product?.configuration) {
       dispatch({ type: PRODUCT_ACTIONS.SET_PRICES, payload: { offer: product.offer, price: product.price } });
     }
   }, [state.product]);
+
+  useEffect(() => {
+    const { product } = state;
+    const { post } = Connection();
+
+    if (state.product?.id) {
+      post(`${productsUrl}/like/get`, {
+        body: [
+          state.product.id,
+          user_state?.id,
+        ]
+      }).then(data => {
+        console.log(data);
+        data === 1
+          ?
+          dispatch({ type: PRODUCT_ACTIONS.LIKE_TRUE })
+          :
+          dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
+      })
+    }
+  }, [state.product, user_state]);
 
   const data = {
     PRODUCT_ACTIONS,

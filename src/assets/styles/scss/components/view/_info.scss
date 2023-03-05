@@ -214,7 +214,7 @@
       opacity: .3;
       align-self: center;
       cursor: pointer;
-      transition: all .4s ease;
+      transition: all .4s ease-in;
 
       &.like {
         color: red;

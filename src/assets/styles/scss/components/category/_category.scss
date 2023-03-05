@@ -6,6 +6,14 @@
   width: fit-content;
   margin: 0 auto;
 
+  &__empty {
+    margin-top: 100px;
+    width: 100%;
+    font-size: 10em;
+    opacity: .4;
+    color: var.$bianchi-color;
+  }
+
   &__title {
     text-transform: capitalize;
     font-size: 3em;

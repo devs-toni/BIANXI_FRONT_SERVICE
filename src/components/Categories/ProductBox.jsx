@@ -3,25 +3,34 @@ import { useLanguage } from '../../context/GlobalContext';
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useUser } from '../../context/UserContext';
+import { Connection } from '../../helpers/HTTP_Connection';
+import { productsUrl } from '../../config';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const ProductBox = ({ 
-  name, 
-  finalPrice, 
-  initPrice, 
-  image, 
-  loaded, 
-  setLoaded, 
-  containerClass, 
-  offer, 
-  isCart, 
-  isRelated, 
-  isEmpty, 
+const ProductBox = ({
+  name,
+  finalPrice,
+  initPrice,
+  image,
+  loaded,
+  setLoaded,
+  containerClass,
+  offer,
+  isCart,
+  isRelated,
+  isLike,
+  isEmpty,
   isSearch,
   type,
   id }) => {
 
   const { text } = useLanguage();
   const navigate = useNavigate();
+
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
@@ -33,14 +42,24 @@ const ProductBox = ({
   const offerPrice = isOffer && <p className={`${containerClass}__price-container--price offer-price`}>{finalPrice} €</p>;
   const offerPreviousPrice = isOffer ? initPrice : finalPrice;
 
+  const deleteLike = () => {
+    const { del } = Connection();
+    del(`${productsUrl}/like/delete`, { body: [id, user_state.id] })
+  }
+
   return (
     <div className={containerClass}>
+      {
+        isLike
+        &&
+        <FontAwesomeIcon icon={faXmark} onClick={deleteLike} className={`${containerClass}__like`} />
+      }
       <img
-        className={`${containerClass}__image ${emptyStyles} ${loadedStyles} ${isRelated && 'point'}`}
+        className={`${containerClass}__image ${emptyStyles} ${loadedStyles} ${(isRelated || isSearch || isLike) && 'point'}`}
         src={image}
         onLoad={() => setLoaded(true)}
         alt={name}
-        onClick={() => isRelated && navigate(`/product/options/${type}/${id}`)}
+        onClick={() => (isRelated || isSearch || isLike) && navigate(`/product/options/${type}/${id}`)}
       />
       {setName}
       <div className={`${containerClass}__price-container`}>
@@ -85,6 +104,7 @@ ProductBox.propTypes = {
   offer: PropTypes.number,
   isCart: PropTypes.bool.isRequired,
   isRelated: PropTypes.bool,
+  isLike: PropTypes.bool,
   isEmpty: PropTypes.bool,
   type: PropTypes.string,
   id: PropTypes.number,

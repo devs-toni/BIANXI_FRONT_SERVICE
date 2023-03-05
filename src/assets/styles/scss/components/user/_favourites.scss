@@ -1,8 +1,7 @@
 @use '../../abstracts/variables' as var;
 
-.search-category {
+.likes-category {
   margin-top: 60px;
-
 
   &__empty {
     margin-top: 100px;
@@ -13,7 +12,7 @@
   }
 
   &__title {
-    text-align: center;
+    text-align: right;
     font-size: 6em;
     width: 60%;
     margin: 0 auto;
@@ -39,7 +38,7 @@
     }
   }
 
-  .search-products {
+  .like-products {
     width: 60%;
     margin: 0 auto;
     display: grid;
@@ -47,7 +46,7 @@
     margin-bottom: 200px;
 
     &__product {
-      .search-product-box {
+      .like-product-box {
         width: fit-content;
         display: flex;
         align-items: center;
@@ -56,6 +55,19 @@
 
         @media screen and (max-width: 1350px) {
           margin: 0;
+        }
+
+        &__like {
+          transform: scale(2);
+          opacity: 1;
+          margin-right: 20px;
+          transition: all .3s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            color: red;
+            transform: scale(3);
+          }
         }
 
         &__image {

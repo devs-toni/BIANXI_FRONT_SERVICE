@@ -1,45 +1,60 @@
 import React from 'react';
 import { useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
 import { Connection } from '../../helpers/HTTP_Connection';
+import PropTypes from 'prop-types';
+import { useUser } from '../../context/UserContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBatteryEmpty, faHourglass } from '@fortawesome/free-solid-svg-icons';
 
-const Category = () => {
+const Category = ({ category, container, box, title }) => {
 
   const { text } = useLanguage();
   const { type, name } = useParams();
+  const navigate = useNavigate();
   const { products } = useGlobal();
   const { products: allProducts, setProducts } = products;
+
+  const { ACTIONS, handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch } = handleUser();
 
   useEffect(() => {
     const { get } = Connection();
 
-    name && get(`${productsUrl}/search/${name}`)
-      .then(data => setProducts(data))
-      .catch(error => console.error(error));
+    name &&
+      get(`${productsUrl}/search/${name}`)
+        .then(data => setProducts(data))
+        .catch(error => console.error(error));
 
-    type && get(`${productsUrl}/get/type/${type}`)
-      .then(data => setProducts(data))
-      .catch(error => console.error(error));
+    type &&
+      get(`${productsUrl}/get/type/${type}`)
+        .then(data => setProducts(data))
+        .catch(error => console.error(error));
 
-  }, [type, name]);
+    if (user_state?.id) {
+      (!name && !type) &&
+        get(`${productsUrl}/get/favourites/${user_state.id}`)
+          .then(data => setProducts(data))
+          .catch(error => console.error(error));
+    } else {
+      navigate("/");
+    }
+  }, [type, name, allProducts]);
 
-  
-  const setTitle = type ? type.toLowerCase() : `${allProducts?.length} ${text.search.title} ${name}`;
-  const classTitle = type ? "category" : "search-category";
-  const containerClass = type ? 'products' : 'search-products';
-  const boxClass = type ? 'product-box' : 'search-product-box';
+
+  const setTitle = title ? title : (type ? type.toLowerCase() : `${allProducts?.length} ${text.search.title} ${name}`);
 
   return (
     <>
       {
         allProducts ?
           (
-            <div className={classTitle}>
-              <h3 className={`${classTitle}__title`}>{setTitle}</h3>
-              <div className={containerClass}>
+            <div className={category}>
+              <h3 className={`${category}__title`}>{setTitle}</h3>
+              <div className={container}>
                 {
                   allProducts.length > 0
                     ?
@@ -48,13 +63,14 @@ const Category = () => {
                         key={index}
                         product={product}
                         isSearch={type ? false : true}
+                        isLike={(!type && !name) ? true : false}
                         isRelated={false}
-                        containerClass={containerClass}
-                        boxClass={boxClass}
+                        containerClass={container}
+                        boxClass={box}
                       />
                     })
                     :
-                    <></>
+                    <FontAwesomeIcon className={`${category}__empty`} icon={faHourglass} />
                 }
               </div>
             </div>
@@ -67,5 +83,12 @@ const Category = () => {
     </>
   );
 };
+
+Category.propTypes = {
+  category: PropTypes.string.isRequired,
+  container: PropTypes.string.isRequired,
+  box: PropTypes.string.isRequired,
+  title: PropTypes.string,
+}
 
 export default Category;
