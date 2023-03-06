@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useRef } from 'react';
 
 const UIContext = createContext();
 
@@ -26,7 +26,8 @@ export const UIProvider = ({ children }) => {
     loginIsOpen: false,
     menuIsOpen: false,
     cartIsOpen: false,
-    searchIsOpen: false
+    searchIsOpen: false,
+    searchRef: useRef(null)
   }
 
   const UiReducer = (state, action) => {
@@ -51,6 +52,7 @@ export const UIProvider = ({ children }) => {
         return { ...state, cartIsOpen: state.cartIsOpen && false };
 
       case UI_ACTIONS.HANDLE_SEARCH:
+        !state.searchIsOpen && state.searchRef.current.focus();
         return { ...state, searchIsOpen: !state.searchIsOpen };
 
       case UI_ACTIONS.CLOSE_SEARCH:
@@ -66,17 +68,17 @@ export const UIProvider = ({ children }) => {
     return { state, dispatch };
   }
 
-/*     const clickOutsideHandler = event => {
-    if (menuRef.current) {
-      if (
-        menuRef.current.contains(event.target) ||
-        activatorRef.current.contains(event.target)
-      ) {
-        return;
+  /*     const clickOutsideHandler = event => {
+      if (menuRef.current) {
+        if (
+          menuRef.current.contains(event.target) ||
+          activatorRef.current.contains(event.target)
+        ) {
+          return;
+        }
+        //setIsNavShow(false);
       }
-      //setIsNavShow(false);
-    }
-  }; */
+    }; */
 
   const data = {
     UI_ACTIONS,
