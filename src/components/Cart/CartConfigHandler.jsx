@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import React, { memo } from 'react'
 import { useCart } from '../../context/CartContext';
 import PropTypes from 'prop-types';
 import Handler from './Handler';
@@ -8,10 +8,9 @@ const CartConfigHandler = memo(({ product }) => {
 
 
   const { handleCart } = useCart();
-  const { dispatch: cart_dispatch, CART_ACTIONS, storage } = handleCart();
+  const { dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
 
-  const { config, id } = product;
-  const [configs, setConfigs] = useState(config);
+  const { config: configurations, id } = product;
 
   const handleAdd = (idProduct, conf) => {
     const { id: idConf, stock } = conf;
@@ -22,7 +21,6 @@ const CartConfigHandler = memo(({ product }) => {
           configurationAdd: idConf
         }
       })
-    storage();
   }
 
   const handleRemove = (idProduct, conf) => {
@@ -34,7 +32,6 @@ const CartConfigHandler = memo(({ product }) => {
           configurationDel: idConf
         }
       })
-    storage();
   }
 
   const handleRemoveConf = (idProduct, conf) => {
@@ -46,30 +43,28 @@ const CartConfigHandler = memo(({ product }) => {
         totalProductInConf: total
       }
     })
-    storage();
   }
 
   return (
     <div className='all-handlers'>
       {
-        configs.map(cnf => {
+        configurations.map(cnf => {
           return (
             <Handler
               key={uuid()}
               add={() => handleAdd(id, cnf)}
               remove={() => handleRemove(id, cnf)}
-              product={product}
               conf={cnf}
               removeConfig={() => handleRemoveConf(id, cnf)}
             />)
         })
       }
     </div>
-
   )
 })
 
 CartConfigHandler.propTypes = {
   product: PropTypes.object.isRequired,
 }
+
 export default CartConfigHandler;

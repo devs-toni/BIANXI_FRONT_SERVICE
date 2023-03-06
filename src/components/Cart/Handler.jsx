@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const Handler = ({ add, remove, product, conf, removeConfig }) => {
+const Handler = ({ add, remove, conf, removeConfig }) => {
 
   const { text } = useLanguage();
 
-  const [style, setStyle] = useState({ backgroundColor: conf.color.color });
+  const style = { backgroundColor: conf.color.color };
 
   return (
     <div className='all-handlers__row'>
@@ -53,7 +53,6 @@ const Handler = ({ add, remove, product, conf, removeConfig }) => {
 Handler.propTypes = {
   add: PropTypes.func.isRequired,
   remove: PropTypes.func.isRequired,
-  product: PropTypes.object.isRequired,
   conf: PropTypes.object.isRequired,
   removeConfig: PropTypes.func.isRequired,
 }

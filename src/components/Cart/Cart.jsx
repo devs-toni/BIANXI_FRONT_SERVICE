@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/GlobalContext';
 import { CartConfigHandler, ProductBox, CartFooter } from '../index';
-
 import { calcTotalPrice } from '../../helpers/utils';
 import uuid from 'react-uuid';
 import { useUI } from '../../context/UIContext';
@@ -14,18 +13,15 @@ const Cart = () => {
   const { text } = useLanguage();
 
   const { handleCart } = useCart();
-  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS, storage } = handleCart();
-
+  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
 
   const { handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
-
 
   const [imgLoaded, setImgLoaded] = useState(false);
 
   const handleDelete = (id) => {
     cart_dispatch({ type: CART_ACTIONS.DELETE_COMPLETE_PRODUCT, payload: id })
-    storage();
   }
 
   return (
@@ -40,7 +36,7 @@ const Cart = () => {
         </div>
         <div className='cart-menu__content'>
           {
-            cart_state.cartProducts?.length > 0
+            cart_state.cartProducts.length > 0
               ?
               cart_state.cartProducts.map(({ id, name, final, type, offer, price, total, config }) => {
                 return (
@@ -63,7 +59,7 @@ const Cart = () => {
                       <p className='total'>{calcTotalPrice(total, final)} €</p>
                     </div>
                     <CartConfigHandler
-                      product={{ id, name, final, type, offer, price, total, config }}
+                      product={{ id, config }}
                     />
                   </div>
                 )

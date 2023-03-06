@@ -21,6 +21,8 @@ const ProductView = () => {
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
   const [loading, setLoading] = useState(true)
 
+
+
   useEffect(() => {
     product_dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
 
