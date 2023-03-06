@@ -1,12 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import { useUI } from "../../context/UIContext";
 
-const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
-
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+const Dropdown = ({ items = [], dropdownTitle, handler }) => {
 
   const activatorRef = useRef(null);
   const dropdownListRef = useRef(null);
@@ -15,11 +11,21 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
 
   const clickHandler = () => {
     setIsOpen(!isOpen);
+    addOutsideHandler();
   };
 
   const handleClick = () => {
     setIsOpen(false);
-    closeMenu();
+    addOutsideHandler();
+    handler();
+  }
+
+  function addOutsideHandler() {
+    if (isOpen) {
+      document.addEventListener("mousedown", clickOutsideHandler);
+    } else {
+      document.addEventListener("mousedown", clickOutsideHandler);
+    }
   }
 
   const clickOutsideHandler = event => {
@@ -33,14 +39,6 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
       setIsOpen(false);
     }
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener("mousedown", clickOutsideHandler);
-    } else {
-      document.addEventListener("mousedown", clickOutsideHandler);
-    }
-  }, [isOpen]);
 
 
   return (
@@ -96,6 +94,6 @@ const Dropdown = ({ items = [], dropdownTitle, closeMenu }) => {
 Dropdown.propTypes = {
   items: PropTypes.array.isRequired,
   dropdownTitle: PropTypes.string.isRequired,
-  closeMenu: PropTypes.func.isRequired
+  handler: PropTypes.func.isRequired
 }
 export default Dropdown;

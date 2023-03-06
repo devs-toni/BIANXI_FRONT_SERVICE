@@ -36,25 +36,25 @@ export const UIProvider = ({ children }) => {
         return { ...state, loginIsOpen: !state.loginIsOpen };
 
       case UI_ACTIONS.CLOSE_LOGIN:
-        return { ...state, loginIsOpen: state.loginIsOpen ? false : '' };
+        return { ...state, loginIsOpen: state.loginIsOpen && false };
 
       case UI_ACTIONS.HANDLE_MENU:
         return { ...state, menuIsOpen: !state.menuIsOpen };
 
       case UI_ACTIONS.CLOSE_MENU:
-        return { ...state, menuIsOpen: state.menuIsOpen ? false : '' };
+        return { ...state, menuIsOpen: state.menuIsOpen && false };
 
       case UI_ACTIONS.HANDLE_CART:
         return { ...state, cartIsOpen: !state.cartIsOpen };
 
       case UI_ACTIONS.CLOSE_CART:
-        return { ...state, cartIsOpen: state.cartIsOpen ? false : '' };
+        return { ...state, cartIsOpen: state.cartIsOpen && false };
 
       case UI_ACTIONS.HANDLE_SEARCH:
         return { ...state, searchIsOpen: !state.searchIsOpen };
 
       case UI_ACTIONS.CLOSE_SEARCH:
-        return { ...state, searchIsOpen: state.searchIsOpen ? false : '' };
+        return { ...state, searchIsOpen: state.searchIsOpen && false };
 
       default:
         break;

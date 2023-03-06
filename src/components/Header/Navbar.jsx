@@ -1,11 +1,12 @@
 import React, { memo, useRef } from 'react'
 import { Logo, Navigator, Icon } from '../index';
-import { faCartShopping, faBars, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping, faMagnifyingGlass, faUser } from '@fortawesome/free-solid-svg-icons';
 import logo from '../../assets/images/logo.png';
 import PropTypes from 'prop-types';
 import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 import { useUI } from '../../context/UIContext';
+import MenuIcon from './MenuIcon';
 
 const Navbar = memo(({ items }) => {
 
@@ -14,9 +15,6 @@ const Navbar = memo(({ items }) => {
 
   const { extra } = useCart();
   const { getTotalPriceCart } = extra;
-
-  const menuRef = useRef(null);
-  const activatorRef = useRef(null);
 
   const showStyles = ui_state.menuIsOpen ? 'active' : '';
   const hideStyles = ui_state.menuIsOpen ? 'hide' : '';
@@ -58,51 +56,40 @@ const Navbar = memo(({ items }) => {
       <div>
         <Logo
           containerClass='navbar__container-logo'
-          closeMenu={handleClickDropdown}
+          handler={handleClickDropdown}
           logo={logo}
         />
       </div>
       <div className='navbar__options'>
         <Navigator
-          containerClass={`${showStyles} navbar__options--nav`}
-          innerRef={menuRef}
+          parentStyles={`${showStyles} navbar__options--nav`}
           items={items}
-          closeMenu={handleClickDropdown}
+          handler={handleClickDropdown}
         />
         <div className="navbar__options--icons">
           <Icon
-            isMenu={false}
-            isCart={false}
-            containerClass={`${hideStyles} navbar__options--icons`}
-            btnClass='user'
+            parentStyles={`${hideStyles} navbar__options--icons`}
+            btnStyles='user'
             icon={faUser}
             handler={handleClickLogin}
           />
           <Icon
-            isMenu={false}
-            isCart={true}
-            containerClass={`${hideStyles} navbar__options--icons`}
-            btnClass='cart'
+            isCartBtn={true}
+            parentStyles={`${hideStyles} navbar__options--icons`}
+            btnStyles='cart'
             icon={faCartShopping}
             handler={handleClickCart}
           />
           <Icon
-            isMenu={false}
-            isCart={false}
-            containerClass={`${hideStyles} navbar__options--icons`}
-            btnClass='search'
+            parentStyles={`${hideStyles} navbar__options--icons`}
+            btnStyles='search'
             icon={faMagnifyingGlass}
             handler={handleClickSearch}
-            innerRef={activatorRef}
           />
-          <Icon
-            isMenu={true}
-            isCart={false}
-            containerClass='navbar__options--icons'
-            btnClass='hamburguer'
-            icon={faBars}
+          <MenuIcon
+            parentStyles='navbar__options--icons'
+            isOpen={ui_state.menuIsOpen}
             handler={handleClickMenu}
-            innerRef={activatorRef}
           />
           <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(), 2)} €</p>
         </div>
