@@ -14,8 +14,8 @@ const Form = ({ handler }) => {
     password: ''
   });
 
-  const { USER_ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
+  const { handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch, USER_ACTIONS } = handleUser();
 
   const { UI_ACTIONS, handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch } = handleUi();

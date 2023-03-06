@@ -4,8 +4,8 @@ import { SearchForm, SearchBox } from '../index';
 
 const Search = () => {
 
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+  const { handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const SEARCH_ACTIONS = {
     SET_SEARCH_VALUE: "SET_SEARCH_VALUE",
