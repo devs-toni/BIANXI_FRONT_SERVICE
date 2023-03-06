@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Category, ProductView, Home } from "../components/index";
+import { Category, ProductView, Home, PaymentPage } from "../components/index";
 import React from 'react';
 import { useLanguage } from "../context/GlobalContext";
 
@@ -21,6 +21,7 @@ export const MyRouter = () => {
         <Route path="product/options">
           <Route path=":type/:id" element={<ProductView />} />
         </Route>
+        <Route path="shopping-cart" element={<PaymentPage />} />
       </Route>
       <Route path='*' />
     </Routes>

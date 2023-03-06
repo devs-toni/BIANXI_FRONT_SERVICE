@@ -71,7 +71,7 @@ const Cart = () => {
               </div>
           }
         </div>
-        <CartFooter />
+        <CartFooter closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_CART }) }} />
       </div>
     </div>
   )

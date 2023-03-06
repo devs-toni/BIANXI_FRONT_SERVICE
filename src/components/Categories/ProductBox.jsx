@@ -5,7 +5,7 @@ import Badge from './Badge';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from '../../context/UserContext';
-import { Connection } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/HTTP_Connection';
 import { productsUrl } from '../../config';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
@@ -42,9 +42,8 @@ const ProductBox = ({
   const offerPrice = isOffer && <p className={`${containerClass}__price-container--price offer-price`}>{finalPrice} €</p>;
   const offerPreviousPrice = isOffer ? initPrice : finalPrice;
 
-  const deleteLike = () => {
-    const { del } = Connection();
-    del(`${productsUrl}/like/delete`, { body: [id, user_state.id] })
+  const deleteLike = async () => {
+    await http().del(`${productsUrl}/like/delete`, { body: [id, user_state.id] })
   }
 
   return (

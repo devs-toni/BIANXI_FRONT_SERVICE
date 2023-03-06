@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
-import { Connection } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/HTTP_Connection';
 import PropTypes from 'prop-types';
 import { useUser } from '../../context/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,21 +22,20 @@ const Category = ({ category, container, box, title }) => {
   const { state: user_state, dispatch: user_dispatch } = handleUser();
 
   useEffect(() => {
-    const { get } = Connection();
 
     name &&
-      get(`${productsUrl}/search/${name}`)
+      http().get(`${productsUrl}/search/${name}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
 
     type &&
-      get(`${productsUrl}/get/type/${type}`)
+      http().get(`${productsUrl}/get/type/${type}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
 
     if (user_state?.id) {
       (!name && !type) &&
-        get(`${productsUrl}/get/favourites/${user_state.id}`)
+        http().get(`${productsUrl}/get/favourites/${user_state.id}`)
           .then(data => setProducts(data))
           .catch(error => console.error(error));
     } else {

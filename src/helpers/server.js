@@ -1,9 +1,9 @@
 import { productsUrl } from "../config";
-import { Connection } from "./HTTP_Connection";
+import { http } from "./HTTP_Connection";
 
 export const addLike = (idProduct, idUser) => {
-  const { post } = Connection();
-  post(`${productsUrl}/like/add`, {
+
+  http().post(`${productsUrl}/like/add`, {
     body: [
       idProduct, idUser
     ]
@@ -13,8 +13,8 @@ export const addLike = (idProduct, idUser) => {
 }
 
 export const deleteLike = (idProduct, idUser) => {
-  const { del } = Connection();
-  del(`${productsUrl}/like/delete`, {
+
+  http().del(`${productsUrl}/like/delete`, {
     body: [
       idProduct, idUser
     ]
@@ -24,10 +24,9 @@ export const deleteLike = (idProduct, idUser) => {
 }
 
 export const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
-  const { post } = Connection();
 
   if (idProduct) {
-    post(`${productsUrl}/like/get`, {
+    http().post(`${productsUrl}/like/get`, {
       body: [
         idProduct,
         idUser,

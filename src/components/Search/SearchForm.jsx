@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { productsUrl } from '../../config';
-import { Connection } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/HTTP_Connection';
 import PropTypes from 'prop-types';
 
 const SearchForm = ({ reset, handleSearch, innerRef }) => {
@@ -15,9 +15,9 @@ const SearchForm = ({ reset, handleSearch, innerRef }) => {
   const handleChange = ({ target }) => {
     const { value } = target;
     dispatch({ type: SEARCH_ACTIONS.SET_SEARCH_VALUE, payload: value })
-    const { get } = Connection();
+
     if (state.inputSearch.length > 0) {
-      get(`${productsUrl}/search/${state.inputSearch}`)
+      http().get(`${productsUrl}/search/${state.inputSearch}`)
         .then(data => {
           dispatch({ type: SEARCH_ACTIONS.SET_TEMP_RESULTS, payload: data })
         })

@@ -1,4 +1,4 @@
-export const Connection = () => {
+export const http = () => {
 
     const customFetch = async (endpoint, options) => {
 

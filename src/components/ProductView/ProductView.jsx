@@ -3,7 +3,7 @@ import { useProduct } from '../../context/ProductContext';
 import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
 import { productsUrl } from '../../config.js';
-import { Connection } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/HTTP_Connection';
 import { setProductConfigurations } from '../../helpers/utils';
 import { getLike } from '../../helpers/server';
 import { useUser } from '../../context/UserContext';
@@ -28,8 +28,7 @@ const ProductView = () => {
 
     const loadProduct = async () => {
 
-      const { get } = Connection();
-      await get(`${productsUrl}/get/${id}`)
+      await http().get(`${productsUrl}/get/${id}`)
         .then(data => {
           product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: data });
 

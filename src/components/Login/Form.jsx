@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { useUser } from '../../context/UserContext';
-import { Connection } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/HTTP_Connection';
 import { usersUrl } from '../../config';
 
 const Form = () => {
@@ -24,8 +24,7 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const { post } = Connection();
-    await post(`${usersUrl}/verify`, { body: formUser })
+    await http().post(`${usersUrl}/verify`, { body: formUser })
       .then(data => {
         if (!data) {
           user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: { error: text.login.error } });

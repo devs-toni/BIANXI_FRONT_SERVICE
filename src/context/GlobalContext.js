@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
 import { colorsUrl, sizesUrl } from '../config';
-import { Connection } from '../helpers/HTTP_Connection';
+import { http } from '../helpers/HTTP_Connection';
 
 const GlobalContext = createContext();
 
@@ -15,13 +15,12 @@ export const GlobalProvider = ({ children }) => {
   const [sizes, setSizes] = useState(null);
 
   useEffect(() => {
-    const { get } = Connection();
-
-    get(`${colorsUrl}/get/all`)
+    
+    http().get(`${colorsUrl}/get/all`)
       .then(data => setColors(data))
       .catch(err => console.error(err));
 
-    get(`${sizesUrl}/get/all`)
+    http().get(`${sizesUrl}/get/all`)
       .then(data => setSizes(data))
       .catch(err => console.error(err));
   }, [])

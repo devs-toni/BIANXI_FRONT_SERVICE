@@ -35,7 +35,7 @@
       "subTotal": "Subtotal:",
       "total": "Total:",
       "finishBtns": "Finalizar compra",
-      "include":  "incluye"
+      "include": "incluye"
     },
     "view": {
       "size": "Talla",
@@ -75,7 +75,7 @@
         "history": "Historia",
         "color": "Celeste",
         "models": "Modelos Históricos",
-        "counter": "Countervail" 
+        "counter": "Countervail"
       },
       "shipments": {
         "title": "Envíos",
@@ -84,7 +84,7 @@
         "free": "Envío Gratis",
         "change": "Devoluciones"
       },
-      "privacy" : {
+      "privacy": {
         "title": "Todos los derechos reservados MuntingsBikers",
         "conditions": "Términos y condiciones",
         "politic": "Política de privacidad"
@@ -111,6 +111,24 @@
       "notFound": "Página no encontrada",
       "dontExist": "La página que estás buscando no existe",
       "home": "Volver"
+    },
+    "payment": {
+      "title": "Tu pedido",
+      "pay": "Realizar el pedido",
+      "product": "Producto",
+      "sub": "Subtotal",
+      "cupon": "¿Tienes un cupón?",
+      "cuponLink": "Haz click aquí para introducir tu código",
+      "total": "Total",
+      "sizeTitle": "Talla: ",
+      "colorTitle": "Color: ",
+      "include": "incluye ",
+      "payTitle": "Realizar pago",
+      "description": "Cargo BANCHY Store.",
+      "address": "Dirección",
+      "cardTitle": "Tarjeta de crédito",
+      "name": "Nombre",
+      "lastname": "Apellidos"
     }
   }
 }

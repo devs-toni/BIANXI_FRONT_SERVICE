@@ -11,6 +11,8 @@ const Layout = () => {
   const { handleUser } = useUser();
   const { state: user_state } = handleUser();
 
+
+
   const items = [
     {
       ref: "product-category/bycicles/road",
@@ -32,11 +34,11 @@ const Layout = () => {
 
   return (
     <div className='layout'>
-      <Navbar items={items} />
-      <Login isLogged={user_state.isLogged} />
-      <Search />
-      <Cart />
-      <MyRouter />
+        <Navbar items={items} />
+        <Login isLogged={user_state.isLogged} />
+        <Search />
+        <Cart />
+        <MyRouter />
     </div>
   )
 }

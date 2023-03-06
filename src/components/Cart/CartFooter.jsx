@@ -4,8 +4,9 @@ import { useLanguage } from '../../context/GlobalContext';
 import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 import { getIVAPriceCart, getTotalPriceCart } from '../../helpers/cart';
+import PropTypes from 'prop-types';
 
-const CartFooter = () => {
+const CartFooter = ({ closeHandler }) => {
 
   const { text } = useLanguage();
 
@@ -24,12 +25,13 @@ const CartFooter = () => {
         <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(getIVAPriceCart(cart_state.cartProducts), 2)} € IVA)</p>
       </div>
       <div className='cart-footer__btns'>
-        <NavLink to='/shopping-cart' className='cart-footer__btns--finish'>{text.cart.finishBtns}</NavLink>
+        <NavLink to='/shopping-cart' className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
       </div>
     </div>
   )
 }
 
-
-
+CartFooter.propTypes = {
+  closeHandler: PropTypes.func.isRequired
+}
 export default CartFooter;

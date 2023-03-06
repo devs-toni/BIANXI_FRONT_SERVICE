@@ -2,6 +2,7 @@ export { default as Cart } from './Cart/Cart';
 export { default as CartConfigHandler } from './Cart/CartConfigHandler';
 export { default as CartFooter } from './Cart/CartFooter';
 export { default as Handler } from './Cart/Handler';
+export { default as PaymentPage } from './Cart/PaymentPage';
 export { default as Badge } from './Categories/Badge';
 export { default as Category } from './Categories/Category';
 export { default as Product } from './Categories/Product';
