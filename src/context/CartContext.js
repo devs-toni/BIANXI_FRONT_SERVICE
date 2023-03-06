@@ -69,7 +69,7 @@ export const CartProvider = ({ children }) => {
 
       case CART_ACTIONS.DELETE_COMPLETE_PRODUCT:
         const { id } = action.payload;
-        const productsCompleteDel = handleDeleteCartProduct(id, state.products);
+        const productsCompleteDel = handleDeleteCartProduct(id, state.cartProducts);
         localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
         return { cartProducts: productsCompleteDel };
 
