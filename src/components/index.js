@@ -10,7 +10,6 @@ export { default as Related } from './Categories/Related';
 export { default as Footer } from './Footer/Footer';
 export { default as Dropdown } from './Header/Dropdown';
 export { default as Icon } from './Header/Icon';
-export * from './Header/Link';
 export { default as Logo } from './Header/Logo';
 export { default as Navbar } from './Header/Navbar';
 export { default as Navigator } from './Header/Navigator';
