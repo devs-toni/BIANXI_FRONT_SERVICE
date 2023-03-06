@@ -22,3 +22,22 @@ export const deleteLike = (idProduct, idUser) => {
     console.log(data);
   })
 }
+
+export const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
+  const { post } = Connection();
+
+  if (idProduct) {
+    post(`${productsUrl}/like/get`, {
+      body: [
+        idProduct,
+        idUser,
+      ]
+    }).then(data => {
+      data === 1
+        ?
+        setLikeTrue()
+        :
+        setLikeFalse()
+    })
+  }
+}

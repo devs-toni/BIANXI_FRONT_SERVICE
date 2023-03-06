@@ -1,6 +1,4 @@
-import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import { productsUrl } from '../config';
-import { Connection } from '../helpers/HTTP_Connection';
+import React, { createContext, useContext, useReducer } from 'react';
 import { addLike, deleteLike } from '../helpers/server';
 import { setProductPrice } from '../helpers/utils';
 import { useUser } from './UserContext';
@@ -13,10 +11,8 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }) => {
 
-
   const { handleUser } = useUser();
   const { state: user_state } = handleUser();
-
 
   const PRODUCT_ACTIONS = {
     SET_PRODUCT: "SET_PRODUCT",
@@ -72,9 +68,9 @@ export const ProductProvider = ({ children }) => {
         return { ...state, config: action.payload };
 
       case PRODUCT_ACTIONS.HANDLE_LIKE:
-        if (state.like) deleteLike(state.product.id, user_state.id);   
-        else addLike(state.product.id, user_state.id);   
-         
+        if (state.like) deleteLike(state.product.id, user_state.id);
+        else addLike(state.product.id, user_state.id);
+
         return { ...state, like: !state.like }
 
       case PRODUCT_ACTIONS.LIKE_FALSE:
@@ -93,36 +89,6 @@ export const ProductProvider = ({ children }) => {
   const handleProduct = () => {
     return { state, dispatch, PRODUCT_ACTIONS };
   }
-
-  useEffect(() => {
-    const { product } = state;
-    const { get } = Connection();
-
-    if (product?.configuration) {
-      dispatch({ type: PRODUCT_ACTIONS.SET_PRICES, payload: { offer: product.offer, price: product.price } });
-    }
-  }, [state.product]);
-
-  useEffect(() => {
-    const { product } = state;
-    const { post } = Connection();
-
-    if (state.product?.id) {
-      post(`${productsUrl}/like/get`, {
-        body: [
-          state.product.id,
-          user_state?.id,
-        ]
-      }).then(data => {
-        console.log(data);
-        data === 1
-          ?
-          dispatch({ type: PRODUCT_ACTIONS.LIKE_TRUE })
-          :
-          dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
-      })
-    }
-  }, [state.product, user_state]);
 
   const data = { handleProduct }
 

@@ -10,15 +10,17 @@ import {
 import { useUI } from "./UIContext";
 
 const CartContext = createContext();
-const items = JSON.parse(localStorage.getItem('cart'));
 
 export const useCart = () => {
   return useContext(CartContext);
 }
 
+const items = JSON.parse(localStorage.getItem('cart'));
+
 export const CartProvider = ({ children }) => {
 
   ////////////////////////////////////////////////////////////////////////////// LOGIC
+
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
 
