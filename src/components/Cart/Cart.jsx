@@ -18,8 +18,8 @@ const Cart = () => {
   const { removeProduct } = funcs;
 
 
-  const { UI_ACTIONS, handleUi } = useUI();
-  const {state: ui_state, dispatch: ui_dispatch} = handleUi();
+  const { handleUi } = useUI();
+  const {state: ui_state, dispatch: ui_dispatch, UI_ACTIONS} = handleUi();
 
 
   const [imgLoaded, setImgLoaded] = useState(false);

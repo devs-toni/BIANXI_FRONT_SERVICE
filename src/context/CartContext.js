@@ -22,11 +22,11 @@ export const CartProvider = ({ children }) => {
 
   const [totalProducts, setTotalProducts] = useState(items ? items : []);
 
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+  const { handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
-  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
-  const { state: product_state } = configureProduct();
+  const { handleProduct } = useProduct();
+  const { state: product_state } = handleProduct();
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(totalProducts));

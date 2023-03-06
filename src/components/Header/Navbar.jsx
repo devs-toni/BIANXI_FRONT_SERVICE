@@ -10,8 +10,8 @@ import MenuIcon from './MenuIcon';
 
 const Navbar = memo(({ items }) => {
 
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+  const { handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const { extra } = useCart();
   const { getTotalPriceCart } = extra;

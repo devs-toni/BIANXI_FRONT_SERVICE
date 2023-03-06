@@ -1,16 +1,10 @@
 import React, { memo, useEffect, useState } from 'react';
-import { useProduct } from '../../context/ProductContext';
 import { setProductConfigurations } from '../../helpers/utils';
 import { PropTypes } from 'prop-types';
 
-const Images = memo(({ name, activator }) => {
+const Images = memo(({ product, activator }) => {
 
-
-  const { configureProduct } = useProduct();
-  const { state: product_state } = configureProduct();
-
-  const { colors: colorsProduct } = setProductConfigurations(product_state.product);
-
+  const { colors: colorsProduct } = setProductConfigurations(product);
   const colors = [...colorsProduct];
 
   const [selectedSource, setSelectedSource] = useState(0);
@@ -35,14 +29,13 @@ const Images = memo(({ name, activator }) => {
     changeImage(activator);
   }, [activator])
 
-
   return (
     <>
       <div className="images">
         <div className="images__main">
           <img
-            src={require(`../../assets/images/${product_state.product.type}/${product_state.product.name}-${selectedSource}.png`)}
-            alt={name}
+            src={require(`../../assets/images/${product.type}/${product.name}-${selectedSource}.png`)}
+            alt={product.name}
             onLoad={() => setLoaded(true)}
             className={`images__main--img ${loaded ? 'loaded' : ''}`}
           />
@@ -57,9 +50,9 @@ const Images = memo(({ name, activator }) => {
                   <img
                     key={index}
                     data-key={index}
-                    src={require(`../../assets/images/${product_state.product.type}/${product_state.product.name}-${index}.png`)}
+                    src={require(`../../assets/images/${product.type}/${product.name}-${index}.png`)}
                     className={`${selectedSource === index ? 'active' : ''}`}
-                    alt={name}
+                    alt={product.name}
                     onClick={handleImage}
                   />
                 )
@@ -73,6 +66,7 @@ const Images = memo(({ name, activator }) => {
 });
 
 Images.propTypes = {
-
+  product: PropTypes.object.isRequired,
+  activator: PropTypes.number.isRequired
 }
 export default Images;

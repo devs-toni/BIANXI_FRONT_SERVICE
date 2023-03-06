@@ -10,11 +10,11 @@ const Login = ({ isLogged }) => {
 
   const navigate = useNavigate();
 
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+  const { handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
-  const { USER_ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
+  const { handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch, USER_ACTIONS } = handleUser();
 
   const showFavourites = () => {
     ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })

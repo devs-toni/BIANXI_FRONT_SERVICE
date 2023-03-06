@@ -13,8 +13,8 @@ export const useProduct = () => {
 export const ProductProvider = ({ children }) => {
 
 
-  const { USER_ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
 
   const addLike = (idProduct, idUser) => {
     const { post } = Connection();
@@ -41,7 +41,9 @@ export const ProductProvider = ({ children }) => {
   const PRODUCT_ACTIONS = {
     SET_PRODUCT: "SET_PRODUCT",
     SET_COLOR: "SET_COLOR",
+    SET_COLORS: "SET_COLORS",
     SET_SIZE: "SET_SIZE",
+    SET_SIZES: "SET_SIZES",
     SET_PRICES: "SET_PRICES",
     SET_EMPTY_PRODUCT: "SET_EMPTY_PRODUCT",
     SET_CONFIG: "SET_CONFIG",
@@ -54,8 +56,10 @@ export const ProductProvider = ({ children }) => {
     product: null,
     config: null,
     color: 0,
+    colors: [],
     size: '',
-    updatedPrices: '',
+    sizes: [],
+    updatedPrices: {},
     empty: false,
     like: false
   }
@@ -64,11 +68,15 @@ export const ProductProvider = ({ children }) => {
     switch (action.type) {
 
       case PRODUCT_ACTIONS.SET_PRODUCT:
-        return { ...state, product: action.payload.product };
+        return { ...state, product: action.payload };
       case PRODUCT_ACTIONS.SET_COLOR:
-        return { ...state, color: action.payload.color };
+        return { ...state, color: action.payload };
+      case PRODUCT_ACTIONS.SET_COLORS:
+        return { ...state, colors: action.payload }
       case PRODUCT_ACTIONS.SET_SIZE:
         return { ...state, size: action.payload };
+      case PRODUCT_ACTIONS.SET_SIZES:
+        return { ...state, sizes: action.payload };
       case PRODUCT_ACTIONS.SET_PRICES:
         return { ...state, updatedPrices: setProductPrice(action.payload.offer, action.payload.price) };
       case PRODUCT_ACTIONS.SET_EMPTY_PRODUCT:
@@ -90,8 +98,8 @@ export const ProductProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reducer, init);
 
-  const configureProduct = () => {
-    return { state, dispatch };
+  const handleProduct = () => {
+    return { state, dispatch, PRODUCT_ACTIONS };
   }
 
   useEffect(() => {
@@ -124,10 +132,7 @@ export const ProductProvider = ({ children }) => {
     }
   }, [state.product, user_state]);
 
-  const data = {
-    PRODUCT_ACTIONS,
-    configureProduct
-  }
+  const data = { handleProduct }
 
   return (
     <ProductContext.Provider value={data}>{children}</ProductContext.Provider>

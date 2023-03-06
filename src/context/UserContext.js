@@ -60,13 +60,10 @@ export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, init);
 
   const handleUser = () => {
-    return { state, dispatch }
+    return { state, dispatch, USER_ACTIONS }
   }
 
-  const data = {
-    USER_ACTIONS,
-    handleUser
-  }
+  const data = { handleUser }
 
   return (
     <UserContext.Provider value={data}>{children}</UserContext.Provider>

@@ -7,6 +7,7 @@ const Details = ({ description, features }) => {
   const { text } = useLanguage();
 
   const [sectionActive, setSectionActive] = useState("description");
+  
   const isActive = (target) => sectionActive === target ? 'active' : '';
 
   return (

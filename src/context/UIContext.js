@@ -65,7 +65,7 @@ export const UIProvider = ({ children }) => {
   const [state, dispatch] = useReducer(UiReducer, initialState);
 
   const handleUi = () => {
-    return { state, dispatch };
+    return { state, dispatch, UI_ACTIONS };
   }
 
   /*     const clickOutsideHandler = event => {
@@ -80,10 +80,7 @@ export const UIProvider = ({ children }) => {
       }
     }; */
 
-  const data = {
-    UI_ACTIONS,
-    handleUi
-  }
+  const data = { handleUi }
 
   return (
     <UIContext.Provider value={data}>{children}</UIContext.Provider>

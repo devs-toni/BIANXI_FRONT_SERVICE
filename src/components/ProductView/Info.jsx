@@ -1,95 +1,79 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { useCart } from '../../context/CartContext';
-import { useProduct } from '../../context/ProductContext';
-import { SizeSelector, ColorSelector, Loader } from '../index';
+import { SizeSelector, ColorSelector } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import CartSelector from './CartSelector';
 import { useUser } from '../../context/UserContext';
+import { useProduct } from '../../context/ProductContext';
+import PropTypes from 'prop-types';
 
-
-const Info = ({ total = 1, setActivator, isLike, handleLike }) => {
+const Info = ({ setColorActivator, isLike, handleLike }) => {
 
   const { text } = useLanguage();
-
-  const { vars } = useCart();
-  const { totalProducts } = vars;
-
-  const { configureProduct } = useProduct();
-  const { state: product_state } = configureProduct();
-
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
-  const { name, sentence } = product_state.product;
-
 
   const { funcs } = useCart();
   const { handleAddSpecificNumberProduct } = funcs;
 
-  const [tempStock, setTempStock] = useState(0);
-  const [loaded, setLoaded] = useState(product_state.updatedPrices ? true : false);
+  const { handleProduct } = useProduct();
+  const { state: product_state } = handleProduct();
+  const { name, sentence } = product_state.product;
+  const configuration = product_state.config;
+  const size = product_state.size;
+  const prices = product_state.updatedPrices;
 
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
+
+  const [totalSelected, setTotalSelected] = useState(0);
   const totalRef = useRef();
 
   const handleCartAddition = () => {
     const { current } = totalRef;
-    handleAddSpecificNumberProduct({ ...product_state.product, ...product_state.updatedPrices }, current.value);
+    handleAddSpecificNumberProduct({ ...product_state.product, ...prices }, current.value);
   }
 
-  const emptyStyles = (product_state.config?.stock === 0 || !product_state.config) ? 'empty' : '';
-  const emptyStylesText = ((product_state.config?.stock === 0 || !product_state.config) && product_state.size) ? 'empty' : '';
-
-
-  useEffect(() => {
-    setTempStock(0);
-  }, [totalProducts]);
-
-  useEffect(() => {
-    setLoaded(true);
-  }, [product_state.updatedPrices])
-
-
+  const emptyStyles = (configuration?.stock === 0 || !configuration) ? 'empty' : '';
+  const emptyStylesText = ((configuration?.stock === 0 || !configuration) && size) ? 'empty' : '';
 
   return (
-    <>
-      {
-        loaded
-          ?
-          <div className="info">
-            <div className="info__main">
-              <p className="info__main--name">{name}</p>
-              <p className="info__main--short">{sentence}</p>
-              <p className="info__main--price">{product_state.updatedPrices.final} €</p>
-            </div>
-            <SizeSelector product={product_state.product} />
-            <ColorSelector product={product_state.product} setActivator={setActivator} />
-            <p className={`${emptyStylesText} info__empty`}>{text.view.empty}</p>
-            <div className="info__buy">
-              <CartSelector
-                containerClass='cart-buttons'
-                innerRef={totalRef}
-                val={tempStock}
-                setVal={setTempStock}
-              />
-              <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
-              {
-                user_state.logged
-                &&
-                <FontAwesomeIcon icon={faHeart} onClick={handleLike} className={isLike ? 'like' : ''} />
-              }
-            </div>
-            <div className="info__share">
-              <p className="info__share--title">{text.view.share}</p>
-              <div className="info__share--icons"></div>
-            </div>
-          </div>
-          :
-          <Loader />
-      }
-
-    </>
+    <div className="info">
+      <div className="info__main">
+        <p className="info__main--name">{name}</p>
+        <p className="info__main--short">{sentence}</p>
+        <p className="info__main--price">{prices.final} €</p>
+      </div>
+      <SizeSelector />
+      <ColorSelector
+        setActivator={setColorActivator}
+      />
+      <p className={`${emptyStylesText} info__empty`}>{text.view.empty}</p>
+      <div className="info__buy">
+        <CartSelector
+          parentStyles='cart-buttons'
+          innerRef={totalRef}
+          value={totalSelected}
+          setValue={setTotalSelected}
+        />
+        <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
+        {
+          user_state.isLogged
+          &&
+          <FontAwesomeIcon icon={faHeart} onClick={handleLike} className={isLike ? 'like' : ''} />
+        }
+      </div>
+      <div className="info__share">
+        <p className="info__share--title">{text.view.share}</p>
+        <div className="info__share--icons"></div>
+      </div>
+    </div>
   )
 }
 
+Info.propTypes = {
+  handleLike: PropTypes.func.isRequired,
+  isLike: PropTypes.bool.isRequired,
+  setColorActivator: PropTypes.func.isRequired
+}
 export default Info;

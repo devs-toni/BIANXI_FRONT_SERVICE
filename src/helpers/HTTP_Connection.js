@@ -1,6 +1,6 @@
 export const Connection = () => {
 
-    const customFetch = (endpoint, options) => {
+    const customFetch = async (endpoint, options) => {
 
         const defaultHeader = {
             "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const Connection = () => {
 
         setTimeout(() => controller.abort(), 2000);
 
-        return fetch(endpoint, options)
+        return await fetch(endpoint, options)
             .then((res) => res.ok ? res.json() : Promise.reject({
                     err: true,
                     status: res.status || "000",
@@ -29,23 +29,23 @@ export const Connection = () => {
         }        
        
 
-    const get = (url, options = {}) => {
-        return customFetch(url, options);
+    const get = async (url, options = {}) => {
+        return await customFetch(url, options);
     };
 
-    const post = (url, options = {}) => {
+    const post = async (url, options = {}) => {
         options.method = "POST";
-        return customFetch(url, options);
+        return await customFetch(url, options);
     };
     
-    const put = (url, options = {}) => {
+    const put = async (url, options = {}) => {
         options.method = "PUT";
-        return customFetch(url, options);
+        return await customFetch(url, options);
     };
     
-    const del = (url, options = {}) => {
+    const del = async (url, options = {}) => {
         options.method = "DELETE";
-        return customFetch(url, options);
+        return await customFetch(url, options);
     };
 
     return {

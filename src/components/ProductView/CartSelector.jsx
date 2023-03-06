@@ -6,20 +6,24 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { getCartProductConfigurations, getMatchConfiguration } from '../../helpers/utils';
 
-const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
+const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
   const { vars: cartVars } = useCart();
   const { totalProducts } = cartVars;
 
-  const { PRODUCT_ACTIONS, configureProduct } = useProduct();
-  const { state: product_state, dispatch: product_dispatch } = configureProduct();
+  const { handleProduct } = useProduct();
+  const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
+  const { id } = product_state.product;
+  const config = product_state.config;
+  const color = product_state.color;
+  const size = product_state.size;
 
   const [tempStock, setTempStock] = useState(0);
 
   useEffect(() => {
     const getConfigurationStock = () => {
-      const allProductConfigurations = getCartProductConfigurations(totalProducts, product_state.product.id);
-      const configMatch = getMatchConfiguration(allProductConfigurations, product_state.size, product_state.color);
+      const allProductConfigurations = getCartProductConfigurations(totalProducts, id);
+      const configMatch = getMatchConfiguration(allProductConfigurations, size, color);
       // If this product is already in cart the stock will be diferent
       if (configMatch) {
         product_dispatch({ type: PRODUCT_ACTIONS.SET_CONFIG, payload: configMatch ? configMatch : null });
@@ -36,34 +40,34 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
     if (product_state.product) {
       const stock = getConfigurationStock();
       setTempStock(stock ? stock : 0);
-      setVal(0);
+      setValue(0);
     }
   }, [product_state.color, product_state.size, totalProducts, product_state.product])
 
 
   const addCount = () => {
-    if (val < tempStock)
-      setVal(prevState => prevState + 1);
+    if (value < tempStock)
+      setValue(prevState => prevState + 1);
   }
 
   const removeCount = () => {
-    if (val > 0)
-      setVal(prevState => prevState - 1);
+    if (value > 0)
+      setValue(prevState => prevState - 1);
   }
 
-  const emptyConfigurationStyles = (product_state.config?.stock === 0 || !product_state.config) ? 'empty' : '';
+  const emptyConfigurationStyles = (config?.stock === 0 || !config) ? 'empty' : '';
 
   return (
-    <div className={`${containerClass}__cart`}>
+    <div className={`${parentStyles}__cart`}>
       <FontAwesomeIcon
-        className={`${containerClass}__cart--handle ${emptyConfigurationStyles}`}
+        className={`${parentStyles}__cart--handle ${emptyConfigurationStyles}`}
         icon={faMinus}
         onClick={removeCount}
       />
       <input
         type="text"
-        className={`${containerClass}__cart--number ${emptyConfigurationStyles}`}
-        value={val}
+        className={`${parentStyles}__cart--number ${emptyConfigurationStyles}`}
+        value={value}
         ref={innerRef}
         onChange={() => { }}
         onKeyDown={(e) => {
@@ -71,7 +75,7 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
         }}
       />
       <FontAwesomeIcon
-        className={`${containerClass}__cart--handle ${emptyConfigurationStyles}`}
+        className={`${parentStyles}__cart--handle ${emptyConfigurationStyles}`}
         icon={faPlus}
         onClick={addCount}
       />
@@ -80,8 +84,8 @@ const CartSelector = ({ containerClass, innerRef, val, setVal }) => {
 }
 
 CartSelector.propTypes = {
-  containerClass: PropTypes.string.isRequired,
+  parentStyles: PropTypes.string.isRequired,
   innerRef: PropTypes.object.isRequired,
-  setVal: PropTypes.func.isRequired,
+  setValue: PropTypes.func.isRequired,
 }
 export default CartSelector;
