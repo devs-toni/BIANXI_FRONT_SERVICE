@@ -67,8 +67,9 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("CART", JSON.stringify(productsConfDel));
         return { cartProducts: productsConfDel };
 
+      //DELETE PRODUCT IN CART MODAL
       case CART_ACTIONS.DELETE_COMPLETE_PRODUCT:
-        const { id } = action.payload;
+        const id = action.payload;
         const productsCompleteDel = handleDeleteCartProduct(id, state.cartProducts);
         localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
         return { cartProducts: productsCompleteDel };
