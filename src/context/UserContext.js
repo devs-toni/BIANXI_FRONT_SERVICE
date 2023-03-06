@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useEffect, useReducer, useState } from 'react'
+import React, { createContext, useContext, useReducer } from 'react'
 
 const loginStorage = JSON.parse(localStorage.getItem('LOGIN_SUCCESS'));
-console.log(loginStorage);
 
 const UserContext = createContext();
 
@@ -12,7 +11,7 @@ export const useUser = () => {
 export const UserProvider = ({ children }) => {
 
   const init = {
-    logged: loginStorage ? true : false,
+    isLogged: loginStorage ? true : false,
     error: '',
     username: loginStorage ? loginStorage.username : '',
     id: loginStorage ? loginStorage.id : 0
@@ -30,7 +29,7 @@ export const UserProvider = ({ children }) => {
 
       case USER_ACTIONS.LOGIN_ERROR:
         return {
-          logged: false,
+          isLogged: false,
           error: action.payload,
           username: '',
           id: 0
@@ -39,7 +38,7 @@ export const UserProvider = ({ children }) => {
       case USER_ACTIONS.LOGIN_SUCCESS:
       localStorage.setItem('LOGIN_SUCCESS', JSON.stringify({ id: action.payload.id, username: action.payload.username }));
         return {
-          logged: true,
+          isLogged: true,
           error: '',
           username: action.payload.username,
           id: action.payload.id
@@ -47,11 +46,12 @@ export const UserProvider = ({ children }) => {
       case USER_ACTIONS.LOGOUT:
         localStorage.removeItem('LOGIN_SUCCESS')
         return {
-          logged: false,
+          isLogged: false,
           error: '',
           username: '',
           id: 0
         }
+        
       default:
         break;
     }

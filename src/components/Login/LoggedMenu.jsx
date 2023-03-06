@@ -1,36 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
-import { useUI } from '../../context/UIContext';
-import { useUser } from '../../context/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
-const LoggedMenu = () => {
+const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavourites }) => {
 
   const { text } = useLanguage();
-  const navigate = useNavigate();
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
 
-  const { USER_ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
-
-  const showLikes = () => {
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    navigate("/product-category/bycicles/favourites");
-  }
-  const isActiveStyles = ui_state.loginIsOpen ? 'active' : '';
+  const isActiveStyles = isOpen ? 'active' : '';
 
   return (
     <div className={`${isActiveStyles} login`}>
-      <p className='login__name'>{text.login.hi} {user_state.username}!</p>
-      <p className='login__link' onClick={showLikes}>{text.login.likes}</p>
-      <p className='login__link' onClick={() => user_dispatch({ type: USER_ACTIONS.LLOGOUT })}>{text.login.logout}</p>
+      <FontAwesomeIcon
+        icon={faXmark}
+        className="login__close"
+        onClick={closeHandler}
+      />
+      <p className='login__name'>{text.login.hi} {username}!</p>
+      <p className='login__link' onClick={handlerFavourites}>{text.login.likes}</p>
+      <p className='login__link' onClick={logoutHandler}>{text.login.logout}</p>
     </div>
   )
 }
 
 LoggedMenu.propTypes = {
-
+  username: PropTypes.string.isRequired,
+  closeHandler: PropTypes.func.isRequired,
+  logoutHandler: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  handlerFavourites: PropTypes.func.isRequired,
 }
 export default LoggedMenu;

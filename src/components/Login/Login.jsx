@@ -1,32 +1,48 @@
-import React, { useState } from 'react';
-import { useLanguage } from '../../context/GlobalContext';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import React from 'react';
 import LoginModal from './LoginModal';
-import { useUser } from '../../context/UserContext';
 import LoggedMenu from './LoggedMenu';
+import PropTypes from 'prop-types';
+import { useUI } from '../../context/UIContext';
+import { useUser } from '../../context/UserContext';
+import { useNavigate } from 'react-router-dom';
 
-export const Login = () => {
+const Login = ({ isLogged }) => {
 
-  const { text } = useLanguage();
+  const navigate = useNavigate();
 
+  const { UI_ACTIONS, handleUi } = useUI();
+  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
 
+  const { USER_ACTIONS, handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch } = handleUser();
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
-
+  const showFavourites = () => {
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    navigate("/product-category/bycicles/favourites");
+  }
   return (
     <>
       {
-        user_state?.logged
+        isLogged
           ?
-          <LoggedMenu />
+          <LoggedMenu
+            closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) }}
+            isOpen={ui_state.loginIsOpen}
+            logoutHandler={() => user_dispatch({ type: USER_ACTIONS.LOGOUT })}
+            username={user_state.username}
+            handlerFavourites={showFavourites}
+          />
           :
           <LoginModal
-            closeIcon={faXmark}
+            closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) }}
+            isOpen={ui_state.loginIsOpen}
           />
       }
     </>
   )
 }
 
+Login.propTypes = {
+  isLogged: PropTypes.bool.isRequired
+}
 export default Login;

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useLanguage } from '../context/GlobalContext';
+import { useUser } from '../context/UserContext';
 import { MyRouter } from '../router/MyRouter';
-import { Navbar, Cart } from './index';
-import Login from './Login/Login';
-import Search from './Search';
+import { Navbar, Cart, Login, Search } from './index';
 
 const Layout = () => {
 
   const { text } = useLanguage();
+
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
 
   const items = [
     {
@@ -31,7 +33,7 @@ const Layout = () => {
   return (
     <div className='layout'>
       <Navbar items={items} />
-      <Login />
+      <Login isLogged={user_state.isLogged} />
       <Search />
       <Cart />
       <MyRouter />
