@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom';
 import { productsUrl } from '../../config.js';
 import { Connection } from '../../helpers/HTTP_Connection';
 import { setProductConfigurations } from '../../helpers/utils';
+import { getLike } from '../../helpers/server';
+import { useUser } from '../../context/UserContext';
 
 const ProductView = () => {
 
@@ -12,6 +14,9 @@ const ProductView = () => {
 
   const { handleProduct } = useProduct();
   const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
+
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
 
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
   const [loading, setLoading] = useState(true)
@@ -22,7 +27,8 @@ const ProductView = () => {
       const { get } = Connection();
       await get(`${productsUrl}/get/${id}`)
         .then(data => {
-          product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: data })
+          product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: data });
+
           const { sizes } = setProductConfigurations(data);
           product_dispatch({ type: PRODUCT_ACTIONS.SET_SIZES, payload: [...sizes] });
           const { colors: res, colorsIds: ids } = setProductConfigurations(data);
@@ -31,6 +37,16 @@ const ProductView = () => {
             finalArray.push({ color: c, id: [...ids][index] });
           });
           product_dispatch({ type: PRODUCT_ACTIONS.SET_COLORS, payload: finalArray });
+          product_dispatch({ type: PRODUCT_ACTIONS.SET_PRICES, payload: { offer: data.offer, price: data.price } });
+
+          if (user_state.id) {
+            getLike(
+              id,
+              user_state.id,
+              () => product_dispatch({ type: PRODUCT_ACTIONS.LIKE_TRUE }),
+              () => product_dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
+            )
+          }
           setLoading(false);
         });
     }

@@ -8,13 +8,11 @@ import CartSelector from './CartSelector';
 import { useUser } from '../../context/UserContext';
 import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
+import { useUI } from '../../context/UIContext';
 
 const Info = ({ setColorActivator, isLike, handleLike }) => {
 
   const { text } = useLanguage();
-
-  const { funcs } = useCart();
-  const { handleAddSpecificNumberProduct } = funcs;
 
   const { handleProduct } = useProduct();
   const { state: product_state } = handleProduct();
@@ -23,15 +21,27 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
   const size = product_state.size;
   const prices = product_state.updatedPrices;
 
+  const { handleCart } = useCart();
+  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+
   const { handleUser } = useUser();
   const { state: user_state } = handleUser();
+
+  const { handleUi } = useUI();
+  const { dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const [totalSelected, setTotalSelected] = useState(0);
   const totalRef = useRef();
 
   const handleCartAddition = () => {
     const { current } = totalRef;
-    handleAddSpecificNumberProduct({ ...product_state.product, ...prices }, current.value);
+    cart_dispatch({
+      type: CART_ACTIONS.ADD_PRODUCTS, payload: {
+        item: { ...product_state.product, ...prices },
+        n: current.value
+      }
+    })
+    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
   }
 
   const emptyStyles = (configuration?.stock === 0 || !configuration) ? 'empty' : '';

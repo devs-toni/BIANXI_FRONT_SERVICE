@@ -8,8 +8,8 @@ import { getCartProductConfigurations, getMatchConfiguration } from '../../helpe
 
 const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
-  const { vars: cartVars } = useCart();
-  const { totalProducts } = cartVars;
+  const { handleCart } = useCart();
+  const { state: cart_state } = handleCart();
 
   const { handleProduct } = useProduct();
   const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
@@ -22,7 +22,7 @@ const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
   useEffect(() => {
     const getConfigurationStock = () => {
-      const allProductConfigurations = getCartProductConfigurations(totalProducts, id);
+      const allProductConfigurations = getCartProductConfigurations(cart_state.cartProducts, id);
       const configMatch = getMatchConfiguration(allProductConfigurations, size, color);
       // If this product is already in cart the stock will be diferent
       if (configMatch) {
@@ -42,7 +42,7 @@ const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
       setTempStock(stock ? stock : 0);
       setValue(0);
     }
-  }, [product_state.color, product_state.size, totalProducts, product_state.product])
+  }, [product_state.color, product_state.size, cart_state.cartProducts, product_state.product])
 
 
   const addCount = () => {

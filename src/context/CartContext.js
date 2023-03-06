@@ -1,154 +1,90 @@
-import { createContext, useState, useEffect, useContext } from "react";
+import { createContext, useCallback, useContext, useEffect, useReducer } from "react";
 import { useProduct } from "./ProductContext";
-import {
-  addProductToCart,
-  updateProductTotal,
-  addConfigurationToProduct,
-  updateConfigurationStock,
-  removeConfigInProduct
-} from "../helpers/utils";
-import { useUI } from "./UIContext";
+import { CartMainMethods } from "../helpers/cart";
 
 const CartContext = createContext();
-const items = JSON.parse(localStorage.getItem('cart'));
 
 export const useCart = () => {
   return useContext(CartContext);
 }
 
+const items = JSON.parse(localStorage.getItem('CART'));
+
 export const CartProvider = ({ children }) => {
-
-  ////////////////////////////////////////////////////////////////////////////// LOGIC
-
-  const [totalProducts, setTotalProducts] = useState(items ? items : []);
-
-  const { handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const { handleProduct } = useProduct();
   const { state: product_state } = handleProduct();
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(totalProducts));
-    //console.log(totalProducts)
-  }, [totalProducts]);
+  const {
+    handleAddProduct,
+    handleRemoveProduct,
+    handleAddSpecificNumberProduct,
+    handleRemoveConfig,
+    handleDeleteCartProduct
+  } = CartMainMethods(product_state);
 
-  const handleAddProduct = (idProduct, idConf) => {
-    const updatedProducts = updateProductTotal(totalProducts, idProduct, 1);
-    updateConfigurationStock(updatedProducts, idProduct, idConf, 1);
-    setTotalProducts(updatedProducts);
+  const CART_ACTIONS = {
+    SET_CART_PRODUCTS: "SET_CART_PRODUCTS",
+    ADD_ONE_PRODUCT: "ADD_ONE_PRODUCT",
+    ADD_PRODUCTS: "ADD_PRODUCTS",
+    DELETE_ONE_PRODUCT: "DELETE_ONE_PRODUCT",
+    DELETE_CONFIGURATION: "DELETE_CONFIGURATION",
+    DELETE_COMPLETE_PRODUCT: "DELETE_COMPLETE_PRODUCT",
   }
 
-  const handleRemoveProduct = (idProduct, idConf) => {
-    const updatedProducts = updateProductTotal(totalProducts, idProduct, -1);
-    updateConfigurationStock(updatedProducts, idProduct, idConf, -1);
-    setTotalProducts(updatedProducts);
+  const initialState = {
+    cartProducts: items ? items : [],
   }
 
-  const removeProduct = (id) => {
-    const updatedProducts = totalProducts.filter(prod => prod.id !== id);
-    setTotalProducts(updatedProducts);
-  }
+  const reducer = (state, action) => {
+    switch (action.type) {
 
-  const handleRemoveConfig = (idProduct, idConf, totalProductInConf) => {
-    const updatedProducts = updateProductTotal(totalProducts, idProduct, totalProductInConf * -1);
-    const newUpdatedProducts = removeConfigInProduct(updatedProducts, idProduct, idConf);
-    const configsLength = newUpdatedProducts.map(prod => {
-      if (prod.id == idProduct) {
-        return prod.config.length;
-      }
-    });
+      //SUM PRODUCT IN CART MODAL
+      case CART_ACTIONS.ADD_ONE_PRODUCT:
+        const { productAdd, configurationAdd } = action.payload;
+        const productsAdd = handleAddProduct(productAdd, configurationAdd, state.cartProducts);
+        localStorage.setItem("CART", JSON.stringify(productAdd));
+        return { cartProducts: productsAdd };
 
-    if (configsLength.join(('').split('')) == 0) {
-      const updatedProducts = newUpdatedProducts.filter(prod => prod.id !== idProduct);
-      setTotalProducts(updatedProducts);
+      //REST PRODUCT IN CART MODAL
+      case CART_ACTIONS.DELETE_ONE_PRODUCT:
+        const { productDel, configurationDel } = action.payload;
+        const productsDel = handleRemoveProduct(productDel, configurationDel, state.cartProducts);
+        localStorage.setItem("CART", JSON.stringify(productsDel));
+        return { cartProducts: productsDel };
 
-    } else
-      setTotalProducts(newUpdatedProducts);
-  }
+      //ADD PRODUCTS IN PRODUCT PAGE
+      case CART_ACTIONS.ADD_PRODUCTS:
+        const { item, n } = action.payload;
+        const productsAddN = handleAddSpecificNumberProduct(item, n, state.cartProducts);
+        localStorage.setItem("CART", JSON.stringify(productsAddN));
+        return { cartProducts: productsAddN };
 
-  const findNumberProduct = id => {
-    return totalProducts.find(p => p.id === id)?.total;
-  }
+      //DELETE CONFIGURATION IN CART MODAL
+      case CART_ACTIONS.DELETE_CONFIGURATION:
+        const { idProduct, idConf, totalProductInConf } = action.payload;
+        const productsConfDel = handleRemoveConfig(idProduct, idConf, totalProductInConf, state.cartProducts);
+        localStorage.setItem("CART", JSON.stringify(productsConfDel));
+        return { cartProducts: productsConfDel };
 
-  const getIndexProduct = id => {
-    return totalProducts.findIndex(p => p.id === id);
-  }
+      case CART_ACTIONS.DELETE_COMPLETE_PRODUCT:
+        const { id } = action.payload;
+        const productsCompleteDel = handleDeleteCartProduct(id, state.products);
+        localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
+        return { cartProducts: productsCompleteDel };
 
-  const getIndexConfig = (configId, indexProduct) => {
-    return totalProducts[indexProduct].config.findIndex(c => c.id == configId);
-  }
-
-  const getProduct = (id) => {
-    return totalProducts[getIndexProduct(id)];
-  }
-
-  const getTotalPriceCart = () => {
-    let total = 0;
-    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return total;
-  }
-
-  const getIVAPriceCart = () => {
-    let total = 0;
-    totalProducts.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return (total * 21) / 100;
-  }
-
-  const handleAddSpecificNumberProduct = (item, numberProductsAdded) => {
-
-    if (numberProductsAdded > 0) {
-      const { id: idItem } = item;
-      const { id: idConfig } = product_state.config;
-      numberProductsAdded = parseInt(numberProductsAdded);
-      const tempConfigurations = [{ ...product_state.config }];
-      // Searching product in cart
-      const indexProduct = getIndexProduct(item.id);
-      if (indexProduct !== -1) {
-        // Update general total
-        const updatedProducts = updateProductTotal(totalProducts, idItem, numberProductsAdded)
-        // Searching configuration in product
-        const indexConfig = getIndexConfig(idConfig, indexProduct);
-        if (indexConfig !== -1) {
-          // Update previous configuration
-          updateConfigurationStock(updatedProducts, idItem, idConfig, numberProductsAdded);
-        } else {
-          // Add new configuration
-          addConfigurationToProduct(product_state.config, numberProductsAdded, updatedProducts, item);
-        }
-        setTotalProducts(updatedProducts);
-      } else {
-        // Add new product to cart
-        const preparedItem = addProductToCart(item, numberProductsAdded, tempConfigurations);
-        setTotalProducts([preparedItem, ...totalProducts]);
-      }
-
-      ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
+      default:
+        break;
     }
   }
 
-  //////////////////////////////////////////////////////////////////////// VISUAL
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-  const data = {
-    vars: {
-      totalProducts,
-      setTotalProducts,
-    },
-    funcs: {
-      handleAddProduct,
-      handleRemoveProduct,
-      handleRemoveConfig,
-      removeProduct,
-      handleAddSpecificNumberProduct,
-      //deleteAllProductRepeats,
-    },
-    extra: {
-      findNumberProduct,
-      getTotalPriceCart,
-      getIVAPriceCart,
-      getProduct
-    }
+  const handleCart = () => {
+    return { state, dispatch, CART_ACTIONS };
   }
+
+  const data = { handleCart }
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
 }
