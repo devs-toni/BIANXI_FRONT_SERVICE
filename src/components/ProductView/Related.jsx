@@ -19,8 +19,8 @@ const Related = ({ type, price }) => {
       .then(data => {
         setRelatedProducts(getProductRelateds(data, price))
       })
-      .catch(error => console.error(error));
-  }, [type, price]);
+      .catch(err => console.error(err));
+  }, []);
 
   return (
     <>

@@ -1,4 +1,4 @@
-import { createContext, useCallback, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useReducer } from "react";
 import { useProduct } from "./ProductContext";
 import { CartMainMethods } from "../helpers/cart";
 

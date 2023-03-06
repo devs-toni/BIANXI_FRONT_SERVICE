@@ -22,7 +22,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
   const prices = product_state.updatedPrices;
 
   const { handleCart } = useCart();
-  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+  const { dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
 
   const { handleUser } = useUser();
   const { state: user_state } = handleUser();

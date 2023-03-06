@@ -22,8 +22,10 @@ const ProductView = () => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    product_dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
 
     const loadProduct = async () => {
+
       const { get } = Connection();
       await get(`${productsUrl}/get/${id}`)
         .then(data => {
@@ -53,7 +55,7 @@ const ProductView = () => {
 
     loadProduct();
     window.scrollTo(0, 0);
-  }, []);
+  }, [id]);
 
   return (
     <>
