@@ -3,9 +3,8 @@ import { useLanguage } from '../../context/GlobalContext';
 import { useUser } from '../../context/UserContext';
 import { Connection } from '../../helpers/HTTP_Connection';
 import { usersUrl } from '../../config';
-import { useUI } from '../../context/UIContext';
 
-const Form = ({ handler }) => {
+const Form = () => {
 
   const { text } = useLanguage();
 
@@ -14,11 +13,8 @@ const Form = ({ handler }) => {
     password: ''
   });
 
-  const { USER_ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
-
-  const { UI_ACTIONS, handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch } = handleUi();
+  const { handleUser } = useUser();
+  const { state: user_state, dispatch: user_dispatch, USER_ACTIONS } = handleUser();
 
   const handleInput = ({ target }) => {
     const { name, value } = target;
@@ -67,4 +63,4 @@ const Form = ({ handler }) => {
   )
 }
 
-export default Form
+export default Form;

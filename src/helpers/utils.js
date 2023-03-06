@@ -59,7 +59,7 @@ export const addProductToCart = (item, numberProductsAdded, arrayConfigurations)
 
 export const addConfigurationToProduct = (configuration, numberProductsAdded, updatedProducts, item) => {
   const updatedConfig = updateNewConfigurationStock(configuration, numberProductsAdded);
-  updatedProducts.filter(product => product.id == item.id)[0].config.push(updatedConfig);
+  updatedProducts?.filter(product => product.id == item.id)[0].config.push(updatedConfig);
 }
 
 const updateNewConfigurationStock = (configuration, addition) => {
@@ -73,7 +73,7 @@ const updateNewConfigurationStock = (configuration, addition) => {
 }
 
 export const updateConfigurationStock = (products, idProduct, idConfig, add) => {
-  products.filter(prod => prod.id == idProduct)[0].config.map(cnf => {
+  products?.filter(prod => prod.id == idProduct)[0].config.map(cnf => {
     if (cnf.id == idConfig) {
       cnf.total = parseInt(cnf.total) + add;
       cnf.stock = parseInt(cnf.stock) - add;
@@ -82,7 +82,7 @@ export const updateConfigurationStock = (products, idProduct, idConfig, add) => 
 }
 
 export const updateProductTotal = (products, idItem, numberProductsAdded) => {
-  return products.map(prod => {
+  return products?.map(prod => {
     if (prod.id === idItem) {
       prod.total = parseInt(prod.total) + parseInt(numberProductsAdded);
     }
@@ -154,3 +154,4 @@ export const getProductRelateds = (products, price) => {
   });
   return responseArray;
 } 
+
