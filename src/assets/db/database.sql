@@ -71,9 +71,7 @@ CREATE TABLE users (
 CREATE TABLE orders (
     id       BIGINT               AUTO_INCREMENT NOT NULL,
     user_id  BIGINT               NOT NULL,
-    ref      BIGINT               NOT NULL,
     address  VARCHAR(255)         NOT NULL,
-    company  VARCHAR(30)          NOT NULL,
     price    FLOAT                NOT NULL,
     FOREIGN KEY (user_id)         REFERENCES users (id) ON DELETE CASCADE,
     PRIMARY KEY (id)

@@ -129,7 +129,8 @@
       "address": "Dirección",
       "cardTitle": "Tarjeta de crédito",
       "name": "Nombre",
-      "lastname": "Apellidos"
+      "lastname": "Apellidos",
+      "email": "Correo electrónico"
     }
   }
 }

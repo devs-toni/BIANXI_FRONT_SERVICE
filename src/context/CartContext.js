@@ -1,6 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { useProduct } from "./ProductContext";
 import { CartMainMethods } from "../helpers/cart";
+import { useUser } from "./UserContext";
 
 const CartContext = createContext();
 
@@ -15,12 +16,16 @@ export const CartProvider = ({ children }) => {
   const { handleProduct } = useProduct();
   const { state: product_state } = handleProduct();
 
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
+
   const {
     handleAddProduct,
     handleRemoveProduct,
     handleAddSpecificNumberProduct,
     handleRemoveConfig,
-    handleDeleteCartProduct
+    handleDeleteCartProduct,
+    createOrder
   } = CartMainMethods(product_state);
 
   const CART_ACTIONS = {
@@ -30,6 +35,7 @@ export const CartProvider = ({ children }) => {
     DELETE_ONE_PRODUCT: "DELETE_ONE_PRODUCT",
     DELETE_CONFIGURATION: "DELETE_CONFIGURATION",
     DELETE_COMPLETE_PRODUCT: "DELETE_COMPLETE_PRODUCT",
+    PAYMENT_SUCCESS: "PAYMENT_SUCCESS"
   }
 
   const initialState = {
@@ -74,6 +80,18 @@ export const CartProvider = ({ children }) => {
         localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
         return { cartProducts: productsCompleteDel };
 
+      case CART_ACTIONS.PAYMENT_SUCCESS:
+        const result = createOrder(
+          state.cartProducts.map(p => p.id),
+          user_state.id,
+          action.payload.form.address,
+          action.payload.price
+        );
+        if (result) {
+          localStorage.removeItem("CART");
+          return { cartProducts: [] }
+        } else return state;
+        
       default:
         break;
     }

@@ -1,35 +1,24 @@
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useNavigate } from 'react-router-dom';
-import { productsUrl } from '../../config';
-import { http } from '../../helpers/http';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const SearchForm = ({ reset, handleSearch, innerRef }) => {
+const SearchForm = ({ close, handleSearch, innerRef }) => {
 
-  const { state, dispatch, SEARCH_ACTIONS } = handleSearch();
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  
+  const strQuery = searchParams.get('q') ?? '';
   const navigate = useNavigate();
 
   const handleChange = ({ target }) => {
     const { value } = target;
-    dispatch({ type: SEARCH_ACTIONS.SET_SEARCH_VALUE, payload: value })
-
-    if (state.inputSearch.length > 0) {
-      http().get(`${productsUrl}/search/${state.inputSearch}`)
-        .then(data => {
-          dispatch({ type: SEARCH_ACTIONS.SET_TEMP_RESULTS, payload: data })
-        })
-        .catch(error => console.error(error));
-    } else {
-      dispatch({ type: SEARCH_ACTIONS.SET_TEMP_RESULTS, payload: [] });
-    }
+    setSearchParams({ q: value });
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate(`/product-category/bycicles/search/${state.inputSearch}`);
-    reset();
+    close();
+    navigate(`/product-category/bycicles/search/${strQuery}`);
   }
 
   return (
@@ -38,18 +27,17 @@ const SearchForm = ({ reset, handleSearch, innerRef }) => {
         <FontAwesomeIcon onClick={handleSubmit} icon={faMagnifyingGlass} />
       </div>
       <form onSubmit={handleSubmit}>
-        <input type="text" value={state.inputSearch} onChange={handleChange} ref={innerRef} />
+        <input type="text" value={strQuery} onChange={handleChange} ref={innerRef} />
       </form>
       <div className='search__container--close'>
-        <FontAwesomeIcon icon={faXmark} onClick={reset} />
+        <FontAwesomeIcon icon={faXmark} onClick={close} />
       </div>
     </div>
   )
 }
 
 SearchForm.propTypes = {
-  reset: PropTypes.func.isRequired,
-  handleSearch: PropTypes.func.isRequired,
+  close: PropTypes.func.isRequired,
   innerRef: PropTypes.object.isRequired
 }
 

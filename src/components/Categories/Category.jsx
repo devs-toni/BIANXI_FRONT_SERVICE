@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
-import { useGlobal, useLanguage } from '../../context/GlobalContext';
+import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
 import { http } from '../../helpers/http';
@@ -12,56 +12,59 @@ import { faHourglass } from '@fortawesome/free-solid-svg-icons';
 const Category = ({ category, container, box, title }) => {
 
   const { text } = useLanguage();
-  const { type, name } = useParams();
+  const { type, search } = useParams();
+
   const navigate = useNavigate();
-  const { products } = useGlobal();
-  const { products: allProducts, setProducts } = products;
+  const [products, setProducts] = useState([]);
 
   const { handleUser } = useUser();
   const { state: user_state } = handleUser();
 
+
   useEffect(() => {
 
-    name &&
-      http().get(`${productsUrl}/search/${name}`)
+    if (search) {
+      http().get(`${productsUrl}/search/${search}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
+      return;
+    }
 
-    type &&
+    if (type) {
       http().get(`${productsUrl}/get/type/${type}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
+      return;
+    }
 
-    if (user_state?.id) {
-      (!name && !type) &&
-        http().get(`${productsUrl}/get/favourites/${user_state.id}`)
-          .then(data => setProducts(data))
-          .catch(error => console.error(error));
+    if (user_state.id) {
+      http().get(`${productsUrl}/get/favourites/${user_state.id}`)
+        .then(data => setProducts(data))
+        .catch(error => console.error(error));
     } else {
       navigate("/");
     }
-  }, [type, name, allProducts]);
+  }, [type, search]);
 
-
-  const setTitle = title ? title : (type ? type.toLowerCase() : `${allProducts?.length} ${text.search.title} ${name}`);
+  const setTitle = title ? title : (type ? type.toLowerCase() : `${products?.length} ${text.search.title} ${search}`);
 
   return (
     <>
       {
-        allProducts ?
+        products ?
           (
             <div className={category}>
               <h3 className={`${category}__title`}>{setTitle}</h3>
               <div className={container}>
                 {
-                  allProducts.length > 0
+                  products.length > 0
                     ?
-                    allProducts.map((product, index) => {
+                    products.map((product, index) => {
                       return <Product
                         key={index}
                         product={product}
                         isSearch={type ? false : true}
-                        isLike={(!type && !name) ? true : false}
+                        isLike={(!type && !search) ? true : false}
                         isRelated={false}
                         containerClass={container}
                         boxClass={box}

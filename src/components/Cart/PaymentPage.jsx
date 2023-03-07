@@ -17,8 +17,6 @@ const PaymentPage = () => {
 
   const [stripePromise, setStripePromise] = useState(loadStripe(stripeVisibleKey));
 
-
-
   return (
     <div className='body-payment'>
       <div className='payment'>

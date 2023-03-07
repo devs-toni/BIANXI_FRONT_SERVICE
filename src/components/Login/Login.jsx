@@ -1,6 +1,5 @@
 import LoginModal from './LoginModal';
 import LoggedMenu from './LoggedMenu';
-import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
 import { useUser } from '../../context/UserContext';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +18,11 @@ const Login = ({ isLogged }) => {
     ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
     navigate("/product-category/bycicles/favourites");
   }
+
+  const showOrders = () => {
+    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    navigate("/product-category/bycicles/orders");
+  }
   return (
     <>
       {
@@ -30,6 +34,7 @@ const Login = ({ isLogged }) => {
             logoutHandler={() => user_dispatch({ type: USER_ACTIONS.LOGOUT })}
             username={user_state.username}
             handlerFavourites={showFavourites}
+            handlerOrders={showOrders}
           />
           :
           <LoginModal
@@ -41,7 +46,4 @@ const Login = ({ isLogged }) => {
   )
 }
 
-Login.propTypes = {
-  isLogged: PropTypes.bool.isRequired
-}
 export default Login;

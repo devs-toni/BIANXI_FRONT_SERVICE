@@ -22,7 +22,7 @@ export const useToast = () => {
 
   const bigOkToast = (msg) => {
     Swal.fire({
-      position: 'top-middle',
+      position: 'center',
       icon: 'success',
       title: msg,
       showConfirmButton: false,

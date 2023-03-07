@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDoorOpen, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faClock, faStar } from '@fortawesome/free-regular-svg-icons';
 
-const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavourites }) => {
+const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavourites, handlerOrders }) => {
 
   const { text } = useLanguage();
 
@@ -23,7 +23,7 @@ const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavo
         <FontAwesomeIcon icon={faStar} />
         {text.login.likes}
       </p>
-      <p className='login__link' onClick={logoutHandler}>
+      <p className='login__link' onClick={handlerOrders}>
         <FontAwesomeIcon icon={faClock} />
         {text.login.orders}
       </p>
@@ -41,5 +41,6 @@ LoggedMenu.propTypes = {
   logoutHandler: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handlerFavourites: PropTypes.func.isRequired,
+  handlerOrders: PropTypes.func.isRequired,
 }
 export default LoggedMenu;

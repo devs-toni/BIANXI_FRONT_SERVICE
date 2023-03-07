@@ -8,6 +8,7 @@ import { formatNumberES } from '../../helpers/utils';
 import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { getTotalPriceCart } from '../../helpers/cart';
+import { useSearchParams } from 'react-router-dom';
 
 const Navbar = memo(({ items }) => {
 
@@ -16,6 +17,8 @@ const Navbar = memo(({ items }) => {
 
   const { handleCart } = useCart();
   const { state: cart_state } = handleCart();
+
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const showStyles = ui_state.menuIsOpen ? 'active' : '';
   const hideStyles = ui_state.menuIsOpen ? 'hide' : '';
@@ -33,6 +36,7 @@ const Navbar = memo(({ items }) => {
   }
 
   const handleClickSearch = () => {
+    setSearchParams("");
     ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH })
     ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
     ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })

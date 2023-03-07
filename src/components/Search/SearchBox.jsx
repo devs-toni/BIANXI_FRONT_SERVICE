@@ -1,32 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
+import { useGlobal } from '../../context/GlobalContext';
 
-const SearchBox = ({ input, results, reset }) => {
+const SearchBox = ({ close }) => {
+
+  const { allProducts } = useGlobal();
+  const { products } = allProducts;
+
+  const [searchParams ] = useSearchParams();
+  const q = searchParams.get('q');
+
 
   return (
     <ul className='search__results'>
       {
-        input.length > 0
-        &&
-        results.map((res, ind) => {
-          if (ind < 10) {
-            return (
-              <li key={uuid()} className="search__results--result">
-                <NavLink to={`/product/options/${res.type}/${res.id}`} onClick={reset}>{res.name}</NavLink>
-              </li>
-            )
-          }
-        })
+        products &&
+        products?.filter(({ name }) => {
+            if (!q) return false;
+            else {
+              if (name.toLowerCase().includes(q.toLowerCase())) {
+                return true;
+              } else return false;
+            }
+          })
+          .map((res, ind) => {
+            if (ind < 10) {
+              return (
+                <li key={uuid()} className="search__results--result">
+                  <NavLink to={`/product/options/${res.type}/${res.id}`} onClick={close}>{res.name}</NavLink>
+                </li>
+              )
+            }
+          })
       }
     </ul>
   )
 }
 
 SearchBox.propTypes = {
-  input: PropTypes.string.isRequired,
-  results: PropTypes.array.isRequired,
-  reset: PropTypes.func.isRequired
+  // input: PropTypes.string.isRequired,
+  // results: PropTypes.array.isRequired,
+   close: PropTypes.func.isRequired
 }
 export default SearchBox

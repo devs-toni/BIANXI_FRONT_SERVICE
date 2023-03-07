@@ -34,3 +34,4 @@ export { default as SizeSelector } from './ProductView/SizeSelector';
 export { default as Search } from './Search/Search';
 export { default as SearchForm } from './Search/SearchForm';
 export { default as SearchBox } from './Search/SearchBox';
+export { default as Orders } from './Orders/Orders';

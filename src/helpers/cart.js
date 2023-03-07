@@ -1,3 +1,5 @@
+import { ordersUrl } from "../config";
+import { http } from "./http";
 import { addConfigurationToProduct, addProductToCart, removeConfigInProduct, updateConfigurationStock, updateProductTotal } from "./utils";
 
 export const CartMainMethods = (product_state) => {
@@ -77,6 +79,18 @@ export const CartMainMethods = (product_state) => {
     return products[indexProduct]?.config?.findIndex(c => c.id == configId);
   }
 
+  const createOrder = (products, idUser, address, amount) => {
+    const validation = http().post(`${ordersUrl}/new`, {
+      body: [products, idUser, address, amount]
+    })
+      .then(data => {
+        console.log("Id de la nueva orden creada" + data);
+        if (data === -1) return false;
+        else return true;
+      });
+    return validation;
+  }
+
   /*   const findNumberProduct = id => {
       return state.cartProducts.find(p => p.id === id)?.total;
     } */
@@ -92,6 +106,7 @@ export const CartMainMethods = (product_state) => {
     handleAddSpecificNumberProduct,
     handleRemoveConfig,
     handleDeleteCartProduct,
+    createOrder
   }
 }
 

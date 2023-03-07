@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
-import { colorsUrl, sizesUrl } from '../config';
+import { colorsUrl, productsUrl, sizesUrl } from '../config';
 import { http } from '../helpers/http';
 
 const GlobalContext = createContext();
@@ -16,6 +16,10 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     
+    http().get(`${productsUrl}/get/all`)
+      .then(data => setProducts(data))
+      .catch(err => console.error(err));
+
     http().get(`${colorsUrl}/get/all`)
       .then(data => setColors(data))
       .catch(err => console.error(err));
@@ -26,7 +30,7 @@ export const GlobalProvider = ({ children }) => {
   }, [])
 
   const data = {
-    products: {
+    allProducts: {
       products,
       setProducts
     },
