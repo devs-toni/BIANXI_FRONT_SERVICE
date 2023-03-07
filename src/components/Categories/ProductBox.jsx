@@ -1,11 +1,10 @@
-import React from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import PropTypes from 'prop-types';
 import Badge from './Badge';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from '../../context/UserContext';
-import { http } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/http';
 import { productsUrl } from '../../config';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 

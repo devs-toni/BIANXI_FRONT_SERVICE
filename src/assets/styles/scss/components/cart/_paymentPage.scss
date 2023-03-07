@@ -2,10 +2,27 @@
 
 
 .body-payment {
-  background-color: #00afa975;
+  background-color: #000000;
   background-image: url(../../../../images/cart-bg.jpg);
   background-repeat: no-repeat no-repeat;
   background-size: cover;
+
+  @media screen and (max-width: 3050px) {
+    background-position: 100%;
+  }
+
+  @media screen and (max-width: 2750px) {
+    background-position: 80%;
+  }
+
+  @media screen and (max-width: 2250px) {
+    background-position: 60%;
+  }
+
+  @media screen and (max-width: 770px) {
+    background-color: white;
+    background-image: none;
+  }
 }
 
 .payment {
@@ -13,7 +30,7 @@
   margin: 80px 300px;
   background-color: #F7F7F7 !important;
   padding: 2em 3em;
-  font-size: 1.1em;
+  font-size: 1em;
   border-radius: 5px;
 
 
@@ -22,24 +39,55 @@
     font-weight: lighter;
     font-size: 2em;
     margin-bottom: 60px;
+
+    @media screen and (max-width: 770px) {
+      margin-bottom: 40px;
+    }
+
+    @media screen and (max-width: 560px) {
+      font-size: 1.8em;
+    }
   }
 
   &__cupon {
     display: flex;
     font-size: 1.2em;
+    margin: 0 auto;
     margin-bottom: 40px;
+    width: 80%;
+
 
     &--text {
       margin-right: .8em;
+
+      @media screen and (max-width: 770px) {
+        margin-bottom: 10px;
+      }
     }
 
     &--ref {
       color: gray;
+      flex-grow: 1;
 
-      &:hover {
-        color: var.$bianchi-color;
-        text-decoration: underline;
+      @media screen and (max-width: 770px) {
+
+        &:hover {
+          color: var.$bianchi-color;
+          text-decoration: underline;
+
+
+        }
       }
+    }
+
+    @media screen and (max-width: 770px) {
+      margin-bottom: 25px;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 560px) {
+      font-size: 1em;
     }
   }
 
@@ -67,6 +115,10 @@
 
           &--right {
             text-align: right;
+          }
+
+          @media screen and (max-width: 770px) {
+            padding-bottom: 15px;
           }
         }
       }
@@ -114,7 +166,12 @@
                 margin-left: 80px;
                 color: rgba(128, 128, 128, 0.664);
                 font-weight: 500;
+
+                @media screen and (max-width: 300px) {
+                  margin-left: 40px;
+                }
               }
+
             }
 
             .color {
@@ -132,7 +189,15 @@
                 height: 20px;
                 border-radius: 50%;
                 margin-left: 80px;
+
+                @media screen and (max-width: 300px) {
+                  margin-left: 40px;
+                }
               }
+            }
+
+            @media screen and (max-width: 560px) {
+              width: 60%;
             }
           }
 
@@ -150,15 +215,14 @@
             .total {}
           }
 
-          &--sub {
-            margin-top: 50px;
-            font-size: 1.2em;
-          }
-
+          &--sub,
           &--subtotal {
             margin-top: 50px;
             font-size: 1.2em;
 
+            @media screen and (max-width: 770px) {
+              margin-top: 30px;
+            }
           }
         }
       }
@@ -202,8 +266,29 @@
               text-align: right;
             }
           }
+
+          @media screen and (max-width: 770px) {
+            padding-top: 35px;
+          }
         }
       }
+
+      @media screen and (max-width: 770px) {
+        width: 90%;
+        margin: 0 auto;
+      }
+
+      @media screen and (max-width: 420px) {
+        width: 100%;
+      }
+    }
+
+    @media screen and (max-width: 560px) {
+      font-size: .9em;
+    }
+
+    @media screen and (max-width: 450px) {
+      font-size: .8em;
     }
   }
 
@@ -259,13 +344,21 @@
           font-weight: 500;
           color: rgba(128, 128, 128, 0.616);
           text-align: left;
-        }
 
-        input {
-          width: 80%;
-          margin: 1.5em 0;
+          @media screen and (max-width: 770px) {
+            background-color: rgba(221, 214, 214, 0.397);
+          }
         }
       }
+    }
+
+    @media screen and (max-width: 770px) {
+      margin: 30px auto;
+      width: 90%;
+    }
+
+    @media screen and (max-width: 420px) {
+      width: 100%;
     }
   }
 
@@ -284,5 +377,23 @@
     &:hover {
       background-position: left bottom;
     }
+  }
+
+  @media screen and (max-width: 1800px) {
+    margin: 80px 100px;
+  }
+
+  @media screen and (max-width: 1400px) {
+    margin: 80px auto;
+  }
+
+  @media screen and (max-width: 770px) {
+    width: auto;
+    margin-top: 0;
+    background-color: white !important;
+  }
+
+  @media screen and (max-width: 420px) {
+    padding: 2em 1em;
   }
 }

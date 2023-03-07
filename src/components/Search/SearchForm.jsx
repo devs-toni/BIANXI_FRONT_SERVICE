@@ -1,9 +1,8 @@
 import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { productsUrl } from '../../config';
-import { http } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 
 const SearchForm = ({ reset, handleSearch, innerRef }) => {

@@ -1,14 +1,13 @@
-import React from 'react';
 import { useEffect } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
-import { http } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { useUser } from '../../context/UserContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBatteryEmpty, faHourglass } from '@fortawesome/free-solid-svg-icons';
+import { faHourglass } from '@fortawesome/free-solid-svg-icons';
 
 const Category = ({ category, container, box, title }) => {
 

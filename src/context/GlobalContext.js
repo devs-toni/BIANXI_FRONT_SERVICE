@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
 import { colorsUrl, sizesUrl } from '../config';
-import { http } from '../helpers/HTTP_Connection';
+import { http } from '../helpers/http';
 
 const GlobalContext = createContext();
 

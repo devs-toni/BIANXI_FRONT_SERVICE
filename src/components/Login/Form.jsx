@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { useUser } from '../../context/UserContext';
-import { http } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/http';
 import { usersUrl } from '../../config';
 
 const Form = () => {
@@ -19,6 +19,7 @@ const Form = () => {
   const handleInput = ({ target }) => {
     const { name, value } = target;
     setFormUser({ ...formUser, [name]: value })
+    user_dispatch({ type: USER_ACTIONS.RESET_ERRORS });
   }
 
   const handleSubmit = async (e) => {
@@ -26,8 +27,10 @@ const Form = () => {
 
     await http().post(`${usersUrl}/verify`, { body: formUser })
       .then(data => {
-        if (!data) {
-          user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: { error: text.login.error } });
+
+        if (data === -1) {
+
+          user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: text.login.error });
         } else {
           user_dispatch({ type: USER_ACTIONS.LOGIN_SUCCESS, payload: { username: formUser.email, id: data } })
         }

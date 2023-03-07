@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useEffect } from "react";
 import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import { productsUrl } from '../../config.js';
-import { http } from '../../helpers/HTTP_Connection';
+import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { getProductRelateds } from '../../helpers/utils';
 

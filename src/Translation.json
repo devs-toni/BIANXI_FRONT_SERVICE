@@ -94,11 +94,12 @@
       "email": "Correo electrónico",
       "password": "Contraseña",
       "signin": "Acceder",
-      "error": "Error! Email/Contraseña Incorrectos",
+      "error": "Email/Contraseña Incorrectos",
       "logout": "Desconectarse",
       "create": "¿Crear una cuenta?",
       "hi": "Hola",
-      "likes": "Lista de favoritos"
+      "likes": "Lista de favoritos",
+      "orders": "Pedidos"
     },
     "search": {
       "title": "resultados encontrados para:"

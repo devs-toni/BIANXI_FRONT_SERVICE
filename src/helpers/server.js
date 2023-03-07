@@ -1,5 +1,5 @@
 import { productsUrl } from "../config";
-import { http } from "./HTTP_Connection";
+import { http } from "./http";
 
 export const addLike = (idProduct, idUser) => {
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import LoginModal from './LoginModal';
 import LoggedMenu from './LoggedMenu';
 import PropTypes from 'prop-types';

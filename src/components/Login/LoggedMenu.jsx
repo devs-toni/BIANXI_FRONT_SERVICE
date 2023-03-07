@@ -1,8 +1,8 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faDoorOpen, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faClock, faStar } from '@fortawesome/free-regular-svg-icons';
 
 const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavourites }) => {
 
@@ -17,9 +17,20 @@ const LoggedMenu = ({ username, logoutHandler, closeHandler, isOpen, handlerFavo
         className="login__close"
         onClick={closeHandler}
       />
-      <p className='login__name'>{text.login.hi} {username}!</p>
-      <p className='login__link' onClick={handlerFavourites}>{text.login.likes}</p>
-      <p className='login__link' onClick={logoutHandler}>{text.login.logout}</p>
+      <p className='login__name'>{text.login.hi} {username}!
+      </p>
+      <p className='login__link' onClick={handlerFavourites}>
+        <FontAwesomeIcon icon={faStar} />
+        {text.login.likes}
+      </p>
+      <p className='login__link' onClick={logoutHandler}>
+        <FontAwesomeIcon icon={faClock} />
+        {text.login.orders}
+      </p>
+      <p className='login__link--out' onClick={logoutHandler}>
+        <FontAwesomeIcon icon={faDoorOpen} />
+        {text.login.logout}
+      </p>
     </div>
   )
 }

@@ -35,7 +35,7 @@ const Layout = () => {
   return (
     <div className='layout'>
         <Navbar items={items} />
-        <Login isLogged={user_state.isLogged} />
+        <Login isLogged={user_state?.isLogged} />
         <Search />
         <Cart />
         <MyRouter />

@@ -21,11 +21,20 @@ export const UserProvider = ({ children }) => {
     LOGIN_SUCCESS: "LOGIN_SUCCESS",
     LOGIN_ERROR: "LOGIN_ERROR",
     HANDLE_LIKE: "HANDLE_LIKE",
+    RESET_ERROR: "RESET_ERROR",
     LOGOUT: "LOGOUT",
   }
 
   const reducer = (state, action) => {
     switch (action.type) {
+
+      case USER_ACTIONS.RESET_ERROR:
+        return {
+          isLogged: state.isLogged,
+          error: '',
+          username: state.username,
+          id: state.id
+        };
 
       case USER_ACTIONS.LOGIN_ERROR:
         return {
@@ -36,7 +45,7 @@ export const UserProvider = ({ children }) => {
         };
 
       case USER_ACTIONS.LOGIN_SUCCESS:
-      localStorage.setItem('LOGIN_SUCCESS', JSON.stringify({ id: action.payload.id, username: action.payload.username }));
+        localStorage.setItem('LOGIN_SUCCESS', JSON.stringify({ id: action.payload.id, username: action.payload.username }));
         return {
           isLogged: true,
           error: '',
@@ -51,7 +60,7 @@ export const UserProvider = ({ children }) => {
           username: '',
           id: 0
         }
-        
+
       default:
         break;
     }
