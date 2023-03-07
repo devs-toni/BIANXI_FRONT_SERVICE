@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useUser } from '../../context/UserContext';
 import { http } from '../../helpers/http';
 import { productsUrl } from '../../config';
-import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 
 const ProductBox = ({
   name,
@@ -47,11 +47,6 @@ const ProductBox = ({
 
   return (
     <div className={containerClass}>
-      {
-        isLike
-        &&
-        <FontAwesomeIcon icon={faXmark} onClick={deleteLike} className={`${containerClass}__like`} />
-      }
       <img
         className={`${containerClass}__image ${emptyStyles} ${loadedStyles} ${(isRelated || isSearch || isLike) && 'point'}`}
         src={image}
@@ -77,7 +72,6 @@ const ProductBox = ({
               <p className={`${containerClass}__price-container--price`}>{finalPrice} €</p>
             </>
         }
-
       </div>
       {
         (isEmpty && !isSearch && !isRelated)
@@ -86,6 +80,11 @@ const ProductBox = ({
           containerClass="empty-product"
           text={text.product.empty}
         />
+      }
+      {
+        isLike
+        &&
+        <FontAwesomeIcon icon={faLinkSlash} onClick={deleteLike} className={`${containerClass}__delete`} />
       }
     </div>
   )

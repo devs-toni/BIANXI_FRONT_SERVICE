@@ -3,16 +3,8 @@
 .likes-category {
   margin-top: 60px;
 
-  &__empty {
-    margin-top: 100px;
-    width: 100%;
-    font-size: 10em;
-    opacity: .4;
-    color: var.$bianchi-color;
-  }
-
   &__title {
-    text-align: right;
+    text-align: left;
     font-size: 6em;
     width: 60%;
     margin: 0 auto;
@@ -42,19 +34,27 @@
     width: 60%;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     margin-bottom: 200px;
 
     &__product {
       .like-product-box {
-        width: fit-content;
+        width: 100%;
         display: flex;
+        flex-flow: column;
         align-items: center;
         position: relative;
-        margin-left: 10%;
 
         @media screen and (max-width: 1350px) {
           margin: 0;
+        }
+
+        &__delete {
+          margin: 20px;
+          opacity: .7;
+          font-size: 2em;
+          cursor: pointer;
+
         }
 
         &__like {
@@ -71,7 +71,7 @@
         }
 
         &__image {
-          width: 21vw;
+          width: 14vw;
           margin-bottom: 10px;
           opacity: 0;
           transition: all 3s;
@@ -123,8 +123,10 @@
         }
 
         &__name {
-          font-size: 1.8em;
+          font-size: 1.5em;
           font-weight: 400;
+          min-width: 100%;
+          text-align: center;
 
           @media screen and (max-width: 1800px) {
             font-size: 1.5em;
@@ -141,13 +143,9 @@
         }
 
         &__price-container {
-          position: absolute;
-          right: 0;
-          top: 60%;
           font-size: 1.2em;
           display: flex;
-          justify-content: center;
-          align-items: center;
+          margin: 0 auto;
 
           &--price {
             font-size: 1.2em;
