@@ -83,12 +83,6 @@ input {
   -webkit-border-vertical-spacing: 0;
 }
 
-th,
-td,
-tbody {
-  display: inline;
-}
-
 .layout {
   display: flex;
   flex-direction: column;
