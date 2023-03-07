@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const SearchBox = ({ input, results, reset }) => {
+
   return (
     <ul className='search__results'>
       {
@@ -12,8 +13,8 @@ const SearchBox = ({ input, results, reset }) => {
         results.map((res, ind) => {
           if (ind < 10) {
             return (
-              <li key={uuid()} className="search__results--result" onClick={reset}>
-                <Link to={`/product/options/${res.type}/${res.id}`}>{res.name}</Link>
+              <li key={uuid()} className="search__results--result">
+                <NavLink to={`/product/options/${res.type}/${res.id}`} onClick={reset}>{res.name}</NavLink>
               </li>
             )
           }

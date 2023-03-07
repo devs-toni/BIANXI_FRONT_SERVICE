@@ -117,7 +117,6 @@
       padding: 13px 10px 13px 20px;
       font-size: 1.4em;
       border-top: 1px solid #d8d5d5a4;
-      cursor: pointer;
 
       &:first-child {
         border: none;
@@ -125,6 +124,10 @@
 
       &:hover {
         background-color: rgba(128, 128, 128, 0.366);
+      }
+
+      a {
+        cursor: pointer;
       }
     }
   }

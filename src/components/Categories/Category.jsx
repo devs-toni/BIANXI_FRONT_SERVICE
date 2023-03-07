@@ -17,8 +17,8 @@ const Category = ({ category, container, box, title }) => {
   const { products } = useGlobal();
   const { products: allProducts, setProducts } = products;
 
-  const { ACTIONS, handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch } = handleUser();
+  const { handleUser } = useUser();
+  const { state: user_state } = handleUser();
 
   useEffect(() => {
 
