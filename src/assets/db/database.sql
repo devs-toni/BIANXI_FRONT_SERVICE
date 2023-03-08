@@ -64,6 +64,7 @@ CREATE TABLE datasheets (
 CREATE TABLE users (
     id         BIGINT             AUTO_INCREMENT NOT NULL,
     email      VARCHAR(255)       NOT NULL, 
+    role       ENUM('U', 'A')     NOT NULL,
     password   VARCHAR(255)       NOT NULL, 
     PRIMARY KEY (id)
 ); 

@@ -62,7 +62,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
             {
               (!isSearch && !isRelated)
               &&
-              < NavLink to={`/product/options/${type}/${id}`} className='products__product--visit'>{text.product.view}</NavLink>
+              < NavLink to={`/product-category/bycicles/options/${type.toString()}/${id.toString()}`} className='products__product--visit'>{text.product.view}</NavLink>
             }
           </>
           :

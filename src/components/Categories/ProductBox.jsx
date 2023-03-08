@@ -52,7 +52,7 @@ const ProductBox = ({
         src={image}
         onLoad={() => setLoaded(true)}
         alt={name}
-        onClick={() => (isRelated || isSearch || isLike) && navigate(`/product/options/${type}/${id}`)}
+        onClick={() => (isRelated || isSearch || isLike) && navigate(`/product-category/bycicles/options/${type.toString()}/${id.toString()}`)}
       />
       {setName}
       <div className={`${containerClass}__price-container`}>

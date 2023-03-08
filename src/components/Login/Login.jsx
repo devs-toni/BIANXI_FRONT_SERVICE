@@ -16,12 +16,12 @@ const Login = ({ isLogged }) => {
 
   const showFavourites = () => {
     ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    navigate("/product-category/bycicles/favourites");
+    navigate("/user/section/favourites");
   }
 
   const showOrders = () => {
     ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    navigate("/product-category/bycicles/orders");
+    navigate("/user/section/orders");
   }
   return (
     <>
