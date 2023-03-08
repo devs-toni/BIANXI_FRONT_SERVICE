@@ -24,7 +24,6 @@ const CartFooter = ({ closeHandler }) => {
         <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(getIVAPriceCart(cartProducts), 2)} € IVA)</p>
       </div>
       <div className='cart-footer__btns'>
-        {console.log(cartProducts.length)}
         {
           cartProducts.length > 0
           ?

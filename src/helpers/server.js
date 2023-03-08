@@ -7,8 +7,6 @@ export const addLike = (idProduct, idUser) => {
     body: [
       idProduct, idUser
     ]
-  }).then(data => {
-    console.log(data);
   })
 }
 
@@ -18,8 +16,6 @@ export const deleteLike = (idProduct, idUser) => {
     body: [
       idProduct, idUser
     ]
-  }).then(data => {
-    console.log(data);
   })
 }
 

@@ -134,12 +134,10 @@ export const AuthProvider = ({ children }) => {
       .then((res) => {
         setProfileOAuth(res);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.err(err));
   }, []);
 
   const setProfileOAuth = useCallback(async (profile) => {
-    console.log(profile);
-
     dispatch({ type: USER_ACTIONS.SET_PROFILE, payload: profile })
     const { name, id } = profile;
     const validation = await saveUser(name, id);
@@ -153,7 +151,6 @@ export const AuthProvider = ({ children }) => {
       body: user
     })
       .then(data => {
-        console.log(data);
         if (data) return data;
         else return false;
       });

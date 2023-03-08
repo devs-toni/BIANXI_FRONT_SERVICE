@@ -2,12 +2,10 @@ import PropTypes from 'prop-types';
 import Form from './Form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useLanguage } from '../../context/GlobalContext';
-import { Link } from 'react-router-dom';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import { GoogleLogin, useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../../context/AuthContext';
-import { useEffect } from 'react';
-import { http } from '../../helpers/http';
+
 
 const LoginModal = ({ closeHandler, isOpen }) => {
 
@@ -15,7 +13,7 @@ const LoginModal = ({ closeHandler, isOpen }) => {
 
   const isActiveStyles = isOpen ? 'active' : '';
 
-  const { user_state, oAuthLogin, setProfileOAuth } = useAuth();
+  const { oAuthLogin } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => oAuthLogin(codeResponse),
