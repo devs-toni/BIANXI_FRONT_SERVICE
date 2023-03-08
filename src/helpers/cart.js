@@ -79,10 +79,10 @@ export const getMainMethods = (product_state) => {
     return products[indexProduct]?.config?.findIndex(c => c.id == configId);
   }
 
-  const createOrder = (products, idUser, address, amount) => {
-  
+  const createOrder = async (products, idUser, address, amount) => {
+    console.log(products);
     if (idUser) {
-      const validation = http().post(`${ORDERS_ENDPOINT}/new`, {
+      const validation = await http().post(`${ORDERS_ENDPOINT}/new`, {
         body: [products, idUser, address, amount]
       })
         .then(data => {

@@ -64,11 +64,16 @@ export const CartProvider = ({ children }) => {
   }, []);
 
 
-  const successPayment = useCallback((form, price) => {
+  const successPayment = useCallback(async (form, price) => {
     const { createOrder } = getMethods();
     const customerOrder = user_state.isAuthenticated ? user_state.id : null;
-    const result = createOrder(
-      cartProducts.map(p => p.id),
+    console.log("what ")
+    console.log(cartProducts)
+    const result = await createOrder(
+      cartProducts.map(p => {
+        console.log(p)
+        return p.id;
+      }),
       customerOrder,
       form.address,
       price

@@ -20,7 +20,7 @@ const Orders = () => {
       await http()
         .get(`${ORDERS_ENDPOINT}/get/all/${userId}`)
         .then(ordersBackend => {
-          setOrders([...ordersBackend]);
+          ordersBackend.length > 0 && setOrders([...ordersBackend]);
         });
     }
     getOrders(user_state.id);

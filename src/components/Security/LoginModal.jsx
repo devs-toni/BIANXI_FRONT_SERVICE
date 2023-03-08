@@ -22,25 +22,6 @@ const LoginModal = ({ closeHandler, isOpen }) => {
     onError: (error) => console.log('Login Failed:', error)
   });
 
-  useEffect(
-    () => {
-      if (user_state.oAuth) {
-        http()
-          .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user_state.oAuth.access_token}`, {
-            headers: {
-              Authorization: `Bearer ${user_state.oAuth.access_token}`,
-              Accept: 'application/json'
-            }
-          })
-          .then((res) => {
-            setProfileOAuth(res);
-          })
-          .catch((err) => console.log(err));
-      }
-    },
-    [user_state.oAuth]
-  );
-
   return (
     <div className={`${isActiveStyles} login`}>
       <h2 className="login__title">{text.login.signin}</h2>

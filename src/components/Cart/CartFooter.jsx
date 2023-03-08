@@ -24,7 +24,14 @@ const CartFooter = ({ closeHandler }) => {
         <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(getIVAPriceCart(cartProducts), 2)} € IVA)</p>
       </div>
       <div className='cart-footer__btns'>
-        <NavLink to={CART_LINK} className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
+        {console.log(cartProducts.length)}
+        {
+          cartProducts.length > 0
+          ?
+          <NavLink to={CART_LINK} className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
+          : 
+          <button className='cart-footer__btns--finish' >{text.cart.finishBtns}</button>
+        }
       </div>
     </div>
   )
