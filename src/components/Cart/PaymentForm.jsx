@@ -45,13 +45,8 @@ const PaymentForm = ({ price }) => {
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const validPayment = await pay();
-
-
-      console.log(1, " - Tenemos productos");
-
-
       if (validPayment) {
-        validPayment && successPayment(form, price);
+        validPayment && successPayment(form, price, cartProducts);
         user_state.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
       }
 

@@ -80,6 +80,7 @@ export const getMainMethods = (product_state) => {
   }
 
   const createOrder = async (products, idUser, address, amount) => {
+
     if (idUser) {
       const validation = await http().post(`${ORDERS_ENDPOINT}/new`, {
         body: [products, idUser, address, amount]
