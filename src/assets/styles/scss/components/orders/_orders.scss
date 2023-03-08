@@ -1,7 +1,17 @@
+@use '../../abstracts/variables' as var;
+
 .orders {
   width: 60%;
   margin: 0 auto;
   font-size: 1.2em;
+
+  &__empty {
+    margin-top: 100px;
+    width: 100%;
+    font-size: 10em;
+    opacity: .4;
+    color: var.$bianchi-color;
+  }
 
   &__titles {
     background-color: rgb(241, 241, 241);
