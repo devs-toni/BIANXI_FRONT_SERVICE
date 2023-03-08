@@ -130,7 +130,8 @@
       "cardTitle": "Tarjeta de crédito",
       "name": "Nombre",
       "lastname": "Apellidos",
-      "email": "Correo electrónico"
+      "email": "Correo electrónico",
+      "products": "Productos"
     }
   }
 }
