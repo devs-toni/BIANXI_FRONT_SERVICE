@@ -31,7 +31,7 @@ const LoginModal = ({ closeHandler, isOpen }) => {
         onClick={closeHandler}
       />
       <Form />
-      <button onClick={() => login()}>Sign in with Google 🚀 </button>
+      <button className='login__google' onClick={() => login()}>Sign in with Google 🚀 </button>
     </div>
   )
 }

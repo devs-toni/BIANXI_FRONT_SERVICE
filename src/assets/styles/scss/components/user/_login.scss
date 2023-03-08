@@ -168,4 +168,14 @@
     }
 
   }
+
+  &__google {
+    font-size: 1.1em;
+    margin-top: 20px;
+    cursor: pointer;
+
+    &:hover {
+      color: #b67c00;
+    }
+  }
 }
