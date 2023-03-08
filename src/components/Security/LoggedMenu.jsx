@@ -41,6 +41,7 @@ LoggedMenu.propTypes = {
   logoutHandler: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   handlerFavourites: PropTypes.func.isRequired,
-  handlerOrders: PropTypes.func.isRequired,
+  handlerOrders: PropTypes.func.isRequired
 }
+
 export default LoggedMenu;

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from 'react';
 import { addLike, deleteLike } from '../helpers/server';
 import { setProductPrice } from '../helpers/utils';
-import { useUser } from './UserContext';
+import { useAuth } from './AuthContext';
 
 const ProductContext = createContext();
 
@@ -11,8 +11,7 @@ export const useProduct = () => {
 
 export const ProductProvider = ({ children }) => {
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
+  const { user_state } = useAuth();
 
   const PRODUCT_ACTIONS = {
     SET_PRODUCT: "SET_PRODUCT",
@@ -80,7 +79,7 @@ export const ProductProvider = ({ children }) => {
         return { ...state, like: true };
 
       default:
-        break;
+        return state;
     }
   }
 

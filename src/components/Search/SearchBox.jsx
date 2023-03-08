@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import uuid from 'react-uuid';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import { useGlobal } from '../../context/GlobalContext';
+import { PRODUCT_LINK } from '../../router/paths';
 
 const SearchBox = ({ close }) => {
 
@@ -29,7 +30,7 @@ const SearchBox = ({ close }) => {
             if (ind < 10) {
               return (
                 <li key={uuid()} className="search__results--result">
-                  <NavLink to={`/product/options/${res.type}/${res.id}`} onClick={close}>{res.name}</NavLink>
+                  <NavLink to={`${PRODUCT_LINK}/${res.type}/${res.id}`} onClick={close}>{res.name}</NavLink>
                 </li>
               )
             }

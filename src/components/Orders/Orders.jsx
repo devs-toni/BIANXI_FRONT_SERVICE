@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
 import uuid from "react-uuid";
-import { ordersUrl } from "../../config";
+import { ORDERS_ENDPOINT } from "../../configuration";
 import { useLanguage } from "../../context/GlobalContext";
-import { useUser } from "../../context/UserContext";
+import { useAuth } from "../../context/AuthContext";
 import { http } from "../../helpers/http";
 import { formatNumberES } from '../../helpers/utils';
 
 const Orders = () => {
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
+  const { user_state } = useAuth();
 
   const { text } = useLanguage();
 
@@ -19,7 +18,7 @@ const Orders = () => {
   useEffect(() => {
     const getOrders = async (userId) => {
       await http()
-        .get(`${ordersUrl}/get/all/${userId}`)
+        .get(`${ORDERS_ENDPOINT}/get/all/${userId}`)
         .then(ordersBackend => {
           setOrders([...ordersBackend]);
         });
@@ -27,7 +26,7 @@ const Orders = () => {
     const getProducts = async () => {
       orders.filter(async order => {
         await http()
-          .get(`${ordersUrl}/get/products/${order.id}`)
+          .get(`${ORDERS_ENDPOINT}/get/products/${order.id}`)
           .then(prod => {
             setProducts([...products, prod = {
               order: order.id,

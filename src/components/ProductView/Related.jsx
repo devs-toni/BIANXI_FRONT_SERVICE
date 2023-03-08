@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEffect } from "react";
 import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
-import { productsUrl } from '../../config.js';
+import { PRODUCTS_ENDPOINT } from '../../configuration.js';
 import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { getProductRelateds } from '../../helpers/utils';
@@ -14,7 +14,7 @@ const Related = ({ type, price }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    http().get(`${productsUrl}/get/type/${type}`)
+    http().get(`${PRODUCTS_ENDPOINT}/get/type/${type}`)
       .then(data => {
         setRelatedProducts(getProductRelateds(data, price))
       })

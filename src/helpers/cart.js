@@ -1,4 +1,4 @@
-import { ordersUrl } from "../config";
+import { ORDERS_ENDPOINT } from "../configuration";
 import { http } from "./http";
 import { addConfigurationToProduct, addProductToCart, removeConfigInProduct, updateConfigurationStock, updateProductTotal } from "./utils";
 
@@ -80,7 +80,7 @@ export const CartMainMethods = (product_state) => {
   }
 
   const createOrder = (products, idUser, address, amount) => {
-    const validation = http().post(`${ordersUrl}/new`, {
+    const validation = http().post(`${ORDERS_ENDPOINT}/new`, {
       body: [products, idUser, address, amount]
     })
       .then(data => {

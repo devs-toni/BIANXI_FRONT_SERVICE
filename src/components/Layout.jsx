@@ -1,33 +1,30 @@
 import React from 'react';
 import { useLanguage } from '../context/GlobalContext';
-import { useUser } from '../context/UserContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Cart, Login, Search } from './index';
+import { CITY_LINK, EBIKE_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
 
 const Layout = () => {
 
   const { text } = useLanguage();
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
-
 
 
   const items = [
     {
-      ref: "product-category/bycicles/road",
+      ref: ROAD_LINK,
       text: text.header.road
     },
     {
-      ref: "product-category/bycicles/mtb",
+      ref: MTB_LINK,
       text: text.header.mtb
     },
     {
-      ref: "product-category/bycicles/ebike",
+      ref: EBIKE_LINK,
       text: text.header.ebike
     },
     {
-      ref: "product-category/bycicles/city",
+      ref: CITY_LINK,
       text: text.header.city
     }
   ];
@@ -35,7 +32,7 @@ const Layout = () => {
   return (
     <div className='layout'>
         <Navbar items={items} />
-        <Login isLogged={user_state?.isLogged} />
+        <Login />
         <Search />
         <Cart />
         <MyRouter />

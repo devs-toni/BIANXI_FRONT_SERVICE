@@ -5,6 +5,7 @@ import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 import { getIVAPriceCart, getTotalPriceCart } from '../../helpers/cart';
 import PropTypes from 'prop-types';
+import { CART_LINK } from '../../router/paths';
 
 const CartFooter = ({ closeHandler }) => {
 
@@ -25,7 +26,7 @@ const CartFooter = ({ closeHandler }) => {
         <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(getIVAPriceCart(cart_state.cartProducts), 2)} € IVA)</p>
       </div>
       <div className='cart-footer__btns'>
-        <NavLink to='/shopping-cart' className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
+        <NavLink to={CART_LINK} className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
       </div>
     </div>
   )

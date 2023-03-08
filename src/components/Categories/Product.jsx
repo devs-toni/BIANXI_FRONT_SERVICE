@@ -4,6 +4,7 @@ import { Badge, Loader, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
+import { CATEGORY, CATEGORY_ROUTER, HOME, PRODUCT, PRODUCT_LINK } from '../../router/paths';
 
 
 const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerClass, boxClass }) => {
@@ -62,7 +63,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
             {
               (!isSearch && !isRelated)
               &&
-              < NavLink to={`/product-category/bycicles/options/${type.toString()}/${id.toString()}`} className='products__product--visit'>{text.product.view}</NavLink>
+              < NavLink to={`${PRODUCT_LINK}/${type.toString()}/${id.toString()}`} className='products__product--visit'>{text.product.view}</NavLink>
             }
           </>
           :

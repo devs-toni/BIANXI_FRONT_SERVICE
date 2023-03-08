@@ -2,6 +2,7 @@ import { faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { SEARCH_LINK } from '../../router/paths';
 
 const SearchForm = ({ close, handleSearch, innerRef }) => {
 
@@ -18,7 +19,7 @@ const SearchForm = ({ close, handleSearch, innerRef }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     close();
-    navigate(`/product-category/bycicles/search/${strQuery}`);
+    navigate(`${SEARCH_LINK}/${strQuery}`);
   }
 
   return (

@@ -59,7 +59,7 @@ export const UIProvider = ({ children }) => {
         return { ...state, searchIsOpen: state.searchIsOpen && false };
 
       default:
-        break;
+        return state;
     }
   }
   const [state, dispatch] = useReducer(UiReducer, initialState);

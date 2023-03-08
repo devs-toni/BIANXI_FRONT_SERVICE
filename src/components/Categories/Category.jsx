@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
-import { productsUrl } from '../../config.js';
+import { PRODUCTS_ENDPOINT } from '../../configuration.js';
 import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
-import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglass } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,28 +17,26 @@ const Category = ({ category, container, box, title }) => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
-
+  const { user_state } = useAuth();
 
   useEffect(() => {
 
     if (search) {
-      http().get(`${productsUrl}/search/${search}`)
+      http().get(`${PRODUCTS_ENDPOINT}/search/${search}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
       return;
     }
 
     if (type) {
-      http().get(`${productsUrl}/get/type/${type}`)
+      http().get(`${PRODUCTS_ENDPOINT}/get/type/${type}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
       return;
     }
 
     if (user_state.id) {
-      http().get(`${productsUrl}/get/favourites/${user_state.id}`)
+      http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${user_state.id}`)
         .then(data => setProducts(data))
         .catch(error => console.error(error));
     } else {

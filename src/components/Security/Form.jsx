@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
-import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 import { http } from '../../helpers/http';
-import { usersUrl } from '../../config';
+import { USERS_ENDPOINT } from '../../configuration';
 
 const Form = () => {
 
@@ -13,26 +13,25 @@ const Form = () => {
     password: ''
   });
 
-  const { handleUser } = useUser();
-  const { state: user_state, dispatch: user_dispatch, USER_ACTIONS } = handleUser();
+  const { user_state, reset, login } = useAuth();
+
 
   const handleInput = ({ target }) => {
     const { name, value } = target;
     setFormUser({ ...formUser, [name]: value })
-    user_dispatch({ type: USER_ACTIONS.RESET_ERRORS });
+    reset();
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await http().post(`${usersUrl}/verify`, { body: formUser })
+    await http().post(`${USERS_ENDPOINT}/verify`, { body: formUser })
       .then(data => {
-
-        if (data === -1) {
-
-          user_dispatch({ type: USER_ACTIONS.LOGIN_ERROR, payload: text.login.error });
+        console.log(data);
+        if (data.length === 0) {
+          login(null, null, null , "Email/Contraseña incorrectos!");
         } else {
-          user_dispatch({ type: USER_ACTIONS.LOGIN_SUCCESS, payload: { username: formUser.email, id: data } })
+          login(data[0], data[1], data[2])
         }
       });
   }

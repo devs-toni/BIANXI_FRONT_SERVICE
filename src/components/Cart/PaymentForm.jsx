@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
-import { stripeUrl } from '../../config';
-import { useForm } from '../../helpers/useForm';
-import { useToast } from '../../helpers/useToast';
+import { STRIPE_ENDPOINT } from '../../configuration';
+import { useForm } from '../../hooks/useForm';
+import { useToast } from '../../hooks/useToast';
 import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 
@@ -63,7 +63,7 @@ const PaymentForm = ({ price }) => {
         description: text.payment.description
       }
 
-      const { client_secret } = await fetch(`${stripeUrl}/payment_intent`, {
+      const { client_secret } = await fetch(`${STRIPE_ENDPOINT}/payment_intent`, {
         body: JSON.stringify(paymentIntentDTO),
         method: "POST",
         headers: headers

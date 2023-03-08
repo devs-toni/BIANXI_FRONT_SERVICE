@@ -5,7 +5,7 @@ import { SizeSelector, ColorSelector } from '../index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import CartSelector from './CartSelector';
-import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
@@ -24,8 +24,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
   const { handleCart } = useCart();
   const { dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
+  const { user_state } = useAuth();
 
   const { handleUi } = useUI();
   const { dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
@@ -68,7 +67,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
         />
         <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
         {
-          user_state.isLogged
+          user_state.isAuthenticated
           &&
           <FontAwesomeIcon icon={faHeart} onClick={handleLike} className={isLike ? 'like' : ''} />
         }

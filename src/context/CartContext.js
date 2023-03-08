@@ -1,7 +1,7 @@
 import { createContext, useContext, useReducer } from "react";
 import { useProduct } from "./ProductContext";
 import { CartMainMethods } from "../helpers/cart";
-import { useUser } from "./UserContext";
+import { useAuth } from "./AuthContext";
 
 const CartContext = createContext();
 
@@ -16,8 +16,7 @@ export const CartProvider = ({ children }) => {
   const { handleProduct } = useProduct();
   const { state: product_state } = handleProduct();
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
+  const { user_state } = useAuth();
 
   const {
     handleAddProduct,
@@ -91,9 +90,9 @@ export const CartProvider = ({ children }) => {
           localStorage.removeItem("CART");
           return { cartProducts: [] }
         } else return state;
-        
+
       default:
-        break;
+        return state;
     }
   }
 

@@ -6,7 +6,7 @@ import { useCart } from '../../context/CartContext';
 import { getTotalPriceCart } from '../../helpers/cart';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { stripeVisibleKey } from '../../config';
+import { STRIPE_VISIBLE_KEY } from '../../configuration';
 
 const PaymentPage = () => {
 
@@ -15,7 +15,7 @@ const PaymentPage = () => {
 
   const { text } = useLanguage();
 
-  const [stripePromise, setStripePromise] = useState(loadStripe(stripeVisibleKey));
+  const [stripePromise, setStripePromise] = useState(loadStripe(STRIPE_VISIBLE_KEY));
 
   return (
     <div className='body-payment'>

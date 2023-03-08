@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
 import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
-import { productsUrl } from '../../config.js';
+import { PRODUCTS_ENDPOINT } from '../../configuration.js';
 import { http } from '../../helpers/http';
 import { setProductConfigurations } from '../../helpers/utils';
 import { getLike } from '../../helpers/server';
-import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 
 const ProductView = () => {
 
@@ -15,8 +15,7 @@ const ProductView = () => {
   const { handleProduct } = useProduct();
   const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
 
-  const { handleUser } = useUser();
-  const { state: user_state } = handleUser();
+  const { user_state } = useAuth();
 
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
   const [loading, setLoading] = useState(true)
@@ -28,7 +27,7 @@ const ProductView = () => {
 
     const loadProduct = async () => {
 
-      await http().get(`${productsUrl}/get/${id}`)
+      await http().get(`${PRODUCTS_ENDPOINT}/get/${id}`)
         .then(data => {
           product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: data });
 
