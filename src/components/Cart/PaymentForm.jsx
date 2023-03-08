@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
-import { ORDERS_ENDPOINT, STRIPE_ENDPOINT } from '../../configuration';
+import { STRIPE_ENDPOINT } from '../../configuration';
 import { useForm } from '../../hooks/useForm';
 import { useToast } from '../../hooks/useToast';
 import { useCart } from '../../context/CartContext';
@@ -22,7 +22,7 @@ const PaymentForm = ({ price }) => {
 
   const navigate = useNavigate();
 
-  const { successPayment } = useCart();
+  const { successPayment, cartProducts } = useCart();
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -45,8 +45,16 @@ const PaymentForm = ({ price }) => {
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const validPayment = await pay();
-      validPayment && successPayment(form, price);
-      user_state.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
+
+
+      console.log(1, " - Tenemos productos");
+
+
+      if (validPayment) {
+        validPayment && successPayment(form, price);
+        user_state.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
+      }
+
     } else setFormErrors(errors)
   }
 

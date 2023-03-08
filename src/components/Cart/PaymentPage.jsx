@@ -6,6 +6,7 @@ import { useCart } from '../../context/CartContext';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_VISIBLE_KEY } from '../../configuration';
+import { Navigate } from 'react-router-dom';
 
 const PaymentPage = () => {
 
@@ -14,6 +15,8 @@ const PaymentPage = () => {
   const { text } = useLanguage();
 
   const [stripePromise, setStripePromise] = useState(loadStripe(STRIPE_VISIBLE_KEY));
+
+  if (cartProducts.length === 0) return <Navigate to="/" />
 
   return (
     <div className='body-payment'>
