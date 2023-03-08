@@ -19,33 +19,24 @@ export const MyRouter = () => {
             <Route path=":type/:id" element={<ProductView />} />
           </Route>
           <Route path={SEARCH_ROUTER}>
-            <Route
-              path=":search"
-              element={<Category
-                category="search-category"
-                container="search-products"
-                box="search-product-box"
-              />}
-            />
+            <Route path=":search" element={<Category category="search-category" container="search-products" box="search-product-box" />} />
           </Route>
         </Route>
         <Route path={CART_ROUTER} element={<PaymentPage />} />
         <Route path={USER_ROUTER}>
-          <Route
-            path={FAVOURITES_ROUTER}
-            element={<UserSection
-              component={Category}
-              category="likes-category"
-              container="like-products"
-              box="like-product-box"
-              title={text.likes.title}
-            />}
+          <Route path={FAVOURITES_ROUTER} element=
+            {
+              <UserSection>
+                <Category category="likes-category" container="like-products" box="like-product-box" title={text.likes.title} />
+              </UserSection>
+            }
           />
-          <Route
-            path={ORDERS_ROUTER}
-            element={<UserSection
-              component={Orders}
-            />}
+          <Route path={ORDERS_ROUTER} element=
+            {
+              <UserSection>
+                <Orders />
+              </UserSection>
+            }
           />
         </Route>
 
