@@ -16,7 +16,9 @@ export const AuthProvider = ({ children }) => {
     id: authStorage ? authStorage.id : 0,
     username: authStorage ? authStorage.username : '',
     role: authStorage ? authStorage.role : '',
-    error: ''
+    error: '',
+    oAuth: null,
+    profile: null
   }
 
   const USER_ACTIONS = {
@@ -25,7 +27,9 @@ export const AuthProvider = ({ children }) => {
     LOGIN_ERROR: "LOGIN_ERROR",
     HANDLE_LIKE: "HANDLE_LIKE",
     RESET_ERROR: "RESET_ERROR",
-    LOGOUT: "LOGOUT"
+    LOGOUT: "LOGOUT",
+    SET_OAUTH: "SET_OAUTH",
+    SET_PROFILE: "SET_PROFILE"
   }
 
   const reducer = (state, action) => {
@@ -64,6 +68,17 @@ export const AuthProvider = ({ children }) => {
           error: '',
         }
 
+      case USER_ACTIONS.SET_OAUTH:
+        return {
+          oAuth: action.payload
+        }
+
+      case USER_ACTIONS.SET_PROFILE:
+        return {
+          ...state,
+          profile: action.payload
+        }
+
       default:
         return state;
     }
@@ -86,14 +101,26 @@ export const AuthProvider = ({ children }) => {
   const logout = useCallback(() => {
     localStorage.removeItem('AUTH');
     dispatch({ type: USER_ACTIONS.LOGOUT })
-  }, [])
+  }, []);
+
+  const oAuthLogin = useCallback((response) => {
+    console.log(response);
+    dispatch({ type: USER_ACTIONS.SET_OAUTH, payload: response })
+  }, []);
+
+  const setProfileOAuth = useCallback((profile) => {
+    dispatch({ type: USER_ACTIONS.SET_PROFILE, payload: profile })
+
+  }, []);
 
   const data = useMemo(() => ({
     user_state,
     login,
     logout,
-    reset
-  }), [login, logout, reset, user_state])
+    reset,
+    oAuthLogin,
+    setProfileOAuth
+  }), [login, logout, reset, oAuthLogin, setProfileOAuth, user_state])
 
   return (
     <AuthContext.Provider value={data}>{children}</AuthContext.Provider>

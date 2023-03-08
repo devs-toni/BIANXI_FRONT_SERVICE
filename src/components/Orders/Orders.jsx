@@ -23,21 +23,7 @@ const Orders = () => {
           setOrders([...ordersBackend]);
         });
     }
-    const getProducts = async () => {
-      orders.filter(async order => {
-        await http()
-          .get(`${ORDERS_ENDPOINT}/get/products/${order.id}`)
-          .then(prod => {
-            setProducts([...products, prod = {
-              order: order.id,
-              products: prod
-            }])
-          })
-      })
-    }
     getOrders(user_state.id);
-    getProducts();
-
   }, []);
 
 
@@ -48,7 +34,6 @@ const Orders = () => {
       <div className="orders__titles">
         <p className="orders__titles--key">#</p>
         <p className="orders__titles--key">{text.payment.address}</p>
-        <p className="orders__titles--key">{text.payment.products}</p>
         <p className="orders__titles--key">{text.payment.total}</p>
       </div>
       {
@@ -59,22 +44,6 @@ const Orders = () => {
             <div className="orders__order" key={uuid()}>
               <p className="orders__order--val">{id}</p>
               <p className="orders__order--val">{address}</p>
-              <div className="orders__order--product">
-                {
-                  products.map(({ products, order }) => {
-                    console.log(products)
-                    if (order === id) {
-                      products.map(({ name }) => {
-                        return (
-                          <React.Fragment key={uuid()}>
-                            <p>{name}</p>
-                          </React.Fragment>
-                        )
-                      })
-                    }
-                  })
-                }
-              </div>
               <p className="orders__order--val">{formatNumberES(price)} €</p>
             </div>
           )

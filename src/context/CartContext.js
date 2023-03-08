@@ -77,7 +77,7 @@ export const CartProvider = ({ children }) => {
       localStorage.removeItem("CART");
       setCartProducts([]);
     }
-  }, []);
+  }, [user_state]);
 
 
   //TOTAL CHARGE IN CART

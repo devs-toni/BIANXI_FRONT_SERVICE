@@ -80,12 +80,12 @@ export const getMainMethods = (product_state) => {
   }
 
   const createOrder = (products, idUser, address, amount) => {
+  
     if (idUser) {
       const validation = http().post(`${ORDERS_ENDPOINT}/new`, {
         body: [products, idUser, address, amount]
       })
         .then(data => {
-          console.log("Id de la nueva orden creada" + data);
           if (data === -1) return false;
           else return true;
         });

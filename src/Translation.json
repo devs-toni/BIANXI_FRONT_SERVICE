@@ -96,7 +96,7 @@
       "signin": "Acceder",
       "error": "Email/Contraseña Incorrectos",
       "logout": "Desconectarse",
-      "create": "¿Crear una cuenta?",
+      "create": "Iniciar sesión con Google",
       "hi": "Hola",
       "likes": "Lista de favoritos",
       "orders": "Pedidos"
@@ -133,5 +133,8 @@
       "email": "Correo electrónico",
       "products": "Productos"
     }
+  }, 
+  "en": {
+    
   }
 }
