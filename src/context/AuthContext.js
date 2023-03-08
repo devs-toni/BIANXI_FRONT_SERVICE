@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
     role: authStorage ? authStorage.role : '',
     error: '',
     oAuth: null,
-    profile: null
+    profile: null,
   }
 
   const USER_ACTIONS = {
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
     RESET_ERROR: "RESET_ERROR",
     LOGOUT: "LOGOUT",
     SET_OAUTH: "SET_OAUTH",
-    SET_PROFILE: "SET_PROFILE"
+    SET_PROFILE: "SET_PROFILE",
   }
 
   const reducer = (state, action) => {
@@ -154,7 +154,7 @@ export const AuthProvider = ({ children }) => {
         if (data) return data;
         else return false;
       });
-      return response;
+    return response;
   }
 
   const data = useMemo(() => ({
@@ -164,6 +164,7 @@ export const AuthProvider = ({ children }) => {
     reset,
     oAuthLogin,
     setProfileOAuth
+
   }), [login, logout, reset, oAuthLogin, setProfileOAuth, user_state])
 
   return (
