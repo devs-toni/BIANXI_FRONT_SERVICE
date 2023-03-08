@@ -42,7 +42,7 @@ const Category = ({ category, container, box, title }) => {
     } else {
       navigate("/");
     }
-  }, [type, search]);
+  }, [type, search, products]);
 
   const setTitle = title ? title : (type ? type.toLowerCase() : `${products?.length} ${text.search.title} ${search}`);
 

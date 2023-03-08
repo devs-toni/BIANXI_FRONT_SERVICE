@@ -42,7 +42,11 @@ const ProductBox = ({
   const offerPreviousPrice = isOffer ? initPrice : finalPrice;
 
   const deleteLike = async () => {
-    await http().del(`${PRODUCTS_ENDPOINT}/like/delete`, { body: [id, user_state.id] })
+    await http()
+      .del(`${PRODUCTS_ENDPOINT}/like/delete`, { body: [id, user_state.id] })
+      .then(data => {
+        return data;
+      }).catch(err => console.error(err));
   }
 
   return (

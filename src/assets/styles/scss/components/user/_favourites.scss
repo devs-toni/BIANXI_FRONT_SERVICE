@@ -3,6 +3,15 @@
 .likes-category {
   margin-top: 60px;
 
+  &__empty {
+    position: absolute;
+    width: 60%;
+    font-size: 10em;
+    opacity: .4;
+    color: var.$bianchi-color;
+    margin: auto;
+  }
+
   &__title {
     text-align: left;
     font-size: 6em;
