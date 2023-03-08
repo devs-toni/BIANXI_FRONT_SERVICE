@@ -6,10 +6,9 @@ import { useCart } from '../../context/CartContext';
 const Icon = ({ isCartBtn, parentStyles, btnStyles, icon, handler }) => {
 
 
-  const { handleCart } = useCart();
-  const { state: cart_state } = handleCart();
+  const { cartProducts } = useCart();
 
-  const hasItems = (cart_state.cartProducts.length > 0) ? true : false;
+  const hasItems = (cartProducts.length > 0) ? true : false;
   const hasItemsStyles = hasItems ? 'active' : '';
 
   return (
@@ -18,7 +17,7 @@ const Icon = ({ isCartBtn, parentStyles, btnStyles, icon, handler }) => {
       {
         isCartBtn
         &&
-        <span className={hasItemsStyles}>{hasItems && cart_state.cartProducts.length}</span>
+        <span className={hasItemsStyles}>{hasItems && cartProducts.length}</span>
       }
     </button>
   )

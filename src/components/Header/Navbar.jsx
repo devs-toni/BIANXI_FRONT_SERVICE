@@ -7,7 +7,6 @@ import { useCart } from '../../context/CartContext';
 import { formatNumberES } from '../../helpers/utils';
 import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
-import { getTotalPriceCart } from '../../helpers/cart';
 import { useSearchParams } from 'react-router-dom';
 
 const Navbar = memo(({ items }) => {
@@ -15,8 +14,7 @@ const Navbar = memo(({ items }) => {
   const { handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
-  const { handleCart } = useCart();
-  const { state: cart_state } = handleCart();
+  const { cartProducts, getTotalPriceCart } = useCart();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -96,7 +94,7 @@ const Navbar = memo(({ items }) => {
             isOpen={ui_state.menuIsOpen}
             handler={handleClickMenu}
           />
-          <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(cart_state.cartProducts), 2)} €</p>
+          <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(cartProducts), 2)} €</p>
         </div>
       </div>
     </div>

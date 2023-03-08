@@ -18,8 +18,7 @@ const PaymentForm = ({ price }) => {
 
   const navigate = useNavigate();
 
-  const { handleCart } = useCart();
-  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+  const { successPayment } = useCart();
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -42,8 +41,7 @@ const PaymentForm = ({ price }) => {
     const errors = validate();
     if (Object.keys(errors).length === 0) {
       const validPayment = await pay();
-      console.log(validPayment);
-      validPayment && cart_dispatch({ type: CART_ACTIONS.PAYMENT_SUCCESS, payload: {price, form} });
+      validPayment && successPayment(form, price);
       navigate("/");
     } else setFormErrors(errors)
   }

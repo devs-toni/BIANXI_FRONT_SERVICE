@@ -21,8 +21,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
   const size = product_state.size;
   const prices = product_state.updatedPrices;
 
-  const { handleCart } = useCart();
-  const { dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+  const { addProducts } = useCart();
 
   const { user_state } = useAuth();
 
@@ -34,12 +33,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
 
   const handleCartAddition = () => {
     const { current } = totalRef;
-    cart_dispatch({
-      type: CART_ACTIONS.ADD_PRODUCTS, payload: {
-        item: { ...product_state.product, ...prices },
-        n: current.value
-      }
-    })
+    addProducts({ ...product_state.product, ...prices }, current.value)
     ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
   }
 

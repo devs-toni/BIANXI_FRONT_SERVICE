@@ -12,17 +12,12 @@ const Cart = () => {
 
   const { text } = useLanguage();
 
-  const { handleCart } = useCart();
-  const { state: cart_state, dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+  const { cartProducts, deleteCompleteProduct } = useCart();
 
   const { handleUi } = useUI();
   const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const [imgLoaded, setImgLoaded] = useState(false);
-
-  const handleDelete = (id) => {
-    cart_dispatch({ type: CART_ACTIONS.DELETE_COMPLETE_PRODUCT, payload: id })
-  }
 
   return (
     <div className={`cart ${ui_state.cartIsOpen ? 'active' : ''}`}>
@@ -36,15 +31,15 @@ const Cart = () => {
         </div>
         <div className='cart-menu__content'>
           {
-            cart_state.cartProducts.length > 0
+            cartProducts.length > 0
               ?
-              cart_state.cartProducts.map(({ id, name, final, type, offer, price, total, config }) => {
+              cartProducts.map(({ id, name, final, type, offer, price, total, config }) => {
                 return (
                   <div className='cart-menu__content--product' key={uuid()}>
                     <FontAwesomeIcon
                       icon={faXmark}
                       className='cart-menu__content--product-close'
-                      onClick={() => handleDelete(id)} />
+                      onClick={() => deleteCompleteProduct(id)} />
                     <div className="cart-menu__content--product-calc">
                       <ProductBox
                         name={name}

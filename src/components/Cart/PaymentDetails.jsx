@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 import uuid from 'react-uuid';
 import { formatNumberES, setProductPrice } from '../../helpers/utils';
-import { getIVAPriceCart, getTotalPriceCart } from '../../helpers/cart';
+import { useCart } from '../../context/CartContext';
 
 const PaymentDetails = ({ products }) => {
 
   const { text } = useLanguage();
+
+  const { getIVAPriceCart, getTotalPriceCart } = useCart();
 
   return (
     <div className='payment__details'>

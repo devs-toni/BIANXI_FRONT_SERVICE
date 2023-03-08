@@ -7,42 +7,25 @@ import uuid from 'react-uuid';
 const CartConfigHandler = memo(({ product }) => {
 
 
-  const { handleCart } = useCart();
-  const { dispatch: cart_dispatch, CART_ACTIONS } = handleCart();
+  const { addOneProduct, deleteOneProduct, deleteConfiguration } = useCart();
 
   const { config: configurations, id } = product;
 
   const handleAdd = (idProduct, conf) => {
     const { id: idConf, stock } = conf;
     if (stock > 0)
-      cart_dispatch({
-        type: CART_ACTIONS.ADD_ONE_PRODUCT, payload: {
-          productAdd: idProduct,
-          configurationAdd: idConf
-        }
-      })
+      addOneProduct(idProduct, idConf)
   }
 
   const handleRemove = (idProduct, conf) => {
     const { id: idConf, total } = conf;
     if (total > 1)
-      cart_dispatch({
-        type: CART_ACTIONS.DELETE_ONE_PRODUCT, payload: {
-          productDel: idProduct,
-          configurationDel: idConf
-        }
-      })
+      deleteOneProduct(idProduct, idConf);
   }
 
   const handleRemoveConf = (idProduct, conf) => {
     const { id: idConf, total } = conf;
-    cart_dispatch({
-      type: CART_ACTIONS.DELETE_CONFIGURATION, payload: {
-        idProduct,
-        idConf,
-        totalProductInConf: total
-      }
-    })
+    deleteConfiguration(idProduct, idConf, total);
   }
 
   return (

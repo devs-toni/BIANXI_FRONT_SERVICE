@@ -3,15 +3,13 @@ import { useLanguage } from '../../context/GlobalContext';
 import PaymentForm from './PaymentForm';
 import PaymentDetails from './PaymentDetails';
 import { useCart } from '../../context/CartContext';
-import { getTotalPriceCart } from '../../helpers/cart';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { STRIPE_VISIBLE_KEY } from '../../configuration';
 
 const PaymentPage = () => {
 
-  const { handleCart } = useCart();
-  const { state: cart_state } = handleCart();
+  const { cartProducts, getTotalPriceCart } = useCart();
 
   const { text } = useLanguage();
 
@@ -27,9 +25,9 @@ const PaymentPage = () => {
               <p className='payment__cupon--text'>{text.payment.cupon}</p>
               <a className='payment__cupon--ref' href="#" rel='noreferrer'>{text.payment.cuponLink}</a>
             </div>
-            <PaymentDetails products={cart_state.cartProducts} />
+            <PaymentDetails products={cartProducts} />
             <Elements stripe={stripePromise}>
-              <PaymentForm price={getTotalPriceCart(cart_state.cartProducts)} />
+              <PaymentForm price={getTotalPriceCart(cartProducts)} />
             </Elements>
           </>
         }
