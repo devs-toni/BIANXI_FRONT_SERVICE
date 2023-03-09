@@ -114,7 +114,7 @@ export const ProductProvider = ({ children }) => {
   }
   const [productState, dispatch] = useReducer(reducer, init);
 
-  const setProperty = useCallback((property, value) => {
+  const setProperty = (property, value) => {
     let action = managePropertySetter(property);
 
     if (property === PRODUCT_PROPERTIES.LIKE && !value) {
@@ -126,7 +126,7 @@ export const ProductProvider = ({ children }) => {
       action = ACTIONS.HANDLE_LIKE;
     }
     dispatch({ type: action, payload: value ? value : null })
-  }, []);
+  }
 
   const managePropertySetter = useCallback((property) => {
     switch (property) {
@@ -162,10 +162,10 @@ export const ProductProvider = ({ children }) => {
     }
   }, []);
 
-  const data = useMemo(() => ({
+  const data = {
     productState,
     setProperty,
-  }), [productState, setProperty])
+  }
   return (
     <ProductContext.Provider value={data}>{children}</ProductContext.Provider>
   )

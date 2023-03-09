@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
 import PropTypes from 'prop-types';
@@ -17,9 +17,7 @@ const Category = ({ category, container, box, title }) => {
   const { allProducts } = useGlobal();
   const { products } = allProducts;
   const [categoryProducts, setCategoryProducts] = useState([])
-  const navigate = useNavigate();
   const { userState } = useAuth();
-
 
   useEffect(() => {
     if (products) {
@@ -27,13 +25,16 @@ const Category = ({ category, container, box, title }) => {
         setCategoryProducts(products.filter(p => p.type === type));
       else if (search)
         setCategoryProducts(products.filter(p => p.name.toLowerCase().includes(search.toLowerCase())));
-      else
+    }
+  }, [type, search, products])
+
+  useEffect(() => {
+    if (products && !type && !search) {
         http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${userState.id}`)
           .then(data => setCategoryProducts(data))
           .catch(error => console.error(error));
     }
-  }, [type, search, products])
-
+  }, [products, categoryProducts])
 
   const setTitle = title ? title : (type ? type.toLowerCase() : `${categoryProducts?.length} ${text.search.title} ${search}`);
 

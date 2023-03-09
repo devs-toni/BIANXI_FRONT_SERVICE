@@ -7,9 +7,9 @@
   box-shadow: 0 0 20px 1px black;
 
   &__empty {
-    margin-top: 100px;
+    margin: 100px 0;
     width: 100%;
-    font-size: 10em;
+    font-size: 6em;
     opacity: .4;
     color: var.$bianchi-color;
   }
