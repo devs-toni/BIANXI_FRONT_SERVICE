@@ -13,7 +13,7 @@ const Form = () => {
     password: ''
   });
 
-  const { user_state, reset, login } = useAuth();
+  const { userState, reset, login } = useAuth();
 
 
   const handleInput = ({ target }) => {
@@ -58,7 +58,7 @@ const Form = () => {
           className='login__form--send'
           value={text.login.signin} />
       </form>
-      <p className='login__form--error'>{user_state?.error}</p>
+      <p className='login__form--error'>{userState?.error}</p>
     </>
   )
 }

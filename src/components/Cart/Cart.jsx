@@ -7,23 +7,24 @@ import { CartConfigHandler, ProductBox, CartFooter } from '../index';
 import { calcTotalPrice } from '../../helpers/utils';
 import uuid from 'react-uuid';
 import { useUI } from '../../context/UIContext';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 
 const Cart = () => {
 
   const { text } = useLanguage();
 
-  const { cartProducts, deleteCompleteProduct } = useCart();
-
-  const { handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
+  const { cartState, deleteCompleteProduct } = useCart();
+  const { cartProducts } = cartState;
+  
+  const { uiState, handleUi } = useUI();
 
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <div className={`cart ${ui_state.cartIsOpen ? 'active' : ''}`}>
-      <div className={`cart-menu ${ui_state.cartIsOpen ? 'active' : ''}`} >
+    <div className={`cart ${uiState.cartIsOpen ? 'active' : ''}`}>
+      <div className={`cart-menu ${uiState.cartIsOpen ? 'active' : ''}`} >
         <div className='cart-menu__header'>
-          <FontAwesomeIcon icon={faXmark} onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }} className='cart-menu__header--close' />
+          <FontAwesomeIcon icon={faXmark} onClick={() => handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE)} className='cart-menu__header--close' />
           <div className='cart-menu__header--content'>
             <FontAwesomeIcon className='cart-menu__header--content-icon' icon={faCartShopping} />
             <h1 className='cart-menu__header--content-title'>Cart</h1>
@@ -66,7 +67,7 @@ const Cart = () => {
               </div>
           }
         </div>
-        <CartFooter closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_CART }) }} />
+        <CartFooter closeHandler={() => handleUi(UI_SECTIONS.CART, UI_ACTIONS.CLOSE)} />
       </div>
     </div>
   )

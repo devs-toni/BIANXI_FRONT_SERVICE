@@ -8,50 +8,52 @@ import { formatNumberES } from '../../helpers/utils';
 import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { useSearchParams } from 'react-router-dom';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 
 const Navbar = memo(({ items }) => {
 
-  const { handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
+  const { uiState, handleUi } = useUI();
 
-  const { cartProducts, getTotalPriceCart } = useCart();
+  const { cartState } = useCart();
+  const { totalAmount: total } = cartState;
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const showStyles = ui_state.menuIsOpen ? 'active' : '';
-  const hideStyles = ui_state.menuIsOpen ? 'hide' : '';
+  const showStyles = uiState.menuIsOpen ? 'active' : '';
+  const hideStyles = uiState.menuIsOpen ? 'hide' : '';
 
   const handleClickLogin = () => {
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_LOGIN })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.HANDLE)
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE)
   }
 
   const handleClickMenu = () => {
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_MENU })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.HANDLE)
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE)
   }
 
   const handleClickSearch = () => {
     setSearchParams("");
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_SEARCH })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.HANDLE)
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)
   }
 
   const handleClickCart = () => {
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+    handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE)
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE)
+
   }
 
   const handleClickDropdown = () => {
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_CART })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_MENU })
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH })
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)
+    handleUi(UI_SECTIONS.CART, UI_ACTIONS.CLOSE)
   }
 
   return (
@@ -91,10 +93,10 @@ const Navbar = memo(({ items }) => {
           />
           <MenuIcon
             parentStyles='navbar__options--icons'
-            isOpen={ui_state.menuIsOpen}
+            isOpen={uiState.menuIsOpen}
             handler={handleClickMenu}
           />
-          <p className="navbar__options--charge" onClick={() => { ui_dispatch({ type: UI_ACTIONS.HANDLE_CART }) }}>{formatNumberES(getTotalPriceCart(cartProducts), 2)} €</p>
+          <p className="navbar__options--charge" onClick={() => handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE)}>{formatNumberES(total, 2)} €</p>
         </div>
       </div>
     </div>

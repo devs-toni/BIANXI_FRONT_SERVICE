@@ -6,7 +6,8 @@ import { useCart } from '../../context/CartContext';
 const Icon = ({ isCartBtn, parentStyles, btnStyles, icon, handler }) => {
 
 
-  const { cartProducts } = useCart();
+  const { cartState } = useCart();
+  const { cartProducts } = cartState;
 
   const hasItems = (cartProducts.length > 0) ? true : false;
   const hasItemsStyles = hasItems ? 'active' : '';

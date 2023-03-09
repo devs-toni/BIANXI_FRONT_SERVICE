@@ -9,7 +9,8 @@ const CuponBox = ({ isOpen }) => {
 
   const { text } = useLanguage();
 
-  const { activeCupon, handleCupon } = useCart();
+  const { cartState, handleCupon } = useCart();
+  const { activeCupon } = cartState;
 
   const [cupon, setCupon] = useState('');
 
@@ -28,7 +29,6 @@ const CuponBox = ({ isOpen }) => {
   return (
     <>
       <div className='main-cupon'>
-        {console.log(activeCupon)}
         {activeCupon && <FontAwesomeIcon icon={faXmark} className="main-cupon__delete" onClick={() => handleCupon(false)} />}
         <div className={`${activeCupon ? 'valid' : ''} ${isOpen ? 'active' : ''} cupon`}>
           {

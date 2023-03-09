@@ -4,42 +4,41 @@ import { useUI } from '../../context/UIContext';
 import { useAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { FAVOURITES_LINK, ORDERS_LINK } from '../../router/paths';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 
 const Login = () => {
 
   const navigate = useNavigate();
 
-  const { handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
-
-  const { user_state, logout } = useAuth();
+  const { uiState, handleUi } = useUI();
+  const { userState, logout } = useAuth();
 
   const showFavourites = () => {
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE);
     navigate(FAVOURITES_LINK);
   }
 
   const showOrders = () => {
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN })
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE);
     navigate(ORDERS_LINK);
   }
   return (
     <>
       {
-        user_state.isAuthenticated
+        userState.isAuthenticated
           ?
           <LoggedMenu
-            closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) }}
-            isOpen={ui_state.loginIsOpen}
+            closeHandler={() => handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)}
+            isOpen={uiState.loginIsOpen}
             logoutHandler={logout}
-            username={user_state.username}
+            username={userState.username}
             handlerFavourites={showFavourites}
             handlerOrders={showOrders}
           />
           :
           <LoginModal
-            closeHandler={() => { ui_dispatch({ type: UI_ACTIONS.CLOSE_LOGIN }) }}
-            isOpen={ui_state.loginIsOpen}
+            closeHandler={() => handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE)}
+            isOpen={uiState.loginIsOpen}
           />
       }
     </>

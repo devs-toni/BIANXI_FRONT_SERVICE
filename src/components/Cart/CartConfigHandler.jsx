@@ -6,7 +6,6 @@ import uuid from 'react-uuid';
 
 const CartConfigHandler = memo(({ product }) => {
 
-
   const { addOneProduct, deleteOneProduct, deleteConfiguration } = useCart();
 
   const { config: configurations, id } = product;

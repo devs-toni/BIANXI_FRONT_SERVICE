@@ -21,3 +21,16 @@ export const CUPONS = [
     percentage: 20
   }
 ]
+
+export const UI_SECTIONS = {
+  MENU: "menu",
+  LOGIN: "login",
+  CART: "cart",
+  SEARCH: "search",
+  CUPON: "cupon"
+}
+
+export const UI_ACTIONS = {
+  HANDLE: "handle",
+  CLOSE: "close"
+}

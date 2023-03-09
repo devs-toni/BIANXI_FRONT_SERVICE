@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { SEARCH_LINK } from '../../router/paths';
 
-const SearchForm = ({ close, handleSearch, innerRef }) => {
+const SearchForm = ({ close, innerRef }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   

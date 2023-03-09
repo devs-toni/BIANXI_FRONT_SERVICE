@@ -11,7 +11,7 @@ import { ORDERS_ENDPOINT } from "../../configuration";
 const Orders = () => {
 
   const { text } = useLanguage();
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
   const [orders, setOrders] = useState([]);
 
@@ -20,7 +20,7 @@ const Orders = () => {
       const array = [];
 
       const orders = await http()
-        .get(`${ORDERS_ENDPOINT}/get/all/${user_state.id}`)
+        .get(`${ORDERS_ENDPOINT}/get/all/${userState.id}`)
         .then(ordersBackend => {
           return ordersBackend;
         });

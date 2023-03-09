@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useRef } from 'react';
+import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef } from 'react';
+import { ACTIONS } from '../types';
 
 const UIContext = createContext();
 
@@ -7,23 +8,6 @@ export const useUI = () => {
 }
 
 export const UIProvider = ({ children }) => {
-
-  const UI_ACTIONS = {
-    HANDLE_LOGIN: "OPEN_LOGIN",
-    CLOSE_LOGIN: "CLOSE_LOGIN",
-
-    HANDLE_MENU: "HANDLE_MENU",
-    CLOSE_MENU: "CLOSE_MENU",
-
-    HANDLE_CART: "HANDLE_CART",
-    CLOSE_CART: "CLOSE_CART",
-
-    HANDLE_SEARCH: "HANDLE_SEARCH",
-    CLOSE_SEARCH: "CLOSE_SEARCH",
-
-    HANDLE_CUPON: "HANDLE_CUPON",
-    CLOSE_CUPON: "CLOSE_CUPON",
-  }
 
   const initialState = {
     loginIsOpen: false,
@@ -37,60 +21,105 @@ export const UIProvider = ({ children }) => {
   const UiReducer = (state, action) => {
     switch (action.type) {
 
-      case UI_ACTIONS.HANDLE_LOGIN:
-        return { ...state, loginIsOpen: !state.loginIsOpen };
+      case ACTIONS.HANDLE_LOGIN:
+        return {
+          ...state,
+          loginIsOpen: !state.loginIsOpen
+        };
 
-      case UI_ACTIONS.CLOSE_LOGIN:
-        return { ...state, loginIsOpen: state.loginIsOpen && false };
+      case ACTIONS.CLOSE_LOGIN:
+        return {
+          ...state,
+          loginIsOpen: state.loginIsOpen && false
+        };
 
-      case UI_ACTIONS.HANDLE_MENU:
-        return { ...state, menuIsOpen: !state.menuIsOpen };
+      case ACTIONS.HANDLE_MENU:
+        return {
+          ...state,
+          menuIsOpen: !state.menuIsOpen
+        };
 
-      case UI_ACTIONS.CLOSE_MENU:
-        return { ...state, menuIsOpen: state.menuIsOpen && false };
+      case ACTIONS.CLOSE_MENU:
+        return {
+          ...state,
+          menuIsOpen: state.menuIsOpen && false
+        };
 
-      case UI_ACTIONS.HANDLE_CART:
-        return { ...state, cartIsOpen: !state.cartIsOpen };
+      case ACTIONS.HANDLE_CART:
+        return {
+          ...state,
+          cartIsOpen: !state.cartIsOpen
+        };
 
-      case UI_ACTIONS.CLOSE_CART:
-        return { ...state, cartIsOpen: state.cartIsOpen && false };
+      case ACTIONS.CLOSE_CART:
+        return {
+          ...state,
+          cartIsOpen: state.cartIsOpen && false
+        };
 
-      case UI_ACTIONS.HANDLE_SEARCH:
+      case ACTIONS.HANDLE_SEARCH:
         !state.searchIsOpen && state.searchRef.current.focus();
-        return { ...state, searchIsOpen: !state.searchIsOpen };
+        return {
+          ...state,
+          searchIsOpen: !state.searchIsOpen
+        };
 
-      case UI_ACTIONS.CLOSE_SEARCH:
-        return { ...state, searchIsOpen: state.searchIsOpen && false };
+      case ACTIONS.CLOSE_SEARCH:
+        return {
+          ...state,
+          searchIsOpen: state.searchIsOpen && false
+        };
 
-      case UI_ACTIONS.HANDLE_CUPON:
-        return { ...state, cuponIsOpen: !state.cuponIsOpen };
+      case ACTIONS.HANDLE_CUPON:
+        return {
+          ...state,
+          cuponIsOpen: !state.cuponIsOpen
+        };
 
-      case UI_ACTIONS.CLOSE_CUPON:
-        return { ...state, cuponIsOpen: state.cuponIsOpen && false };
+      case ACTIONS.CLOSE_CUPON:
+        return {
+          ...state,
+          cuponIsOpen: state.cuponIsOpen && false
+        };
 
       default:
         return state;
     }
   }
-  const [state, dispatch] = useReducer(UiReducer, initialState);
+  const [uiState, dispatch] = useReducer(UiReducer, initialState);
 
-  const handleUi = () => {
-    return { state, dispatch, UI_ACTIONS };
-  }
+  const manageSection = useCallback((section, handler) => {
+    const handle = handler === "handle" ? true : false;
+    switch (section) {
+      case "menu":
+        return handle ? ACTIONS.HANDLE_MENU : ACTIONS.CLOSE_MENU;
 
-  /*     const clickOutsideHandler = event => {
-      if (menuRef.current) {
-        if (
-          menuRef.current.contains(event.target) ||
-          activatorRef.current.contains(event.target)
-        ) {
-          return;
-        }
-        //setIsNavShow(false);
-      }
-    }; */
+      case "login":
+        return handle ? ACTIONS.HANDLE_LOGIN : ACTIONS.CLOSE_LOGIN;
 
-  const data = { handleUi }
+      case "search":
+        return handle ? ACTIONS.HANDLE_SEARCH : ACTIONS.CLOSE_SEARCH;
+
+      case "cart":
+        return handle ? ACTIONS.HANDLE_CART : ACTIONS.CLOSE_CART;
+
+      case "cupon":
+        return handle ? ACTIONS.HANDLE_CUPON_UI : ACTIONS.CLOSE_CUPON;
+
+      default:
+        break;
+    }
+  }, []);
+
+  const handleUi = useCallback((section, handler) => {
+    const action = manageSection(section, handler);
+    dispatch({ type: action })
+  }, []);
+
+  const data = useMemo(() => ({
+    uiState,
+    handleUi
+  }), [uiState, handleUi])
 
   return (
     <UIContext.Provider value={data}>{children}</UIContext.Provider>

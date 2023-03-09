@@ -1,23 +1,23 @@
 import { useSearchParams } from 'react-router-dom';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 import { useUI } from '../../context/UIContext';
 import { SearchForm, SearchBox } from '../index';
 
 const Search = () => {
 
-  const { handleUi } = useUI();
-  const { state: ui_state, dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
+  const { uiState, handleUi } = useUI();
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClose = () => {
-    ui_dispatch({ type: UI_ACTIONS.CLOSE_SEARCH });
+    handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE);
     setSearchParams("");
   }
-  
+
   return (
-    <div className={`search ${ui_state.searchIsOpen ? "active" : ""}`}>
+    <div className={`search ${uiState.searchIsOpen ? "active" : ""}`}>
       <SearchForm
-        innerRef={ui_state.searchRef}
+        innerRef={uiState.searchRef}
         close={handleClose}
       />
       <SearchBox close={handleClose} />

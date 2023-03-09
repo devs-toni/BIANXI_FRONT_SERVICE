@@ -5,17 +5,17 @@ import PaymentDetails from './PaymentDetails';
 import { useCart } from '../../context/CartContext';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { STRIPE_VISIBLE_KEY } from '../../configuration';
+import { STRIPE_VISIBLE_KEY, UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 import { Navigate } from 'react-router-dom';
 import { useUI } from '../../context/UIContext';
 import CuponBox from './CuponBox';
 
 const PaymentPage = () => {
 
-  const { cartProducts, getTotalPriceCart } = useCart();
+  const { cartState, getTotalPriceCart } = useCart();
+  const { cartProducts } = cartState;
 
-  const { handleUi } = useUI();
-  const { state, dispatch, UI_ACTIONS } = handleUi();
+  const { uiState, handleUi } = useUI();
 
   const { text } = useLanguage();
 
@@ -32,9 +32,9 @@ const PaymentPage = () => {
             <h2 className='payment__title'>{text.payment.title}</h2>
             <div className='payment__cupon'>
               <p className='payment__cupon--text'>{text.payment.cupon}</p>
-              <p className='payment__cupon--ref' onClick={() => { dispatch({ type: UI_ACTIONS.HANDLE_CUPON }) }}>{text.payment.cuponLink}</p>
+              <p className='payment__cupon--ref' onClick={() => handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.HANDLE)}>{text.payment.cuponLink}</p>
             </div>
-            <CuponBox isOpen={state.cuponIsOpen} />
+            <CuponBox isOpen={uiState.cuponIsOpen} />
             <PaymentDetails products={cartProducts} />
             <Elements stripe={stripePromise}>
               <PaymentForm price={getTotalPriceCart(cartProducts)} />

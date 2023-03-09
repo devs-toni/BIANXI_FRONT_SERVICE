@@ -3,9 +3,9 @@ import { useAuth } from '../../context/AuthContext'
 
 const UserSection = ({ children }) => {
 
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
-  return user_state.isAuthenticated ? children : <Navigate to="/"/>
+  return userState.isAuthenticated ? children : <Navigate to="/"/>
 }
 
 export default UserSection

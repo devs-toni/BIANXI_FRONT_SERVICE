@@ -18,11 +18,12 @@ const PaymentForm = ({ price }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
   const navigate = useNavigate();
 
-  const { successPayment, cartProducts } = useCart();
+  const { successPayment, cartState } = useCart();
+  const { cartProducts } = cartState;
 
   const [formErrors, setFormErrors] = useState({});
 
@@ -47,7 +48,7 @@ const PaymentForm = ({ price }) => {
       const validPayment = await pay();
       if (validPayment) {
         validPayment && successPayment(form, price, cartProducts);
-        user_state.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
+        userState.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
       }
 
     } else setFormErrors(errors)
