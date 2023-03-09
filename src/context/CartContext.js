@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer } from "react";
 import { useProduct } from "./ProductContext";
 import { useAuth } from "./AuthContext";
+import { useUI } from "./UIContext";
 import { getMainMethods } from "../helpers/cart";
 import { ACTIONS } from "../types";
 import { http } from "../helpers/http";
-import { NEW_USER_DISCOUNT, ORDERS_ENDPOINT } from "../configuration";
+import { NEW_USER_DISCOUNT, ORDERS_ENDPOINT, UI_ACTIONS, UI_SECTIONS } from "../configuration";
 
 const CartContext = createContext();
 
@@ -18,6 +19,7 @@ export const CartProvider = ({ children }) => {
 
   const { productState } = useProduct();
   const { userState } = useAuth();
+  const { handleUi } = useUI();
 
   //TOTAL CHARGE IN CART
   const getTotalPriceCart = useCallback((products) => {
@@ -53,6 +55,17 @@ export const CartProvider = ({ children }) => {
           totalAmount: getTotalPriceCart(action.payload),
           iva: getIVAPriceCart(action.payload),
           discountNew: state.isNew ? (getTotalPriceCart(action.payload) * NEW_USER_DISCOUNT) / 100 : 0,
+        };
+
+      case ACTIONS.RESET_CART: 
+        return {
+          cartProducts: [],
+          activeCupon: false,
+          discountCupon: 0,
+          isNew: false,
+          discountNew: 0,
+          totalAmount: 0,
+          iva: 0
         };
 
       case ACTIONS.HANDLE_CUPON:
@@ -167,7 +180,8 @@ export const CartProvider = ({ children }) => {
     );
     if (result) {
       localStorage.removeItem("CART");
-      dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: [] });
+      handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+      dispatch({ type: ACTIONS.RESET_CART });
     }
   }, [userState, getMethods]);
 
@@ -202,8 +216,9 @@ export const CartProvider = ({ children }) => {
     deleteConfiguration,
     deleteCompleteProduct,
     successPayment,
-    handleCupon
-  }), [cartState, addOneProduct, deleteOneProduct, addProducts, deleteConfiguration, deleteCompleteProduct, successPayment, handleCupon])
+    handleCupon,
+    getTotalPriceCart,
+  }), [cartState, addOneProduct, deleteOneProduct, addProducts, deleteConfiguration, deleteCompleteProduct, successPayment, handleCupon, getTotalPriceCart])
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
 }

@@ -4,12 +4,13 @@ import { useLanguage } from '../../context/GlobalContext';
 import uuid from 'react-uuid';
 import { formatNumberES, setProductPrice } from '../../helpers/utils';
 import { useCart } from '../../context/CartContext';
+import { NEW_USER_DISCOUNT } from '../../configuration';
 
 const PaymentDetails = ({ products }) => {
 
   const { text } = useLanguage();
 
-  const { cartState } = useCart();
+  const { cartState, getTotalPriceCart } = useCart();
   const { totalAmount: total, iva, activeCupon, discountCupon, discountNew, isNew } = cartState;
 
   return (
@@ -60,15 +61,15 @@ const PaymentDetails = ({ products }) => {
 
           {
             activeCupon &&
-            <tr className='body__row--discount'>
-              <td className='body__row--sub-discount'>{text.payment.discount}</td>
+            <tr className='body__row'>
+              <td className='body__row--sub-discount'>{Math.ceil((discountCupon / getTotalPriceCart(cartState.cartProducts)) * 100)}% {text.payment.discount.toLowerCase()}</td>
               <td className='body__row--subtotal-discount'>- {formatNumberES(discountCupon, 2)} €</td>
             </tr>
           }
           {
             isNew &&
             <tr className='body__row'>
-              <td className='body__row--sub-discount'>{text.payment.new}</td>
+              <td className='body__row--sub-discount'>{NEW_USER_DISCOUNT}% {text.payment.new.toLowerCase()}</td>
               <td className='body__row--subtotal-discount'>- {formatNumberES(discountNew, 2)} €</td>
             </tr>
           }

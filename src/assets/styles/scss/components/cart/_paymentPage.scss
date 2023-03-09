@@ -139,14 +139,6 @@
           justify-content: space-between;
           width: 100%;
 
-          &--discount {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 50px;
-          }
-
           &--product {
             width: 40%;
             text-align: left;
@@ -220,6 +212,7 @@
             text-align: right;
             font-size: 1.3em;
             line-height: 50px;
+            margin-bottom: 120px;
 
             .ind {
               font-size: .7em;
