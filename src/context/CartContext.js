@@ -78,7 +78,6 @@ export const CartProvider = ({ children }) => {
         };
 
       case ACTIONS.SET_NEW_USER_DISCOUNT:
-        console.log(action.payload);
         return {
           ...state,
           isNew: action.payload.isNew,

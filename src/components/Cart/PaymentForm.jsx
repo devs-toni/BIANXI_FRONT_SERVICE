@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
@@ -25,12 +24,11 @@ const PaymentForm = ({ price }) => {
   const { successPayment, cartState } = useCart();
   const { cartProducts } = cartState;
 
-  const [formErrors, setFormErrors] = useState({});
-
   const {
     form,
     validate,
-    handleChange } = useForm({
+    handleChange,
+    errors } = useForm({
       name: "",
       lastname: "",
       address: "",
@@ -43,15 +41,14 @@ const PaymentForm = ({ price }) => {
   const handlePayment = async (e) => {
     e.preventDefault();
 
-    const errors = validate();
+    validate();
     if (Object.keys(errors).length === 0) {
       const validPayment = await pay();
       if (validPayment) {
         validPayment && successPayment(form, price, cartProducts);
         userState.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
       }
-
-    } else setFormErrors(errors)
+    }
   }
 
   const pay = async () => {
@@ -111,18 +108,18 @@ const PaymentForm = ({ price }) => {
         <form onSubmit={handlePayment} className="container--form">
           <label className="label-card" htmlFor='numberCard'>{text.payment.name}</label>
           <input type="text" className="input-card" name='name' value={form.name} onChange={handleChange} />
-          <p className='error'>{formErrors.name}</p>
+          <p className='error'>{errors.name}</p>
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.lastname}</label>
           <input type="text" className="input-card" name="lastname" value={form.lastname} onChange={handleChange} />
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.address}</label>
           <input type="text" className="input-card" name="address" value={form.address} onChange={handleChange} />
-          <p className='error'>{formErrors.address}</p>
+          <p className='error'>{errors.address}</p>
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.email}</label>
           <input type="email" className="input-card" name="email" value={form.email} onChange={handleChange} />
-          <p className='error'>{formErrors.email}</p>
+          <p className='error'>{errors.email}</p>
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.cardTitle}</label>
           <CardElement className="input-card" />

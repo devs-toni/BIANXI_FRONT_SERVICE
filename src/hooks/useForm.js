@@ -1,10 +1,10 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
 
 export const useForm = (initialForm) => {
 
   const [form, setForm] = useState(initialForm);
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -12,6 +12,11 @@ export const useForm = (initialForm) => {
       ...form,
       [name]: value
     });
+
+    setErrors({
+      ...errors,
+      [name]: ''
+    })
   };
 
   const validateForm = (form) => {
@@ -34,14 +39,15 @@ export const useForm = (initialForm) => {
     } else if (!regexEmail.test(form.email.trim())) {
       errors.email = 'El email introducido no és válido';
     }
+
     return errors;
   }
 
   const validate = () => {
-    return validateForm(form);
+    setErrors(validateForm(form));
   }
 
   return {
-    form, handleChange, validate
+    form, handleChange, validate, errors
   }
 }
