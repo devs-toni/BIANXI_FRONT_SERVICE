@@ -40,7 +40,7 @@ const Orders = () => {
       setOrders(array);
     }
     setUserOrders();
-  }, [])
+  }, [orders.length])
 
 
   return (
