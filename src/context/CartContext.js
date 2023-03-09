@@ -84,18 +84,24 @@ export const CartProvider = ({ children }) => {
     const isNewUser = async () => {
       await http().get(`${ORDERS_ENDPOINT}/get/all/${userState.id}`)
         .then(data => {
-          const y = data.length === 0;
-          console.log(data);
-          console.log(userState.id);
-          console.log(y);
-          if (items && y) {
-            const discountNew = (cartState.totalAmount * NEW_USER_DISCOUNT) / 100;
-            const finalPrice = cartState.totalAmount - discountNew;
-            const iva = (finalPrice * 21) / 100;
-            if (userState.id !== 0)
-              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: y, discount: discountNew, amount: finalPrice } })
+          const isLogged = userState.id !== 0;
+          const isNew = data.length === 0;
+          const cuponIsActive = cartState.activeCupon;
+          const cuponDiscount = cartState.discountCupon;
+          const total = getTotalPriceCart(cartState.cartProducts);
+          const saving = (total * NEW_USER_DISCOUNT) / 100;
+          const finalPriceWithDiscount = cuponIsActive ? (total - cuponDiscount - saving) : (total - saving);
+          const finalPriceWithoutDiscount = cuponIsActive ? (total - cuponDiscount) : total;
+          const ivaWithDiscount = (finalPriceWithDiscount * 21) / 100;
+          const ivaWithoutDiscount = (finalPriceWithoutDiscount * 21) / 100;
+
+          if (items && isNew) {
+            // IF IS REALLY LOGGED
+            if (isLogged)
+              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: isNew, discount: saving, amount: finalPriceWithDiscount, iva: ivaWithDiscount } })
+            // IF IS NOT REALLY LOGGED
             else
-              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: cartState.totalAmount, iva: iva } })
+              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: finalPriceWithoutDiscount, iva: ivaWithoutDiscount } })
           }
         });
     }
@@ -167,13 +173,25 @@ export const CartProvider = ({ children }) => {
 
   //SET ACTIVE CUPON
   const handleCupon = useCallback((state, percentage) => {
-    const saving = (cartState.totalAmount * percentage) / 100;
-    const finalPrice = cartState.totalAmount - saving;
-    if (state) {
-      const iva = (finalPrice * 21 / 100);
-      dispatch({ type: ACTIONS.HANDLE_CUPON, payload: { amount: finalPrice, active: state, iva: iva, discount: saving } })
-    } else
-      dispatch({ type: ACTIONS.HANDLE_CUPON, payload: { amount: getTotalPriceCart(cartState.cartProducts), active: state, iva: getIVAPriceCart(cartState.cartProducts), discount: 0 } });
+    const total = getTotalPriceCart(cartState.cartProducts);
+    const isNew = cartState.isNew;
+    let saving = 0;
+
+    if (percentage)
+      saving = (total * percentage) / 100;
+    else
+      saving = cartState.discountCupon;
+
+    const finalPriceWithCupon = isNew ? (total - cartState.discountNew) - saving : total - saving;
+    const finalPriceWithoutCupon = isNew ? (total - cartState.discountNew) : total;
+    const ivaWithCupon = (finalPriceWithCupon * 21) / 100;
+    const ivaWithoutCupon = (finalPriceWithoutCupon * 21) / 100;
+
+    if (state)
+      dispatch({ type: ACTIONS.HANDLE_CUPON, payload: { amount: finalPriceWithCupon, active: state, iva: ivaWithCupon, discount: saving } })
+    else
+      dispatch({ type: ACTIONS.HANDLE_CUPON, payload: { amount: finalPriceWithoutCupon, active: state, iva: ivaWithoutCupon, discount: saving } });
+
   }, [cartState, getTotalPriceCart]);
 
   const data = useMemo(() => ({

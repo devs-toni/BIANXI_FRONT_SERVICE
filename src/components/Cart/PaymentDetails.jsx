@@ -60,16 +60,16 @@ const PaymentDetails = ({ products }) => {
 
           {
             activeCupon &&
-            <tr className='body__row'>
-              <td className='body__row--sub'>{text.payment.discount}</td>
-              <td className='body__row--subtotal'>{formatNumberES(discountCupon, 2)} €</td>
+            <tr className='body__row--discount'>
+              <td className='body__row--sub-discount'>{text.payment.discount}</td>
+              <td className='body__row--subtotal-discount'>- {formatNumberES(discountCupon, 2)} €</td>
             </tr>
           }
           {
             isNew &&
             <tr className='body__row'>
-              <td className='body__row--sub'>{text.payment.new}</td>
-              <td className='body__row--subtotal'>{formatNumberES(discountNew, 2)} €</td>
+              <td className='body__row--sub-discount'>{text.payment.new}</td>
+              <td className='body__row--subtotal-discount'>- {formatNumberES(discountNew, 2)} €</td>
             </tr>
           }
 

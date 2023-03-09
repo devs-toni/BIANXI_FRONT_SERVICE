@@ -29,7 +29,7 @@ const ProductBox = ({
   const { text } = useLanguage();
   const navigate = useNavigate();
 
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
@@ -43,7 +43,7 @@ const ProductBox = ({
 
   const deleteLike = async () => {
     await http()
-      .del(`${PRODUCTS_ENDPOINT}/like/delete`, { body: [id, user_state.id] })
+      .del(`${PRODUCTS_ENDPOINT}/like/delete`, { body: [id, userState.id] })
       .then(data => {
         return data;
       }).catch(err => console.error(err));

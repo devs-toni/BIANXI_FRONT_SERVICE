@@ -138,8 +138,11 @@
           flex-flow: row nowrap;
           justify-content: space-between;
           width: 100%;
-          margin-bottom: 20px;
 
+          &--discount {
+            margin-top: 50px;
+          }
+  
           &--product {
             width: 40%;
             text-align: left;
@@ -224,6 +227,14 @@
           &--sub,
           &--subtotal {
             margin-top: 50px;
+
+            &-discount {
+              margin-top: 10px;
+              margin-bottom: 10px;
+              color: red;
+              font-size: 1.2em;
+            }
+
             font-size: 1.2em;
 
             @media screen and (max-width: 770px) {
@@ -384,7 +395,7 @@
     background-size: 200% 100%;
     background-position: right bottom;
     transition: all .2s ease-out;
-    margin-top: 20px ;
+    margin-top: 20px;
 
     &:hover {
       background-position: left bottom;
