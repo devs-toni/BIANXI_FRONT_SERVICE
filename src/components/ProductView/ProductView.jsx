@@ -2,51 +2,64 @@ import { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
 import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
-import { PRODUCTS_ENDPOINT } from '../../configuration.js';
+import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../configuration.js';
 import { http } from '../../helpers/http';
 import { setProductConfigurations } from '../../helpers/utils';
-import { getLike } from '../../helpers/server';
 import { useAuth } from '../../context/AuthContext';
 
 const ProductView = () => {
 
   const { id, type } = useParams();
 
-  const { handleProduct } = useProduct();
-  const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
+  const { productState, setProperty } = useProduct();
 
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
   const [loading, setLoading] = useState(true)
 
 
-
   useEffect(() => {
-    product_dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
+    setProperty(PRODUCT_PROPERTIES.LIKE, false);
+
+    const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
+      if (idProduct) {
+        http().post(`${PRODUCTS_ENDPOINT}/like/get`, {
+          body: [
+            idProduct,
+            idUser,
+          ]
+        }).then(data => {
+          data === 1
+            ?
+            setLikeTrue()
+            :
+            setLikeFalse()
+        })
+      }
+    }
 
     const loadProduct = async () => {
-
       await http().get(`${PRODUCTS_ENDPOINT}/get/${id}`)
         .then(data => {
-          product_dispatch({ type: PRODUCT_ACTIONS.SET_PRODUCT, payload: data });
+          setProperty(PRODUCT_PROPERTIES.PRODUCT, data);
 
           const { sizes } = setProductConfigurations(data);
-          product_dispatch({ type: PRODUCT_ACTIONS.SET_SIZES, payload: [...sizes] });
+          setProperty(PRODUCT_PROPERTIES.SIZES, [...sizes])
           const { colors: res, colorsIds: ids } = setProductConfigurations(data);
           const finalArray = [];
           [...res].forEach((c, index) => {
             finalArray.push({ color: c, id: [...ids][index] });
           });
-          product_dispatch({ type: PRODUCT_ACTIONS.SET_COLORS, payload: finalArray });
-          product_dispatch({ type: PRODUCT_ACTIONS.SET_PRICES, payload: { offer: data.offer, price: data.price } });
+          setProperty(PRODUCT_PROPERTIES.COLORS, finalArray)
+          setProperty(PRODUCT_PROPERTIES.PRICES, { offer: data.offer, price: data.price })
 
-          if (user_state.id) {
+          if (userState.id) {
             getLike(
               id,
-              user_state.id,
-              () => product_dispatch({ type: PRODUCT_ACTIONS.LIKE_TRUE }),
-              () => product_dispatch({ type: PRODUCT_ACTIONS.LIKE_FALSE })
+              userState.id,
+              () => setProperty(PRODUCT_PROPERTIES.LIKE, true),
+              () => setProperty(PRODUCT_PROPERTIES.LIKE, false)
             )
           }
           setLoading(false);
@@ -65,22 +78,22 @@ const ProductView = () => {
           <>
             <div className="view">
               <Images
-                product={product_state.product}
+                product={productState.product}
                 activator={colorActivatorImage}
               />
               <Info
                 setColorActivator={setColorActivatorImage}
-                handleLike={() => { product_dispatch({ type: PRODUCT_ACTIONS.HANDLE_LIKE }) }}
-                isLike={product_state.like}
+                handleLike={() => setProperty(PRODUCT_PROPERTIES.LIKE)}
+                isLike={productState.like}
               />
             </div>
             <Details
-              description={product_state.product.description}
-              features={product_state.product.datasheet}
+              description={productState.product.description}
+              features={productState.product.datasheet}
             />
             <Related
               type={type}
-              price={product_state.product.price}
+              price={productState.product.price}
             />
           </>
           :

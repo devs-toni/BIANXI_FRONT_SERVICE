@@ -9,32 +9,32 @@ import { useAuth } from '../../context/AuthContext';
 import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 
 const Info = ({ setColorActivator, isLike, handleLike }) => {
 
   const { text } = useLanguage();
 
-  const { handleProduct } = useProduct();
-  const { state: product_state } = handleProduct();
-  const { name, sentence } = product_state.product;
-  const configuration = product_state.config;
-  const size = product_state.size;
-  const prices = product_state.updatedPrices;
+  const { productState } = useProduct();
+
+  const { name, sentence } = productState.product;
+  const configuration = productState.config;
+  const size = productState.size;
+  const prices = productState.updatedPrices;
 
   const { addProducts } = useCart();
 
-  const { user_state } = useAuth();
+  const { userState } = useAuth();
 
   const { handleUi } = useUI();
-  const { dispatch: ui_dispatch, UI_ACTIONS } = handleUi();
 
   const [totalSelected, setTotalSelected] = useState(0);
   const totalRef = useRef();
 
   const handleCartAddition = () => {
     const { current } = totalRef;
-    addProducts({ ...product_state.product, ...prices }, current.value)
-    ui_dispatch({ type: UI_ACTIONS.HANDLE_CART });
+    addProducts({ ...productState.product, ...prices }, current.value)
+    handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE);
   }
 
   const emptyStyles = (configuration?.stock === 0 || !configuration) ? 'empty' : '';
@@ -61,7 +61,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
         />
         <button className={`${emptyStyles} info__buy--add`} onClick={handleCartAddition}>{text.view.add}</button>
         {
-          user_state.isAuthenticated
+          userState.isAuthenticated
           &&
           <FontAwesomeIcon icon={faHeart} onClick={handleLike} className={isLike ? 'like' : ''} />
         }

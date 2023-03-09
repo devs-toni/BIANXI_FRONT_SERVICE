@@ -1,5 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
-import { addLike, deleteLike } from '../helpers/server';
+import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../configuration';
+import { http } from '../helpers/http';
 import { setProductPrice } from '../helpers/utils';
 import { ACTIONS } from '../types';
 import { useAuth } from './AuthContext';
@@ -30,40 +31,67 @@ export const ProductProvider = ({ children }) => {
     switch (action.type) {
 
       case ACTIONS.SET_PRODUCT:
-        return { ...state, product: action.payload };
+        return {
+          ...state,
+          product: action.payload
+        };
 
       case ACTIONS.SET_COLOR:
-        return { ...state, color: action.payload };
+        return {
+          ...state,
+          color: action.payload
+        };
 
       case ACTIONS.SET_COLORS:
-        return { ...state, colors: action.payload }
+        return {
+          ...state,
+          colors: action.payload
+        };
 
       case ACTIONS.SET_SIZE:
-        return { ...state, size: action.payload };
+        return {
+          ...state,
+          size: action.payload
+        };
 
       case ACTIONS.SET_SIZES:
-        return { ...state, sizes: action.payload };
+        return {
+          ...state,
+          sizes: action.payload
+        };
 
       case ACTIONS.SET_PRICES:
-        return { ...state, updatedPrices: setProductPrice(action.payload.offer, action.payload.price) };
+        return {
+          ...state,
+          updatedPrices: setProductPrice(action.payload.offer, action.payload.price)
+        };
 
       case ACTIONS.SET_EMPTY_PRODUCT:
-        return { ...state, empty: true };
+        return {
+          ...state,
+          empty: true
+        };
 
       case ACTIONS.SET_CONFIG:
-        return { ...state, config: action.payload };
+        return {
+          ...state,
+          config: action.payload
+        };
+
+      case ACTIONS.SET_LIKE:
+        return {
+          ...state,
+          like: action.payload
+        };
 
       case ACTIONS.HANDLE_LIKE:
         if (state.like) deleteLike(state.product.id, userState.id);
         else addLike(state.product.id, userState.id);
 
-        return { ...state, like: !state.like }
-
-      case ACTIONS.LIKE_FALSE:
-        return { ...state, like: false };
-
-      case ACTIONS.LIKE_TRUE:
-        return { ...state, like: true };
+        return {
+          ...state,
+          like: !state.like
+        };
 
       default:
         return state;
@@ -71,65 +99,69 @@ export const ProductProvider = ({ children }) => {
   }
   const [productState, dispatch] = useReducer(reducer, init);
 
-  const setProduct = useCallback(() => {
+  const setProperty = useCallback((property, value) => {
+    let action = managePropertySetter(property);
 
-  }, [])
-  const setColor = useCallback(() => {
+    if (property === PRODUCT_PROPERTIES.LIKE && !value) {
+      action = ACTIONS.HANDLE_LIKE;
+    }
+    dispatch({ type: action, payload: value ? value : null })
+  }, []);
 
-  }, [])
-  const setSize = useCallback(() => {
+  const managePropertySetter = useCallback((property) => {
+    switch (property) {
+      case PRODUCT_PROPERTIES.PRODUCT:
+        return ACTIONS.SET_PRODUCT;
 
-  }, [])
-  const setSizes = useCallback(() => {
+      case PRODUCT_PROPERTIES.COLOR:
+        return ACTIONS.SET_COLOR;
 
-  }, [])
-  const setColors = useCallback(() => {
+      case PRODUCT_PROPERTIES.SIZE:
+        return ACTIONS.SET_SIZE;
 
-  }, [])
-  const setPrices = useCallback(() => {
+      case PRODUCT_PROPERTIES.COLORS:
+        return ACTIONS.SET_COLORS;
 
-  }, [])
-  const setEmptyProduct = useCallback(() => {
+      case PRODUCT_PROPERTIES.SIZES:
+        return ACTIONS.SET_SIZES;
 
-  }, [])
-  const setConfig = useCallback(() => {
+      case PRODUCT_PROPERTIES.PRICES:
+        return ACTIONS.SET_PRICES;
 
-  }, [])
-  const handleLike = useCallback(() => {
+      case PRODUCT_PROPERTIES.EMPTY:
+        return ACTIONS.SET_EMPTY_PRODUCT;
 
-  }, [])
-  const setLikeFalse = useCallback(() => {
+      case PRODUCT_PROPERTIES.CONFIG:
+        return ACTIONS.SET_CONFIG;
 
-  }, [])
-  const setLikeTrue = useCallback(() => {
+      case PRODUCT_PROPERTIES.LIKE:
+        return ACTIONS.SET_LIKE;
 
-  }, [])
+      default:
+        break;
+    }
+  }, []);
+
+  const addLike = (idProduct, idUser) => {
+    http().post(`${PRODUCTS_ENDPOINT}/like/add`, {
+      body: [
+        idProduct, idUser
+      ]
+    })
+  }
+
+  const deleteLike = (idProduct, idUser) => {
+    http().del(`${PRODUCTS_ENDPOINT}/like/delete`, {
+      body: [
+        idProduct, idUser
+      ]
+    })
+  }
 
   const data = useMemo(() => ({
     productState,
-    setProduct,
-    setColor,
-    setSize,
-    setSizes,
-    setColors,
-    setPrices,
-    setEmptyProduct,
-    setConfig,
-    handleLike,
-    setLikeFalse,
-    setLikeTrue
-  }), [productState,
-    setProduct,
-    setColor,
-    setSize,
-    setSizes,
-    setColors,
-    setPrices,
-    setEmptyProduct,
-    setConfig,
-    handleLike,
-    setLikeFalse,
-    setLikeTrue])
+    setProperty,
+  }), [productState, setProperty])
   return (
     <ProductContext.Provider value={data}>{children}</ProductContext.Provider>
   )

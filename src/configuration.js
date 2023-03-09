@@ -34,3 +34,15 @@ export const UI_ACTIONS = {
   HANDLE: "handle",
   CLOSE: "close"
 }
+
+export const PRODUCT_PROPERTIES = {
+  PRODUCT: "product",
+  COLOR: "color",
+  SIZE: "size",
+  COLORS: "colors",
+  SIZES: "sizes",
+  PRICES: "prices",
+  EMPTY: "empty",
+  CONFIG: "config",
+  LIKE: "like"
+}

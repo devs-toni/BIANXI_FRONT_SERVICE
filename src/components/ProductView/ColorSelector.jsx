@@ -3,27 +3,27 @@ import { useLanguage } from '../../context/GlobalContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
+import { PRODUCT_PROPERTIES } from '../../configuration';
 
 const ColorSelector = ({ setActivator }) => {
 
   const { text } = useLanguage();
 
-  const { handleProduct } = useProduct();
-  const { state, dispatch, PRODUCT_ACTIONS } = handleProduct();
+  const { productState, setProperty } = useProduct();
 
   const handleColor = ({ target }, index) => {
     const { value } = target;
-    dispatch({ type: PRODUCT_ACTIONS.SET_COLOR, payload: value });
+    setProperty(PRODUCT_PROPERTIES.COLOR, value)
     setActivator(index);
   }
 
-  const isActive = (id) => (state.color == id) ? "active" : "";
+  const isActive = (id) => (productState.color == id) ? "active" : "";
 
   return (
     <div className="info__color">
       <p className="info__color--title">{text.view.color}</p>
       {
-        state.colors.sort((a, b) => a.id > b.id ? 1 : -1).map(({ color, id }, index) => {
+        productState.colors.sort((a, b) => a.id > b.id ? 1 : -1).map(({ color, id }, index) => {
           const style = {
             color,
             backgroundColor: color

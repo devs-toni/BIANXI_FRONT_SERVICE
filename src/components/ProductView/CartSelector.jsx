@@ -5,43 +5,40 @@ import { useProduct } from '../../context/ProductContext';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { getCartProductConfigurations, getMatchConfiguration } from '../../helpers/utils';
+import { PRODUCT_PROPERTIES } from '../../configuration';
 
 const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
   const { cartProducts } = useCart();
 
-  const { handleProduct } = useProduct();
-  const { state: product_state, dispatch: product_dispatch, PRODUCT_ACTIONS } = handleProduct();
-  const { id } = product_state.product;
-  const config = product_state.config;
-  const color = product_state.color;
-  const size = product_state.size;
+  const { productState, setProperty } = useProduct();
+  const { id } = productState.product;
+  const config = productState.config;
+  const color = productState.color;
+  const size = productState.size;
 
   const [tempStock, setTempStock] = useState(0);
 
   useEffect(() => {
     const getConfigurationStock = () => {
       const allProductConfigurations = getCartProductConfigurations(cartProducts, id);
-      const configMatch = getMatchConfiguration(allProductConfigurations, size, color);
-      // If this product is already in cart the stock will be diferent
-      if (configMatch) {
-        product_dispatch({ type: PRODUCT_ACTIONS.SET_CONFIG, payload: configMatch ? configMatch : null });
-        return configMatch?.stock;
-        // Else the product stock is the initial stock got in backend
-      } else {
-        const { configuration } = product_state.product;
-        const configMatch = getMatchConfiguration(configuration, product_state.size, product_state.color);
-        product_dispatch({ type: PRODUCT_ACTIONS.SET_CONFIG, payload: configMatch ? configMatch : null });
-        return configMatch?.stock;
-      }
-    };
+      let finalConfig = getMatchConfiguration(allProductConfigurations, size, color);
 
-    if (product_state.product) {
+      if (!finalConfig) {
+        // If the product stock is the initial stock got in backend
+        const { configuration } = productState.product;
+        finalConfig = getMatchConfiguration(configuration, productState.size, productState.color);
+      }
+      setProperty(PRODUCT_PROPERTIES.CONFIG, finalConfig ? finalConfig : null)
+      return finalConfig?.stock;
+    }
+
+    if (productState.product) {
       const stock = getConfigurationStock();
       setTempStock(stock ? stock : 0);
       setValue(0);
     }
-  }, [product_state.color, product_state.size, cartProducts, product_state.product])
+  }, [productState.color, productState.size, cartProducts, productState.product])
 
 
   const addCount = () => {
