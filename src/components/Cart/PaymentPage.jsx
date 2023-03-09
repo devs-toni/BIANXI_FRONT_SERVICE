@@ -12,8 +12,8 @@ import CuponBox from './CuponBox';
 
 const PaymentPage = () => {
 
-  const { cartState, getTotalPriceCart } = useCart();
-  const { cartProducts } = cartState;
+  const { cartState } = useCart();
+  const { cartProducts, totalAmount: total } = cartState;
 
   const { uiState, handleUi } = useUI();
 
@@ -37,7 +37,7 @@ const PaymentPage = () => {
             <CuponBox isOpen={uiState.cuponIsOpen} />
             <PaymentDetails products={cartProducts} />
             <Elements stripe={stripePromise}>
-              <PaymentForm price={getTotalPriceCart(cartProducts)} />
+              <PaymentForm price={total} />
             </Elements>
           </>
         }

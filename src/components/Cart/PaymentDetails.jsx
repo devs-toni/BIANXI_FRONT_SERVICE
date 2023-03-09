@@ -9,8 +9,8 @@ const PaymentDetails = ({ products }) => {
 
   const { text } = useLanguage();
 
-  const { getIVAPriceCart, cartState } = useCart();
-  const { totalAmount: total } = cartState;
+  const { cartState } = useCart();
+  const { totalAmount: total, iva, activeCupon, discountCupon, discountNew, isNew } = cartState;
 
   return (
     <div className='payment__details'>
@@ -58,6 +58,21 @@ const PaymentDetails = ({ products }) => {
             })
           }
 
+          {
+            activeCupon &&
+            <tr className='body__row'>
+              <td className='body__row--sub'>{text.payment.discount}</td>
+              <td className='body__row--subtotal'>{formatNumberES(discountCupon, 2)} €</td>
+            </tr>
+          }
+          {
+            isNew &&
+            <tr className='body__row'>
+              <td className='body__row--sub'>{text.payment.new}</td>
+              <td className='body__row--subtotal'>{formatNumberES(discountNew, 2)} €</td>
+            </tr>
+          }
+
           <tr className='body__row'>
             <td className='body__row--sub'>{text.payment.sub}</td>
             <td className='body__row--subtotal'>{formatNumberES(total, 2)} €</td>
@@ -68,7 +83,7 @@ const PaymentDetails = ({ products }) => {
             <td className='foot__row--left'>{text.payment.total}</td>
             <td className='foot__row--right'>
               <p className='total'>{formatNumberES(total, 2)} €</p>
-              <p className='iva'><span>({text.payment.include}</span> {formatNumberES(getIVAPriceCart(products))} €</p>
+              <p className='iva'><span>({text.payment.include}</span> {formatNumberES(iva)} €</p>
               <p className='iva-title'>IVA)</p>
               <p></p>
             </td>

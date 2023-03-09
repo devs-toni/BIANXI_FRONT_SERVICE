@@ -19,6 +19,7 @@ const CuponBox = ({ isOpen }) => {
     setCupon(value);
 
     if (CUPONS.find(c => c.code === value)) {
+      console.log("cupooon");
       handleCupon(true, CUPONS.find(c => c.code === value).percentage);
     }
     else

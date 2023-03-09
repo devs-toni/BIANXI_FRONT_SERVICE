@@ -11,7 +11,25 @@ export const useProduct = () => {
   return useContext(ProductContext);
 }
 
+const addLike = (idProduct, idUser) => {
+  http().post(`${PRODUCTS_ENDPOINT}/like/add`, {
+    body: [
+      idProduct, idUser
+    ]
+  })
+}
+
+const deleteLike = (idProduct, idUser) => {
+  http().del(`${PRODUCTS_ENDPOINT}/like/delete`, {
+    body: [
+      idProduct, idUser
+    ]
+  })
+}
+
 export const ProductProvider = ({ children }) => {
+
+
 
   const { userState } = useAuth();
 
@@ -81,13 +99,10 @@ export const ProductProvider = ({ children }) => {
       case ACTIONS.SET_LIKE:
         return {
           ...state,
-          like: action.payload
+          like: action.payload.newState
         };
 
       case ACTIONS.HANDLE_LIKE:
-        if (state.like) deleteLike(state.product.id, userState.id);
-        else addLike(state.product.id, userState.id);
-
         return {
           ...state,
           like: !state.like
@@ -103,6 +118,11 @@ export const ProductProvider = ({ children }) => {
     let action = managePropertySetter(property);
 
     if (property === PRODUCT_PROPERTIES.LIKE && !value) {
+      if (productState.like) {
+        deleteLike(productState.product.id, userState.id);
+      } else {
+        addLike(productState.product.id, userState.id);
+      }
       action = ACTIONS.HANDLE_LIKE;
     }
     dispatch({ type: action, payload: value ? value : null })
@@ -141,22 +161,6 @@ export const ProductProvider = ({ children }) => {
         break;
     }
   }, []);
-
-  const addLike = (idProduct, idUser) => {
-    http().post(`${PRODUCTS_ENDPOINT}/like/add`, {
-      body: [
-        idProduct, idUser
-      ]
-    })
-  }
-
-  const deleteLike = (idProduct, idUser) => {
-    http().del(`${PRODUCTS_ENDPOINT}/like/delete`, {
-      body: [
-        idProduct, idUser
-      ]
-    })
-  }
 
   const data = useMemo(() => ({
     productState,

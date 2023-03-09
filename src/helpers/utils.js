@@ -73,6 +73,7 @@ const updateNewConfigurationStock = (configuration, addition) => {
 }
 
 export const updateConfigurationStock = (products, idProduct, idConfig, add) => {
+  console.log(products?.filter(prod => prod.id == idProduct)[0]);
   products?.filter(prod => prod.id == idProduct)[0].config.map(cnf => {
     if (cnf.id == idConfig) {
       cnf.total = parseInt(cnf.total) + add;

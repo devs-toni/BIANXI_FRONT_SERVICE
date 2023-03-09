@@ -1,6 +1,7 @@
 export { default as Cart } from './Cart/Cart';
 export { default as CartConfigHandler } from './Cart/CartConfigHandler';
 export { default as CartFooter } from './Cart/CartFooter';
+export { default as CuponBox } from './Cart/CuponBox';
 export { default as Handler } from './Cart/Handler';
 export { default as PaymentDetails } from './Cart/PaymentDetails';
 export { default as PaymentForm } from './Cart/PaymentForm';

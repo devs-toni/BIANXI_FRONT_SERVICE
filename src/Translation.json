@@ -133,7 +133,9 @@
       "name": "Nombre",
       "lastname": "Apellidos",
       "email": "Correo electrónico",
-      "products": "Productos"
+      "products": "Productos",
+      "discount": "Cupón descuento",
+      "new": "Regalo primera compra"
     }
   }, 
   "en": {

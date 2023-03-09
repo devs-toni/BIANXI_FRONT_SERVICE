@@ -10,27 +10,27 @@ const CartFooter = ({ closeHandler }) => {
 
   const { text } = useLanguage();
 
-  const { cartState, getIVAPriceCart } = useCart();
-  const { totalAmount: total, cartProducts } = cartState;
-  
+  const { cartState } = useCart();
+  const { totalAmount: total, iva, cartProducts } = cartState;
+
   return (
     <div className='cart-footer'>
       <div className='cart-footer__sub'>
         <p className="cart-footer__sub--title">{text.cart.subTotal}</p>
-        <p className="cart-footer__sub--price">{formatNumberES(total , 2)} €</p>
+        <p className="cart-footer__sub--price">{formatNumberES(total, 2)} €</p>
       </div>
       <div className="cart-footer__total">
         <p className='cart-footer__total--title'>{text.cart.total}</p>
-        <p className='cart-footer__total--price'>{formatNumberES(total , 2)} €</p>
-        <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(getIVAPriceCart(cartProducts), 2)} € IVA)</p>
+        <p className='cart-footer__total--price'>{formatNumberES(total, 2)} €</p>
+        <p className='cart-footer__total--title'>({text.cart.include} {formatNumberES(iva, 2)} € IVA)</p>
       </div>
       <div className='cart-footer__btns'>
         {
           cartProducts.length > 0
-          ?
-          <NavLink to={CART_LINK} className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
-          : 
-          <button className='cart-footer__btns--finish' >{text.cart.finishBtns}</button>
+            ?
+            <NavLink to={CART_LINK} className='cart-footer__btns--finish' onClick={closeHandler}>{text.cart.finishBtns}</NavLink>
+            :
+            <button className='cart-footer__btns--finish' >{text.cart.finishBtns}</button>
         }
       </div>
     </div>

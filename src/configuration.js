@@ -22,6 +22,8 @@ export const CUPONS = [
   }
 ]
 
+export const NEW_USER_DISCOUNT = 5;
+
 export const UI_SECTIONS = {
   MENU: "menu",
   LOGIN: "login",

@@ -20,7 +20,7 @@ const ProductView = () => {
 
 
   useEffect(() => {
-    setProperty(PRODUCT_PROPERTIES.LIKE, false);
+    setProperty(PRODUCT_PROPERTIES.LIKE, { newState: false });
 
     const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
       if (idProduct) {
@@ -58,8 +58,8 @@ const ProductView = () => {
             getLike(
               id,
               userState.id,
-              () => setProperty(PRODUCT_PROPERTIES.LIKE, true),
-              () => setProperty(PRODUCT_PROPERTIES.LIKE, false)
+              () => setProperty(PRODUCT_PROPERTIES.LIKE, { newState: true }),
+              () => setProperty(PRODUCT_PROPERTIES.LIKE, { newState: false })
             )
           }
           setLoading(false);
