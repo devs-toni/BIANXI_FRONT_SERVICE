@@ -23,7 +23,7 @@ const SizeSelector = () => {
           productState.sizes.sort((a, b) => a > b ? 1 : -1).map((size, index) => {
             return (
               <React.Fragment key={uuid()}>
-                {index === 0 && <option key={uuid()} value="">Choose option</option>}
+                {index === 0 && <option key={uuid()} value=" ">Choose option</option>}
                 <option key={uuid()} value={size}>{size}</option>
               </React.Fragment>
             )
