@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 import { CATEGORY, CATEGORY_ROUTER, HOME, PRODUCT, PRODUCT_LINK } from '../../router/paths';
+import { useUI } from '../../context/UIContext';
+import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 
 
 const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerClass, boxClass }) => {
@@ -18,7 +20,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-
+  const { handleUi } = useUI();
 
   useEffect(() => {
     setUpdatePrices(setProductPrice(offer, price));
@@ -27,7 +29,10 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
     setLoaded(true);
   }, [product])
 
-
+  const handleNav = () => {
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE);
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE);
+  }
 
   return (
 
@@ -63,7 +68,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
             {
               (!isSearch && !isRelated)
               &&
-              < NavLink to={`${PRODUCT_LINK}/${type.toString()}/${id.toString()}`} className='products__product--visit'>{text.product.view}</NavLink>
+              < NavLink to={`${PRODUCT_LINK}/${type.toString()}/${id.toString()}`} className='products__product--visit' onClick={handleNav}>{text.product.view}</NavLink>
             }
           </>
           :

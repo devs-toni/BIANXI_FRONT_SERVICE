@@ -34,6 +34,8 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
   const handleCartAddition = () => {
     const { current } = totalRef;
     addProducts({ ...productState.product, ...prices }, current.value)
+    handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE);
+    handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE);
     handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE);
   }
 
