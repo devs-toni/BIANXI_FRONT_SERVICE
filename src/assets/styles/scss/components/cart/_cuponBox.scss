@@ -1,0 +1,47 @@
+@use '../../abstracts/variables' as var;
+
+.cupon {
+  height: 0;
+  transition: all .3s ease-in;
+  overflow: hidden;
+  background-color: #007e7a;
+  margin-bottom: 20px;
+  border-radius: 5px;
+
+
+  &.active {
+    height: 220px;
+
+  }
+
+  form {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  &__label {
+    margin-top: 20px;
+    width: 80%;
+    margin-bottom: 30px;
+    font-size: 1.3em;
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 80%;
+    font-size: 2.6em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    padding: .4em 0;
+  }
+
+  &__error {
+    color: red;
+    margin-top: 20px;
+    font-size: 1.2em;
+  }
+}

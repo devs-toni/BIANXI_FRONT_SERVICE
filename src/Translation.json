@@ -120,6 +120,8 @@
       "sub": "Subtotal",
       "cupon": "¿Tienes un cupón?",
       "cuponLink": "Haz click aquí para introducir tu código",
+      "label":"Ingresa el código de tu cupón",
+      "cuponError": "El cupon introducido no és válido",
       "total": "Total",
       "sizeTitle": "Talla: ",
       "colorTitle": "Color: ",

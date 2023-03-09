@@ -20,6 +20,9 @@ export const UIProvider = ({ children }) => {
 
     HANDLE_SEARCH: "HANDLE_SEARCH",
     CLOSE_SEARCH: "CLOSE_SEARCH",
+
+    HANDLE_CUPON: "HANDLE_CUPON",
+    CLOSE_CUPON: "CLOSE_CUPON",
   }
 
   const initialState = {
@@ -27,7 +30,8 @@ export const UIProvider = ({ children }) => {
     menuIsOpen: false,
     cartIsOpen: false,
     searchIsOpen: false,
-    searchRef: useRef(null)
+    searchRef: useRef(null),
+    cuponIsOpen: false,
   }
 
   const UiReducer = (state, action) => {
@@ -57,6 +61,12 @@ export const UIProvider = ({ children }) => {
 
       case UI_ACTIONS.CLOSE_SEARCH:
         return { ...state, searchIsOpen: state.searchIsOpen && false };
+
+      case UI_ACTIONS.HANDLE_CUPON:
+        return { ...state, cuponIsOpen: !state.cuponIsOpen };
+
+      case UI_ACTIONS.CLOSE_CUPON:
+        return { ...state, cuponIsOpen: state.cuponIsOpen && false };
 
       default:
         return state;
