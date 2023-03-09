@@ -15,12 +15,9 @@ const Orders = () => {
 
   const [orders, setOrders] = useState([]);
 
-
-
-
   useEffect(() => {
     const setUserOrders = async () => {
-      let array = [];
+      const array = [];
 
       const orders = await http()
         .get(`${ORDERS_ENDPOINT}/get/all/${user_state.id}`)
@@ -35,11 +32,11 @@ const Orders = () => {
           });
         const newOrd = { ...ord, products: result }
         array.push(newOrd);
-        console.log(array);
       }));
       setOrders(array);
     }
     setUserOrders();
+
   }, [orders.length])
 
 

@@ -12,6 +12,12 @@ export const STRIPE_VISIBLE_KEY = "pk_test_51MibNiJvIad3hgcE0izvl4WzZ6v7ukyk3UvA
 export const GOOGLE_OAUTH_KEY = "162877889324-ph6vkb5temebbg62b7sbqrp14t2is97b.apps.googleusercontent.com";
 
 export const CUPONS = [
-  "TREK",
-  "KTM",
+  {
+    code: "TREK",
+    percentage: 10
+  },
+  {
+    code: "KTM",
+    percentage: 20
+  }
 ]

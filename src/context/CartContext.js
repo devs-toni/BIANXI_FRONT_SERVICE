@@ -9,15 +9,26 @@ export const useCart = () => {
   return useContext(CartContext);
 }
 
+
+
 const items = JSON.parse(localStorage.getItem('CART'));
 
 export const CartProvider = ({ children }) => {
+
+  //TOTAL CHARGE IN CART
+  const getTotalPriceCart = useCallback((products) => {
+    let total = 0;
+    products?.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
+    return total;
+  }, []);
 
   const { handleProduct } = useProduct();
   const { state: product_state } = handleProduct();
   const { user_state } = useAuth();
 
-  const [cartProducts, setCartProducts] = useState(items ? items : [])
+  const [cartProducts, setCartProducts] = useState(items ? items : []);
+  const [activeCupon, setActiveCupon] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(items ? getTotalPriceCart(items) : 0);
 
   const getMethods = useCallback(() => {
     return getMainMethods(product_state);
@@ -29,6 +40,7 @@ export const CartProvider = ({ children }) => {
     const productsAdd = handleAddProduct(productAdd, configurationAdd, cartProducts);
     localStorage.setItem("CART", JSON.stringify(productsAdd));
     setCartProducts(productsAdd);
+    setTotalAmount(getTotalPriceCart(productsAdd));
   }, []);
 
   //REST PRODUCT IN CART MODAL
@@ -37,6 +49,8 @@ export const CartProvider = ({ children }) => {
     const productsDel = handleRemoveProduct(productDel, configurationDel, cartProducts);
     localStorage.setItem("CART", JSON.stringify(productsDel));
     setCartProducts(productsDel);
+    setTotalAmount(getTotalPriceCart(productsDel));
+
   }, []);
 
   //ADD PRODUCTS IN PRODUCT PAGE
@@ -45,6 +59,7 @@ export const CartProvider = ({ children }) => {
     const productsAddN = handleAddSpecificNumberProduct(item, n, cartProducts);
     localStorage.setItem("CART", JSON.stringify(productsAddN));
     setCartProducts(productsAddN);
+    setTotalAmount(getTotalPriceCart(productsAddN));
   }, [product_state]);
 
   //DELETE CONFIGURATION IN CART MODAL
@@ -53,6 +68,7 @@ export const CartProvider = ({ children }) => {
     const productsConfDel = handleRemoveConfig(idProduct, idConf, totalProductInConf, cartProducts);
     localStorage.setItem("CART", JSON.stringify(productsConfDel));
     setCartProducts(productsConfDel);
+    setTotalAmount(getTotalPriceCart(productsConfDel));
   }, []);
 
   //DELETE PRODUCT IN CART MODAL
@@ -61,6 +77,7 @@ export const CartProvider = ({ children }) => {
     const productsCompleteDel = handleDeleteCartProduct(id, cartProducts);
     localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
     setCartProducts(productsCompleteDel);
+    setTotalAmount(getTotalPriceCart(productsCompleteDel));
   }, []);
 
 
@@ -78,15 +95,16 @@ export const CartProvider = ({ children }) => {
     if (result) {
       localStorage.removeItem("CART");
       setCartProducts([]);
+      setTotalAmount(getTotalPriceCart(0));
+
     }
   }, [user_state]);
 
-
-  //TOTAL CHARGE IN CART
-  const getTotalPriceCart = useCallback((products) => {
-    let total = 0;
-    products?.map(p => total += (parseFloat(`${p.final}`.replace('.', '')) * p.total));
-    return total;
+  //SET ACTIVE CUPON
+  const handleCupon = useCallback((state, percentage) => {
+    setActiveCupon(state);
+    const discount = ((totalAmount * percentage) / 100);
+    state ? setTotalAmount(prevState => prevState - discount) : setTotalAmount(getTotalPriceCart(cartProducts));
   }, []);
 
   const getIVAPriceCart = useCallback((products) => {
@@ -97,6 +115,7 @@ export const CartProvider = ({ children }) => {
 
   const data = useMemo(() => ({
     cartProducts,
+    activeCupon,
     addOneProduct,
     deleteOneProduct,
     addProducts,
@@ -104,8 +123,9 @@ export const CartProvider = ({ children }) => {
     deleteCompleteProduct,
     successPayment,
     getIVAPriceCart,
-    getTotalPriceCart
-  }), [cartProducts, addOneProduct, deleteOneProduct, addProducts, deleteConfiguration, deleteCompleteProduct, successPayment, getIVAPriceCart, getTotalPriceCart])
+    getTotalPriceCart,
+    handleCupon
+  }), [cartProducts, addOneProduct, deleteOneProduct, addProducts, deleteConfiguration, deleteCompleteProduct, successPayment, getIVAPriceCart, getTotalPriceCart, handleCupon, activeCupon])
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>
 }

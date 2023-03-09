@@ -1,40 +1,53 @@
+import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { CUPONS } from '../../configuration';
+import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/GlobalContext';
-import { useUI } from '../../context/UIContext';
-import { useForm } from '../../hooks/useForm';
 
 const CuponBox = ({ isOpen }) => {
 
   const { text } = useLanguage();
-  const { form, handleChange } = useForm({ cupon: '' });
-  const [error, setError] = useState('');
 
-  const { handleUi } = useUI();
-  const { state, dispatch, UI_ACTIONS } = handleUi();
+  const { activeCupon, handleCupon } = useCart();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [cupon, setCupon] = useState('');
 
-    if (CUPONS.find(c => c === form.cupon)) {
-      console.log("Tienes descuento!!!");
-      dispatch({ type: UI_ACTIONS.CLOSE_CUPON });
-    } else {
-      setError(text.payment.cuponError);
+  const handleChange = ({ target }) => {
+    const { value } = target;
+    setCupon(value);
+
+    if (CUPONS.find(c => c.code === value)) {
+      handleCupon(true, CUPONS.find(c => c.code === value).percentage);
     }
+    else
+      handleCupon(false);
   }
 
+
   return (
-    <div className={`${isOpen ? 'active' : ''} cupon`}>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="cuponInput" className='cupon__label'>{text.payment.label}</label>
-        <input type="text" id='cuponInput' name='cupon' className='cupon__input' onChange={(e) => {
-          handleChange(e);
-          setError(''); 
-          }} value={form.cupon} placeholder='CODE' />
-        <span className='cupon__error' >{error}</span>
-      </form>
-    </div>
+    <>
+      <div className='main-cupon'>
+        {console.log(activeCupon)}
+        {activeCupon && <FontAwesomeIcon icon={faXmark} className="main-cupon__delete" onClick={() => handleCupon(false)} />}
+        <div className={`${activeCupon ? 'valid' : ''} ${isOpen ? 'active' : ''} cupon`}>
+          {
+            activeCupon
+              ?
+              <>
+                <FontAwesomeIcon icon={faCheck} className="cupon__check" />
+                <label htmlFor="cuponInput" className='cupon__label '>{text.payment.label}</label>
+                <input type="text" className='cupon__input' value={cupon} onChange={handleChange} placeholder='CODE' disabled />
+              </>
+              :
+              <>
+                <label htmlFor="cuponInput" className='cupon__label'>{text.payment.label}</label>
+                <input type="text" className='cupon__input' value={cupon} onChange={handleChange} placeholder='CODE' />
+              </>
+          }
+        </div>
+      </div>
+    </>
   )
 }
 
