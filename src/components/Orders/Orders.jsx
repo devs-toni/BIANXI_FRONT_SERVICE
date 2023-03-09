@@ -21,20 +21,23 @@ const Orders = () => {
   useEffect(() => {
     const setUserOrders = async () => {
       let array = [];
+
       const orders = await http()
         .get(`${ORDERS_ENDPOINT}/get/all/${user_state.id}`)
         .then(ordersBackend => {
           return ordersBackend;
         });
-      await orders.map(async (ord, ind) => {
+
+      await Promise.all(orders.map(async (ord) => {
         const result = await http().get(`${ORDERS_ENDPOINT}/get/products/${ord.id}`)
           .then(productsBackend => {
             return productsBackend;
           });
         const newOrd = { ...ord, products: result }
         array.push(newOrd);
-        if (ind === orders.length - 1) setOrders(array);
-      });
+        console.log(array);
+      }));
+      setOrders(array);
     }
     setUserOrders();
   }, [])
@@ -48,10 +51,11 @@ const Orders = () => {
         <p className="orders__titles--key">{text.payment.products}</p>
         <p className="orders__titles--key">{text.payment.total}</p>
       </div>
+      {console.log(orders.length)}
       {
         orders.length > 0
           ?
-          orders.map(({ id, address, price, products }) => {
+          orders.sort((a, b) => a.id > b.id ? 1 : -1).map(({ id, address, price, products }) => {
             return (
               <div className="orders__order" key={uuid()}>
                 <p className="orders__order--val">{id}</p>

@@ -2,8 +2,9 @@
 
 .orders {
   width: 60%;
-  margin: 0 auto;
+  margin: 100px auto;
   font-size: 1.2em;
+  box-shadow: 0 0 20px 1px black;
 
   &__empty {
     margin-top: 100px;
@@ -14,37 +15,44 @@
   }
 
   &__titles {
-    background-color: rgb(241, 241, 241);
-    padding: .5em;
+    background-color: rgb(7, 105, 105);
+    padding: .2em;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border-radius: 5px;
-    font-weight: 500;
+    grid-template-columns: 10% 35% 35% 20%;
+     font-weight: 500;
+    color: white;
     font-size: 1.3em;
 
     &--key {
       width: 100%;
-      padding: 1em 1em;
+      padding: .4em 0;
+      text-align: center;
     }
   }
 
   &__order {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: .5em;
+    grid-template-columns: 10% 35% 35% 20%;
     align-items: center;
+    padding: 1.5em 0;
+    background-color: rgb(241, 241, 241);
+
+    &:nth-child(even) {
+      background-color: rgb(255, 255, 255);
+      color: rgb(0, 0, 0);
+    }
 
 
     &--val {
-      padding: 1em 1em;
+      text-align: center;
+      padding: .3em 0;
+      font-weight: 600;
+      font-size: 1.1em;
     }
 
     &--product {
-      padding: 1em;
 
-      p {
-        padding: .5em;
-      }
+      p {}
     }
   }
 }
