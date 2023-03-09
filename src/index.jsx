@@ -14,20 +14,20 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <BrowserRouter>
     <GoogleOAuthProvider clientId="162877889324-ph6vkb5temebbg62b7sbqrp14t2is97b.apps.googleusercontent.com">
-      <LanguageProvider>
-        <UIProvider>
-          <AuthProvider>
-            <ProductProvider>
-              <CartProvider>
-                <GlobalProvider>
+      <GlobalProvider>
+        <LanguageProvider>
+          <UIProvider>
+            <AuthProvider>
+              <ProductProvider>
+                <CartProvider>
                   <App />
-                </GlobalProvider>
-              </CartProvider>
-            </ProductProvider>
-          </AuthProvider>
-        </UIProvider>
-      </LanguageProvider>
-    </GoogleOAuthProvider>,
+                </CartProvider>
+              </ProductProvider>
+            </AuthProvider>
+          </UIProvider>
+        </LanguageProvider>
+      </GlobalProvider>
+    </GoogleOAuthProvider>
   </BrowserRouter>
 );
 

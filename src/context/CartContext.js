@@ -70,7 +70,8 @@ export const CartProvider = ({ children }) => {
           ...state,
           isNew: action.payload.isNew,
           discountNew: action.payload.discount,
-          totalAmount: action.payload.amount
+          totalAmount: action.payload.amount,
+          iva: action.payload.iva ? action.payload.iva : state.iva,
         }
 
       default: return state;
@@ -90,10 +91,11 @@ export const CartProvider = ({ children }) => {
           if (items && y) {
             const discountNew = (cartState.totalAmount * NEW_USER_DISCOUNT) / 100;
             const finalPrice = cartState.totalAmount - discountNew;
+            const iva = (finalPrice * 21) / 100;
             if (userState.id !== 0)
               dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: y, discount: discountNew, amount: finalPrice } })
             else
-              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: cartState.totalAmount } })
+              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: cartState.totalAmount, iva: iva } })
           }
         });
     }
