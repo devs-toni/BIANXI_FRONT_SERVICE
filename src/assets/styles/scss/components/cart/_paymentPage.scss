@@ -140,9 +140,13 @@
           width: 100%;
 
           &--discount {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            width: 100%;
             margin-top: 50px;
           }
-  
+
           &--product {
             width: 40%;
             text-align: left;
@@ -226,7 +230,7 @@
 
           &--sub,
           &--subtotal {
-            margin-top: 50px;
+            margin-top: 20px;
 
             &-discount {
               margin-top: 10px;
