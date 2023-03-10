@@ -1,0 +1,198 @@
+@use '../../themes/variables' as var;
+
+.likes-category {
+  margin-top: 60px;
+
+  &__empty {
+    position: absolute;
+    width: 60%;
+    font-size: 10em;
+    opacity: .4;
+    color: var.$bianchi-color;
+    margin: auto;
+  }
+
+  &__title {
+    text-align: left;
+    font-size: 6em;
+    width: 60%;
+    margin: 0 auto;
+    font-weight: lighter;
+    margin-bottom: 100px;
+
+    @media screen and (max-width: 1800px) {
+      font-size: 4em;
+    }
+
+    @media screen and (max-width: 1000px) {
+      font-size: 3em;
+    }
+
+    @media screen and (max-width: 650px) {
+      font-size: 2.5em;
+      margin-bottom: 60px;
+      width: 80%;
+    }
+
+    @media screen and (max-width: 490px) {
+      font-size: 1.8em;
+    }
+  }
+
+  .like-products {
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 200px;
+
+    &__product {
+      .like-product-box {
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        position: relative;
+
+        @media screen and (max-width: 1350px) {
+          margin: 0;
+        }
+
+        &__delete {
+          margin: 20px;
+          opacity: .7;
+          font-size: 2em;
+          cursor: pointer;
+
+        }
+
+        &__like {
+          transform: scale(2);
+          opacity: 1;
+          margin-right: 20px;
+          transition: all .3s ease-in-out;
+          cursor: pointer;
+
+          &:hover {
+            color: red;
+            transform: scale(3);
+          }
+        }
+
+        &__image {
+          width: 14vw;
+          margin-bottom: 10px;
+          opacity: 0;
+          transition: all 3s;
+          filter: contrast(1);
+
+          &.loaded {
+            opacity: 1;
+          }
+
+          &.point {
+            cursor: pointer;
+          }
+
+          @media screen and (max-width: 1750px) {
+            width: 19vw;
+          }
+
+          @media screen and (max-width: 1550px) {
+            width: 21vw;
+          }
+
+          @media screen and (max-width: 1350px) {
+            width: 23vw;
+          }
+
+          @media screen and (max-width: 1150px) {
+            width: 25vw;
+          }
+
+          @media screen and (max-width: 1050px) {
+            width: 30vw;
+          }
+
+          @media screen and (max-width: 950px) {
+            width: 33vw;
+          }
+
+          @media screen and (max-width: 850px) {
+            width: 36vw;
+          }
+
+          @media screen and (max-width: 770px) {
+            width: 70vw;
+          }
+
+          @media screen and (max-width: 350px) {
+            width: 73vw;
+          }
+        }
+
+        &__name {
+          font-size: 1.5em;
+          font-weight: 400;
+          min-width: 100%;
+          text-align: center;
+
+          @media screen and (max-width: 1800px) {
+            font-size: 1.5em;
+          }
+
+          @media screen and (max-width: 770px) {
+            text-align: center;
+            font-size: 1.4em;
+          }
+
+          @media screen and (max-width: 490px) {
+            font-size: 1.2em;
+          }
+        }
+
+        &__price-container {
+          font-size: 1.2em;
+          display: flex;
+          margin: 0 auto;
+
+          &--price {
+            font-size: 1.2em;
+            letter-spacing: .2px;
+            color: var.$bianchi-color;
+
+            @media screen and (max-width: 1800px) {
+              font-size: 1.1em;
+            }
+
+            @media screen and (max-width: 490px) {
+              font-size: 1em;
+              margin: -10px 0 0 0;
+            }
+          }
+
+          @media screen and (max-width: 1000px) {
+            top: 70%;
+          }
+
+          @media screen and (max-width: 770px) {
+            position: relative;
+            margin: 20px 0;
+          }
+        }
+
+        @media screen and (max-width: 770px) {
+          flex-direction: column;
+        }
+      }
+    }
+
+    @media screen and (max-width: 1000px) {
+      width: 70%;
+    }
+
+    @media screen and (max-width: 770px) {
+      margin-bottom: 60px;
+    }
+  }
+}

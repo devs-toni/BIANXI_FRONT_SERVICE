@@ -1,4 +1,4 @@
-import './assets/styles/scss/index.scss';
+import './assets/styles/global/index.scss';
 import { Layout, Footer } from './components/index';
 
 function App() {

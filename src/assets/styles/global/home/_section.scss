@@ -1,0 +1,101 @@
+@use '../../themes/variables' as var;
+
+.sections {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  margin: 0 auto;
+
+  &__link {
+    text-align: center;
+  }
+
+  &__section {
+    min-width: 260px;
+    padding: 20px 50px;
+    width: 40%;
+    height: 260px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+    background-color: #F9F9F9;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: all .4s ease-in-out;
+
+    &--image {
+      font-size: 6em;
+      margin-bottom: 50px;
+
+      @media screen and (max-width: 1700px) {
+        font-size: 4.5em;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 3.5em;
+      }
+
+      @media screen and (max-width: 470px) {
+        font-size: 2em;
+      }
+      @media screen and (max-width: 330px) {
+        font-size: 1.5em;
+      }
+    }
+
+    &--name {
+      font-size: 2.6em;
+      text-transform: capitalize;
+      font-weight: 500;
+
+      @media screen and (max-width: 1700px) {
+        font-size: 1.9em;
+      }
+
+      @media screen and (max-width: 600px) {
+        font-size: 1.4em;
+      }
+
+      @media screen and (max-width: 470px) {
+        font-size: 1.2em;
+      }
+
+      @media screen and (max-width: 330px) {
+        font-size: 1em;
+      }
+    }
+
+    &:hover {
+      background-color: var.$bianchi-color;
+    }
+
+    @media screen and (max-width: 1700px) {
+      min-width: 150px;
+      height: 180px;
+    }
+
+    @media screen and (max-width: 600px) {
+      min-width: 120px;
+      height: 140px;
+      margin: 10px auto;
+    }
+
+    @media screen and (max-width: 470px) {
+      min-width: 80px;
+      height: 110px;
+    }
+
+    @media screen and (max-width: 330px) {
+      max-width: 40px;
+      padding: 15px 15px;
+      height: 100px;
+    }
+  }
+
+  @media screen and (max-width: 1120px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

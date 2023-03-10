@@ -1,0 +1,67 @@
+@use '../../themes/variables' as var;
+
+.main-cupon {
+  position: relative;
+
+  &__delete {
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    opacity: 1;
+    font-size: 2em;
+    transition: all .4s ease;
+    z-index: 2;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+
+    &:hover {
+      transform: rotate(-180deg);
+    }
+  }
+}
+
+.cupon {
+  height: 0;
+  transition: all .3s ease-in;
+  overflow: hidden;
+  background-color: #007e7a;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  position: relative;
+
+  &.active {
+    height: 180px;
+  }
+
+  &.valid {
+    opacity: 0.4;
+  }
+
+  &__label {
+    margin-top: 20px;
+    width: 80%;
+    margin-bottom: 30px;
+    font-size: 1.3em;
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 80%;
+    font-size: 2.6em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 3px;
+    padding: .4em 0;
+  }
+
+  &__check {
+    position: absolute;
+    top: 52%;
+    opacity: 1;
+    font-size: 3em;
+  }
+}

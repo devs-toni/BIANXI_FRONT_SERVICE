@@ -1,0 +1,95 @@
+@use '../../themes/variables' as var;
+
+.dropdown_wrapper {
+  position: relative;
+  display: inline-block;
+
+  @media screen and (max-width: 768px) {
+    font-size: 0.7em;
+  }
+}
+
+.dropdown_activator {
+  align-items: center;
+  background-color: inherit;
+  border: none;
+  height: 100%;
+  color: var.$font-color-header;
+  font-weight: bolder;
+  letter-spacing: 1.4px;
+  display: flex;
+  align-items: center;
+  font-size: 1.15em;
+  margin: 1rem 0.6rem;
+  cursor: pointer;
+  width: 100%;
+  transition: all .4s ease-in-out;  
+
+  @media screen and (max-width: 770px) {
+    padding: 0;
+    color: white;
+
+    svg {
+      filter: brightness(50);
+      width: 100%;
+    }
+  }
+}
+
+.dropdown_item_list {
+  min-width: 150px;
+  background: white;
+  display: none;
+  margin: 0;
+  position: absolute;
+  box-shadow: 0 0 2px 0 gray;
+  background-color: #F2F2F2;
+  border-radius: 5px;
+  padding: 0;
+  z-index: 3;
+
+  &.active {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(auto, 1fr));
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    font-size: 0.7em
+  }
+}
+
+.item_list {
+  list-style: none;
+  border: none;
+  outline: none;
+
+  &:last-child a {
+    border-bottom: none;
+  }
+
+  a,
+  a:link,
+  a:active,
+  a:visited {
+    display: flex;
+    color: #666666;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.8rem;
+    transition: all 0.1s ease-in-out;
+
+
+    &:hover {
+      background-color: gray;
+      color: white;
+    }
+
+    @media screen and (max-width: 770px) {
+      width: auto;
+      padding: 0;
+      padding-left: 0.4rem;
+      height: 40px;
+    }
+  }
+}

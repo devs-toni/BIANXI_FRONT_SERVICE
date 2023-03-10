@@ -1,0 +1,19 @@
+@use './header/navbar';
+@use './home/home';
+@use './category/category';
+@use './category/related';
+@use './cart/cart';
+@use './cart/paymentPage';
+@use './view/mainView';
+@use './footer/footer';
+@use './user/login';
+@use './user/favourites';
+@use './search/search';
+@use './search/categorySearch';
+@use './orders/orders';
+
+@use './payLoader';
+@use './loader';
+
+@use '../themes/animations';
+@use '../themes/variables';

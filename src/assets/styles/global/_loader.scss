@@ -1,0 +1,25 @@
+@use '../themes/variables' as var;
+@import '../themes/animations';
+
+.lds-hourglass {
+  display: inline-flex;
+  position: relative;
+  width: 100%;
+  height: 53vh;
+  justify-content: center;
+  align-items: center;
+
+  &:after {
+    content: " ";
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    margin: 8px;
+    color: var.$bianchi-color;
+    box-sizing: border-box;
+    border: 32px solid black;
+    border-color: var.$bianchi-color transparent var.$bianchi-color transparent;
+    @include loader();
+  }
+}

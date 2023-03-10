@@ -1,0 +1,47 @@
+@use '../../themes/variables' as var;
+@use './product';
+
+.category {
+  padding: var.$section-padding;
+  width: fit-content;
+  margin: 0 auto;
+
+  &__empty {
+    margin-top: 100px;
+    width: 100%;
+    font-size: 10em;
+    opacity: .4;
+    color: var.$bianchi-color;
+  }
+
+  &__filter {
+    &--price {
+      width: 60%;
+      margin: 0 auto;
+    }
+  }
+
+  &__title {
+    text-transform: capitalize;
+    font-size: 3em;
+    text-align: left;
+
+    @media screen and (max-width: 770px) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media screen and (max-width: 1750px) {
+    width: 60%;
+  }
+
+  @media screen and (max-width: 1550px) {
+    width: 70%;
+  }
+
+  @media screen and (min-width: 270px) and (max-width: 1350px) {
+    width: 80%;
+    padding: 0;
+  }
+}
