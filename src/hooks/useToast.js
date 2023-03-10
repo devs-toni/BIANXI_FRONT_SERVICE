@@ -1,46 +1,26 @@
-import Swal from 'sweetalert2'
+import { toast } from "react-hot-toast";
+
 
 export const useToast = () => {
 
-  const smallOkToast = (msg) => {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: 'center',
-      showConfirmButton: false,
-      timer: 4000,
-      timerProgressBar: true,
-      didOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
+  const handleToast = (icon, msg) => {
+    toast(msg,
+      {
+        icon: icon,
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontSize: '2em',
+          display: 'flex',
+          flexDirection: 'column',
+          textAlign: 'center',
+        }
       }
-    })
-    Toast.fire({
-      icon: 'success',
-      title: msg
-    })
-  }
-
-  const bigOkToast = (msg) => {
-    Swal.fire({
-      position: 'center',
-      icon: 'success',
-      title: msg,
-      showConfirmButton: false,
-      timer: 2000
-    })
-  }
-
-  const bigErrorToast = (msg) => {
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: `${msg}!`,
-    })
+    );
   }
 
   return {
-    smallOkToast,
-    bigOkToast,
-    bigErrorToast
+    handleToast
   }
 }

@@ -37,7 +37,7 @@ const Orders = () => {
     }
     setUserOrders();
 
-  }, [orders.length])
+  }, [orders])
 
 
   return (
@@ -48,7 +48,6 @@ const Orders = () => {
         <p className="orders__titles--key">{text.payment.products}</p>
         <p className="orders__titles--key">{text.payment.total}</p>
       </div>
-      {console.log(orders.length)}
       {
         orders.length > 0
           ?

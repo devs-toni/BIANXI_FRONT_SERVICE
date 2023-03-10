@@ -10,6 +10,7 @@ import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ORDERS_LINK } from '../../router/paths';
+import { toast, Toaster } from 'react-hot-toast';
 
 const PaymentForm = ({ price }) => {
   const { text } = useLanguage();
@@ -24,6 +25,8 @@ const PaymentForm = ({ price }) => {
   const { successPayment, cartState } = useCart();
   const { cartProducts } = cartState;
 
+  const { handleToast } = useToast();
+
   const {
     form,
     validate,
@@ -35,9 +38,6 @@ const PaymentForm = ({ price }) => {
       email: ""
     });
 
-  const { bigOkToast, bigErrorToast } = useToast();
-
-
   const handlePayment = async (e) => {
     e.preventDefault();
 
@@ -45,8 +45,12 @@ const PaymentForm = ({ price }) => {
     if (Object.keys(errors).length === 0) {
       const validPayment = await pay();
       if (validPayment) {
-        validPayment && successPayment(form, price, cartProducts);
-        userState.isAuthenticated ? navigate(ORDERS_LINK) : navigate('/');
+        handleToast('👌', "Payment successful");
+        successPayment(form, price, cartProducts);
+        if (userState.isAuthenticated)
+          navigate(ORDERS_LINK)
+        else
+          navigate('/');
       }
     }
   }
@@ -85,16 +89,16 @@ const PaymentForm = ({ price }) => {
         .then(function (result) {
           if (result.error) {
             const message = result.error.message;
-            bigErrorToast(message);
+            handleToast('⛔', message);
             return false;
-
           } else {
-            bigOkToast("Payment Successful");
             return true;
           }
         });
 
       return isValid;
+    } else {
+      handleToast('⛔', error.message);
     }
   }
 
@@ -127,6 +131,7 @@ const PaymentForm = ({ price }) => {
           <input className='payment__pay' type="submit" value={text.payment.pay} />
         </form>
       </div>
+      <Toaster />
     </div>
   )
 }
