@@ -131,28 +131,22 @@ export const setProductConfigurations = (item) => {
   return { colors, colorsIds, sizes }
 }
 
-export const getProductRelateds = (products, price) => {
+export const getProductRelateds = (products, price, itemId) => {
 
   const sortArray = products.sort((a, b) => a.price < b.price ? 1 : -1);
-
-  const downArrayWithNulls = sortArray.map(p => p.price < price ? p : null);
-  const upArrayWithNulls = sortArray.map(p => p.price > price ? p : null);
-
-  const downArray = downArrayWithNulls.filter(p => p != null);
-  const upArray = upArrayWithNulls.filter(p => p != null);
-
-  const upArraySorted = upArray.sort((a, b) => a.price > b.price ? 1 : -1);
-
   const responseArray = [];
 
-  downArray.forEach((p, ind) => {
-    if (responseArray.length < 4) {
-      if (ind % 2 === 0) {
-        if (downArray[ind]) responseArray.push(downArray[ind]);
-      } else
-        if (upArraySorted[ind]) responseArray.push(upArraySorted[ind]);
+  while (responseArray.length < 4) {
+    const rndInt = randomIntFromInterval(0, sortArray.length - 1);
+    const newItem = sortArray[rndInt];
+    if (!responseArray.find(item => item.id === newItem.id) && newItem.id !== itemId) {
+      responseArray.push(sortArray[rndInt]);
     }
-  });
+  }
   return responseArray;
-} 
+}
+
+function randomIntFromInterval(min, max) { // min and max included 
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}
 

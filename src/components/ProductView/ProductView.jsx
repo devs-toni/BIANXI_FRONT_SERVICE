@@ -94,6 +94,7 @@ const ProductView = () => {
             <Related
               type={type}
               price={productState.product.price}
+              id={parseInt(id)}
             />
           </>
           :

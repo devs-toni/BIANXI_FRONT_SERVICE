@@ -7,7 +7,7 @@ import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { getProductRelateds } from '../../helpers/utils';
 
-const Related = ({ type, price }) => {
+const Related = ({ type, price, id }) => {
 
   const { text } = useLanguage();
 
@@ -16,10 +16,10 @@ const Related = ({ type, price }) => {
   useEffect(() => {
     http().get(`${PRODUCTS_ENDPOINT}/get/type/${type}`)
       .then(data => {
-        setRelatedProducts(getProductRelateds(data, price))
+        setRelatedProducts(getProductRelateds(data, price, id))
       })
       .catch(err => console.error(err));
-  }, []);
+  }, [id]);
 
   return (
     <>
@@ -60,7 +60,8 @@ const Related = ({ type, price }) => {
 
 Related.propTypes = {
   type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired
+  price: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired
 }
 
 export default Related;
