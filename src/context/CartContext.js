@@ -57,7 +57,7 @@ export const CartProvider = ({ children }) => {
           discountNew: state.isNew ? (getTotalPriceCart(action.payload) * NEW_USER_DISCOUNT) / 100 : 0,
         };
 
-      case ACTIONS.RESET_CART: 
+      case ACTIONS.RESET_CART:
         return {
           cartProducts: [],
           activeCupon: false,
@@ -106,14 +106,20 @@ export const CartProvider = ({ children }) => {
           const finalPriceWithoutDiscount = cuponIsActive ? (total - cuponDiscount) : total;
           const ivaWithDiscount = (finalPriceWithDiscount * 21) / 100;
           const ivaWithoutDiscount = (finalPriceWithoutDiscount * 21) / 100;
-
-          if (items && isNew) {
+          console.log(isNew)
+          console.log("id" + userState.id)
+          console.log(1)
+          if (isNew) {
             // IF IS REALLY LOGGED
-            if (isLogged)
+            console.log(2)
+            if (isLogged) {
+              console.log(3)
               dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: isNew, discount: saving, amount: finalPriceWithDiscount, iva: ivaWithDiscount } })
-            // IF IS NOT REALLY LOGGED
-            else
+            }// IF IS NOT REALLY LOGGED
+            else {
+              console.log(4)
               dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: finalPriceWithoutDiscount, iva: ivaWithoutDiscount } })
+            }
           }
         });
     }
