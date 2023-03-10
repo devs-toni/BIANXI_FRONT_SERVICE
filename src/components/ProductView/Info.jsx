@@ -10,7 +10,16 @@ import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
 import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
-import { FacebookIcon, FacebookShareButton } from 'react-share';
+import {
+  FacebookShareButton,
+  LinkedinShareButton,
+  TwitterShareButton,
+  PinterestShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  LinkedinIcon,
+  PinterestIcon,
+} from 'react-share';
 
 const Info = ({ setColorActivator, isLike, handleLike }) => {
 
@@ -73,12 +82,36 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
         <p className="info__share--title">{text.view.share}</p>
         <div className="info__share--icons">
           <FacebookShareButton
-            url={'https://www.arcprojects.com'}
-            quote={text.info.shareFacebook}
+            url={'https://arcprojects.es/#/'}
+            quote={text.info.share}
             hashtag="#bianxi"
           >
-            <FacebookIcon size={32} round />
+            <FacebookIcon size={50} round />
           </FacebookShareButton>
+
+          <TwitterShareButton
+            url={'https://arcprojects.es/#/'}
+            title={text.info.share}
+            hashtag="#bianxi"
+          >
+            <TwitterIcon size={50} round />
+          </TwitterShareButton>
+
+          <LinkedinShareButton
+            title={'Bianxi'}
+            url={'https://arcprojects.es/#/'}
+            description={text.info.share}
+          >
+            <LinkedinIcon size={50} round />
+          </LinkedinShareButton>
+
+          <PinterestShareButton
+            url={'https://arcprojects.es/#/'}
+            media={'https://arcprojects.es/#/'}
+            description={text.info.share}
+          >
+            <PinterestIcon size={50} round />
+          </PinterestShareButton>
         </div>
       </div>
     </div>

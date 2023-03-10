@@ -254,6 +254,7 @@
       font-weight: 400;
       font-size: 1.4em;
       margin-right: 20px;
+      text-align: center;
 
       @media screen and (max-width: 1300px) {
         margin-right: 0;
@@ -265,8 +266,10 @@
     }
 
     &--icons {
-
-      svg {}
+      margin-top: 30px;
+      svg {
+        margin-right: 20px;
+      }
     }
 
     @media screen and (max-width: 1300px) {
