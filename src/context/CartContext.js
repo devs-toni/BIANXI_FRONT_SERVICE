@@ -13,13 +13,13 @@ export const useCart = () => {
   return useContext(CartContext);
 }
 
-const items = JSON.parse(localStorage.getItem('CART'));
 
 export const CartProvider = ({ children }) => {
 
   const { productState } = useProduct();
   const { userState } = useAuth();
   const { handleUi } = useUI();
+  const items = JSON.parse(localStorage.getItem(`CART-${userState.id}`));
 
   //TOTAL CHARGE IN CART
   const getTotalPriceCart = useCallback((products) => {
@@ -93,6 +93,10 @@ export const CartProvider = ({ children }) => {
   const [cartState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
+    console.log(userState.id)
+    const items = JSON.parse(localStorage.getItem(`CART-${userState.id}`));
+    dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: items ? items : [] })
+
     const isNewUser = async () => {
       await http().get(`${ORDERS_ENDPOINT}/get/all/${userState.id}`)
         .then(data => {
@@ -125,11 +129,15 @@ export const CartProvider = ({ children }) => {
   }, [productState]);
 
 
+  const setStorage = useCallback((products) => {
+    localStorage.setItem(`CART-${userState.id}`, JSON.stringify(products));
+  }, [userState.id])
+
   //SUM PRODUCT IN CART MODAL
   const addOneProduct = useCallback((productAdd, configurationAdd) => {
     const { handleAddProduct } = getMethods();
     const productsAdd = handleAddProduct(productAdd, configurationAdd, cartState.cartProducts);
-    localStorage.setItem("CART", JSON.stringify(productsAdd));
+    setStorage(productsAdd);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAdd });
   }, [cartState.cartProducts, getMethods]);
 
@@ -137,7 +145,7 @@ export const CartProvider = ({ children }) => {
   const deleteOneProduct = useCallback((productDel, configurationDel) => {
     const { handleRemoveProduct } = getMethods();
     const productsDel = handleRemoveProduct(productDel, configurationDel, cartState.cartProducts);
-    localStorage.setItem("CART", JSON.stringify(productsDel));
+    setStorage(productsDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsDel });
   }, [cartState.cartProducts, getMethods]);
 
@@ -145,7 +153,7 @@ export const CartProvider = ({ children }) => {
   const addProducts = useCallback((item, n) => {
     const { handleAddSpecificNumberProduct } = getMethods();
     const productsAddN = handleAddSpecificNumberProduct(item, n, cartState.cartProducts);
-    localStorage.setItem("CART", JSON.stringify(productsAddN));
+    setStorage(productsAddN);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAddN });
   }, [productState, getMethods, cartState.cartProducts]);
 
@@ -153,7 +161,7 @@ export const CartProvider = ({ children }) => {
   const deleteConfiguration = useCallback((idProduct, idConf, totalProductInConf) => {
     const { handleRemoveConfig } = getMethods();
     const productsConfDel = handleRemoveConfig(idProduct, idConf, totalProductInConf, cartState.cartProducts);
-    localStorage.setItem("CART", JSON.stringify(productsConfDel));
+    setStorage(productsConfDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsConfDel });
   }, [cartState.cartProducts, getMethods]);
 
@@ -161,7 +169,7 @@ export const CartProvider = ({ children }) => {
   const deleteCompleteProduct = useCallback((id) => {
     const { handleDeleteCartProduct } = getMethods();
     const productsCompleteDel = handleDeleteCartProduct(id, cartState.cartProducts);
-    localStorage.setItem("CART", JSON.stringify(productsCompleteDel));
+    setStorage(productsCompleteDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsCompleteDel });
   }, [cartState.cartProducts, getMethods]);
 
@@ -178,7 +186,7 @@ export const CartProvider = ({ children }) => {
       price
     );
     if (result) {
-      localStorage.removeItem("CART");
+      localStorage.removeItem(`CART-${userState.id}`);
       handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
       dispatch({ type: ACTIONS.RESET_CART });
     }
