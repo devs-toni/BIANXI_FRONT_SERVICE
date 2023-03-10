@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/GlobalContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Cart, Login, Search } from './index';
-import { CITY_LINK, EBIKE_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
+import { ALL_LINK, CITY_LINK, EBIKE_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
 
 const Layout = () => {
 
@@ -11,6 +11,10 @@ const Layout = () => {
 
 
   const items = [
+    {
+      ref: ALL_LINK,
+      text: text.header.promo
+    },
     {
       ref: ROAD_LINK,
       text: text.header.road
@@ -31,11 +35,11 @@ const Layout = () => {
 
   return (
     <div className='layout'>
-        <Navbar items={items} />
-        <Login />
-        <Search />
-        <Cart />
-        <MyRouter />
+      <Navbar items={items} />
+      <Login />
+      <Search />
+      <Cart />
+      <MyRouter />
     </div>
   )
 }

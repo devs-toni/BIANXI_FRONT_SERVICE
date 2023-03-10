@@ -8,6 +8,7 @@ export const CITY_LINK = `/${CATEGORY_ROUTER}/city`;
 export const MTB_LINK = `/${CATEGORY_ROUTER}/mtb`;
 export const ROAD_LINK = `/${CATEGORY_ROUTER}/road`;
 export const EBIKE_LINK = `/${CATEGORY_ROUTER}/ebike`;
+export const ALL_LINK = `/${TOTAL_PRODUCTS_ROUTER}/all`;
 
 export const PRODUCT_ROUTER = "options";
 export const SEARCH_ROUTER = "search";
