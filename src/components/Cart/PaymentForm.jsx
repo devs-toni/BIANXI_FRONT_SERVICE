@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ORDERS_LINK } from '../../router/paths';
 import { toast, Toaster } from 'react-hot-toast';
+import { useState } from 'react';
 
 const PaymentForm = ({ price }) => {
   const { text } = useLanguage();
@@ -24,6 +25,8 @@ const PaymentForm = ({ price }) => {
 
   const { successPayment, cartState } = useCart();
   const { cartProducts } = cartState;
+
+  const [loading, setLoading] = useState(false);
 
   const { handleToast } = useToast();
 
@@ -40,17 +43,23 @@ const PaymentForm = ({ price }) => {
 
   const handlePayment = async (e) => {
     e.preventDefault();
-
     validate();
-    if (Object.keys(errors).length === 0) {
+    if (Object.keys(errors).map((key) => errors[key].length).filter(v => v !== 0).length === 0) {
+      setLoading(true);
       const validPayment = await pay();
+
       if (validPayment) {
+        setLoading(false);
         handleToast('👌', "Payment successful");
-        successPayment(form, price, cartProducts);
-        if (userState.isAuthenticated)
-          navigate(ORDERS_LINK)
-        else
-          navigate('/');
+
+        setTimeout(function () {
+          successPayment(form, price, cartProducts);
+          if (userState.isAuthenticated)
+            navigate(ORDERS_LINK)
+          else
+            navigate('/');
+        }, 2000);
+
       }
     }
   }
@@ -90,6 +99,7 @@ const PaymentForm = ({ price }) => {
           if (result.error) {
             const message = result.error.message;
             handleToast('⛔', message);
+            setLoading(false);
             return false;
           } else {
             return true;
@@ -98,6 +108,7 @@ const PaymentForm = ({ price }) => {
 
       return isValid;
     } else {
+      setLoading(false);
       handleToast('⛔', error.message);
     }
   }
@@ -127,8 +138,13 @@ const PaymentForm = ({ price }) => {
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.cardTitle}</label>
           <CardElement className="input-card" />
-
-          <input className='payment__pay' type="submit" value={text.payment.pay} />
+          {
+            loading
+              ?
+              <div className="lds-ripple payment__load-pay"><div></div><div></div></div>
+              :
+              <input className='payment__pay' type="submit" value={text.payment.pay} />
+          }
         </form>
       </div>
       <Toaster />

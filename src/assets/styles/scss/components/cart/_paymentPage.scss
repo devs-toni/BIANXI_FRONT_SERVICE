@@ -399,6 +399,12 @@
     }
   }
 
+  &__load-pay {
+    text-align: center;
+    width: 20% !important;
+    margin: 20px auto;
+  }
+
   @media screen and (max-width: 1800px) {
     margin: 80px 100px;
   }
