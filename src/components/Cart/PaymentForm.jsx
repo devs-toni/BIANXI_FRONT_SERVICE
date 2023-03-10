@@ -42,8 +42,12 @@ const PaymentForm = ({ price }) => {
     });
 
   const handlePayment = async (e) => {
+    console.log(e)
     e.preventDefault();
+    console.log(1);
     validate();
+    console.log(2);
+    console.log(errors)
     if (Object.keys(errors).map((key) => errors[key].length).filter(v => v !== 0).length === 0) {
       setLoading(true);
       const validPayment = await pay();
@@ -133,7 +137,7 @@ const PaymentForm = ({ price }) => {
           <p className='error'>{errors.address}</p>
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.email}</label>
-          <input type="email" className="input-card" name="email" value={form.email} onChange={handleChange} />
+          <input type="text" className="input-card" name="email" value={form.email} onChange={handleChange} />
           <p className='error'>{errors.email}</p>
 
           <label className="label-card" htmlFor='numberCard'>{text.payment.cardTitle}</label>
