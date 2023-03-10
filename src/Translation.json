@@ -6,7 +6,8 @@
       "mtb": "MTB",
       "ebike": "E-BIKE",
       "city": "CITY",
-      "contact": "CONTACTAR"
+      "contact": "CONTACTAR",
+      "promo": "PROMOCIONES"
     },
     "home": {
       "creation": {
