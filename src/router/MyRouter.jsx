@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Category, ProductView, Home, PaymentPage, Orders, UserSection } from "../components/index";
 import React from 'react';
 import { useLanguage } from "../context/GlobalContext";
-import { CATEGORY_ROUTER, PRODUCT_ROUTER, SEARCH_ROUTER, CART_ROUTER, USER_ROUTER, FAVOURITES_ROUTER, ORDERS_ROUTER, UNDEFINED_ROUTER, HOME_ROUTER } from "./paths";
+import { CATEGORY_ROUTER, PRODUCT_ROUTER, SEARCH_ROUTER, CART_ROUTER, USER_ROUTER, FAVOURITES_ROUTER, ORDERS_ROUTER, UNDEFINED_ROUTER, HOME_ROUTER, TOTAL_PRODUCTS_ROUTER } from "./paths";
 
 export const MyRouter = () => {
 
@@ -13,6 +13,9 @@ export const MyRouter = () => {
       <Route path={HOME_ROUTER}>
 
         <Route index element={<Home />} />
+        <Route path={TOTAL_PRODUCTS_ROUTER}>
+          <Route path=":section" element={<Category category="category" container="products" box="product-box" />} />
+        </Route>
         <Route path={CATEGORY_ROUTER}>
           <Route path=":type" element={<Category category="category" container="products" box="product-box" />} />
           <Route path={PRODUCT_ROUTER}>

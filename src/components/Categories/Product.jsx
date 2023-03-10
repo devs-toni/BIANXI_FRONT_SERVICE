@@ -9,7 +9,7 @@ import { useUI } from '../../context/UIContext';
 import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 
 
-const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerClass, boxClass }) => {
+const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, containerClass, boxClass }) => {
 
   const { text } = useLanguage();
 
@@ -60,13 +60,15 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerCla
               isCart={false}
               isRelated={isRelated}
               isLike={isLike}
+              isAll={isAll}
               isEmpty={isEmptyProduct}
               isSearch={isSearch}
               type={type}
               id={id}
             />
+
             {
-              (!isSearch && !isRelated)
+              (!isSearch && !isRelated && !isLike)
               &&
               < NavLink to={`${PRODUCT_LINK}/${type.toString()}/${id.toString()}`} className='products__product--visit' onClick={handleNav}>{text.product.view}</NavLink>
             }
@@ -83,6 +85,7 @@ Product.propTypes = {
   isSearch: PropTypes.bool.isRequired,
   isRelated: PropTypes.bool,
   isLike: PropTypes.bool,
+  isAll: PropTypes.bool,
   boxClass: PropTypes.string.isRequired,
   containerClass: PropTypes.string.isRequired,
   total: PropTypes.number

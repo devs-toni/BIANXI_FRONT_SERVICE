@@ -2,6 +2,7 @@ export const HOME_ROUTER = "/";
 
 // public routes
 export const CATEGORY_ROUTER = "product-category/bycicles";
+export const TOTAL_PRODUCTS_ROUTER = "products";
 
 export const CITY_LINK = `/${CATEGORY_ROUTER}/city`;
 export const MTB_LINK = `/${CATEGORY_ROUTER}/mtb`;

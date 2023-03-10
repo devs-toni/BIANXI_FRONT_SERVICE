@@ -3,6 +3,7 @@ import { useLanguage } from '../../context/GlobalContext';
 import { Dropdown } from '../index';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
+import { TOTAL_PRODUCTS_ROUTER } from '../../router/paths';
 
 const Navigator = ({ parentStyles, items, handler }) => {
 
@@ -11,7 +12,7 @@ const Navigator = ({ parentStyles, items, handler }) => {
   return (
     <nav className={parentStyles}>
       <div className='container-link'>
-        <Link className='item-link' to="/">{text.header.promo}</Link>
+        <Link className='item-link' to={`/${TOTAL_PRODUCTS_ROUTER}/all`}>{text.header.promo}</Link>
       </div>
       <Dropdown
         items={items}
