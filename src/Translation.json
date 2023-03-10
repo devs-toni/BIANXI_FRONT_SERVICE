@@ -1,13 +1,13 @@
 {
   "es": {
     "header": {
-      "bycicles": "BICICLETAS",
+      "bycicles": "CATEGORIAS",
       "road": "CARRETERA",
       "mtb": "MTB",
       "ebike": "E-BIKE",
       "city": "CITY",
       "contact": "CONTACTAR",
-      "promo": "PROMOCIONES"
+      "promo": "PRODUCTOS"
     },
     "home": {
       "creation": {
@@ -30,6 +30,7 @@
       "offer": "En Oferta"
     },
     "cart": {
+      "title": "Carrito de la compra",
       "empty": "Vacío",
       "price": "Precio: ",
       "delete": "Eliminar",
@@ -144,13 +145,13 @@
   },
   "en": {
     "header": {
-      "bycicles": "BIKES",
+      "bycicles": "CATEGORIES",
       "road": "ROAD",
       "mtb": "MTB",
       "ebike": "E-BIKE",
       "city": "CITY",
       "contact": "CONTACT",
-      "promo": "PROMOS"
+      "promo": "PRODUCTS"
     },
     "home": {
       "creation": {
@@ -173,6 +174,7 @@
       "offer": "On offer"
     },
     "cart": {
+      "title": "Shopping cart",
       "empty": "Empty",
       "price": "Price: ",
       "delete": "Delete",
@@ -282,7 +284,151 @@
       "new": "Gift first purchase"
     },
     "info": {
-      "share": "Look this bike!!!"
+      "share": "Look this bycicle!!!"
+    }
+  },
+  "it": {
+    "header": {
+      "bycicles": "CATEGORIE",
+      "road": "STRADA",
+      "mtb": "MTB",
+      "ebike": "E-BIKE",
+      "city": "CITTA",
+      "contact": "CONTATTO",
+      "promo": "PRODOTTI"
+    },
+    "home": {
+      "creation": {
+        "description1": "BIANCHI È IL MARCHIO DI BICICLETTE PIÙ STORICO E PRESTIGIOSO. IL NOSTRO PATRIMONIO, INIZIATO DA OLTRE 130 ANNI DA EDOARDO BIANCHI NEL 1885, NON PUÒ ESSERE EGUAGLIATO NEL MONDO DEL CICLISMO",
+        "description2": "LA NOSTRA POSIZIONE È QUELLA DI OFFRIRE IL MEGLIO CHE L'ITALIA HA DA OFFRIRE AL MONDO: UN IMPEGNO PER L'ARTIGIANATO, UN DESIGN DISTINTO, STILE E GUSTO."
+      },
+      "advantages": {
+        "advantage1": {
+          "name": "Spedizione gratuita",
+          "description": "* Ordini superiori a 50€ *"
+        },
+        "advantage2": "Pagamento sicuro",
+        "advantage3": "Garanzia minima di 2 anni",
+        "advantage4": "Le migliori biciclette"
+      }
+    },
+    "product": {
+      "view": "Seleziona le opzioni",
+      "empty": "Scarichi",
+      "offer": "In offerta"
+    },
+    "cart": {
+      "title": "Carrello della spesa",
+      "empty": "Vuoto",
+      "price": "Prezzo: ",
+      "delete": "Elimina",
+      "subTotal": "Subtotale:",
+      "total": "Totale:",
+      "finishBtns": "Acquisto finale",
+      "include": "incluso"
+    },
+    "view": {
+      "size": "Dimensione",
+      "color": "Colore",
+      "empty": "Scarichi",
+      "add": "Aggiungi al carrello",
+      "share": "Condividi",
+      "detailInfo": "Descrizione",
+      "detailMore": "Informazioni aggiuntive",
+      "warning": "*La foto potrebbe non corrispondere all'assemblaggio offerto.",
+      "select": "Scegliere un'opzione",
+      "relatedTitle": "Prodotti correlati"
+    },
+    "footer": {
+      "contact": {
+        "title": "Si può contattare tramite:",
+        "phone": "+34 000 00 00 00",
+        "whatsapp": "+34 000 00 00 00",
+        "mail": "info@xyzemail.com"
+      },
+      "pay": {
+        "title": "Metodi di pagamento accettati"
+      },
+      "opinions": {
+        "title": "Opinioni"
+      },
+      "utils": {
+        "title": "Link utili",
+        "contact": "Contatto",
+        "about": "About us",
+        "faq": "FAQ",
+        "pay": "Metodi di pagamento",
+        "warranty": "Garanzia"
+      },
+      "know": {
+        "title": "Saperne di più",
+        "history": "Storia",
+        "color": "Celeste",
+        "models": "Modelli storici",
+        "counter": "Contromodello"
+      },
+      "shipments": {
+        "title": "Spedizioni",
+        "shipment": "Spedizioni e resi",
+        "time": "Ora di consegna",
+        "free": "Spedizione gratuita",
+        "change": "Resi"
+      },
+      "privacy": {
+        "title": "Tutti i diritti riservati MuntingsBikers",
+        "conditions": "Termini e condizioni",
+        "politic": "Politica sulla privacy"
+      }
+    },
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "signin": "Sign In",
+      "error": "Incorrect Email/Password",
+      "logout": "Logout",
+      "create": "Accedi con Google",
+      "hi": "Ciao",
+      "likes": "Wishlist",
+      "orders": "Ordini"
+    },
+    "search": {
+      "title": "risultati trovati per:"
+    },
+    "likes": {
+      "title": "Preferiti"
+    },
+    "error": {
+      "ops": "Opps!",
+      "notFound": "Pagina non trovata",
+      "dontExist": "La pagina che stai cercando non esiste",
+      "home": "Indietro"
+    },
+    "payment": {
+      "title": "Il tuo ordine",
+      "pay": "Effettua l'ordine",
+      "product": "Prodotto",
+      "sub": "Subtotale",
+      "cupon": "¿Hai un coupon?",
+      "cuponLink": "Clicca qui per inserire il tuo codice",
+      "label": "Inserisci il tuo codice coupon",
+      "cuponError": "Il coupon inserito non è valido",
+      "total": "Totale",
+      "sizeTitle": "Size: ",
+      "colorTitle": "Colore: ",
+      "include": "incluso ",
+      "payTitle": "Effettua il pagamento",
+      "description": "Ordine BANCHY Store.",
+      "address": "Indirizzo",
+      "cardTitle": "Carta di Credito",
+      "name": "Nome",
+      "lastname": "Cognome",
+      "email": "Email",
+      "products": "Prodotti",
+      "discount": "Buono sconto",
+      "new": "Regalo primo acquisto"
+    },
+    "info": {
+      "share": "Guarda questa biciclette!!!"
     }
   }
 }

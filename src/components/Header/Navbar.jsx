@@ -9,8 +9,9 @@ import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { useSearchParams } from 'react-router-dom';
 import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
-import spa from '../../assets/images/lang/spa.png';
-import eng from '../../assets/images/lang/eng.png';
+import es from '../../assets/images/lang/es.png';
+import en from '../../assets/images/lang/en.png';
+import it from '../../assets/images/lang/it.png';
 import { useLanguage } from '../../context/GlobalContext';
 
 const Navbar = memo(({ items }) => {
@@ -22,7 +23,7 @@ const Navbar = memo(({ items }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { handleLanguage } = useLanguage();
+  const { language, handleLanguage } = useLanguage();
 
   const showStyles = uiState.menuIsOpen ? 'active' : '';
   const hideStyles = uiState.menuIsOpen ? 'hide' : '';
@@ -39,7 +40,7 @@ const Navbar = memo(({ items }) => {
     handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE)
   }
 
-  const handleClickSearch = () => {
+  const handleClickSearch = async () => {
     setSearchParams("");
     handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.HANDLE)
     handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE)
@@ -61,21 +62,26 @@ const Navbar = memo(({ items }) => {
     handleUi(UI_SECTIONS.CART, UI_ACTIONS.CLOSE)
   }
 
+  const languageStyle = (lang) => language === lang ? "active" : '';
+
   return (
     <div className='navbar'>
       <div>
         <Logo
           containerClass='navbar__container-logo'
-          handler={handleClickDropdown}
+          handler={handleClickDropdown} 
           logo={logo}
         />
       </div>
       <div className='navbar__options'>
-        <div className='navbar__options--lang'>
-          <img src={spa} alt="spa" name="spa" onClick={handleLanguage} />
+        <div className={`navbar__options--lang ${languageStyle('es') ? "active" : ''}`}>
+          <img src={es} alt="es" name="es" onClick={handleLanguage} />
         </div>
-        <div className='navbar__options--lang'>
-          <img src={eng} alt="eng" name="eng" onClick={handleLanguage} />
+        <div className={`navbar__options--lang ${languageStyle('en') ? "active" : ''}`}>
+          <img src={en} alt="en" className='w' name="en" onClick={handleLanguage} />
+        </div>
+        <div className={`navbar__options--lang ${languageStyle('it') ? "active" : ''}`}>
+          <img src={it} alt="it" className="w" name="it" onClick={handleLanguage} />
         </div>
         <Navigator
           parentStyles={`${showStyles} navbar__options--nav`}

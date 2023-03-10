@@ -27,7 +27,7 @@ const Cart = () => {
           <FontAwesomeIcon icon={faXmark} onClick={() => handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE)} className='cart-menu__header--close' />
           <div className='cart-menu__header--content'>
             <FontAwesomeIcon className='cart-menu__header--content-icon' icon={faCartShopping} />
-            <h1 className='cart-menu__header--content-title'>Cart</h1>
+            <h1 className='cart-menu__header--content-title'>{text.cart.title}</h1>
           </div>
         </div>
         <div className='cart-menu__content'>

@@ -64,12 +64,15 @@ export const LanguageProvider = ({ children }) => {
 
   const handleLanguage = ({ target }) => {
     const { name } = target;
-    if (name === "spa") {
+    if (name === "es") {
       setLanguage('es');
       setText(translations.es);
-    } else {
+    } else if (name === "en") {
       setLanguage('en');
       setText(translations.en);
+    } else if (name === "it") {
+      setLanguage('it');
+      setText(translations.it);
     }
   };
 

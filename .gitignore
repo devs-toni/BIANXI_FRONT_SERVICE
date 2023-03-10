@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules/
+/.vscode
 src/assets/styles/css
 src/assets/images
 /.pnp
