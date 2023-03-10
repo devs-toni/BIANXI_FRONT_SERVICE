@@ -2,6 +2,10 @@
 @use './link';
 @use './dropdown';
 
+.languages {
+  display: flex;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -19,6 +23,10 @@
       transform: scale(1.2);
       cursor: pointer;
 
+      @media screen and (max-width: 1050px) {
+        transform: scale(1.1);
+      }
+
       @media screen and (max-width: 400px) {
         transform: scale(1);
       }
@@ -33,12 +41,13 @@
       }
     }
 
-    @media screen and (max-width: 770px) {
-      margin: auto 15px;
+    @media screen and (max-width: 1050px) {
+      margin: auto 20px;
     }
 
-    @media screen and (max-width: 770px) {
-      width: 15%;
+    @media screen and (max-width: 870px) {
+      margin: auto 15px;
+        width: 15%;
     }
 
     @media screen and (max-width: 350px) {
@@ -62,19 +71,45 @@
   &__options {
     display: flex;
     flex-grow: 1;
+    align-items: center;
 
     &--lang {
       margin-right: 0;
+      min-width: 65px;
       height: 100%;
       display: flex;
       align-items: center;
-      overflow: hidden;
       transition: .4s all ease;
+
+      @media screen and (max-width: 1050px) {
+        max-width: 40px;
+        min-width: 40px;
+        height: 40px;
+      }
 
       .w {
         max-width: 65px;
         min-width: 65px;
+        margin-right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: .4s all ease;
+
+
+        @media screen and (max-width: 1050px) {
+          max-width: 45px;
+          min-width: 45px;
+          height: 30px;
+        }
       }
+
+      @media screen and (max-width: 1050px) {
+        max-width: 40px;
+        min-width: 40px;
+        height: 40px;
+      }
+
 
       img {
         max-width: 40px;
@@ -82,16 +117,25 @@
         height: 40px;
         cursor: pointer;
         transition: all .3s ease;
+        margin: 0 auto;
+
+        @media screen and (max-width: 1050px) {
+          max-width: 30px;
+          min-width: 30px;
+          height: 30px;
+        }
 
         &:hover {
           transform: scale(1.2);
         }
-
-
       }
 
       &.active {
-        transform: translateY(-10px);
+        transform: translateY(-8px);
+
+        @media screen and (max-width: 870px) {
+          transform: none;
+        }
       }
     }
 
@@ -101,9 +145,14 @@
       justify-content: end;
       width: 100%;
       transition: all .5s ease-in-out;
-      margin-right: 30px;
+      margin: 0 30px;
 
-      @media screen and (max-width: 770px) {
+      @media screen and (max-width: 870px) {
+        font-size: .9em;
+        margin-right: 10px;
+      }
+
+      @media screen and (max-width: 870px) {
         overflow-y: hidden;
         height: 100vh;
         transition: all 0.6s left;
@@ -132,6 +181,7 @@
           @media screen and (max-width: 480px) {
             width: 100vw !important;
             height: 50vh;
+            margin: 0;
           }
         }
 
@@ -141,6 +191,7 @@
           right: 0;
           left: 0;
           top: 80px;
+          margin: 0;
         }
       }
     }
@@ -152,7 +203,7 @@
       align-self: center;
       cursor: pointer;
 
-      @media screen and (max-width:770px) {
+      @media screen and (max-width:870px) {
         display: none;
       }
     }
@@ -217,7 +268,7 @@
           border: .1px solid #04aaa5d8;
           cursor: pointer;
 
-          @media screen and (max-width: 770px) {
+          @media screen and (max-width: 870px) {
             right: 110px;
           }
 
@@ -261,7 +312,7 @@
       &-user {
         z-index: 2;
 
-        @media screen and (max-width: 770px) {
+        @media screen and (max-width: 870px) {
           &.hide {
             opacity: 0;
           }
@@ -286,7 +337,7 @@
         z-index: 4;
         padding-right: 20px;
 
-        @media screen and (max-width: 770px) {
+        @media screen and (max-width: 870px) {
           display: block;
         }
 
@@ -298,7 +349,7 @@
 
       &-search {
 
-        @media screen and (max-width: 770px) {
+        @media screen and (max-width: 870px) {
 
           &.hide {
             opacity: 0;
@@ -325,7 +376,7 @@
         color: white !important;
         font-size: 1.3em !important;
 
-        @media screen and (max-width: 770px) {
+        @media screen and (max-width: 870px) {
           display: block;
         }
 
@@ -339,12 +390,12 @@
       }
     }
 
-    @media screen and (max-width:770px) {
+    @media screen and (max-width:870px) {
       flex-grow: 0;
     }
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 870px) {
     padding: 1em 0 0 0;
   }
 }

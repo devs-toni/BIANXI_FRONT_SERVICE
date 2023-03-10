@@ -9,10 +9,7 @@ import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { useSearchParams } from 'react-router-dom';
 import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
-import es from '../../assets/images/lang/es.png';
-import en from '../../assets/images/lang/en.png';
-import it from '../../assets/images/lang/it.png';
-import { useLanguage } from '../../context/GlobalContext';
+
 
 const Navbar = memo(({ items }) => {
 
@@ -22,8 +19,6 @@ const Navbar = memo(({ items }) => {
   const { totalAmount: total } = cartState;
 
   const [searchParams, setSearchParams] = useSearchParams();
-
-  const { language, handleLanguage } = useLanguage();
 
   const showStyles = uiState.menuIsOpen ? 'active' : '';
   const hideStyles = uiState.menuIsOpen ? 'hide' : '';
@@ -62,7 +57,6 @@ const Navbar = memo(({ items }) => {
     handleUi(UI_SECTIONS.CART, UI_ACTIONS.CLOSE)
   }
 
-  const languageStyle = (lang) => language === lang ? "active" : '';
 
   return (
     <div className='navbar'>
@@ -74,15 +68,6 @@ const Navbar = memo(({ items }) => {
         />
       </div>
       <div className='navbar__options'>
-        <div className={`navbar__options--lang ${languageStyle('es') ? "active" : ''}`}>
-          <img src={es} alt="es" name="es" onClick={handleLanguage} />
-        </div>
-        <div className={`navbar__options--lang ${languageStyle('en') ? "active" : ''}`}>
-          <img src={en} alt="en" className='w' name="en" onClick={handleLanguage} />
-        </div>
-        <div className={`navbar__options--lang ${languageStyle('it') ? "active" : ''}`}>
-          <img src={it} alt="it" className="w" name="it" onClick={handleLanguage} />
-        </div>
         <Navigator
           parentStyles={`${showStyles} navbar__options--nav`}
           items={items}

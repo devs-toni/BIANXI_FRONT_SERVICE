@@ -26,12 +26,12 @@
     align-items: center;
     transition: all .4s ease-in-out;
 
-    @media screen and (max-width: 770px) {
+    @media screen and (max-width: 870px) {
       color: white;
     }
   }
 
-  @media screen and (max-width: 770px) {
+  @media screen and (max-width: 870px) {
     width: 100%;
     font-size: 0.8em;
     height: auto;
