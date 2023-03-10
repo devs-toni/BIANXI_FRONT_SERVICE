@@ -14,6 +14,13 @@
     color: var.$bianchi-color;
   }
 
+  &__filter {
+    &--price {
+      width: 60%;
+      margin: 0 auto;
+    }
+  }
+
   &__title {
     text-transform: capitalize;
     font-size: 3em;

@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
-import { Loader, Product } from '../index';
+import { Loader, Product, SliderPrice, SliderThumbCategory } from '../index';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,7 +8,7 @@ import { faHourglass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { http } from '../../helpers/http';
 import { PRODUCTS_ENDPOINT } from '../../config/configuration';
-import { Slider } from '@mui/material';
+
 
 const Category = ({ category, container, box, title }) => {
 
@@ -20,6 +20,7 @@ const Category = ({ category, container, box, title }) => {
   const [categoryProducts, setCategoryProducts] = useState([])
   const { userState } = useAuth();
 
+
   useEffect(() => {
     if (products) {
       if (type)
@@ -27,13 +28,14 @@ const Category = ({ category, container, box, title }) => {
       else if (search)
         setCategoryProducts(products.filter(p => p.name.toLowerCase().includes(search.toLowerCase())));
       else if (section)
-        setCategoryProducts(products);
+        setCategoryProducts(products.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
       else
         http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${userState.id}`)
           .then(data => setCategoryProducts(data))
           .catch(error => console.error(error));
     }
   }, [type, search, products])
+
 
 
   const setTitle = title ? title : (type ? type.toLowerCase() : (search ? `${categoryProducts?.length} ${text.search.title} ${search}` : text.header.promo));
@@ -45,18 +47,12 @@ const Category = ({ category, container, box, title }) => {
           (
             <div className={category}>
               <h3 className={`${category}__title`}>{setTitle}</h3>
-
               {
                 section
                 &&
                 <div className={`${category}__filter`}>
                   <div className={`${category}__filter--price`}>
-                      <Slider
-                        size="small"
-                        defaultValue={70}
-                        aria-label="Small"
-                        valueLabelDisplay="auto"
-                      />
+                    <SliderPrice products={products} setProducts={setCategoryProducts} />
                   </div>
                 </div>
               }

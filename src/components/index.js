@@ -10,6 +10,7 @@ export { default as Badge } from './Categories/Badge';
 export { default as Category } from './Categories/Category';
 export { default as Product } from './Categories/Product';
 export { default as ProductBox } from './Categories/ProductBox';
+export { default as SliderPrice } from './Categories/SliderPrice';
 export { default as Footer } from './Footer/Footer';
 export { default as Dropdown } from './Header/Dropdown';
 export { default as Icon } from './Header/Icon';
