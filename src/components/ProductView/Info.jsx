@@ -10,6 +10,7 @@ import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
 import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { FacebookIcon, FacebookShareButton } from 'react-share';
 
 const Info = ({ setColorActivator, isLike, handleLike }) => {
 
@@ -70,7 +71,15 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
       </div>
       <div className="info__share">
         <p className="info__share--title">{text.view.share}</p>
-        <div className="info__share--icons"></div>
+        <div className="info__share--icons">
+          <FacebookShareButton
+            url={'https://www.arcprojects.com'}
+            quote={text.info.shareFacebook}
+            hashtag="#bianxi"
+          >
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+        </div>
       </div>
     </div>
   )
