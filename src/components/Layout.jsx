@@ -24,10 +24,6 @@ const Layout = () => {
       text: text.header.mtb
     },
     {
-      ref: EBIKE_LINK,
-      text: text.header.ebike
-    },
-    {
       ref: CITY_LINK,
       text: text.header.city
     }

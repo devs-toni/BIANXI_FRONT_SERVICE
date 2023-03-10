@@ -17,7 +17,7 @@ export const GlobalProvider = ({ children }) => {
   useEffect(() => {
     
     http().get(`${PRODUCTS_ENDPOINT}/get/all`)
-      .then(data => setProducts(data))
+      .then(data => setProducts(data.filter(product => product.type !== "ebike")))
       .catch(err => console.error(err));
 
     http().get(`${COLORS_ENDPOINT}/get/all`)
