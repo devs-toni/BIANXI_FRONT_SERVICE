@@ -63,6 +63,26 @@
     display: flex;
     flex-grow: 1;
 
+    &--lang {
+      margin-right: 20px;
+      width: 50px;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+
+      img {
+        width: 40px;
+        height: 30px;
+        cursor: pointer;
+        transition: all .3s ease;
+
+        &:hover {
+          transform: scale(1.2);
+        }
+      }
+    }
+
     &--nav {
       display: flex;
       align-items: center;

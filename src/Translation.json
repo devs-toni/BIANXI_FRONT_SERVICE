@@ -121,7 +121,7 @@
       "sub": "Subtotal",
       "cupon": "¿Tienes un cupón?",
       "cuponLink": "Haz click aquí para introducir tu código",
-      "label":"Ingresa el código de tu cupón",
+      "label": "Ingresa el código de tu cupón",
       "cuponError": "El cupon introducido no és válido",
       "total": "Total",
       "sizeTitle": "Talla: ",
@@ -141,8 +141,148 @@
     "info": {
       "share": "Mira que bicicleta!!!"
     }
-  }, 
+  },
   "en": {
-    
+    "header": {
+      "bycicles": "BIKES",
+      "road": "ROAD",
+      "mtb": "MTB",
+      "ebike": "E-BIKE",
+      "city": "CITY",
+      "contact": "CONTACT",
+      "promo": "PROMOS"
+    },
+    "home": {
+      "creation": {
+        "description1": "BIANCHI ES LA MAS HISTORICA Y PRESTIGIOSA MARCA DE BICICLETAS. NUESTRA HERENCIA, POR MAS DE 130 AÑOS EMPEZADA POR EDOARDO BIANCHI EL 1885, NO PUEDE SER IGUALADA EN EL MUNDO CICLISTA.",
+        "description2": "NUESTRA POSICION ES OFRECER LO MEJOR QUE ITALIA PUEDE OFRECER AL MUNDO: EL COMPROMISO DE HACER PRODUCTOS COMO ARTESANOS “A REGOLA D’ARTE”, ASI COMO UN DISEÑO DISTINGUIDO, ESTILO Y GUSTO."
+      },
+      "advantages": {
+        "advantage1": {
+          "name": "Free Shipping",
+          "description": "* Orders over 50€ *"
+        },
+        "advantage2": "Secure Payment",
+        "advantage3": "Minimum 2-year warranty",
+        "advantage4": "The Best bikes"
+      }
+    },
+    "product": {
+      "view": "Select options",
+      "empty": "Sold out",
+      "offer": "On offer"
+    },
+    "cart": {
+      "empty": "Empty",
+      "price": "Price: ",
+      "delete": "Delete",
+      "subTotal": "Subtotal:",
+      "total": "Total:",
+      "finishBtns": "Finish purchase",
+      "include": "includes"
+    },
+    "view": {
+      "size": "Size",
+      "color": "Color",
+      "empty": "Sold out",
+      "add": "Add to cart",
+      "share": "Share",
+      "detailInfo": "Description",
+      "detailMore": "Additional Information",
+      "warning": "*Photo may not match the offered assembly.",
+      "select": "Choose an option",
+      "relatedTitle": "Related Products"
+    },
+    "footer": {
+      "contact": {
+        "title": "You can contact through:",
+        "phone": "+34 000 00 00 00",
+        "whatsapp": "+34 000 00 00 00",
+        "mail": "info@xyzemail.com"
+      },
+      "pay": {
+        "title": "Accepted methods of payments"
+      },
+      "opinions": {
+        "title": "Opinions"
+      },
+      "utils": {
+        "title": "Useful Links",
+        "contact": "Contact",
+        "about": "About Us",
+        "faq": "FAQ",
+        "pay": "Payment Methods",
+        "warranty": "Warranty"
+      },
+      "know": {
+        "title": "Know more",
+        "history": "History",
+        "color": "Celeste",
+        "models": "Historical Models",
+        "counter": "Countervail"
+      },
+      "shipments": {
+        "title": "Shipments",
+        "shipment": "Shipment and Returns",
+        "time": "Time of delivery",
+        "free": "Free Shipping",
+        "change": "Returns"
+      },
+      "privacy": {
+        "title": "All rights reserved MuntingsBikers",
+        "conditions": "Terms and conditions",
+        "politic": "Privacy policy"
+      }
+    },
+    "login": {
+      "email": "Email",
+      "password": "Password",
+      "signin": "Sign In",
+      "error": "Incorrect Email/Password",
+      "logout": "Logout",
+      "create": "Sign in with Google",
+      "hi": "Hi",
+      "likes": "Wishlist",
+      "orders": "Orders"
+    },
+    "search": {
+      "title": "results found for:"
+    },
+    "likes": {
+      "title": "Favourites"
+    },
+    "error": {
+      "ops": "Opps!",
+      "notFound": "Page not found",
+      "dontExist": "The page you are looking for doesn't exist",
+      "home": "Back"
+    },
+    "payment": {
+      "title": "Your order",
+      "pay": "Place order",
+      "product": "Product",
+      "sub": "Subtotal",
+      "cupon": "¿Do you have a coupon?",
+      "cuponLink": "Click here to enter your code",
+      "label": "Enter your coupon code",
+      "cuponError": "The coupon entered is invalid",
+      "total": "Total",
+      "sizeTitle": "Size: ",
+      "colorTitle": "Color: ",
+      "include": "includes ",
+      "payTitle": "Make payment",
+      "description": "Order BANCHY Store.",
+      "address": "Address",
+      "cardTitle": "Credit Card",
+      "name": "Name",
+      "lastname": "Lastname",
+      "email": "Email",
+      "products": "Products",
+      "discount": "Discount coupon",
+      "new": "Gift first purchase"
+    },
+    "info": {
+      "share": "Look this bike!!!"
+    }
   }
 }

@@ -9,6 +9,9 @@ import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { useSearchParams } from 'react-router-dom';
 import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import spa from '../../assets/images/lang/spa.png';
+import eng from '../../assets/images/lang/eng.png';
+import { useLanguage } from '../../context/GlobalContext';
 
 const Navbar = memo(({ items }) => {
 
@@ -18,6 +21,8 @@ const Navbar = memo(({ items }) => {
   const { totalAmount: total } = cartState;
 
   const [searchParams, setSearchParams] = useSearchParams();
+
+  const { handleLanguage } = useLanguage();
 
   const showStyles = uiState.menuIsOpen ? 'active' : '';
   const hideStyles = uiState.menuIsOpen ? 'hide' : '';
@@ -66,6 +71,12 @@ const Navbar = memo(({ items }) => {
         />
       </div>
       <div className='navbar__options'>
+        <div className='navbar__options--lang'>
+          <img src={spa} alt="spa" name="spa" onClick={handleLanguage} />
+        </div>
+        <div className='navbar__options--lang'>
+          <img src={eng} alt="eng" name="eng" onClick={handleLanguage} />
+        </div>
         <Navigator
           parentStyles={`${showStyles} navbar__options--nav`}
           items={items}
