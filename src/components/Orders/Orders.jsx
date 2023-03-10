@@ -6,7 +6,7 @@ import { faHourglass } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { http } from "../../helpers/http";
-import { ORDERS_ENDPOINT } from "../../configuration";
+import { ORDERS_ENDPOINT } from "../../config/configuration";
 
 const Orders = () => {
 

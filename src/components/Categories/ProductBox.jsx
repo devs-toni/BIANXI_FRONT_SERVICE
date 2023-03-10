@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../../context/AuthContext';
 import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT } from '../../configuration';
+import { PRODUCTS_ENDPOINT } from '../../config/configuration';
 import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { PRODUCT_LINK } from '../../router/paths';
 

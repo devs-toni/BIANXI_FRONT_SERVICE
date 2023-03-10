@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
-import { COLORS_ENDPOINT, PRODUCTS_ENDPOINT, SIZES_ENDPOINT } from '../configuration';
+import { COLORS_ENDPOINT, PRODUCTS_ENDPOINT, SIZES_ENDPOINT } from '../config/configuration';
 import { http } from '../helpers/http';
 
 const GlobalContext = createContext();

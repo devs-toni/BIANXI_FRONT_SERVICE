@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
 import { CATEGORY, CATEGORY_ROUTER, HOME, PRODUCT, PRODUCT_LINK } from '../../router/paths';
 import { useUI } from '../../context/UIContext';
-import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 
 
 const Product = ({ product, total = 1, isSearch, isRelated, isLike, containerClass, boxClass }) => {

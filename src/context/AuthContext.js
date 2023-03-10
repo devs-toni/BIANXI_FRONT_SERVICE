@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react'
-import { USERS_ENDPOINT } from '../configuration';
+import { USERS_ENDPOINT } from '../config/configuration';
 import { http } from '../helpers/http';
-import { ACTIONS } from '../types';
+import { ACTIONS } from '../config/types';
 
 
 const authStorage = JSON.parse(localStorage.getItem('AUTH'));

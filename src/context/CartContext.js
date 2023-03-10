@@ -3,9 +3,9 @@ import { useProduct } from "./ProductContext";
 import { useAuth } from "./AuthContext";
 import { useUI } from "./UIContext";
 import { getMainMethods } from "../helpers/cart";
-import { ACTIONS } from "../types";
+import { ACTIONS } from "../config/types";
 import { http } from "../helpers/http";
-import { NEW_USER_DISCOUNT, ORDERS_ENDPOINT, UI_ACTIONS, UI_SECTIONS } from "../configuration";
+import { NEW_USER_DISCOUNT, ORDERS_ENDPOINT, UI_ACTIONS, UI_SECTIONS } from "../config/configuration";
 
 const CartContext = createContext();
 

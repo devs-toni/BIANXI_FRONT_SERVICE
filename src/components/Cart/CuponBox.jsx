@@ -1,7 +1,7 @@
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { CUPONS, UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { CUPONS, UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/GlobalContext';
 import { useUI } from '../../context/UIContext';

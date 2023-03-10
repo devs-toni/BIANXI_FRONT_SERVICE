@@ -1,6 +1,6 @@
 import React from 'react'
 import uuid from 'react-uuid';
-import { PRODUCT_PROPERTIES } from '../../configuration';
+import { PRODUCT_PROPERTIES } from '../../config/configuration';
 import { useLanguage } from '../../context/GlobalContext';
 import { useProduct } from '../../context/ProductContext';
 

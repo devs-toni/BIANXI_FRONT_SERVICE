@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router-dom';
-import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 import { useUI } from '../../context/UIContext';
 import { SearchForm, SearchBox } from '../index';
 

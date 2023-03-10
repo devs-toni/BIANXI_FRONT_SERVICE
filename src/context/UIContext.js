@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useMemo, useReducer, useRef } from 'react';
-import { ACTIONS } from '../types';
+import { ACTIONS } from '../config/types';
 
 const UIContext = createContext();
 

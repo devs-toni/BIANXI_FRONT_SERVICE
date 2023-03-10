@@ -5,7 +5,7 @@ import PaymentDetails from './PaymentDetails';
 import { useCart } from '../../context/CartContext';
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
-import { STRIPE_VISIBLE_KEY, UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { STRIPE_VISIBLE_KEY, UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 import { Navigate } from 'react-router-dom';
 import { useUI } from '../../context/UIContext';
 import CuponBox from './CuponBox';

@@ -8,7 +8,7 @@ import { formatNumberES } from '../../helpers/utils';
 import { useUI } from '../../context/UIContext';
 import MenuIcon from './MenuIcon';
 import { useSearchParams } from 'react-router-dom';
-import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 import es from '../../assets/images/lang/es.png';
 import en from '../../assets/images/lang/en.png';
 import it from '../../assets/images/lang/it.png';

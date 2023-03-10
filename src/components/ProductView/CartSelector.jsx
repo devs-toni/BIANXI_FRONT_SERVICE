@@ -5,7 +5,7 @@ import { useProduct } from '../../context/ProductContext';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { PropTypes } from 'prop-types';
 import { getCartProductConfigurations, getMatchConfiguration } from '../../helpers/utils';
-import { PRODUCT_PROPERTIES } from '../../configuration';
+import { PRODUCT_PROPERTIES } from '../../config/configuration';
 
 const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 

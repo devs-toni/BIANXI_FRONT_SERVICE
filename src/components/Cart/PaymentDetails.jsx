@@ -4,7 +4,7 @@ import { useLanguage } from '../../context/GlobalContext';
 import uuid from 'react-uuid';
 import { formatNumberES, setProductPrice } from '../../helpers/utils';
 import { useCart } from '../../context/CartContext';
-import { NEW_USER_DISCOUNT } from '../../configuration';
+import { NEW_USER_DISCOUNT } from '../../config/configuration';
 
 const PaymentDetails = ({ products }) => {
 

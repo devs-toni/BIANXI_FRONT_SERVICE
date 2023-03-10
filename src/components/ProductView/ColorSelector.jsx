@@ -3,7 +3,7 @@ import { useLanguage } from '../../context/GlobalContext';
 import { useProduct } from '../../context/ProductContext';
 import uuid from 'react-uuid';
 import PropTypes from 'prop-types';
-import { PRODUCT_PROPERTIES } from '../../configuration';
+import { PRODUCT_PROPERTIES } from '../../config/configuration';
 
 const ColorSelector = ({ setActivator }) => {
 

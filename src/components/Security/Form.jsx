@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { useAuth } from '../../context/AuthContext';
 import { http } from '../../helpers/http';
-import { USERS_ENDPOINT } from '../../configuration';
+import { USERS_ENDPOINT } from '../../config/configuration';
 
 const Form = () => {
 

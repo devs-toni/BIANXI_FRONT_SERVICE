@@ -1,4 +1,4 @@
-import { ORDERS_ENDPOINT } from "../configuration";
+import { ORDERS_ENDPOINT } from "../config/configuration";
 import { http } from "./http";
 import { addConfigurationToProduct, addProductToCart, removeConfigInProduct, updateConfigurationStock, updateProductTotal } from "./utils";
 

@@ -7,7 +7,7 @@ import { CartConfigHandler, ProductBox, CartFooter } from '../index';
 import { calcTotalPrice } from '../../helpers/utils';
 import uuid from 'react-uuid';
 import { useUI } from '../../context/UIContext';
-import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 
 const Cart = () => {
 

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
-import { STRIPE_ENDPOINT } from '../../configuration';
+import { STRIPE_ENDPOINT } from '../../config/configuration';
 import { useForm } from '../../hooks/useForm';
 import { useToast } from '../../hooks/useToast';
 import { useCart } from '../../context/CartContext';

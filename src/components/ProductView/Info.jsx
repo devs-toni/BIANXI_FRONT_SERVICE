@@ -9,7 +9,7 @@ import { useAuth } from '../../context/AuthContext';
 import { useProduct } from '../../context/ProductContext';
 import PropTypes from 'prop-types';
 import { useUI } from '../../context/UIContext';
-import { UI_ACTIONS, UI_SECTIONS } from '../../configuration';
+import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
 import {
   FacebookShareButton,
   LinkedinShareButton,

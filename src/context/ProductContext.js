@@ -1,8 +1,8 @@
 import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
-import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../configuration';
+import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../config/configuration';
 import { http } from '../helpers/http';
 import { setProductPrice } from '../helpers/utils';
-import { ACTIONS } from '../types';
+import { ACTIONS } from '../config/types';
 import { useAuth } from './AuthContext';
 
 const ProductContext = createContext();

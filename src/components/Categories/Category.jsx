@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglass } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT } from '../../configuration';
+import { PRODUCTS_ENDPOINT } from '../../config/configuration';
 
 const Category = ({ category, container, box, title }) => {
 
