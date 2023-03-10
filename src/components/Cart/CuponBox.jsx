@@ -1,9 +1,10 @@
 import { faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useRef, useState } from 'react';
-import { CUPONS } from '../../configuration';
+import { CUPONS, UI_ACTIONS, UI_SECTIONS } from '../../configuration';
 import { useCart } from '../../context/CartContext';
 import { useLanguage } from '../../context/GlobalContext';
+import { useUI } from '../../context/UIContext';
 
 const CuponBox = ({ isOpen }) => {
 
@@ -19,6 +20,8 @@ const CuponBox = ({ isOpen }) => {
   const { cartState, handleCupon } = useCart();
   const { activeCupon } = cartState;
 
+  const { handleUi } = useUI();
+
   const [cupon, setCupon] = useState('');
 
 
@@ -32,11 +35,16 @@ const CuponBox = ({ isOpen }) => {
     }
   }
 
+  const cancel = () => {
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+    handleCupon(false)
+  }
+
 
   return (
     <>
       <div className='main-cupon'>
-        {activeCupon && <FontAwesomeIcon icon={faXmark} className="main-cupon__delete" onClick={() => handleCupon(false)} />}
+        {activeCupon && <FontAwesomeIcon icon={faXmark} className="main-cupon__delete" onClick={cancel} />}
         <div className={`${activeCupon ? 'valid' : ''} ${isOpen ? 'active' : ''} cupon`}>
           {
             activeCupon
