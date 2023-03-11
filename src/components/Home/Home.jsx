@@ -20,8 +20,7 @@ const Home = () => {
   },
   {
     name: text.header.ebike,
-    icon: faBolt,
-    path: "ebike"
+    icon: faBolt
   },
   {
     name: text.header.city,
