@@ -47,7 +47,7 @@
   @media screen and (max-width: 480px) {
 
     &.active {
-      width: 89vw !important;
+      width: 87vw !important;
       height: 50vh;
       top: 9%;
     }
@@ -74,6 +74,16 @@
     &:hover {
       transform: rotate(-180deg);
       color: rgba(0, 0, 0, 0.5);
+    }
+
+    @media screen and (max-width: 480px) {
+      right: 7%;
+    }
+    @media screen and (max-width: 400px) {
+      right: 10%;
+    }
+    @media screen and (max-width: 330px) {
+      right: 13%;
     }
   }
 
