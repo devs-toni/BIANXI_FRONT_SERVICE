@@ -93,7 +93,6 @@ export const CartProvider = ({ children }) => {
   const [cartState, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    console.log(userState.id)
     const items = JSON.parse(localStorage.getItem(`CART-${userState.id}`));
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: items ? items : [] })
 

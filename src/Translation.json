@@ -30,7 +30,7 @@
       "offer": "En Oferta"
     },
     "cart": {
-      "title": "Carrito de la compra",
+      "title": "Cart",
       "empty": "Vacío",
       "price": "Precio: ",
       "delete": "Eliminar",
@@ -173,7 +173,7 @@
       "offer": "On offer"
     },
     "cart": {
-      "title": "Shopping cart",
+      "title": "Cart",
       "empty": "Empty",
       "price": "Price: ",
       "delete": "Delete",
@@ -316,7 +316,7 @@
       "offer": "In offerta"
     },
     "cart": {
-      "title": "Carrello della spesa",
+      "title": "Cart",
       "empty": "Vuoto",
       "price": "Prezzo: ",
       "delete": "Elimina",
