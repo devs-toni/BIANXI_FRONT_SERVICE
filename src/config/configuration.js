@@ -29,7 +29,7 @@ export const UI_SECTIONS = {
   LOGIN: "login",
   CART: "cart",
   SEARCH: "search",
-  CUPON: "cupon"
+  FILTER: "filter"
 }
 
 export const UI_ACTIONS = {

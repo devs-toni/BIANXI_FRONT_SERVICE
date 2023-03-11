@@ -1,13 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useGlobal, useLanguage } from '../../context/GlobalContext';
-import { Loader, Product, SliderPrice, SliderThumbCategory } from '../index';
+import { useUI } from '../../context/UIContext';
+import { Loader, Product } from '../index';
 import PropTypes from 'prop-types';
 import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHourglass } from '@fortawesome/free-solid-svg-icons';
+import { faHourglass, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT } from '../../config/configuration';
+import { PRODUCTS_ENDPOINT, UI_SECTIONS, UI_ACTIONS } from '../../config/configuration';
+ 
 
 
 const Category = ({ category, container, box, title }) => {
@@ -19,6 +21,7 @@ const Category = ({ category, container, box, title }) => {
   const { products } = allProducts;
   const [categoryProducts, setCategoryProducts] = useState([])
   const { userState } = useAuth();
+  const { handleUi } = useUI();
 
 
   useEffect(() => {
@@ -43,7 +46,8 @@ const Category = ({ category, container, box, title }) => {
   return (
     <>
       {
-        (categoryProducts && products) ?
+        (categoryProducts && products)
+          ?
           (
             <div className={category}>
               <h3 className={`${category}__title`}>{setTitle}</h3>
@@ -51,9 +55,7 @@ const Category = ({ category, container, box, title }) => {
                 section
                 &&
                 <div className={`${category}__filter`}>
-                  <div className={`${category}__filter--price`}>
-                    <SliderPrice products={products} setProducts={setCategoryProducts} />
-                  </div>
+                    <button onClick={() => handleUi(UI_SECTIONS.FILTER, UI_ACTIONS.HANDLE)} className={`${category}__filter--title`}><FontAwesomeIcon icon={faSliders}/>{text.filters.btn}</button>
                 </div>
               }
               <div className={container}>
