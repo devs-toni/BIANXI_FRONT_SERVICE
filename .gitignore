@@ -4,6 +4,7 @@
 /node_modules/
 /.vscode
 src/assets/styles/css
+src/config/configuration.js
 src/assets/images
 /.pnp
 .pnp.js
