@@ -1,5 +1,6 @@
 
-const HOST_ENDPOINT = 'http://localhost:8080';
+const HOST_ENDPOINT = 'http://localhost:8081';
+//const HOST_ENDPOINT = 'https://bianxiapi.arcprojects.es';
 
 export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/products";
 export const SIZES_ENDPOINT = HOST_ENDPOINT + "/sizes";
