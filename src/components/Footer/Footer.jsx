@@ -56,8 +56,7 @@ const Footer = () => {
       <div className='footer__privacy'>
         <p className='footer__privacy--title'>{text.footer.privacy.title}</p>
         <div className="footer__privacy--terms">
-          <p>{text.footer.privacy.conditions.toUpperCase()}</p>
-          <p>{text.footer.privacy.politic.toUpperCase()}</p>
+          <a rel='noreferrer' href='https://bianchistore.es' target='_blank'>{text.footer.privacy.conditions.toUpperCase()}</a>
         </div>
       </div>
     </div>

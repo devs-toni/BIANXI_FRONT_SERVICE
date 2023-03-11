@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ProductProvider } from './context/ProductContext';
 import { CartProvider } from './context/CartContext';
 import { GlobalProvider, LanguageProvider } from './context/GlobalContext';
@@ -12,7 +12,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <HashRouter>
     <GoogleOAuthProvider clientId="162877889324-ph6vkb5temebbg62b7sbqrp14t2is97b.apps.googleusercontent.com">
       <GlobalProvider>
         <LanguageProvider>
@@ -28,7 +28,7 @@ root.render(
         </LanguageProvider>
       </GlobalProvider>
     </GoogleOAuthProvider>
-  </BrowserRouter>
+  </HashRouter>
 );
 
 

@@ -87,9 +87,8 @@
         "change": "Devoluciones"
       },
       "privacy": {
-        "title": "Todos los derechos reservados MuntingsBikers",
-        "conditions": "Términos y condiciones",
-        "politic": "Política de privacidad"
+        "title": "El uso de esta página se limita exclusivamente a fines educativos, no és de uso comercial.",
+        "conditions": "Esta página esta insipirada en Bianchi Store"
       }
     },
     "login": {
@@ -231,9 +230,8 @@
         "change": "Returns"
       },
       "privacy": {
-        "title": "All rights reserved MuntingsBikers",
-        "conditions": "Terms and conditions",
-        "politic": "Privacy policy"
+        "title": "The use of this site is limited to educational purposes only, is not for commercial use.",
+        "conditions": "This page is inspired by Bianchi Store"
       }
     },
     "login": {
@@ -375,9 +373,8 @@
         "change": "Resi"
       },
       "privacy": {
-        "title": "Tutti i diritti riservati MuntingsBikers",
-        "conditions": "Termini e condizioni",
-        "politic": "Politica sulla privacy"
+        "title": "L'uso di questo sito è limitato a scopi educativi, non è destinato all'uso commerciale.",
+        "conditions": "Questa pagina è ispirata a Bianchi Store"
       }
     },
     "login": {

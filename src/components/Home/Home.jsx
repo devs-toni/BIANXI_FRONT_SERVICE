@@ -2,7 +2,7 @@ import React from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { Carousel, Section, Advantage } from '../index';
 import { faTruckFast, faMoneyBill1Wave, faTriangleExclamation, faBicycle, faRoad, faMountain, faBolt, faCity } from '@fortawesome/free-solid-svg-icons';
-import logoImage from '../../assets/images/logo-image.png';
+import logoImage from '../../assets/images/logoImage.png';
 
 const Home = () => {
 
