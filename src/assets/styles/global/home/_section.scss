@@ -9,6 +9,10 @@
 
   &__link {
     text-align: center;
+
+    &.disable {
+      opacity: .2;
+    }
   }
 
   &__section {
@@ -41,6 +45,7 @@
       @media screen and (max-width: 470px) {
         font-size: 2em;
       }
+
       @media screen and (max-width: 330px) {
         font-size: 1.5em;
       }
@@ -70,6 +75,10 @@
 
     &:hover {
       background-color: var.$bianchi-color;
+
+      &.disable {
+        background-color: transparent;
+      }
     }
 
     @media screen and (max-width: 1700px) {
