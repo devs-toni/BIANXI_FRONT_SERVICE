@@ -56,6 +56,15 @@
       color: white;
       font-size: .9em;
       background-color: var.$bianchi-color;
+
+      @media screen and (max-width: 2200px) {
+        top: 0;
+      }
+
+      @media screen and (max-width: 480px) {
+        font-size: .7em;
+        height: 15px;
+      }
     }
 
     @media screen and (max-width: 1050px) {
