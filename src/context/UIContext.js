@@ -16,6 +16,7 @@ export const UIProvider = ({ children }) => {
     searchIsOpen: false,
     searchRef: useRef(null),
     cuponIsOpen: false,
+    filterIsOpen: false
   }
 
   const UiReducer = (state, action) => {
@@ -82,6 +83,18 @@ export const UIProvider = ({ children }) => {
           cuponIsOpen: state.cuponIsOpen && false
         };
 
+      case ACTIONS.HANDLE_FILTER:
+        return {
+          ...state,
+          filterIsOpen: !state.filterIsOpen
+        };
+
+      case ACTIONS.CLOSE_FILTER:
+        return {
+          ...state,
+          filterIsOpen: state.filterIsOpen && false
+        };
+
       default:
         return state;
     }
@@ -105,6 +118,9 @@ export const UIProvider = ({ children }) => {
 
       case "cupon":
         return handle ? ACTIONS.HANDLE_CUPON_UI : ACTIONS.CLOSE_CUPON;
+
+      case "filter":
+        return handle ? ACTIONS.HANDLE_FILTER : ACTIONS.CLOSE_FILTER;
 
       default:
         break;

@@ -2,13 +2,11 @@ import React from 'react';
 import { useLanguage } from '../context/GlobalContext';
 import { MyRouter } from '../router/MyRouter';
 import { Navbar, Cart, Login, Search } from './index';
-import { ALL_LINK, CITY_LINK, EBIKE_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
+import { ALL_LINK, CITY_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
 
 const Layout = () => {
 
   const { text } = useLanguage();
-
-
 
   const items = [
     {

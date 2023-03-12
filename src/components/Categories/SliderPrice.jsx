@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 const PrettoSlider = styled(Slider)({
 
-  marginTop: '150px',
+  marginTop: '50px',
   color: '#00B7B1 !important',
   height: 10,
   '& .MuiSlider-track': {

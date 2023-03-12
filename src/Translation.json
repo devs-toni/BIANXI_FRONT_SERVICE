@@ -140,6 +140,9 @@
     },
     "info": {
       "share": "Mira que bicicleta!!!"
+    },
+    "filters": {
+      "btn": "Filters"
     }
   },
   "en": {
@@ -283,6 +286,9 @@
     },
     "info": {
       "share": "Look this bycicle!!!"
+    },
+    "filters": {
+      "btn": "Filters"
     }
   },
   "it": {
@@ -426,6 +432,9 @@
     },
     "info": {
       "share": "Guarda questa biciclette!!!"
+    },
+    "filters": {
+      "btn": "Filters"
     }
   }
 }

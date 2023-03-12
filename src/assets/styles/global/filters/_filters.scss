@@ -1,0 +1,62 @@
+@use '../../themes/variables' as var;
+
+.category-filters {
+  position: fixed;
+  height: 100vh;
+  visibility: hidden;
+  z-index: 3;
+  width: 100vw;
+  transition: var.$modal-transition;
+
+
+  .filters-menu {
+    width: 100vw;
+    height: 40vh;
+    background-color: var.$modal-bg;
+    position: relative;
+    bottom: -100vh;
+    opacity: 1;
+    transition: all .6s ease;
+
+    &__header {
+      padding: 2em 0;
+
+      h1 {
+        text-align: center;
+      }
+    }
+
+    &__content {
+      width: 40%;
+      margin: 0 auto;
+
+      p {
+        font-size: 1.4em;
+      }
+    }
+
+
+    &.active {
+      bottom: -60vh;
+      z-index: 3;
+    }
+
+    &__close {
+      position: absolute;
+      right: 2%;
+      top: 4%;
+      font-size: 1.8em;
+      cursor: pointer;
+    }
+
+    @media screen and (max-width: 770px) {
+      background-color: var.$modal-bg-mobile;
+      color: white;
+    }
+  }
+
+  &.active {
+    background-color: var.$modal-bg-color;
+    visibility: visible;
+  }
+}
