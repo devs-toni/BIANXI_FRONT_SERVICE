@@ -37,7 +37,7 @@ const Category = ({ category, container, box, title }) => {
           .then(data => setCategoryProducts(data))
           .catch(error => console.error(error));
     }
-  }, [type, search, products])
+  }, [type, search, products, categoryProducts])
 
 
 
