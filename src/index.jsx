@@ -9,11 +9,12 @@ import { GlobalProvider, LanguageProvider } from './context/GlobalContext';
 import { AuthProvider } from './context/AuthContext';
 import UIProvider from './context/UIContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { GOOGLE_OAUTH_KEY } from './config/configuration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <HashRouter>
-    <GoogleOAuthProvider clientId="162877889324-ph6vkb5temebbg62b7sbqrp14t2is97b.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={GOOGLE_OAUTH_KEY}>
       <GlobalProvider>
         <LanguageProvider>
           <UIProvider>
