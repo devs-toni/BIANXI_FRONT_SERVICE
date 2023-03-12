@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/GlobalContext';
 import { MyRouter } from '../router/MyRouter';
-import { Navbar, Cart, Login, Search, Filter } from './index';
+import { Navbar, Cart, Login, Search } from './index';
 import { ALL_LINK, CITY_LINK, MTB_LINK, ROAD_LINK } from '../router/paths';
 
 const Layout = () => {
@@ -33,7 +33,6 @@ const Layout = () => {
       <Login />
       <Search />
       <Cart />
-      <Filter />
       <MyRouter />
     </div>
   )

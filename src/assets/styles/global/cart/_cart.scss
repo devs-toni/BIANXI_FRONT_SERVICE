@@ -13,12 +13,12 @@
   position: fixed;
   visibility: hidden;
   z-index: 3;
-  transition: all .4s ease-in-out;
+  transition: var.$modal-transition;
   overflow: hidden;
 
   &.active {
     visibility: visible;
-    background-color: rgba(0, 0, 0, 0.705);
+    background-color: var.$modal-bg-color;
   }
 
   .cart-menu {
@@ -38,7 +38,7 @@
     right: -100%;
     width: 30vw;
     line-height: 50px;
-    background-color: rgb(255, 255, 255);
+    background-color: var.$modal-bg;
     max-height: 100%;
 
     &.active {
