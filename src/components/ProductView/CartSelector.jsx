@@ -9,7 +9,7 @@ import { PRODUCT_PROPERTIES } from '../../config/configuration';
 
 const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
-  const { cartProducts } = useCart();
+  const { cartState } = useCart();
 
   const { productState, setProperty } = useProduct();
   const { id } = productState.product;
@@ -21,7 +21,7 @@ const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
 
   useEffect(() => {
     const getConfigurationStock = () => {
-      const allProductConfigurations = getCartProductConfigurations(cartProducts, id);
+      const allProductConfigurations = getCartProductConfigurations(cartState.cartProducts, id);
       let finalConfig = getMatchConfiguration(allProductConfigurations, size, color);
 
       if (!finalConfig) {
@@ -38,7 +38,7 @@ const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
       setTempStock(stock ? stock : 0);
       setValue(0);
     }
-  }, [productState.color, productState.size, cartProducts, productState.product])
+  }, [productState.color, productState.size, cartState.cartProducts, productState.product])
 
 
   const addCount = () => {

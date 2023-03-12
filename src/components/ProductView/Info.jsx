@@ -47,6 +47,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
     handleUi(UI_SECTIONS.LOGIN, UI_ACTIONS.CLOSE);
     handleUi(UI_SECTIONS.MENU, UI_ACTIONS.CLOSE);
     handleUi(UI_SECTIONS.CART, UI_ACTIONS.HANDLE);
+    setTotalSelected(0);
   }
 
   const emptyStyles = (configuration?.stock === 0 || !configuration) ? 'empty' : '';
