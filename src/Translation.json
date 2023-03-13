@@ -143,6 +143,9 @@
     },
     "filters": {
       "btn": "Filters"
+    },
+    "errors": {
+      "form": "Hay errores en el formulario."
     }
   },
   "en": {
@@ -289,6 +292,9 @@
     },
     "filters": {
       "btn": "Filters"
+    },
+    "errors": {
+      "form": "There are errors in the form."
     }
   },
   "it": {
@@ -435,6 +441,9 @@
     },
     "filters": {
       "btn": "Filters"
+    },
+    "errors": {
+      "form": "Ci sono errori nel modulo."
     }
   }
 }

@@ -10,7 +10,7 @@ import { useCart } from '../../context/CartContext';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { ORDERS_LINK } from '../../router/paths';
-import { toast, Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { useState } from 'react';
 
 const PaymentForm = ({ price }) => {
@@ -44,11 +44,8 @@ const PaymentForm = ({ price }) => {
   const handlePayment = async (e) => {
     console.log(e)
     e.preventDefault();
-    console.log(1);
-    validate();
-    console.log(2);
-    console.log(errors)
-    if (Object.keys(errors).map((key) => errors[key].length).filter(v => v !== 0).length === 0) {
+    const currentErrors = validate();
+    if (Object.keys(currentErrors).map((key) => currentErrors[key].length).filter(v => v !== 0).length === 0) {
       setLoading(true);
       const validPayment = await pay();
 
@@ -65,6 +62,8 @@ const PaymentForm = ({ price }) => {
         }, 2000);
 
       }
+    } else {
+      handleToast('⛔', text.errors.form);
     }
   }
 

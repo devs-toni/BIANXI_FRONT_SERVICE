@@ -8,12 +8,13 @@ export const useToast = () => {
       {
         icon: icon,
         style: {
+          width: 'fit-content',
           borderRadius: '10px',
           background: '#333',
           color: '#fff',
           fontSize: '2em',
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           textAlign: 'center',
         }
       }

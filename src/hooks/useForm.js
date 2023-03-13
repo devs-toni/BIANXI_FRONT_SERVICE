@@ -44,7 +44,9 @@ export const useForm = (initialForm) => {
   }
 
   const validate = () => {
-    setErrors(validateForm(form));
+    const errors = validateForm(form);
+    setErrors(errors);
+    return errors;
   }
 
   return {
