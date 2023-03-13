@@ -84,7 +84,14 @@ export const CartProvider = ({ children }) => {
           discountNew: action.payload.discount,
           totalAmount: action.payload.amount,
           iva: action.payload.iva ? action.payload.iva : state.iva,
-        }
+        };
+      
+      case ACTIONS.RESET_CUPON:
+        return {
+          ...state, 
+          activeCupon: false,
+          discountCupon: 0
+        };
 
       default: return state;
     }
@@ -121,6 +128,10 @@ export const CartProvider = ({ children }) => {
         });
     }
     isNewUser();
+
+    if (!userState.isAuthenticated) {
+      dispatch({ type: ACTIONS.RESET_CUPON });
+    }
   }, [userState.isAuthenticated])
 
   const getMethods = useCallback(() => {
@@ -194,6 +205,8 @@ export const CartProvider = ({ children }) => {
   //SET ACTIVE CUPON
   const handleCupon = useCallback((state, percentage) => {
     const total = getTotalPriceCart(cartState.cartProducts);
+
+
     const isNew = cartState.isNew;
     let saving = 0;
 
