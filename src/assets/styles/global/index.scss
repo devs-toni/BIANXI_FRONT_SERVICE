@@ -12,6 +12,7 @@
 @use './search/categorySearch';
 @use './orders/orders';
 @use './filters/filters';
+@use './error404';
 
 @use './payLoader';
 @use './loader';

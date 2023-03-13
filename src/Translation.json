@@ -112,7 +112,8 @@
       "ops": "Opps!",
       "notFound": "Página no encontrada",
       "dontExist": "La página que estás buscando no existe",
-      "home": "Volver"
+      "home": "Volver",
+      "form": "Hay errores en el formulario."
     },
     "payment": {
       "title": "Tu pedido",
@@ -143,9 +144,6 @@
     },
     "filters": {
       "btn": "Filters"
-    },
-    "errors": {
-      "form": "Hay errores en el formulario."
     }
   },
   "en": {
@@ -261,7 +259,8 @@
       "ops": "Opps!",
       "notFound": "Page not found",
       "dontExist": "The page you are looking for doesn't exist",
-      "home": "Back"
+      "home": "Back",
+      "form": "There are errors in the form."
     },
     "payment": {
       "title": "Your order",
@@ -292,9 +291,6 @@
     },
     "filters": {
       "btn": "Filters"
-    },
-    "errors": {
-      "form": "There are errors in the form."
     }
   },
   "it": {
@@ -410,7 +406,8 @@
       "ops": "Opps!",
       "notFound": "Pagina non trovata",
       "dontExist": "La pagina che stai cercando non esiste",
-      "home": "Indietro"
+      "home": "Indietro",
+      "form": "Ci sono errori nel modulo."
     },
     "payment": {
       "title": "Il tuo ordine",
@@ -441,9 +438,6 @@
     },
     "filters": {
       "btn": "Filters"
-    },
-    "errors": {
-      "form": "Ci sono errori nel modulo."
     }
   }
 }

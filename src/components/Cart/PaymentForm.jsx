@@ -63,7 +63,7 @@ const PaymentForm = ({ price }) => {
 
       }
     } else {
-      handleToast('⛔', text.errors.form);
+      handleToast('⛔', text.error.form);
     }
   }
 

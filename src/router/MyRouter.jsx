@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { Category, ProductView, Home, PaymentPage, Orders, UserSection } from "../components/index";
+import { Category, ProductView, Home, PaymentPage, Orders, UserSection, Error404 } from "../components/index";
 import React from 'react';
 import { useLanguage } from "../context/GlobalContext";
 import { CATEGORY_ROUTER, PRODUCT_ROUTER, SEARCH_ROUTER, CART_ROUTER, USER_ROUTER, FAVOURITES_ROUTER, ORDERS_ROUTER, UNDEFINED_ROUTER, HOME_ROUTER, TOTAL_PRODUCTS_ROUTER } from "./paths";
@@ -44,7 +44,7 @@ export const MyRouter = () => {
         </Route>
 
       </Route>
-      <Route path={UNDEFINED_ROUTER} />
+      <Route path={UNDEFINED_ROUTER} element={<Error404 />} />
     </Routes>
   );
 };
