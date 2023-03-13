@@ -23,6 +23,11 @@ const Category = ({ category, container, box, title }) => {
   const { userState } = useAuth();
   const { handleUi } = useUI();
 
+  const getFavourites = () => {
+    http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${userState.id}`)
+      .then(data => setCategoryProducts(data))
+      .catch(error => console.error(error));
+  }
 
   useEffect(() => {
     if (products) {
@@ -33,11 +38,17 @@ const Category = ({ category, container, box, title }) => {
       else if (section)
         setCategoryProducts(products.sort((a, b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1));
       else
-        http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${userState.id}`)
-          .then(data => setCategoryProducts(data))
-          .catch(error => console.error(error));
+        getFavourites();
     }
-  }, [type, search, products, categoryProducts])
+  }, [type, search, products])
+
+
+  useEffect(() => {
+    if (!type && !search && !section) {
+      getFavourites();
+    }
+  }, [categoryProducts])
+
 
 
 

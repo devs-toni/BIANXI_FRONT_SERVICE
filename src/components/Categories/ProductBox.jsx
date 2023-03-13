@@ -79,7 +79,7 @@ const ProductBox = ({
         }
       </div>
       {
-        (isEmpty && !isSearch && !isRelated)
+        (isEmpty && !isSearch && !isRelated && !isLike)
         &&
         <Badge
           containerClass="empty-product"

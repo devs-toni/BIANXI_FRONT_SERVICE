@@ -42,7 +42,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, conta
           ?
           <>
             {
-              (offer > 0 && !isSearch) &&
+              (offer > 0 && !isSearch && !isLike) &&
               <Badge
                 containerClass="offer"
                 text={text.product.offer}
