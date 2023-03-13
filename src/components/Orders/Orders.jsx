@@ -7,6 +7,7 @@ import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
 import { http } from "../../helpers/http";
 import { ORDERS_ENDPOINT } from "../../config/configuration";
+import { Loader } from '../index';
 
 const Orders = () => {
 
@@ -14,8 +15,10 @@ const Orders = () => {
   const { userState } = useAuth();
 
   const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+
     const setUserOrders = async () => {
       const array = [];
 
@@ -34,6 +37,7 @@ const Orders = () => {
         array.push(newOrd);
       }));
       setOrders(array);
+      setLoading(false);
     }
     setUserOrders();
 
@@ -42,37 +46,50 @@ const Orders = () => {
 
   return (
     <div className='orders'>
-      <div className="orders__titles">
-        <p className="orders__titles--key">#</p>
-        <p className="orders__titles--key">{text.payment.address}</p>
-        <p className="orders__titles--key">{text.payment.products}</p>
-        <p className="orders__titles--key">{text.payment.total}</p>
-      </div>
       {
-        orders.length > 0
+        loading
           ?
-          orders.sort((a, b) => a.id > b.id ? 1 : -1).map(({ id, address, price, products }) => {
-            return (
-              <div className="orders__order" key={uuid()}>
-                <p className="orders__order--val">{id}</p>
-                <p className="orders__order--val">{address}</p>
-                <div>
-                  {
-                    products.map(({ name }) => {
-                      return (
-                        <p key={uuid()} className="orders__order--val">{name}</p>
-                      )
-                    })
-                  }
-                </div>
-                <p className="orders__order--val">{formatNumberES(price)} €</p>
-              </div>
-            )
-          })
+          (
+            <Loader />
+          )
           :
-          <FontAwesomeIcon className="orders__empty" icon={faHourglass} />
+          (
+            <>
+              <div className="orders__titles">
+                <p className="orders__titles--key">#</p>
+                <p className="orders__titles--key">{text.payment.address}</p>
+                <p className="orders__titles--key">{text.payment.products}</p>
+                <p className="orders__titles--key">{text.payment.total}</p>
+              </div>
+              {
+                orders.length > 0
+                  ?
+                  orders.sort((a, b) => a.id > b.id ? 1 : -1).map(({ id, address, price, products }) => {
+                    return (
+                      <div className="orders__order" key={uuid()}>
+                        <p className="orders__order--val">{id}</p>
+                        <p className="orders__order--val">{address}</p>
+                        <div>
+                          {
+                            products.map(({ name }) => {
+                              return (
+                                <p key={uuid()} className="orders__order--val">{name}</p>
+                              )
+                            })
+                          }
+                        </div>
+                        <p className="orders__order--val">{formatNumberES(price)} €</p>
+                      </div>
+                    )
+                  })
+                  :
+                  <FontAwesomeIcon className="orders__empty" icon={faHourglass} />
+              }
+            </>
+          )
       }
     </div>
+
   )
 }
 
