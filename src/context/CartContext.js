@@ -55,6 +55,8 @@ export const CartProvider = ({ children }) => {
           totalAmount: getTotalPriceCart(action.payload),
           iva: getIVAPriceCart(action.payload),
           discountNew: state.isNew ? (getTotalPriceCart(action.payload) * NEW_USER_DISCOUNT) / 100 : 0,
+          activeCupon: false,
+          discountCupon: 0
         };
 
       case ACTIONS.RESET_CART:
@@ -85,10 +87,10 @@ export const CartProvider = ({ children }) => {
           totalAmount: action.payload.amount,
           iva: action.payload.iva ? action.payload.iva : state.iva,
         };
-      
+
       case ACTIONS.RESET_CUPON:
         return {
-          ...state, 
+          ...state,
           activeCupon: false,
           discountCupon: 0
         };
@@ -98,6 +100,7 @@ export const CartProvider = ({ children }) => {
   }
 
   const [cartState, dispatch] = useReducer(reducer, initialState);
+
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem(`CART-${userState.id}`));
@@ -149,6 +152,8 @@ export const CartProvider = ({ children }) => {
     const productsAdd = handleAddProduct(productAdd, configurationAdd, cartState.cartProducts);
     setStorage(productsAdd);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAdd });
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+
   }, [cartState.cartProducts, getMethods]);
 
   //REST PRODUCT IN CART MODAL
@@ -157,6 +162,8 @@ export const CartProvider = ({ children }) => {
     const productsDel = handleRemoveProduct(productDel, configurationDel, cartState.cartProducts);
     setStorage(productsDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsDel });
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+
   }, [cartState.cartProducts, getMethods]);
 
   //ADD PRODUCTS IN PRODUCT PAGE
@@ -165,6 +172,8 @@ export const CartProvider = ({ children }) => {
     const productsAddN = handleAddSpecificNumberProduct(item, n, cartState.cartProducts);
     setStorage(productsAddN);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAddN });
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+
   }, [productState, getMethods, cartState.cartProducts]);
 
   //DELETE CONFIGURATION IN CART MODAL
@@ -173,6 +182,8 @@ export const CartProvider = ({ children }) => {
     const productsConfDel = handleRemoveConfig(idProduct, idConf, totalProductInConf, cartState.cartProducts);
     setStorage(productsConfDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsConfDel });
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+
   }, [cartState.cartProducts, getMethods]);
 
   //DELETE PRODUCT IN CART MODAL
@@ -181,6 +192,8 @@ export const CartProvider = ({ children }) => {
     const productsCompleteDel = handleDeleteCartProduct(id, cartState.cartProducts);
     setStorage(productsCompleteDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsCompleteDel });
+    handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
+
   }, [cartState.cartProducts, getMethods]);
 
   //PAYMENT COMPLETED
