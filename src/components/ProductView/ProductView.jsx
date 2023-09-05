@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
 import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
-import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../config/configuration.js';
+import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../config/configuration';
 import { http } from '../../helpers/http';
 import { setProductConfigurations } from '../../helpers/utils';
 import { useAuth } from '../../context/AuthContext';

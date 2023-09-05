@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useEffect } from "react";
 import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
-import { PRODUCTS_ENDPOINT } from '../../config/configuration.js';
+import { PRODUCTS_ENDPOINT } from '../../config/configuration';
 import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { getProductRelateds } from '../../helpers/utils';

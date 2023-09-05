@@ -9,7 +9,7 @@ import { GlobalProvider, LanguageProvider } from './context/GlobalContext';
 import { AuthProvider } from './context/AuthContext';
 import UIProvider from './context/UIContext';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { GOOGLE_OAUTH_KEY } from './config/configuration.js';
+import { GOOGLE_OAUTH_KEY } from './config/configuration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
