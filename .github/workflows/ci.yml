@@ -18,8 +18,6 @@ jobs:
 
       - name: Install dependencies
         run: npm i
-        env:
-          CI: false
         
       #- name: Linter
       #  run: npm run lint
