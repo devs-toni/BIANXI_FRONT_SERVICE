@@ -3,8 +3,6 @@
 # dependencies
 /node_modules/
 /.vscode
-src/assets/styles/css
-src/assets/images
 /.pnp
 .pnp.js
 
@@ -25,4 +23,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 src/config/configuration.js
-package-lock.json
