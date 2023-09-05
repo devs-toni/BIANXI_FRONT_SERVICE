@@ -67,7 +67,7 @@ jobs:
           context: .
           dockerfile: Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/arcp:${{ env.NEXT_RELEASE }}
+          tags: ${{ secrets.DOCKER_USERNAME }}/bianxi-front:${{ env.NEXT_RELEASE }}
 
 #   - name: Deploy
 #     run: |
