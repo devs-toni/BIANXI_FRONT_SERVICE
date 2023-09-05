@@ -16,6 +16,7 @@ This web application uses on <u><i>frontend</i></u>:
   <li>React router v6.4.5 for the route management</li>
   <li>Stripe/js for the payment</li>
   <li>React-uauth/google for google authentication</li>
+  <li>Sass for styles</li>
 </ul></b>
 
 On the <u><i>backend:</i></u>
