@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
-import { COLORS_ENDPOINT, PRODUCTS_ENDPOINT } from '../config/configuration';
+import { COLORS_ENDPOINT, PRODUCTS_ENDPOINT, SIZES_ENDPOINT } from '../config/configuration';
 import { http } from '../helpers/http';
 
 const GlobalContext = createContext();
@@ -15,9 +15,6 @@ export const GlobalProvider = ({ children }) => {
   const [sizes, setSizes] = useState(null);
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_API_URL)
-    console.log(PRODUCTS_ENDPOINT);
-;
     http().get(`${PRODUCTS_ENDPOINT}`)
       .then(data => setProducts(data.filter(product => product.type !== "ebike")))
       .catch(err => console.error(err));
@@ -26,7 +23,7 @@ export const GlobalProvider = ({ children }) => {
       .then(data => setColors(data))
       .catch(err => console.error(err));
 
-    http().get("https://bianxi-api.arcprojects.es/api/sizes")
+    http().get(`${SIZES_ENDPOINT}`)
       .then(data => setSizes(data))
       .catch(err => console.error(err));
   }, [])

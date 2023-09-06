@@ -34,11 +34,11 @@ jobs:
 
       - name: Create env
         run: |
-          touch .env
+          touch .env.production
           echo REACT_APP_GOOGLE_OAUTH_KEY=${{ secrets. REACT_APP_GOOGLE_OAUTH_KEY }} >> .env
           echo REACT_APP_STRIPE_KEY=${{ secrets.REACT_APP_STRIPE_KEY }} >> .env
-          echo REACT_APP_API_URL=${{ secrets.REACT_APP_API_URL }} >> .env
-          cat .env
+          echo REACT_APP_API_URL=https://bianxi-api.arcprojects.es >> .env
+          cat .env.production
 
 
       - name: Build Production
