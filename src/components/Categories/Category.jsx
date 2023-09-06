@@ -24,8 +24,11 @@ const Category = ({ category, container, box, title }) => {
   const { handleUi } = useUI();
 
   const getFavourites = () => {
-    http().get(`${PRODUCTS_ENDPOINT}/get/favourites/${userState.id}`)
-      .then(data => setCategoryProducts(data))
+    http().get(`${PRODUCTS_ENDPOINT}/favourites/${userState.id}`)
+      .then(data => {
+        if (categoryProducts.length !== data.length)
+          setCategoryProducts(data)
+      })
       .catch(error => console.error(error));
   }
 
@@ -84,6 +87,7 @@ const Category = ({ category, container, box, title }) => {
                           isAll={section ? true : false}
                           containerClass={container}
                           boxClass={box}
+                          getFavourites={getFavourites}
                         />
                       })
                       :

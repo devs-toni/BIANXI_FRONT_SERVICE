@@ -12,24 +12,14 @@ export const useProduct = () => {
 }
 
 const addLike = (idProduct, idUser) => {
-  http().post(`${PRODUCTS_ENDPOINT}/like/add`, {
-    body: [
-      idProduct, idUser
-    ]
-  })
+  http().post(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`)
 }
 
 const deleteLike = (idProduct, idUser) => {
-  http().del(`${PRODUCTS_ENDPOINT}/like/delete`, {
-    body: [
-      idProduct, idUser
-    ]
-  })
+  http().del(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`)
 }
 
 export const ProductProvider = ({ children }) => {
-
-
 
   const { userState } = useAuth();
 
@@ -117,13 +107,16 @@ export const ProductProvider = ({ children }) => {
   const setProperty = (property, value) => {
     let action = managePropertySetter(property);
 
+
     if (property === PRODUCT_PROPERTIES.LIKE && !value) {
       if (productState.like) {
         deleteLike(productState.product.id, userState.id);
       } else {
         addLike(productState.product.id, userState.id);
       }
-      action = ACTIONS.HANDLE_LIKE;
+      action = ACTIONS.HANDLE_LIKE
+    } else if (property === PRODUCT_PROPERTIES.LIKE && value) {
+      action = ACTIONS.SET_LIKE
     }
     dispatch({ type: action, payload: value ? value : null })
   }

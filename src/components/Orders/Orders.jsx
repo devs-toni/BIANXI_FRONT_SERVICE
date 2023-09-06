@@ -23,13 +23,13 @@ const Orders = () => {
       const array = [];
 
       const orders = await http()
-        .get(`${ORDERS_ENDPOINT}/get/all/${userState.id}`)
+        .get(`${ORDERS_ENDPOINT}/${userState.id}`)
         .then(ordersBackend => {
           return ordersBackend;
         });
 
       await Promise.all(orders.map(async (ord) => {
-        const result = await http().get(`${ORDERS_ENDPOINT}/get/products/${ord.id}`)
+        const result = await http().get(`${ORDERS_ENDPOINT}/products/${ord.id}`)
           .then(productsBackend => {
             return productsBackend;
           });

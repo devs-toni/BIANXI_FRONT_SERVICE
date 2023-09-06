@@ -107,7 +107,7 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: items ? items : [] })
 
     const isNewUser = async () => {
-      await http().get(`${ORDERS_ENDPOINT}/get/all/${userState.id}`)
+      await http().get(`${ORDERS_ENDPOINT}/${userState.id}`)
         .then(data => {
           const isLogged = userState.id !== 0;
           const isNew = data.length === 0;

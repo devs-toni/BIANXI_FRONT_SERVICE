@@ -109,16 +109,17 @@ export const getCartProductConfigurations = (products, id) => {
 }
 
 export const getMatchConfiguration = (array, selectedSize, selectedColor) => {
-  return array?.filter(({ sizes, color }) => (sizes.size == selectedSize && color.id == selectedColor))[0];
+  if (typeof(array) !== 'undefined') {
+    return array?.filter(({ size, color }) => (size.size == selectedSize && color.id == selectedColor))[0];
+  }
 }
 
 export const setProductConfigurations = (item) => {
   let colors = new Set();
   let colorsIds = new Set();
   let sizes = new Set();
-
-  const colorsAndSizes = item.configuration.map(({ sizes, color }) => {
-    return [sizes, color]
+  const colorsAndSizes = item.configuration.map(({ size, color }) => {
+    return [size, color]
   });
   colorsAndSizes.flat().forEach(cnf => {
     if (cnf?.size) sizes.add(cnf.size);

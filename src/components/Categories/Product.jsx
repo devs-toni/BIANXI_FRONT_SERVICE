@@ -7,9 +7,10 @@ import { useLanguage } from '../../context/GlobalContext';
 import { CATEGORY, CATEGORY_ROUTER, HOME, PRODUCT, PRODUCT_LINK } from '../../router/paths';
 import { useUI } from '../../context/UIContext';
 import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
+import { getFabUtilityClass } from '@mui/material';
 
 
-const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, containerClass, boxClass }) => {
+const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, containerClass, boxClass, getFavourites }) => {
 
   const { text } = useLanguage();
 
@@ -65,6 +66,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, conta
               isSearch={isSearch}
               type={type}
               id={id}
+              getFavourites={getFavourites}
             />
 
             {

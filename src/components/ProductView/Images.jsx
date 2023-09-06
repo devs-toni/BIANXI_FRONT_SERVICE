@@ -50,7 +50,7 @@ const Images = memo(({ product, activator }) => {
                   <img
                     key={index}
                     data-key={index}
-                    src={require(`../../assets/images/${product.type}/${product.name}-${index}.png`)}
+                    src={require(`../../assets/images/${product.type}/${product.name}-${selectedSource}.png`)}
                     className={`${selectedSource === index ? 'active' : ''}`}
                     alt={product.name}
                     onClick={handleImage}

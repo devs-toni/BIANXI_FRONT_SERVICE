@@ -14,7 +14,7 @@ const Related = ({ type, price, id }) => {
   const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
-    http().get(`${PRODUCTS_ENDPOINT}/get/type/${type}`)
+    http().get(`${PRODUCTS_ENDPOINT}/type/${type}`)
       .then(data => {
         setRelatedProducts(getProductRelateds(data, price, id))
       })

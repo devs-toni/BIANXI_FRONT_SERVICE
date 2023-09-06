@@ -39,7 +39,7 @@ const PaymentDetails = ({ products }) => {
                             <p className='total'>x {cnf.total}</p>
                             <div className="size">
                               <p className='size__title'>{text.payment.sizeTitle}</p>
-                              <p className='size__result'>{cnf.sizes.size}</p>
+                              <p className='size__result'>{cnf.size.size}</p>
                             </div>
                             <div className="color">
                               <p className='color__title'>{text.payment.colorTitle}</p>

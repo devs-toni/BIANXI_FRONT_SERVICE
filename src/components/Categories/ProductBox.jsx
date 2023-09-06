@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../../context/AuthContext';
 import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT } from '../../config/configuration';
+import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../config/configuration';
 import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { PRODUCT_LINK } from '../../router/paths';
+import { useProduct } from '../../context/ProductContext';
 
 const ProductBox = ({
   name,
@@ -25,12 +26,14 @@ const ProductBox = ({
   isEmpty,
   isSearch,
   type,
-  id }) => {
+  id,
+  getFavourites }) => {
 
   const { text } = useLanguage();
   const navigate = useNavigate();
 
   const { userState } = useAuth();
+  const { setProperty } = useProduct();
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';
@@ -44,10 +47,9 @@ const ProductBox = ({
 
   const deleteLike = async () => {
     await http()
-      .del(`${PRODUCTS_ENDPOINT}/like/delete`, { body: [id, userState.id] })
-      .then(data => {
-        return data;
-      }).catch(err => console.error(err));
+      .del(`${PRODUCTS_ENDPOINT}/likes/${id}/${userState.id}`).then((data) => {
+        if (!data.error) getFavourites()
+      })
   }
 
   return (

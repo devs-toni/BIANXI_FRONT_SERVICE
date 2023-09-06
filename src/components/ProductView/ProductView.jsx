@@ -24,23 +24,17 @@ const ProductView = () => {
 
     const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
       if (idProduct) {
-        http().post(`${PRODUCTS_ENDPOINT}/like/get`, {
-          body: [
-            idProduct,
-            idUser,
-          ]
-        }).then(data => {
-          data === 1
-            ?
-            setLikeTrue()
-            :
-            setLikeFalse()
+        http().get(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`).then((data) => {
+          if (data.error)
+            setLikeFalse();
+          else
+            setLikeTrue();
         })
       }
     }
 
     const loadProduct = async () => {
-      await http().get(`${PRODUCTS_ENDPOINT}/get/${id}`)
+      await http().get(`${PRODUCTS_ENDPOINT}/${id}`)
         .then(data => {
           setProperty(PRODUCT_PROPERTIES.PRODUCT, data);
 
@@ -53,6 +47,7 @@ const ProductView = () => {
           });
           setProperty(PRODUCT_PROPERTIES.COLORS, finalArray)
           setProperty(PRODUCT_PROPERTIES.PRICES, { offer: data.offer, price: data.price })
+
 
           if (userState.id) {
             getLike(
@@ -83,8 +78,8 @@ const ProductView = () => {
               />
               <Info
                 setColorActivator={setColorActivatorImage}
-                handleLike={() => setProperty(PRODUCT_PROPERTIES.LIKE)}
                 isLike={productState.like}
+                handleLike={() => setProperty(PRODUCT_PROPERTIES.LIKE)}
               />
             </div>
             <Details

@@ -1,12 +1,12 @@
 
 const HOST_ENDPOINT = process.env.REACT_APP_API_URL;
 
-export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/products";
-export const SIZES_ENDPOINT = HOST_ENDPOINT + "/sizes";
-export const COLORS_ENDPOINT = HOST_ENDPOINT + "/colors";
-export const USERS_ENDPOINT = HOST_ENDPOINT + "/users";
-export const STRIPE_ENDPOINT = HOST_ENDPOINT + "/stripe";
-export const ORDERS_ENDPOINT = HOST_ENDPOINT + "/orders";
+export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/api/products";
+export const SIZES_ENDPOINT = HOST_ENDPOINT + "/api/sizes";
+export const COLORS_ENDPOINT = HOST_ENDPOINT + "/api/colors";
+export const USERS_ENDPOINT = HOST_ENDPOINT + "/api/users";
+export const STRIPE_ENDPOINT = HOST_ENDPOINT + "/stripe"
+export const ORDERS_ENDPOINT = HOST_ENDPOINT + "/api/orders";
 
 export const STRIPE_VISIBLE_KEY = process.env.REACT_APP_STRIPE_KEY;
 export const GOOGLE_OAUTH_KEY = process.env.REACT_APP_STRIPE_PASSWORD;

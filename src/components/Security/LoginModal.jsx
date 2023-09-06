@@ -17,7 +17,7 @@ const LoginModal = ({ closeHandler, isOpen }) => {
 
   const login = useGoogleLogin({
     onSuccess: (codeResponse) => oAuthLogin(codeResponse),
-    onError: (error) => console.log('Login Failed:', error)
+    onError: (error) => console.error('Login Failed:', error)
   });
 
   return (

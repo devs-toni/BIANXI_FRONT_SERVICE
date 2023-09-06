@@ -17,7 +17,7 @@ const Handler = ({ add, remove, conf, removeConfig }) => {
         <div className="handler__data">
           <div className="handler__data--prop">
             <p className='size'>{text.view.size}</p>
-            <p className='sizeName'>{conf.sizes.size}</p>
+            <p className='sizeName'>{conf.size.size}</p>
           </div>
           <div className="handler__data--prop">
             <p className='color'>{text.view.color}</p>

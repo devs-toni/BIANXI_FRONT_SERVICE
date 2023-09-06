@@ -16,15 +16,15 @@ export const GlobalProvider = ({ children }) => {
 
   useEffect(() => {
     
-    http().get(`${PRODUCTS_ENDPOINT}/get/all`)
+    http().get(`${PRODUCTS_ENDPOINT}`)
       .then(data => setProducts(data.filter(product => product.type !== "ebike")))
       .catch(err => console.error(err));
 
-    http().get(`${COLORS_ENDPOINT}/get/all`)
+    http().get(`${COLORS_ENDPOINT}`)
       .then(data => setColors(data))
       .catch(err => console.error(err));
 
-    http().get(`${SIZES_ENDPOINT}/get/all`)
+    http().get(`${SIZES_ENDPOINT}`)
       .then(data => setSizes(data))
       .catch(err => console.error(err));
   }, [])

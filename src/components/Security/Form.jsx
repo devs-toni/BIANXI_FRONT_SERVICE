@@ -30,7 +30,7 @@ const Form = () => {
         if (data.length === 0) {
           login(null, null, null , "Email/Contraseña incorrectos!");
         } else {
-          login(data[0], data[1], data[2])
+          login(data.id, data.email, data.role)
         }
       });
   }
