@@ -26,7 +26,7 @@ export const GlobalProvider = ({ children }) => {
       .then(data => setColors(data))
       .catch(err => console.error(err));
 
-    http().get(`${SIZES_ENDPOINT}`)
+    http().get("https://bianxi-api.arcprojects.es/api/sizes")
       .then(data => setSizes(data))
       .catch(err => console.error(err));
   }, [])
