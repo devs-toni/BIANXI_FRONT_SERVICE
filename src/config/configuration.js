@@ -1,5 +1,4 @@
 const HOST_ENDPOINT = process.env.REACT_APP_API_URL;
-console.log(HOST_ENDPOINT);
 
 export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/api/products";
 export const SIZES_ENDPOINT = HOST_ENDPOINT + "/api/sizes";
@@ -7,7 +6,7 @@ export const COLORS_ENDPOINT = HOST_ENDPOINT + "/api/colors";
 export const USERS_ENDPOINT = HOST_ENDPOINT + "/api/users";
 export const STRIPE_ENDPOINT = HOST_ENDPOINT + "/stripe"
 export const ORDERS_ENDPOINT = HOST_ENDPOINT + "/api/orders";
-console.log(COLORS_ENDPOINT);
+
 
 export const STRIPE_VISIBLE_KEY = process.env.REACT_APP_STRIPE_KEY;
 

@@ -15,7 +15,9 @@ export const GlobalProvider = ({ children }) => {
   const [sizes, setSizes] = useState(null);
 
   useEffect(() => {
-    
+    console.log(process.env.REACT_APP_API_URL)
+    console.log(PRODUCTS_ENDPOINT);
+;
     http().get(`${PRODUCTS_ENDPOINT}`)
       .then(data => setProducts(data.filter(product => product.type !== "ebike")))
       .catch(err => console.error(err));
