@@ -13,7 +13,7 @@
     &--logo {
       width: 35%;
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
 
       img {
         max-width: 400px;
@@ -46,7 +46,7 @@
 
 
     &--title {
-      text-align: end;
+      text-align: flex-end;
       width: 70%;
       font-size: 4em;
 

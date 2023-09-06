@@ -30,7 +30,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     pointer-events: auto;
     position: absolute;
     top: 0;
@@ -137,7 +137,7 @@
       height: fit-content;
       display: flex;
       flex-flow: column;
-      justify-content: start;
+      justify-content: flex-start;
       align-items: center;
 
       &--product {
