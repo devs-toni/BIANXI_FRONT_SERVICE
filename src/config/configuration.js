@@ -1,4 +1,3 @@
-
 const HOST_ENDPOINT = process.env.REACT_APP_API_URL;
 
 export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/api/products";
@@ -9,7 +8,8 @@ export const STRIPE_ENDPOINT = HOST_ENDPOINT + "/stripe"
 export const ORDERS_ENDPOINT = HOST_ENDPOINT + "/api/orders";
 
 export const STRIPE_VISIBLE_KEY = process.env.REACT_APP_STRIPE_KEY;
-export const GOOGLE_OAUTH_KEY = process.env.REACT_APP_STRIPE_PASSWORD;
+
+export const GOOGLE_OAUTH_KEY = process.env.REACT_APP_GOOGLE_OAUTH_KEY;
 
 export const CUPONS = [
   {
