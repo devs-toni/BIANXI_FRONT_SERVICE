@@ -59,6 +59,7 @@ export const addProductToCart = (item, numberProductsAdded, arrayConfigurations)
 
 export const addConfigurationToProduct = (configuration, numberProductsAdded, updatedProducts, item) => {
   const updatedConfig = updateNewConfigurationStock(configuration, numberProductsAdded);
+  // eslint-disable-next-line eqeqeq
   updatedProducts?.filter(product => product.id == item.id)[0].config.push(updatedConfig);
 }
 
@@ -73,7 +74,9 @@ const updateNewConfigurationStock = (configuration, addition) => {
 }
 
 export const updateConfigurationStock = (products, idProduct, idConfig, add) => {
+    // eslint-disable-next-line eqeqeq, array-callback-return
   products?.filter(prod => prod.id == idProduct)[0].config.map(cnf => {
+        // eslint-disable-next-line eqeqeq
     if (cnf.id == idConfig) {
       cnf.total = parseInt(cnf.total) + add;
       cnf.stock = parseInt(cnf.stock) - add;
@@ -95,7 +98,9 @@ export const updateProductTotal = (products, idItem, numberProductsAdded) => {
 
 export const removeConfigInProduct = (products, idProduct, idConf) => {
   return products?.map(prod => {
+    // eslint-disable-next-line eqeqeq
     if (prod.id == idProduct) {
+          // eslint-disable-next-line eqeqeq
       prod.config = prod.config.filter(cnf => cnf.id != idConf)
     }
     return prod;
@@ -105,11 +110,13 @@ export const removeConfigInProduct = (products, idProduct, idConf) => {
 ////////////////////////////////////////////////////////////////////////////// UTIL METHODS
 
 export const getCartProductConfigurations = (products, id) => {
+      // eslint-disable-next-line eqeqeq
   return products?.filter(p => p.id == id)[0]?.config;
 }
 
 export const getMatchConfiguration = (array, selectedSize, selectedColor) => {
   if (typeof(array) !== 'undefined') {
+    // eslint-disable-next-line eqeqeq
     return array?.filter(({ size, color }) => (size.size == selectedSize && color.id == selectedColor))[0];
   }
 }

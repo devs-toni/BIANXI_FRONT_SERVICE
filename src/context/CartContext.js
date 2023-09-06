@@ -135,6 +135,7 @@ export const CartProvider = ({ children }) => {
     if (!userState.isAuthenticated) {
       dispatch({ type: ACTIONS.RESET_CUPON });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState.isAuthenticated])
 
   const getMethods = useCallback(() => {
@@ -153,7 +154,7 @@ export const CartProvider = ({ children }) => {
     setStorage(productsAdd);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAdd });
     handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartState.cartProducts, getMethods]);
 
   //REST PRODUCT IN CART MODAL
@@ -163,7 +164,7 @@ export const CartProvider = ({ children }) => {
     setStorage(productsDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsDel });
     handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartState.cartProducts, getMethods]);
 
   //ADD PRODUCTS IN PRODUCT PAGE
@@ -173,7 +174,7 @@ export const CartProvider = ({ children }) => {
     setStorage(productsAddN);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsAddN });
     handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productState, getMethods, cartState.cartProducts]);
 
   //DELETE CONFIGURATION IN CART MODAL
@@ -183,7 +184,7 @@ export const CartProvider = ({ children }) => {
     setStorage(productsConfDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsConfDel });
     handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartState.cartProducts, getMethods]);
 
   //DELETE PRODUCT IN CART MODAL
@@ -193,7 +194,7 @@ export const CartProvider = ({ children }) => {
     setStorage(productsCompleteDel);
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: productsCompleteDel });
     handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartState.cartProducts, getMethods]);
 
   //PAYMENT COMPLETED
@@ -213,6 +214,7 @@ export const CartProvider = ({ children }) => {
       handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
       dispatch({ type: ACTIONS.RESET_CART });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userState, getMethods]);
 
   //SET ACTIVE CUPON

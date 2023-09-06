@@ -19,7 +19,7 @@ const PaymentPage = () => {
 
   const { text } = useLanguage();
 
-  const [stripePromise, setStripePromise] = useState(loadStripe(STRIPE_VISIBLE_KEY));
+  const [stripePromise] = useState(loadStripe(STRIPE_VISIBLE_KEY));
 
   if (cartProducts.length === 0) return <Navigate to="/" />
 

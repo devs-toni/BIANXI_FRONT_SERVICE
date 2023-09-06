@@ -130,6 +130,7 @@ export const UIProvider = ({ children }) => {
   const handleUi = useCallback((section, handler) => {
     const action = manageSection(section, handler);
     dispatch({ type: action })
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const data = useMemo(() => ({

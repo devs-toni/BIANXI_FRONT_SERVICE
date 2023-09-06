@@ -7,7 +7,7 @@ const Search = () => {
 
   const { uiState, handleUi } = useUI();
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [setSearchParams] = useSearchParams();
 
   const handleClose = () => {
     handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE);

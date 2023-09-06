@@ -5,10 +5,9 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../../context/AuthContext';
 import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../config/configuration';
+import { PRODUCTS_ENDPOINT } from '../../config/configuration';
 import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { PRODUCT_LINK } from '../../router/paths';
-import { useProduct } from '../../context/ProductContext';
 
 const ProductBox = ({
   name,
@@ -33,7 +32,6 @@ const ProductBox = ({
   const navigate = useNavigate();
 
   const { userState } = useAuth();
-  const { setProperty } = useProduct();
 
   const emptyStyles = isEmpty ? 'empty' : '';
   const loadedStyles = loaded ? 'loaded' : '';

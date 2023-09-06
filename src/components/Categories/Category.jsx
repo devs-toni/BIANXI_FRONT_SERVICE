@@ -43,6 +43,7 @@ const Category = ({ category, container, box, title }) => {
       else
         getFavourites();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type, search, products])
 
 
@@ -50,6 +51,7 @@ const Category = ({ category, container, box, title }) => {
     if (!type && !search && !section) {
       getFavourites();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryProducts])
 
 

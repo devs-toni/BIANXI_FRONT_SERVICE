@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import React, { createContext, useCallback, useContext, useReducer } from 'react';
 import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../config/configuration';
 import { http } from '../helpers/http';
 import { setProductPrice } from '../helpers/utils';

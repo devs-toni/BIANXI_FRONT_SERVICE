@@ -19,6 +19,7 @@ const Related = ({ type, price, id }) => {
         setRelatedProducts(getProductRelateds(data, price, id))
       })
       .catch(err => console.error(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

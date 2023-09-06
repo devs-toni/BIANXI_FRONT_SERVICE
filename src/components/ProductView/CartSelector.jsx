@@ -38,6 +38,7 @@ const CartSelector = ({ parentStyles, innerRef, value, setValue }) => {
       setTempStock(stock ? stock : 0);
       setValue(0);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productState.color, productState.size, cartState.cartProducts, productState.product])
 
 

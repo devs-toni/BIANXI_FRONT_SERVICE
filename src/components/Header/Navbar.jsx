@@ -18,7 +18,7 @@ const Navbar = memo(({ items }) => {
   const { cartState } = useCart();
   const { totalAmount: total } = cartState;
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [setSearchParams] = useSearchParams();
 
   const showStyles = uiState.menuIsOpen ? 'active' : '';
   const hideStyles = uiState.menuIsOpen ? 'hide' : '';

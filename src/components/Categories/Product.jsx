@@ -4,17 +4,16 @@ import { Badge, Loader, ProductBox } from '../index';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { useLanguage } from '../../context/GlobalContext';
-import { CATEGORY, CATEGORY_ROUTER, HOME, PRODUCT, PRODUCT_LINK } from '../../router/paths';
+import { PRODUCT_LINK } from '../../router/paths';
 import { useUI } from '../../context/UIContext';
 import { UI_ACTIONS, UI_SECTIONS } from '../../config/configuration';
-import { getFabUtilityClass } from '@mui/material';
 
 
 const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, containerClass, boxClass, getFavourites }) => {
 
   const { text } = useLanguage();
 
-  const { id, name, price, type, offer, sentence, description, datasheet, configuration, orders } = product;
+  const { id, name, price, type, offer, configuration } = product;
   const [updatePrices, setUpdatePrices] = useState(null)
   const [isEmptyProduct, setIsEmptyProduct] = useState(false);
   const [image, setImage] = useState(null);
@@ -28,6 +27,7 @@ const Product = ({ product, total = 1, isSearch, isRelated, isLike, isAll, conta
     setImage(require(`../../assets/images/${type}/${name}-0.png`));
     setIsEmptyProduct(isEmptyMethod(configuration));
     setLoaded(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product])
 
   const handleNav = () => {

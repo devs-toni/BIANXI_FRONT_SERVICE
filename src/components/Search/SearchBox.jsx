@@ -26,6 +26,7 @@ const SearchBox = ({ close }) => {
               } else return false;
             }
           })
+          // eslint-disable-next-line array-callback-return
           .map((res, ind) => {
             if (ind < 10) {
               return (

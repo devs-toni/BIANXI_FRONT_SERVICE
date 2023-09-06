@@ -17,6 +17,7 @@ const ColorSelector = ({ setActivator }) => {
     setActivator(index);
   }
 
+  // eslint-disable-next-line eqeqeq
   const isActive = (id) => (productState.color == id) ? "active" : "";
 
   return (

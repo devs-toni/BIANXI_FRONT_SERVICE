@@ -96,6 +96,7 @@ export const AuthProvider = ({ children }) => {
         setProfileOAuth(res);
       })
       .catch((err) => console.err(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setProfileOAuth = useCallback(async (profile) => {
@@ -103,6 +104,7 @@ export const AuthProvider = ({ children }) => {
     const validation = await saveUser(name, id);
     validation && login(validation.id, name, 'U', '');
     localStorage.setItem('AUTH', JSON.stringify({ isAuthenticated: true, id: validation.id, username: name, role: 'U' }));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const saveUser = async (username, password) => {

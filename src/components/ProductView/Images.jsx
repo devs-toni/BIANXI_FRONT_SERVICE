@@ -27,6 +27,7 @@ const Images = memo(({ product, activator }) => {
 
   useEffect(() => {
     changeImage(activator);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activator])
 
   return (

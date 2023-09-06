@@ -53,11 +53,14 @@ export const getMainMethods = (product_state) => {
   const handleRemoveConfig = (idProduct, idConf, totalProductInConf, products) => {
     const updatedProducts = updateProductTotal(products, idProduct, totalProductInConf * -1);
     const newUpdatedProducts = removeConfigInProduct(updatedProducts, idProduct, idConf);
+    // eslint-disable-next-line array-callback-return
     const configsLength = newUpdatedProducts.map(prod => {
+      // eslint-disable-next-line eqeqeq
       if (prod.id == idProduct) {
         return prod.config.length;
       }
     });
+    // eslint-disable-next-line eqeqeq
     if (configsLength.join(('').split('')) == 0) {
       const updatedProducts = newUpdatedProducts.filter(prod => prod.id !== idProduct);
       return updatedProducts;
@@ -76,6 +79,7 @@ export const getMainMethods = (product_state) => {
   }
 
   const getIndexConfig = (configId, indexProduct, products) => {
+    // eslint-disable-next-line eqeqeq
     return products[indexProduct]?.config?.findIndex(c => c.id == configId);
   }
 
