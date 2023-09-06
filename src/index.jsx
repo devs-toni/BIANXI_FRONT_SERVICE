@@ -12,6 +12,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_OAUTH_KEY } from './config/configuration';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+console.log(GOOGLE_OAUTH_KEY);
 root.render(
   <HashRouter>
     <GoogleOAuthProvider clientId={GOOGLE_OAUTH_KEY}>
