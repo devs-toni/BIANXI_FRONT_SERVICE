@@ -106,8 +106,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const saveUser = async (username, password) => {
-    const user = { email: username, role: "U", password }
-    const response = await http().post(`${USERS_ENDPOINT}/save`, {
+    const user = { email: username, password }
+    const response = await http().post(`${USERS_ENDPOINT}`, {
       body: user
     })
       .then(data => {
