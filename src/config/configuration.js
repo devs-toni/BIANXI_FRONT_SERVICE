@@ -1,5 +1,4 @@
 const HOST_ENDPOINT = process.env.REACT_APP_API_URL;
-console.log(HOST_ENDPOINT);
 
 export const PRODUCTS_ENDPOINT = HOST_ENDPOINT + "/api/products";
 export const SIZES_ENDPOINT = HOST_ENDPOINT + "/api/sizes";
