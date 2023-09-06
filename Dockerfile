@@ -7,4 +7,4 @@ COPY ./ ./
 
 RUN npm i
 
-CMD ["NODE_ENV=production", "npm", "run", "start"]
+CMD ["npm", "run", "start"]
