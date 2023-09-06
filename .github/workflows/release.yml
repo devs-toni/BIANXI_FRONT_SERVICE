@@ -15,10 +15,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18.17.0
-        env:
-          REACT_APP_GOOGLE_OAUTH_KEY: ${{ secrets. REACT_APP_GOOGLE_OAUTH_KEY }}
-          REACT_APP_STRIPE_KEY: ${{ secrets.REACT_APP_STRIPE_KEY }}
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
       - name: Install dependencies
         run: npm i
@@ -35,6 +31,15 @@ jobs:
           NEXT_RELEASE=$(jq '.version' package.json | sed 's/-SNAPSHOT.0//' | xargs npm version --no-git-tag-version | sed 's/v//')
           echo "NEXT_RELEASE=$NEXT_RELEASE" >> $GITHUB_ENV
         shell: bash
+
+      - name: Create env
+        run: |
+          touch .env
+          echo REACT_APP_GOOGLE_OAUTH_KEY: ${{ secrets. REACT_APP_GOOGLE_OAUTH_KEY }} >> .env
+          echo REACT_APP_STRIPE_KEY: ${{ secrets.REACT_APP_STRIPE_KEY }} >> .env
+          echo REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }} >> .env
+          cat .env
+
 
       - name: Build Production
         run: npm run build:prod
