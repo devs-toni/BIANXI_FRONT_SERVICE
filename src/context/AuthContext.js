@@ -113,7 +113,7 @@ export const AuthProvider = ({ children }) => {
       body: user
     })
       .then(data => {
-        if (data) return data;
+        if (!data.error) return data;
         else return false;
       });
     return response;
