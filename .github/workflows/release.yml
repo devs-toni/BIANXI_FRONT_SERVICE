@@ -37,7 +37,7 @@ jobs:
           touch .env.production
           echo REACT_APP_GOOGLE_OAUTH_KEY=${{ secrets. REACT_APP_GOOGLE_OAUTH_KEY }} >> .env
           echo REACT_APP_STRIPE_KEY=${{ secrets.REACT_APP_STRIPE_KEY }} >> .env
-          echo REACT_APP_API_URL=https://bianxi-api.arcprojects.es >> .env
+          echo REACT_APP_API_URL=https://bianxi-api:8080 >> .env
           cat .env.production
 
 
