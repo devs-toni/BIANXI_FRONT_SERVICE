@@ -27,7 +27,7 @@ const Form = () => {
 
     await http().post(`${USERS_ENDPOINT}/verify`, { body: formUser })
       .then(data => {
-        if (data.length === 0) {
+        if (data.error) {
           login(null, null, null , "Email/Contraseña incorrectos!");
         } else {
           login(data.id, data.email, data.role)

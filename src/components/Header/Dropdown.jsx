@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-const Dropdown = ({ items = [], dropdownTitle, handler }) => {
+const Dropdown = ({ items = [], dropdownTitle, handler, style }) => {
 
   const activatorRef = useRef(null);
   const dropdownListRef = useRef(null);
@@ -14,10 +14,10 @@ const Dropdown = ({ items = [], dropdownTitle, handler }) => {
     addOutsideHandler();
   };
 
-  const handleClick = () => {
+  const handleClick = (e) => {
     setIsOpen(false);
     addOutsideHandler();
-    handler();
+    handler(e);
   }
 
   function addOutsideHandler() {
@@ -42,7 +42,7 @@ const Dropdown = ({ items = [], dropdownTitle, handler }) => {
 
 
   return (
-    <div className='dropdown_wrapper' onClick={clickHandler}>
+    <div className='dropdown_wrapper' style={style} onClick={clickHandler}>
       <p
         className='dropdown_activator'
         aria-haspopup="true"
@@ -81,7 +81,7 @@ const Dropdown = ({ items = [], dropdownTitle, handler }) => {
         {items.map((item, index) => {
           return (
             <li className='item_list' key={index}>
-              <Link to={item.ref} onClick={handleClick}>{item.text}</Link>
+              <Link to={item.ref} onClick={handleClick} name={item.text.toLowerCase()} >{item.text}</Link>
             </li>
           );
         })}
