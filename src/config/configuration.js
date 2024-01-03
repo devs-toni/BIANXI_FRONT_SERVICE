@@ -10,6 +10,7 @@ export const ORDERS_ENDPOINT = HOST_ENDPOINT + "/api/orders";
 export const STRIPE_VISIBLE_KEY = process.env.REACT_APP_STRIPE_KEY;
 export const GOOGLE_OAUTH_KEY = process.env.REACT_APP_GOOGLE_OAUTH_KEY;
 export const NEW_USER_DISCOUNT = process.env.NEW_USER_DISCOUNT;
+export const FRONT_PORT = process.env.FRONT_PORT;
 
 export const CUPONS = [
   {
