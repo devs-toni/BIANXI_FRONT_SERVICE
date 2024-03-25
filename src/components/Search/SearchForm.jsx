@@ -7,7 +7,7 @@ import { SEARCH_LINK } from '../../router/paths';
 const SearchForm = ({ close, innerRef }) => {
 
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const strQuery = searchParams.get('q') ?? '';
   const navigate = useNavigate();
 
@@ -18,8 +18,10 @@ const SearchForm = ({ close, innerRef }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    close();
-    navigate(`${SEARCH_LINK}/${strQuery}`);
+    if (strQuery.length > 0) {
+      close();
+      navigate(`${SEARCH_LINK}/${strQuery}`);
+    }
   }
 
   return (

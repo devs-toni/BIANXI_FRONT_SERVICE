@@ -10,7 +10,8 @@ const SearchBox = ({ close }) => {
   const { allProducts } = useGlobal();
   const { products } = allProducts;
 
-  const [searchParams ] = useSearchParams();
+  // eslint-disable-next-line 
+  const [searchParams,setSearchParams] = useSearchParams();
   const q = searchParams.get('q');
 
 

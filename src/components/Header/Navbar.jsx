@@ -18,7 +18,8 @@ const Navbar = memo(({ items }) => {
   const { cartState } = useCart();
   const { totalAmount: total } = cartState;
 
-  const [setSearchParams] = useSearchParams();
+  // eslint-disable-next-line 
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const showStyles = uiState.menuIsOpen ? 'active' : '';
   const hideStyles = uiState.menuIsOpen ? 'hide' : '';

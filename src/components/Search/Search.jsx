@@ -7,7 +7,8 @@ const Search = () => {
 
   const { uiState, handleUi } = useUI();
 
-  const [setSearchParams] = useSearchParams();
+  // eslint-disable-next-line 
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleClose = () => {
     handleUi(UI_SECTIONS.SEARCH, UI_ACTIONS.CLOSE);
