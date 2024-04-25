@@ -4,8 +4,8 @@ import { useAuth } from "./AuthContext";
 import { useUI } from "./UIContext";
 import { getMainMethods } from "../helpers/cart";
 import { ACTIONS } from "../config/types";
-import { http } from "../helpers/http";
-import { NEW_USER_DISCOUNT, ORDERS_ENDPOINT, UI_ACTIONS, UI_SECTIONS } from "../config/configuration";
+import { NEW_USER_DISCOUNT, UI_ACTIONS, UI_SECTIONS } from "../config/configuration";
+import { useMutationGetUserOrders, useQueryCreateOrder } from "../persistence/orders";
 
 const CartContext = createContext();
 
@@ -100,35 +100,34 @@ export const CartProvider = ({ children }) => {
   }
 
   const [cartState, dispatch] = useReducer(reducer, initialState);
-
+  const getUserOrders = useMutationGetUserOrders();
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem(`CART-${userState.id}`));
     dispatch({ type: ACTIONS.MODIFY_PRODUCTS, payload: items ? items : [] })
 
     const isNewUser = async () => {
-      await http().get(`${ORDERS_ENDPOINT}/${userState.id}`)
-        .then(data => {
-          const isLogged = userState.id !== 0;
-          const isNew = data.length === 0;
-          const cuponIsActive = cartState.activeCupon;
-          const cuponDiscount = cartState.discountCupon;
-          const total = getTotalPriceCart(cartState.cartProducts);
-          const saving = (total * NEW_USER_DISCOUNT) / 100;
-          const finalPriceWithDiscount = cuponIsActive ? (total - cuponDiscount - saving) : (total - saving);
-          const finalPriceWithoutDiscount = cuponIsActive ? (total - cuponDiscount) : total;
-          const ivaWithDiscount = (finalPriceWithDiscount * 21) / 100;
-          const ivaWithoutDiscount = (finalPriceWithoutDiscount * 21) / 100;
-          if (isNew) {
-            // IF IS REALLY LOGGED
-            if (isLogged) {
-              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: isNew, discount: saving, amount: finalPriceWithDiscount, iva: ivaWithDiscount } })
-            }// IF IS NOT REALLY LOGGED
-            else {
-              dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: finalPriceWithoutDiscount, iva: ivaWithoutDiscount } })
-            }
-          }
-        });
+
+      const orders = await getUserOrders.mutateAsync(userState.id)
+      const isLogged = userState.id !== 0;
+      const isNew = orders.length === 0;
+      const cuponIsActive = cartState.activeCupon;
+      const cuponDiscount = cartState.discountCupon;
+      const total = getTotalPriceCart(cartState.cartProducts);
+      const saving = (total * NEW_USER_DISCOUNT) / 100;
+      const finalPriceWithDiscount = cuponIsActive ? (total - cuponDiscount - saving) : (total - saving);
+      const finalPriceWithoutDiscount = cuponIsActive ? (total - cuponDiscount) : total;
+      const ivaWithDiscount = (finalPriceWithDiscount * 21) / 100;
+      const ivaWithoutDiscount = (finalPriceWithoutDiscount * 21) / 100;
+      if (isNew) {
+        // IF IS REALLY LOGGED
+        if (isLogged) {
+          dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: isNew, discount: saving, amount: finalPriceWithDiscount, iva: ivaWithDiscount } })
+        }// IF IS NOT REALLY LOGGED
+        else {
+          dispatch({ type: ACTIONS.SET_NEW_USER_DISCOUNT, payload: { isNew: false, discount: 0, amount: finalPriceWithoutDiscount, iva: ivaWithoutDiscount } })
+        }
+      }
     }
     isNewUser();
 
@@ -197,18 +196,21 @@ export const CartProvider = ({ children }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartState.cartProducts, getMethods]);
 
+  const createOrder = useQueryCreateOrder();
   //PAYMENT COMPLETED
   const successPayment = useCallback(async (form, price, products) => {
-    const { createOrder } = getMethods();
     const customerOrder = userState.isAuthenticated ? userState.id : null;
-    const result = await createOrder(
-      products.map(p => {
+    const result = createOrder.mutateAsync({
+      productsIds: products.map(p => {
         return p.id;
       }),
-      customerOrder,
-      form.address,
-      price
-    );
+      userId: customerOrder,
+      orderAddress: form.address,
+      orderAmount: price
+    }).then(data => {
+      if (data !== -1) return true
+      else return false
+    });
     if (result) {
       localStorage.removeItem(`CART-${userState.id}`);
       handleUi(UI_SECTIONS.CUPON, UI_ACTIONS.CLOSE);
@@ -220,7 +222,6 @@ export const CartProvider = ({ children }) => {
   //SET ACTIVE CUPON
   const handleCupon = useCallback((state, percentage) => {
     const total = getTotalPriceCart(cartState.cartProducts);
-
 
     const isNew = cartState.isNew;
     let saving = 0;

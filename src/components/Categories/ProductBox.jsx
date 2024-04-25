@@ -4,10 +4,9 @@ import Badge from './Badge';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAuth } from '../../context/AuthContext';
-import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT } from '../../config/configuration';
 import { faLinkSlash } from '@fortawesome/free-solid-svg-icons';
 import { PRODUCT_LINK } from '../../router/paths';
+import { useQueryDeleteLike } from '../../persistence/favourites';
 
 const ProductBox = ({
   name,
@@ -30,6 +29,7 @@ const ProductBox = ({
 
   const { text } = useLanguage();
   const navigate = useNavigate();
+  const deleteLike = useQueryDeleteLike();
 
   const { userState } = useAuth();
 
@@ -42,13 +42,6 @@ const ProductBox = ({
   const isOffer = offer > 0 ? true : false;
   const offerPrice = isOffer && <p className={`${containerClass}__price-container--price offer-price`}>{finalPrice} €</p>;
   const offerPreviousPrice = isOffer ? initPrice : finalPrice;
-
-  const deleteLike = async () => {
-    await http()
-      .del(`${PRODUCTS_ENDPOINT}/likes/${id}/${userState.id}`).then((data) => {
-        if (!data.error) getFavourites()
-      })
-  }
 
   return (
     <div className={containerClass}>
@@ -89,7 +82,7 @@ const ProductBox = ({
       {
         isLike
         &&
-        <FontAwesomeIcon icon={faLinkSlash} onClick={deleteLike} className={`${containerClass}__delete`} />
+        <FontAwesomeIcon icon={faLinkSlash} onClick={() => deleteLike.mutate({ idProduct: id, idUser: userState.id })} className={`${containerClass}__delete`} />
       }
     </div>
   )

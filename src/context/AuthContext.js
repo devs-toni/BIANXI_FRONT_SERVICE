@@ -1,7 +1,6 @@
 import React, { createContext, useCallback, useContext, useMemo, useReducer } from 'react'
-import { USERS_ENDPOINT } from '../config/configuration';
-import { http } from '../helpers/http';
 import { ACTIONS } from '../config/types';
+import { useQueryOAuthLogin, useQuerySaveUser } from '../persistence/users';
 
 
 const authStorage = JSON.parse(localStorage.getItem('AUTH'));
@@ -13,6 +12,9 @@ export const useAuth = () => {
 }
 
 export const AuthProvider = ({ children }) => {
+
+  const oAuthRequest = useQueryOAuthLogin();
+  const querySaveUser = useQuerySaveUser();
 
   const initialState = {
     isAuthenticated: authStorage ? true : false,
@@ -85,18 +87,9 @@ export const AuthProvider = ({ children }) => {
 
   // OAUTH REGISTER
   const oAuthLogin = useCallback((response) => {
-    http()
-      .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${response.access_token}`, {
-        headers: {
-          Authorization: `Bearer ${response.access_token}`,
-          Accept: 'application/json'
-        }
-      })
-      .then((res) => {
-        setProfileOAuth(res);
-      })
-      .catch((err) => console.err(err));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    oAuthRequest.mutateAsync({ access_token: response.access_token })
+      .then(data => setProfileOAuth(data));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const setProfileOAuth = useCallback(async (profile) => {
@@ -104,18 +97,19 @@ export const AuthProvider = ({ children }) => {
     const validation = await saveUser(name, id);
     validation && login(validation.id, name, 'U', '');
     localStorage.setItem('AUTH', JSON.stringify({ isAuthenticated: true, id: validation.id, username: name, role: 'U' }));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const saveUser = async (username, password) => {
     const user = { email: username, password }
-    const response = await http().post(`${USERS_ENDPOINT}`, {
-      body: user
-    })
-      .then(data => {
-        if (!data.error) return data;
-        else return false;
-      });
+    const response = querySaveUser.mutateAsync({
+      email: user.email,
+      password: user.password
+    }).then(data => {
+      if (!data.error) return data;
+      else return false;
+    });
+
     return response;
   }
 

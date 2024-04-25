@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState, createContext } from 'react'
-import { COLORS_ENDPOINT, PRODUCTS_ENDPOINT, SIZES_ENDPOINT } from '../config/configuration';
-import { http } from '../helpers/http';
+import { useQueryGetProducts } from '../persistence/products';
+import { useQueryGetColors } from '../persistence/colors';
+import { useQueryGetSizes } from '../persistence/sizes';
+
 
 const GlobalContext = createContext();
 
@@ -14,19 +16,17 @@ export const GlobalProvider = ({ children }) => {
   const [colors, setColors] = useState(null);
   const [sizes, setSizes] = useState(null);
 
+  const { data: productsData, status: productsStatus } = useQueryGetProducts();
+  const { data: colorsData, status: colorsStatus } = useQueryGetColors();
+  const { data: sizesData, status: sizesStatus } = useQueryGetSizes();
+
+
   useEffect(() => {
-    http().get(`${PRODUCTS_ENDPOINT}`)
-      .then(data => setProducts(data.filter(product => product.type !== "ebike")))
-      .catch(err => console.error(err));
+    if (productsStatus === 'success') setProducts(productsData.filter(product => product.type !== "ebike"));
+    if (colorsStatus === 'success') setColors(colorsData)
+    if (sizesStatus === 'success') setSizes(sizesData)
 
-    http().get(`${COLORS_ENDPOINT}`)
-      .then(data => setColors(data))
-      .catch(err => console.error(err));
-
-    http().get(`${SIZES_ENDPOINT}`)
-      .then(data => setSizes(data))
-      .catch(err => console.error(err));
-  }, [])
+  }, [productsData, productsStatus, colorsStatus, colorsData, sizesData, sizesStatus]);
 
   const data = {
     allProducts: {

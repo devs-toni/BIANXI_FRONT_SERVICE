@@ -7,9 +7,8 @@ import { useAuth } from '../../context/AuthContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHourglass, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
-import { http } from '../../helpers/http';
-import { PRODUCTS_ENDPOINT, UI_SECTIONS, UI_ACTIONS } from '../../config/configuration';
-
+import { UI_SECTIONS, UI_ACTIONS } from '../../config/configuration';
+import { useQueryGetFavourites } from '../../persistence/favourites';
 
 
 const Category = ({ category, container, box, title }) => {
@@ -23,13 +22,11 @@ const Category = ({ category, container, box, title }) => {
   const { userState } = useAuth();
   const { handleUi } = useUI();
 
+  const { data: favourites, status: favouritesStatus } = useQueryGetFavourites(userState.id);
+
+
   const getFavourites = () => {
-    http().get(`${PRODUCTS_ENDPOINT}/favourites/${userState.id}`)
-      .then(data => {
-        if (categoryProducts.length !== data.length)
-          setCategoryProducts(data)
-      })
-      .catch(error => console.error(error));
+    if (favouritesStatus === 'success') setCategoryProducts(favourites)
   }
 
   useEffect(() => {
@@ -44,7 +41,7 @@ const Category = ({ category, container, box, title }) => {
         getFavourites();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [type, search, products])
+  }, [type, search, products, favourites])
 
 
   useEffect(() => {
