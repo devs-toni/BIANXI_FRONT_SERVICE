@@ -5,9 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHourglass } from "@fortawesome/free-regular-svg-icons";
 import { useAuth } from "../../context/AuthContext";
 import { useEffect, useState } from "react";
-import { http } from "../../helpers/http";
-import { ORDERS_ENDPOINT } from "../../config/configuration";
 import { Loader } from '../index';
+import { useQueryGetUserOrders, useQueryGetOrderProductsById } from '../../persistence/orders';
 
 const Orders = () => {
 
@@ -17,32 +16,28 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true)
 
+  const { data: ordersData, status: ordersStatus } = useQueryGetUserOrders(userState.id)
+  const getOrder = useQueryGetOrderProductsById();
+
   useEffect(() => {
 
     const setUserOrders = async () => {
       const array = [];
 
-      const orders = await http()
-        .get(`${ORDERS_ENDPOINT}/${userState.id}`)
-        .then(ordersBackend => {
-          return ordersBackend;
-        });
-
-      await Promise.all(orders.map(async (ord) => {
-        const result = await http().get(`${ORDERS_ENDPOINT}/products/${ord.id}`)
-          .then(productsBackend => {
-            return productsBackend;
-          });
-        const newOrd = { ...ord, products: result }
-        array.push(newOrd);
-      }));
-      setOrders(array);
-      setLoading(false);
+      if (ordersStatus === 'success') {
+        await Promise.all(ordersData.map(async (ord) => {
+          const result = await getOrder.mutateAsync({ id: ord.id })
+          const newOrd = { ...ord, products: result }
+          array.push(newOrd);
+        }));
+        setOrders(array);
+        setLoading(false);
+      }
     }
     setUserOrders();
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orders])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ordersStatus])
 
 
   return (

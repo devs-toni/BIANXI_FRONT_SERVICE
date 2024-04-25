@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react'
 import { useProduct } from '../../context/ProductContext';
 import { Details, Images, Info, Loader, Related } from '../index';
 import { useParams } from 'react-router-dom';
-import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../../config/configuration';
-import { http } from '../../helpers/http';
+import { PRODUCT_PROPERTIES } from '../../config/configuration';
 import { setProductConfigurations } from '../../helpers/utils';
 import { useAuth } from '../../context/AuthContext';
+import { useQueryGetLikeStatus } from '../../persistence/favourites';
+import { useQueryGetProductById } from '../../persistence/products';
 
 const ProductView = () => {
 
@@ -16,25 +17,24 @@ const ProductView = () => {
   const { userState } = useAuth();
 
   const [colorActivatorImage, setColorActivatorImage] = useState(0);
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
+
+  const getLikeStatus = useQueryGetLikeStatus()
+  const getProductById = useQueryGetProductById();
 
 
   useEffect(() => {
     setProperty(PRODUCT_PROPERTIES.LIKE, { newState: false });
 
-    const getLike = (idProduct, idUser, setLikeTrue, setLikeFalse) => {
-      if (idProduct) {
-        http().get(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`).then((data) => {
-          if (data.error)
-            setLikeFalse();
-          else
-            setLikeTrue();
-        })
-      }
-    }
+    getLikeStatus.mutateAsync({ idProduct: id, idUser: userState.id })
+      .then((data) => {
+        if (data === 1)
+          setProperty(PRODUCT_PROPERTIES.LIKE, { newState: true })
+        else setProperty(PRODUCT_PROPERTIES.LIKE, { newState: false })
+      })
 
     const loadProduct = async () => {
-      await http().get(`${PRODUCTS_ENDPOINT}/${id}`)
+      await getProductById.mutateAsync({ id: id })
         .then(data => {
           setProperty(PRODUCT_PROPERTIES.PRODUCT, data);
 
@@ -47,23 +47,13 @@ const ProductView = () => {
           });
           setProperty(PRODUCT_PROPERTIES.COLORS, finalArray)
           setProperty(PRODUCT_PROPERTIES.PRICES, { offer: data.offer, price: data.price })
-
-
-          if (userState.id) {
-            getLike(
-              id,
-              userState.id,
-              () => setProperty(PRODUCT_PROPERTIES.LIKE, { newState: true }),
-              () => setProperty(PRODUCT_PROPERTIES.LIKE, { newState: false })
-            )
-          }
           setLoading(false);
         });
     }
 
     loadProduct();
     window.scrollTo(0, 0);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   return (

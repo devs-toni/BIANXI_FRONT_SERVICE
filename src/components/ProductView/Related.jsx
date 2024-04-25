@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { useEffect } from "react";
 import { useLanguage } from '../../context/GlobalContext';
 import { Loader, Product } from '../index';
-import { PRODUCTS_ENDPOINT } from '../../config/configuration';
-import { http } from '../../helpers/http';
 import PropTypes from 'prop-types';
 import { getProductRelateds } from '../../helpers/utils';
+import { useQueryGetRelatedProducts } from '../../persistence/products';
 
 const Related = ({ type, price, id }) => {
 
@@ -13,14 +12,12 @@ const Related = ({ type, price, id }) => {
 
   const [relatedProducts, setRelatedProducts] = useState([]);
 
+  const { data: relatedData, status: relatedStatus } = useQueryGetRelatedProducts(type);
+
   useEffect(() => {
-    http().get(`${PRODUCTS_ENDPOINT}/type/${type}`)
-      .then(data => {
-        setRelatedProducts(getProductRelateds(data, price, id))
-      })
-      .catch(err => console.error(err));
+    if (relatedStatus === 'success') setRelatedProducts(getProductRelateds(relatedData, price, id))
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [id, relatedData, relatedStatus]);
 
   return (
     <>

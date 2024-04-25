@@ -1,5 +1,3 @@
-import { ORDERS_ENDPOINT } from "../config/configuration";
-import { http } from "./http";
 import { addConfigurationToProduct, addProductToCart, removeConfigInProduct, updateConfigurationStock, updateProductTotal } from "./utils";
 
 export const getMainMethods = (product_state) => {
@@ -83,26 +81,11 @@ export const getMainMethods = (product_state) => {
     return products[indexProduct]?.config?.findIndex(c => c.id == configId);
   }
 
-  const createOrder = async (products, idUser, address, amount) => {
-
-    if (idUser) {
-      const validation = await http().post(`${ORDERS_ENDPOINT}/new`, {
-        body: [products, idUser, address, amount]
-      })
-        .then(data => {
-          if (data === -1) return false;
-          else return true;
-        });
-      return validation;
-    } else return true;
-  }
-
   return {
     handleAddProduct,
     handleRemoveProduct,
     handleAddSpecificNumberProduct,
     handleRemoveConfig,
     handleDeleteCartProduct,
-    createOrder,
   }
 }

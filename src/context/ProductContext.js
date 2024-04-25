@@ -1,9 +1,9 @@
 import React, { createContext, useCallback, useContext, useReducer } from 'react';
-import { PRODUCTS_ENDPOINT, PRODUCT_PROPERTIES } from '../config/configuration';
-import { http } from '../helpers/http';
+import { PRODUCT_PROPERTIES } from '../config/configuration';
 import { setProductPrice } from '../helpers/utils';
 import { ACTIONS } from '../config/types';
 import { useAuth } from './AuthContext';
+import { useQueryAddLike, useQueryDeleteLike } from '../persistence/favourites';
 
 const ProductContext = createContext();
 
@@ -11,17 +11,12 @@ export const useProduct = () => {
   return useContext(ProductContext);
 }
 
-const addLike = (idProduct, idUser) => {
-  http().post(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`)
-}
-
-const deleteLike = (idProduct, idUser) => {
-  http().del(`${PRODUCTS_ENDPOINT}/likes/${idProduct}/${idUser}`)
-}
-
 export const ProductProvider = ({ children }) => {
 
   const { userState } = useAuth();
+
+  const addLike = useQueryAddLike();
+  const deleteLike = useQueryDeleteLike();
 
   const init = {
     product: null,
@@ -110,9 +105,15 @@ export const ProductProvider = ({ children }) => {
 
     if (property === PRODUCT_PROPERTIES.LIKE && !value) {
       if (productState.like) {
-        deleteLike(productState.product.id, userState.id);
+        deleteLike.mutate({
+          idProduct: productState.product.id,
+          idUser: userState.id
+        });
       } else {
-        addLike(productState.product.id, userState.id);
+        addLike.mutate({
+          idProduct: productState.product.id,
+          idUser: userState.id
+        });
       }
       action = ACTIONS.HANDLE_LIKE
     } else if (property === PRODUCT_PROPERTIES.LIKE && value) {

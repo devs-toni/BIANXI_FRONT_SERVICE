@@ -32,10 +32,12 @@
     "@types/node": "^18.14.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "axios": "^1.6.8",
     "env-cmd": "^10.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.4.5",
     "react-share": "^4.4.1",
     "react-uuid": "^2.0.0",
@@ -56,10 +58,10 @@
     "jest-environment-jsdom": "^29.6.4",
     "jest-mock-extended": "^3.0.5",
     "lint-staged": "^14.0.1",
+    "react-scripts": "^5.0.1",
     "stream": "npm:stream-browserify@^3.0.0",
     "util": "^0.12.5",
-    "webpack": "^5.89.0",
-    "react-scripts": "^5.0.1"
+    "webpack": "^5.89.0"
   },
   "eslintConfig": {
     "extends": [

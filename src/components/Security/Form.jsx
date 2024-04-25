@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useLanguage } from '../../context/GlobalContext';
 import { useAuth } from '../../context/AuthContext';
-import { http } from '../../helpers/http';
-import { USERS_ENDPOINT } from '../../config/configuration';
+import { useQueryLoginUser } from '../../persistence/users';
 
 const Form = () => {
 
@@ -14,7 +13,7 @@ const Form = () => {
   });
 
   const { userState, reset, login } = useAuth();
-
+  const loginUser = useQueryLoginUser();
 
   const handleInput = ({ target }) => {
     const { name, value } = target;
@@ -24,15 +23,17 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    await http().post(`${USERS_ENDPOINT}/verify`, { body: formUser })
-      .then(data => {
-        if (data.error) {
-          login(null, null, null , "Email/Contraseña incorrectos!");
-        } else {
-          login(data.id, data.email, data.role)
-        }
-      });
+    
+    loginUser.mutateAsync({
+      email: formUser.email,
+      password: formUser.password
+    }).then(data => {
+      if (data.error) {
+        login(null, null, null , "Email/Contraseña incorrectos!");
+      } else {
+        login(data.id, data.email, data.role)
+      }
+    });
   }
   return (
     <>
