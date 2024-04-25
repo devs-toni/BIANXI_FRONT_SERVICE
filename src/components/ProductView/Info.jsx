@@ -50,7 +50,7 @@ const Info = ({ setColorActivator, isLike, handleLike }) => {
     setTotalSelected(0);
   }
 
-  const emptyStyles = (configuration?.stock === 0 || !configuration) ? 'empty' : '';
+  const emptyStyles = (configuration?.stock === 0 || !configuration || totalSelected === 0) ? 'empty' : '';
   const emptyStylesText = ((configuration?.stock === 0 || !configuration) && size) ? 'empty' : '';
 
   return (
