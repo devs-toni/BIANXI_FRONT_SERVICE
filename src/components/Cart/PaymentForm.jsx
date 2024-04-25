@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import PropTypes from 'prop-types';
-import { STRIPE_ENDPOINT } from '../../config/configuration';
+import { STRIPE_SECRET_KEY } from '../../config/configuration';
 import { useForm } from '../../hooks/useForm';
 import { useToast } from '../../hooks/useToast';
 import { useCart } from '../../context/CartContext';
@@ -42,7 +42,6 @@ const PaymentForm = ({ price }) => {
     });
 
   const handlePayment = async (e) => {
-    console.log(e)
     e.preventDefault();
     const currentErrors = validate();
     if (Object.keys(currentErrors).map((key) => currentErrors[key].length).filter(v => v !== 0).length === 0) {
@@ -72,49 +71,56 @@ const PaymentForm = ({ price }) => {
       type: 'card',
       card: elements.getElement(CardElement)
     });
-
+  
     if (!error) {
-      const headers = new Headers({ 'Content-Type': 'application/json' });
-      const paymentIntentDTO = {
-        id: paymentMethod.id,
-        amount: parseInt(price),
-        currency: "EUR",
-        description: text.payment.description
-      }
-
-      const { client_secret } = await fetch(`${STRIPE_ENDPOINT}/payment_intent`, {
-        body: JSON.stringify(paymentIntentDTO),
-        method: "POST",
-        headers: headers
-      })
-        .then(r => r.json())
-        .then(r => { return r });
-
-      const isValid = await stripe.confirmCardPayment(`${client_secret}`, {
-        payment_method: {
-          card: elements.getElement(CardElement),
-          billing_details: {
-            name: 'name',
+      const formData = new URLSearchParams();
+      formData.append('payment_method_types[]', 'card');
+      formData.append('amount', parseInt(price));
+      formData.append('currency', 'eur');
+      formData.append('description', text.payment.description);
+  
+      try {
+        const response = await fetch('https://api.stripe.com/v1/payment_intents', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${STRIPE_SECRET_KEY}`,
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-        },
-      })
-        .then(function (result) {
-          if (result.error) {
-            const message = result.error.message;
-            handleToast('⛔', message);
+          body: formData,
+        });
+  
+        const { client_secret, status } = await response.json();
+  
+        if (status === 'requires_action' || status === 'requires_payment_method') {
+          const { error } = await stripe.confirmCardPayment(client_secret, {
+            payment_method: paymentMethod.id
+          });
+  
+          if (error) {
+            handleToast('⛔', error.message);
             setLoading(false);
             return false;
           } else {
             return true;
           }
-        });
-
-      return isValid;
+        } else if (status === 'succeeded') {
+          return true;
+        } else {
+          handleToast('⛔', 'Error processing payment.');
+          setLoading(false);
+          return false;
+        }
+      } catch (error) {
+        handleToast('⛔', 'Error processing payment.');
+        setLoading(false);
+        return false;
+      }
     } else {
       setLoading(false);
       handleToast('⛔', error.message);
+      return false;
     }
-  }
+  };
 
   return (
     <div className="payment__form-container">

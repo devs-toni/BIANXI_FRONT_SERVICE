@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 import { ORDERS_ENDPOINT } from "../config/configuration";
 
@@ -15,20 +15,19 @@ const getUserOrders = async (id) => {
 }
 
 export const useQueryGetUserOrders = (id) =>
-    useQuery(
-        ['getUserOrders'],
-        () => getUserOrders(id),
-        {
-            retry: false,
-            onError: (error) => {
-                return error;
-            }
+    useMutation(['getUserOrders'], async (data) => {
+        return getUserOrders(data);
+    }, {
+        onError: (err) => err,
+        onSuccess: (data, variables) => {
+            return data;
         },
-    );
+        onMutate: () => { },
+    });
 
 export const useMutationGetUserOrders = () =>
-    useMutation(['getOrder'], async (data) => {
-        return getUserOrders(data);
+    useMutation(['getOrder'], async (id) => {
+        return getUserOrders(id);
     }, {
         onError: (err) => err,
         onSuccess: (data, variables) => {
@@ -63,7 +62,7 @@ export const useQueryGetOrderProductsById = () => {
 }
 
 const createOrder = async (data) => {
-    const assetUrl = `${ORDERS_ENDPOINT}/new`;
+    const assetUrl = `${ORDERS_ENDPOINT}`;
     const url = new URL(assetUrl);
 
     const response = await axios.post(url.href, data);
@@ -74,9 +73,12 @@ const createOrder = async (data) => {
 }
 
 export const useQueryCreateOrder = () => {
-    return useMutation(['getOrder'], createOrder, {
+    const queryClient = useQueryClient()
+
+    return useMutation(['createOrder'], createOrder, {
         onError: (err) => err,
         onSuccess: (data, variables) => {
+            void queryClient.invalidateQueries('getUserOrders')
             return data;
         },
         onMutate: () => { },

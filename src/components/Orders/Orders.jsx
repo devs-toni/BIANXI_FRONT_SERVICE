@@ -16,7 +16,7 @@ const Orders = () => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true)
 
-  const { data: ordersData, status: ordersStatus } = useQueryGetUserOrders(userState.id)
+  const getUserOrders = useQueryGetUserOrders();
   const getOrder = useQueryGetOrderProductsById();
 
   useEffect(() => {
@@ -24,20 +24,19 @@ const Orders = () => {
     const setUserOrders = async () => {
       const array = [];
 
-      if (ordersStatus === 'success') {
-        await Promise.all(ordersData.map(async (ord) => {
-          const result = await getOrder.mutateAsync({ id: ord.id })
-          const newOrd = { ...ord, products: result }
-          array.push(newOrd);
-        }));
-        setOrders(array);
-        setLoading(false);
-      }
+      const ordersData = await getUserOrders.mutateAsync(userState.id)
+      await Promise.all(ordersData.map(async (ord) => {
+        const result = await getOrder.mutateAsync({ id: ord.id })
+        const newOrd = { ...ord, products: result }
+        array.push(newOrd);
+      }));
+      setOrders(array);
+      setLoading(false);
     }
     setUserOrders();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [ordersStatus])
+  }, [userState.id])
 
 
   return (
