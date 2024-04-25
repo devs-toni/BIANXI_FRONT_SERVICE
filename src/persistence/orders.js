@@ -73,7 +73,7 @@ const createOrder = async (data) => {
 }
 
 export const useQueryCreateOrder = () => {
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
     return useMutation(['createOrder'], createOrder, {
         onError: (err) => err,
@@ -82,5 +82,6 @@ export const useQueryCreateOrder = () => {
             return data;
         },
         onMutate: () => { },
+        refetchOnWindowFocus: true,
     });
 }

@@ -54,8 +54,10 @@ const PaymentForm = ({ price }) => {
 
         setTimeout(function () {
           successPayment(form, price, cartProducts);
-          if (userState.isAuthenticated)
+          if (userState.isAuthenticated) {
             navigate(ORDERS_LINK)
+            window.location.reload();
+          }
           else
             navigate('/');
         }, 2000);
@@ -71,14 +73,14 @@ const PaymentForm = ({ price }) => {
       type: 'card',
       card: elements.getElement(CardElement)
     });
-  
+
     if (!error) {
       const formData = new URLSearchParams();
       formData.append('payment_method_types[]', 'card');
       formData.append('amount', parseInt(price));
       formData.append('currency', 'eur');
       formData.append('description', text.payment.description);
-  
+
       try {
         const response = await fetch('https://api.stripe.com/v1/payment_intents', {
           method: 'POST',
@@ -88,14 +90,14 @@ const PaymentForm = ({ price }) => {
           },
           body: formData,
         });
-  
+
         const { client_secret, status } = await response.json();
-  
+
         if (status === 'requires_action' || status === 'requires_payment_method') {
           const { error } = await stripe.confirmCardPayment(client_secret, {
             payment_method: paymentMethod.id
           });
-  
+
           if (error) {
             handleToast('⛔', error.message);
             setLoading(false);
