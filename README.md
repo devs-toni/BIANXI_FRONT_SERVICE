@@ -18,7 +18,7 @@ Variables de entorno requeridas para el arranque:
 - `REACT_APP_GOOGLE_OAUTH_KEY=`
 - `REACT_APP_NEW_USER_DISCOUNT=5`
 
-## 🌿 2.3 Convenciones
+## 🌿 2.3 Convenciones del Repositorio
 - **Ramas:** `feat/`, `refactor/`, `test/`, `chore/`.
 - **Commits:** `feat:`, `internal:`, `chore:`.
 - **Pull Requests:** Abrir en modo **Draft** para validación de build vía GitHub Actions.
