@@ -8,7 +8,6 @@ Frontend de la aplicación Bianchi desarrollado con **React 16** empleando `crea
 ![home](./src/assets/readme/cart.png)\
 <br />
 
-
 ## 📝 2.1. Introducción
 Interfaz de usuario para el ecommerce Bianchi, conectada directamente a la API de servicios.
 
@@ -19,15 +18,12 @@ Variables de entorno requeridas para el arranque:
 - `REACT_APP_GOOGLE_OAUTH_KEY=`
 - `REACT_APP_NEW_USER_DISCOUNT=5`
 
-## 🌿 2.3. Repositorio Git
-**URL:** [https://github.com/devs-toni/BIANXI_FRONT_SERVICE](https://github.com/devs-toni/BIANXI_FRONT_SERVICE)
-
-### 🏷️ 2.3.1. Convenciones
+## 🌿 2.3 Convenciones
 - **Ramas:** `feat/`, `refactor/`, `test/`, `chore/`.
 - **Commits:** `feat:`, `internal:`, `chore:`.
 - **Pull Requests:** Abrir en modo **Draft** para validación de build vía GitHub Actions.
 
-### 📦 2.3.2. Generar Versión
+### 📦 2.3.1. Generar Versión
 Desde **GitHub Actions -> Release**, ejecutar **Run Workflow** para:
 1. Generar nueva versión del proyecto.
 2. Subir imagen a Docker Hub.
