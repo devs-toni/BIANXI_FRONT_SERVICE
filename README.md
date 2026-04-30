@@ -1,6 +1,6 @@
-# Bianxi e-commerce
+# 🎨 BIANXI FRONT Service
 
-<b>This project is based on the page <a href="https://bianchistore.es">Bianchi Store</a> and mocks the e-commerce system implemented by this page, trying with this to improve my knowledge of react and another related libraries.</b>\
+Frontend de la aplicación Bianchi desarrollado con **React 16** empleando `create-react-app`.
 <br />
 
 ![home](./src/assets/readme/home.png)
@@ -8,23 +8,32 @@
 ![home](./src/assets/readme/cart.png)\
 <br />
 
-This web application uses on <u><i>frontend</i></u>:
 
-<b><ul>
+## 📝 2.1. Introducción
+Interfaz de usuario para el ecommerce Bianchi, conectada directamente a la API de servicios.
 
-  <li>React v18.2</li>
-  <li>React router v6.4.5 for the route management</li>
-  <li>Stripe/js for the payment</li>
-  <li>React-uauth/google for google authentication</li>
-  <li>Sass for styles</li>
-</ul></b>
+## 🛠️ 2.2. Entorno de Desarrollo
+Variables de entorno requeridas para el arranque:
+- `REACT_APP_API_URL=http://localhost:8080`
+- `REACT_APP_STRIPE_VISIBLE_KEY=`
+- `REACT_APP_GOOGLE_OAUTH_KEY=`
+- `REACT_APP_NEW_USER_DISCOUNT=5`
 
-On the <u><i>backend:</i></u>
+## 🌿 2.3. Repositorio Git
+**URL:** [https://github.com/devs-toni/BIANXI_FRONT_SERVICE](https://github.com/devs-toni/BIANXI_FRONT_SERVICE)
 
-<b><ul>
+### 🏷️ 2.3.1. Convenciones
+- **Ramas:** `feat/`, `refactor/`, `test/`, `chore/`.
+- **Commits:** `feat:`, `internal:`, `chore:`.
+- **Pull Requests:** Abrir en modo **Draft** para validación de build vía GitHub Actions.
 
-  <li>SpringBoot</li>
-  <li>MySql</li>
-</ul></b>
+### 📦 2.3.2. Generar Versión
+Desde **GitHub Actions -> Release**, ejecutar **Run Workflow** para:
+1. Generar nueva versión del proyecto.
+2. Subir imagen a Docker Hub.
+3. Crear release en GitHub.
 
-👩‍🚀 I hope you enjoy it! 🚀
+## 🐳 2.4. Repositorio Docker Hub
+👉 [devstoni/bianxi-front](https://hub.docker.com/repository/docker/devstoni/bianxi-front/general)
+
+<b>This project is based on the page <a href="https://bianchistore.es">Bianchi Store</a> and mocks the e-commerce system implemented by this page, trying with this to improve my knowledge of react and another related libraries.</b>\
